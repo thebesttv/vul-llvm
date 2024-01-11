@@ -35,6 +35,7 @@ add_llvm_target(ARMCodeGen
   ARMFixCortexA57AES1742098Pass.cpp
   ARMFrameLowering.cpp
   ARMHazardRecognizer.cpp
+  ARMInitUndef.cpp
   ARMInstructionSelector.cpp
   ARMISelDAGToDAG.cpp
   ARMISelLowering.cpp

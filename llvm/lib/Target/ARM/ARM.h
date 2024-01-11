@@ -57,6 +57,7 @@ FunctionPass *createARMSLSHardeningPass();
 FunctionPass *createARMIndirectThunks();
 Pass *createMVELaneInterleavingPass();
 FunctionPass *createARMFixCortexA57AES1742098Pass();
+FunctionPass *createARMInitUndefPass();
 
 void LowerARMMachineInstrToMCInst(const MachineInstr *MI, MCInst &OutMI,
                                   ARMAsmPrinter &AP);
@@ -67,6 +68,7 @@ void initializeARMConstantIslandsPass(PassRegistry &);
 void initializeARMDAGToDAGISelPass(PassRegistry &);
 void initializeARMExpandPseudoPass(PassRegistry &);
 void initializeARMFixCortexA57AES1742098Pass(PassRegistry &);
+void initializeARMInitUndefPass(PassRegistry &);
 void initializeARMLoadStoreOptPass(PassRegistry &);
 void initializeARMLowOverheadLoopsPass(PassRegistry &);
 void initializeARMParallelDSPPass(PassRegistry &);
@@ -79,6 +81,8 @@ void initializeMVETailPredicationPass(PassRegistry &);
 void initializeMVEVPTBlockPass(PassRegistry &);
 void initializeThumb2ITBlockPass(PassRegistry &);
 void initializeThumb2SizeReducePass(PassRegistry &);
+
+extern char &ARMInitUndefPass;
 
 } // end namespace llvm
 

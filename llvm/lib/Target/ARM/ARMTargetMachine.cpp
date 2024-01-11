@@ -41,6 +41,7 @@
 #include "llvm/IR/Function.h"
 #include "llvm/MC/TargetRegistry.h"
 #include "llvm/Pass.h"
+#include "llvm/PassRegistry.h"
 #include "llvm/Support/CodeGen.h"
 #include "llvm/Support/CommandLine.h"
 #include "llvm/Support/ErrorHandling.h"
@@ -111,6 +112,7 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeARMTarget() {
   initializeMVELaneInterleavingPass(Registry);
   initializeARMFixCortexA57AES1742098Pass(Registry);
   initializeARMDAGToDAGISelPass(Registry);
+  initializeARMInitUndefPass(Registry);
 }
 
 static std::unique_ptr<TargetLoweringObjectFile> createTLOF(const Triple &TT) {
@@ -384,6 +386,7 @@ public:
   void addPreSched2() override;
   void addPreEmitPass() override;
   void addPreEmitPass2() override;
+  void addOptimizedRegAlloc() override;
 
   std::unique_ptr<CSEConfigBase> getCSEConfig() const override;
 };
@@ -619,6 +622,13 @@ void ARMPassConfig::addPreEmitPass2() {
     // Identify valid eh continuation targets for Windows EHCont Guard.
     addPass(createEHContGuardCatchretPass());
   }
+}
+
+void ARMPassConfig::addOptimizedRegAlloc() {
+  if (getOptimizeRegAlloc())
+    insertPass(&DetectDeadLanesID, &ARMInitUndefPass);
+
+  TargetPassConfig::addOptimizedRegAlloc();
 }
 
 yaml::MachineFunctionInfo *
