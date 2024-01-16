@@ -154,7 +154,7 @@ def parseScript(test, preamble):
     script += scriptInTest
 
     # Add compile flags specified with ADDITIONAL_COMPILE_FLAGS.
-    # Modules need to be build with the same compilation flags as the
+    # Modules need to be built with the same compilation flags as the
     # test. So add these flags before adding the modules.
     substitutions = [
         (s, x + " " + " ".join(additionalCompileFlags))
@@ -166,13 +166,9 @@ def parseScript(test, preamble):
     if modules:
         _validateModuleDependencies(modules)
 
-        # This flag is needed for both modules.
-        #moduleCompileFlags.append("-fprebuilt-module-path=%T")
-
         # The moduleCompileFlags are added to the %{compile_flags}, but
-        # the modules need should be built without these flags. So
-        # expand the compile_flags and add the expanded value to the
-        # build script.
+        # the modules need to be built without these flags. So expand the
+        # %{compile_flags} eagerly and hardcode them in the build script.
         compileFlags = _getSubstitution("%{compile_flags}", test.config)
 
         # Building the modules needs to happen before the other script
@@ -186,10 +182,10 @@ def parseScript(test, preamble):
                 "-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal "
                 "--precompile -o %T/std.compat.pcm -c %{module}/std.compat.cppm",
             )
-            moduleCompileFlags.append("-fmodule-file=std.compat=%T/std.compat.pcm %T/std.compat.pcm")
+            moduleCompileFlags.extend(["-fmodule-file=std.compat=%T/std.compat.pcm", "%T/std.compat.pcm"])
 
-        # Make sure the std module is added before std.compat. Libc++'s
-        # std.compat module will depend on its std module.  It is not
+        # Make sure the std module is built before std.compat. Libc++'s
+        # std.compat module depends on the std module. It is not
         # known whether the compiler expects the modules in the order of
         # their dependencies. However it's trivial to provide them in
         # that order.
@@ -200,7 +196,7 @@ def parseScript(test, preamble):
             "-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal "
             "--precompile -o %T/std.pcm -c %{module}/std.cppm",
         )
-        moduleCompileFlags.append("-fmodule-file=std=%T/std.pcm %T/std.pcm")
+        moduleCompileFlags.extend(["-fmodule-file=std=%T/std.pcm", "%T/std.pcm"])
 
         # Add compile flags required for the modules.
         substitutions = [

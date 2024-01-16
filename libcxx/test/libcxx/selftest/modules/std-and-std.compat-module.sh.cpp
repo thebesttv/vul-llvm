@@ -14,7 +14,7 @@
 
 // Make sure that the compile flags contain the expected elements.
 // The tests only look for the expected components and not the exact flags.
-// Otherwise changing the location of the module breaks this test.
+// Otherwise changing the location of the module would break this test.
 
 // MODULE_DEPENDENCIES: std std.compat
 
