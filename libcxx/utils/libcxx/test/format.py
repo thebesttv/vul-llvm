@@ -7,6 +7,7 @@
 # ===----------------------------------------------------------------------===##
 
 import lit
+import libcxx.test.config as config
 import lit.formats
 import os
 import re
@@ -58,13 +59,6 @@ def _validateModuleDependencies(modules):
             raise RuntimeError(
                 f"Invalid module dependency '{m}', only 'std' and 'std.compat' are valid"
             )
-
-
-def _getSubstitution(substitution, config):
-    for (orig, replacement) in config.substitutions:
-        if orig == substitution:
-            return replacement
-    raise ValueError("Substitution {} is not in the config.".format(substitution))
 
 
 def parseScript(test, preamble):
@@ -156,12 +150,9 @@ def parseScript(test, preamble):
     # Add compile flags specified with ADDITIONAL_COMPILE_FLAGS.
     # Modules need to be built with the same compilation flags as the
     # test. So add these flags before adding the modules.
-    substitutions = [
-        (s, x + " " + " ".join(additionalCompileFlags))
-        if s == "%{compile_flags}"
-        else (s, x)
-        for (s, x) in substitutions
-    ]
+    substitutions = config._appendToSubstitution(
+        substitutions, "%{compile_flags}", " ".join(additionalCompileFlags)
+    )
 
     if modules:
         _validateModuleDependencies(modules)
@@ -169,7 +160,7 @@ def parseScript(test, preamble):
         # The moduleCompileFlags are added to the %{compile_flags}, but
         # the modules need to be built without these flags. So expand the
         # %{compile_flags} eagerly and hardcode them in the build script.
-        compileFlags = _getSubstitution("%{compile_flags}", test.config)
+        compileFlags = config._getSubstitution("%{compile_flags}", test.config)
 
         # Building the modules needs to happen before the other script
         # commands are executed. Therefore the commands are added to the
@@ -182,7 +173,9 @@ def parseScript(test, preamble):
                 "-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal "
                 "--precompile -o %T/std.compat.pcm -c %{module}/std.compat.cppm",
             )
-            moduleCompileFlags.extend(["-fmodule-file=std.compat=%T/std.compat.pcm", "%T/std.compat.pcm"])
+            moduleCompileFlags.extend(
+                ["-fmodule-file=std.compat=%T/std.compat.pcm", "%T/std.compat.pcm"]
+            )
 
         # Make sure the std module is built before std.compat. Libc++'s
         # std.compat module depends on the std module. It is not
@@ -199,12 +192,9 @@ def parseScript(test, preamble):
         moduleCompileFlags.extend(["-fmodule-file=std=%T/std.pcm", "%T/std.pcm"])
 
         # Add compile flags required for the modules.
-        substitutions = [
-            (s, x + " " + " ".join(moduleCompileFlags))
-            if s == "%{compile_flags}"
-            else (s, x)
-            for (s, x) in substitutions
-        ]
+        substitutions = config._appendToSubstitution(
+            substitutions, "%{compile_flags}", " ".join(moduleCompileFlags)
+        )
 
     # Perform substitutions in the script itself.
     script = lit.TestRunner.applySubstitutions(
