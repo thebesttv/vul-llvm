@@ -1,0 +1,286 @@
+{
+    "project": "resource-leak",
+    "type": "docker",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/input.json",
+    "results": [
+        {
+            "type": "resourceLeak",
+            "sourceIndex": 0,
+            "nodes": [
+                6,
+                4,
+                3,
+                10,
+                9,
+                16,
+                14,
+                13
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 5,
+                    "endLine": 11,
+                    "endColumn": 47,
+                    "content": "Node *node = (Node *)malloc(sizeof(Node));",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 9,
+                    "endLine": 12,
+                    "endColumn": 14,
+                    "content": "!node",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 15,
+                    "beginColumn": 5,
+                    "endLine": 15,
+                    "endColumn": 16,
+                    "content": "return node",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 10,
+                    "beginColumn": 1,
+                    "endLine": 16,
+                    "endColumn": 2,
+                    "content": "Node *createNode() {\n    Node *node = (Node *)malloc(sizeof(Node));\n    if (!nod ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 19,
+                    "beginColumn": 5,
+                    "endLine": 19,
+                    "endColumn": 31,
+                    "content": "Node *node = createNode();",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 20,
+                    "beginColumn": 5,
+                    "endLine": 20,
+                    "endColumn": 19,
+                    "content": "node->data = n",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 21,
+                    "beginColumn": 5,
+                    "endLine": 21,
+                    "endColumn": 16,
+                    "content": "return node",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 18,
+                    "beginColumn": 1,
+                    "endLine": 22,
+                    "endColumn": 2,
+                    "content": "Node *createNode(int n) {\n    Node *node = createNode();\n    node->data = n;\n    ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 5,
+                    "endLine": 25,
+                    "endColumn": 32,
+                    "content": "Node *node = createNode(1);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 26,
+                    "beginColumn": 9,
+                    "endLine": 26,
+                    "endColumn": 18,
+                    "content": "argc == 2",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 29,
+                    "beginColumn": 5,
+                    "endLine": 29,
+                    "endColumn": 13,
+                    "content": "return 0",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 24,
+                    "beginColumn": 1,
+                    "endLine": 30,
+                    "endColumn": 2,
+                    "content": "int main(int argc, char *argv[]) {\n    Node *node = createNode(1);\n    if (argc  ..."
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "sourceIndex": 1,
+            "nodes": [
+                6,
+                4,
+                3,
+                10,
+                9,
+                16,
+                15,
+                14,
+                13
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 5,
+                    "endLine": 11,
+                    "endColumn": 47,
+                    "content": "Node *node = (Node *)malloc(sizeof(Node));",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 9,
+                    "endLine": 12,
+                    "endColumn": 14,
+                    "content": "!node",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 15,
+                    "beginColumn": 5,
+                    "endLine": 15,
+                    "endColumn": 16,
+                    "content": "return node",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 10,
+                    "beginColumn": 1,
+                    "endLine": 16,
+                    "endColumn": 2,
+                    "content": "Node *createNode() {\n    Node *node = (Node *)malloc(sizeof(Node));\n    if (!nod ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 19,
+                    "beginColumn": 5,
+                    "endLine": 19,
+                    "endColumn": 31,
+                    "content": "Node *node = createNode();",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 20,
+                    "beginColumn": 5,
+                    "endLine": 20,
+                    "endColumn": 19,
+                    "content": "node->data = n",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 21,
+                    "beginColumn": 5,
+                    "endLine": 21,
+                    "endColumn": 16,
+                    "content": "return node",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 18,
+                    "beginColumn": 1,
+                    "endLine": 22,
+                    "endColumn": 2,
+                    "content": "Node *createNode(int n) {\n    Node *node = createNode();\n    node->data = n;\n    ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 5,
+                    "endLine": 25,
+                    "endColumn": 32,
+                    "content": "Node *node = createNode(1);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 26,
+                    "beginColumn": 9,
+                    "endLine": 26,
+                    "endColumn": 18,
+                    "content": "argc == 2",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 27,
+                    "beginColumn": 9,
+                    "endLine": 27,
+                    "endColumn": 33,
+                    "content": "int x = node->data + 10;",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 29,
+                    "beginColumn": 5,
+                    "endLine": 29,
+                    "endColumn": 13,
+                    "content": "return 0",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 24,
+                    "beginColumn": 1,
+                    "endLine": 30,
+                    "endColumn": 2,
+                    "content": "int main(int argc, char *argv[]) {\n    Node *node = createNode(1);\n    if (argc  ..."
+                }
+            ]
+        }
+    ]
+}

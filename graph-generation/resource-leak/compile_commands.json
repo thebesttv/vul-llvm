@@ -1,0 +1,7 @@
+[
+    {
+        "command": "c++ -c main.cpp",
+        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak",
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp"
+    }
+]
