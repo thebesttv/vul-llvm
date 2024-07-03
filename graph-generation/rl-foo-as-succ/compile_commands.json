@@ -1,0 +1,7 @@
+[
+    {
+        "command": "cc -c main.c",
+        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ",
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c"
+    }
+]

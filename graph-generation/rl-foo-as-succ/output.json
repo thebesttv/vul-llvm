@@ -1,0 +1,197 @@
+{
+    "project": "rl-foo-as-succ",
+    "type": "docker",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/input.json",
+    "results": [
+        {
+            "type": "resourceLeak",
+            "sourceIndex": 0,
+            "nodes": [
+                6,
+                4,
+                3,
+                14,
+                13,
+                11,
+                10,
+                9,
+                20,
+                19
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 30,
+                    "beginColumn": 5,
+                    "endLine": 30,
+                    "endColumn": 29,
+                    "content": "void *tmp = malloc(len);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 31,
+                    "beginColumn": 9,
+                    "endLine": 31,
+                    "endColumn": 20,
+                    "content": "tmp == NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 34,
+                    "beginColumn": 5,
+                    "endLine": 34,
+                    "endColumn": 15,
+                    "content": "return tmp",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 29,
+                    "beginColumn": 1,
+                    "endLine": 35,
+                    "endColumn": 2,
+                    "content": "void *__zend_malloc(size_t len) {\n    void *tmp = malloc(len);\n    if (tmp == NU ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 39,
+                    "beginColumn": 9,
+                    "endLine": 39,
+                    "endColumn": 74,
+                    "content": "pemalloc(sizeof(zend_llist_element) + l->size - 1, l->persistent)",
+                    "stmtKind": "ConditionalOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 38,
+                    "beginColumn": 5,
+                    "endLine": 39,
+                    "endColumn": 75,
+                    "content": "zend_llist_element *tmp =\n        pemalloc(sizeof(zend_llist_element) + l->size  ...",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 41,
+                    "beginColumn": 5,
+                    "endLine": 41,
+                    "endColumn": 24,
+                    "content": "tmp->prev = l->tail",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 42,
+                    "beginColumn": 5,
+                    "endLine": 42,
+                    "endColumn": 21,
+                    "content": "tmp->next = NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 43,
+                    "beginColumn": 9,
+                    "endLine": 43,
+                    "endColumn": 16,
+                    "content": "l->tail",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 44,
+                    "beginColumn": 9,
+                    "endLine": 44,
+                    "endColumn": 28,
+                    "content": "l->tail->next = tmp",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 48,
+                    "beginColumn": 5,
+                    "endLine": 48,
+                    "endColumn": 18,
+                    "content": "l->tail = tmp",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 49,
+                    "beginColumn": 5,
+                    "endLine": 49,
+                    "endColumn": 40,
+                    "content": "memcpy(tmp->data, element, l->size)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 51,
+                    "beginColumn": 5,
+                    "endLine": 51,
+                    "endColumn": 15,
+                    "content": "++l->count",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 37,
+                    "beginColumn": 1,
+                    "endLine": 52,
+                    "endColumn": 2,
+                    "content": "void zend_llist_add_element(zend_llist *l, const void *element) {\n    zend_llist ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 58,
+                    "beginColumn": 5,
+                    "endLine": 58,
+                    "endColumn": 13,
+                    "content": "return 0",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 54,
+                    "beginColumn": 1,
+                    "endLine": 59,
+                    "endColumn": 2,
+                    "content": "int main(int argc, char *argv[]) {\n    zend_llist *list = pemalloc(sizeof(zend_l ..."
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "beginLine": 42,
+                    "beginColumn": 5,
+                    "endLine": 42,
+                    "endColumn": 21,
+                    "content": "tmp->next = NULL"
+                }
+            ]
+        }
+    ]
+}

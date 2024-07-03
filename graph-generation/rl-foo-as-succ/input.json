@@ -1,0 +1,31 @@
+{
+    "project": "rl-foo-as-succ",
+    "type": "docker",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/compile_commands.json",
+    "results": [
+        {
+            "type": "resourceLeak",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "line": 30,
+                    "column": 17
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "line": 39,
+                    "column": 9
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
+                    "line": 57,
+                    "column": 5
+                }
+            ]
+        }
+    ]
+}
