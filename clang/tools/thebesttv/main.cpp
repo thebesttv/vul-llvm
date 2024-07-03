@@ -173,6 +173,20 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
             return std::nullopt;
         };
 
+        auto getFirstIntraProcSucc = [](VarLocResult loc) {
+            int fid = loc.fid, bid = loc.bid;
+            ICFG &icfg = Global.icfg;
+            int u = icfg.getNodeId(fid, bid);
+            for (const auto &e : icfg.G[u]) {
+                if (e.type == ICFG::Edge::Type::INTRA_PROC) {
+                    int v = e.target;
+                    return VarLocResult(fid,
+                                        icfg.functionBlockOfNodeId[v].second);
+                }
+            }
+            return VarLocResult();
+        };
+
         // 分别获取，succ / pred 优先的匹配结果
 
         VarLocResult succFirstResult;
@@ -247,8 +261,10 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
                     if (calleeFid == previousFid) {
                         // 由于 foo() 只在 pred 有 CallExpr，succ 就没有了
                         // 所以直接返回非法值，跳过这条语句
-                        logger.info("  Skip this stmt");
-                        return VarLocResult();
+                        auto succ = getFirstIntraProcSucc(succFirstResult);
+                        logger.info("  Returning successor of foo's block: B{}",
+                                    succ.bid);
+                        return succ;
                     } else if (calleeFid == nextFid) {
                         logger.info("  Pred first");
                         return predFirstResult;
