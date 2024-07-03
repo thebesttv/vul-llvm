@@ -1,0 +1,66 @@
+{
+    "project": "resource-leak",
+    "type": "docker",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/compile_commands.json",
+    "results": [
+        {
+            "type": "resourceLeak",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "line": 11,
+                    "column": 26
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "line": 19,
+                    "column": 18
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "line": 25,
+                    "column": 18
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "line": 26,
+                    "column": 9
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "line": 11,
+                    "column": 26
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "line": 19,
+                    "column": 18
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "line": 25,
+                    "column": 18
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "line": 27,
+                    "column": 9
+                }
+            ]
+        }
+    ]
+}
