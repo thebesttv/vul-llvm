@@ -613,6 +613,35 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
 
         auto &fromFile = Global.functionLocations[from.fid].file;
         removeNpeBadSource(fromFile, fromLine);
+    } else if (type == "resourceLeak") {
+        /**
+         * resourceLeak 也有 source 和 sink
+         * - source 是 malloc 的位置
+         * - sink 对应 last access 的位置（Infer）
+         *
+         * 在处理时，把 sink 拆分为两个 target:
+         * - sink 对应语句
+         * - sink 所在函数的 exit
+         * 也就是说，路径必须经过 sink 然后到 sink 所在函数的出口
+         *
+         * 目前的问题：
+         * - 如果是在 if 之类的 local block 中 leak，路径还是会到达函数出口。
+         *   但这种情况 Infer 也无法区分（因为它给出 last access 的位置，
+         *   而非 leak 的位置） ，所以暂时不处理。
+         */
+        logger.info("Handle known type: {}", type);
+        requireTrue(from.isValid());
+        requireTrue(to.isValid());
+
+        auto new_path = std::vector<VarLocResult>(path);
+        new_path.push_back(to);
+
+        int size =
+            findPathBetween(from, fromLine, getExit(to), INT_MAX, new_path, {},
+                            "resourceLeak", sourceIndex, results);
+        if (size == 0) {
+            logger.warn("Unable to find any path for NPE bug version!");
+        }
     } else {
         logger.info("Handle unknown type: {}", type);
         requireTrue(from.isValid());
