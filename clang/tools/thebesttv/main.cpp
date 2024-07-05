@@ -46,7 +46,7 @@ void fixCompilationDatabase(fs::path path) {
     for (auto &cmd : input) {
         std::string file = cmd["file"];
         if (visitedFiles.find(file) != visitedFiles.end()) {
-            // logger.warn("Duplicate entry for file: {}", file);
+            logger.trace("Duplicate entry for file: {}", file);
             needsUpdate = true;
             continue;
         }
@@ -356,7 +356,7 @@ void dumpICFGNode(int u, ordered_json &jPath) {
 
     const NamedLocation &loc = Global.functionLocations[fid];
 
-    logger.info(">> Node {} is in {} B{}", u, loc.name, bid);
+    logger.trace(">> Node {} is in {} B{}", u, loc.name, bid);
 
     auto ASTFromFile = getASTOfFile(loc.file);
     auto AST = ASTFromFile->getAST();
