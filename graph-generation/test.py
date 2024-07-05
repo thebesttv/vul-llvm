@@ -4,6 +4,7 @@ import logging
 import subprocess
 import sys
 import difflib
+import argparse
 
 def config_logger():
     LOG_FORMAT = '%(asctime)s %(levelname)s [%(name)s] %(message)s'
@@ -103,6 +104,19 @@ docker run -t \
         raise Exception(f"Output mismatch: {dir}")
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        prog='test.py',
+        description='Test script for path-generation tool'
+    )
+    parser.add_argument('-a', '--all', action='store_true',
+                        help='Run test for real-world projects too')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='Show tool output')
+    parser.add_argument('-d', '--dry-run', action='store_true',
+                        help='Only list test cases, do not run them')
+
+    args = parser.parse_args()
+
     ROOT = os.path.dirname(os.path.realpath(__file__))
     tool_path = os.path.join(ROOT, 'tool')
     assert os.path.exists(tool_path), f'{tool_path} does not exist'
@@ -112,6 +126,10 @@ if __name__ == '__main__':
 
     update_paths(ROOT)
 
-    test_cases = get_test_cases(ROOT)
+    test_cases = get_test_cases(ROOT, args.all)
+
+    if args.dry_run:
+        sys.exit(0)
+
     for test in test_cases:
-        run_case(*test, tool_path)
+        run_case(*test, tool_path, args.verbose)
