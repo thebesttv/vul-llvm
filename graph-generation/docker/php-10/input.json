@@ -1,4 +1,11 @@
 {
+  "project": "php",
+  "type": "docker",
+  "root": "/home/thebesttv/php",
+  "compile_commands": "/home/thebesttv/php/compile_commands.json",
+  "results": [
+    
+{
   "type": "npe",
   "locations": [
     {
@@ -50,3 +57,6 @@
     "infer"
   ]
 }
+  ]
+}
+
