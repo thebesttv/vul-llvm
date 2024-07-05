@@ -27,7 +27,8 @@ def update_paths(root):
     subprocess.run(cmd, shell=True, check=True)
 
 def get_directories(root):
-    return [d for d in os.listdir(root) if os.path.isdir(os.path.join(root, d))]
+    l = (d for d in os.listdir(root) if os.path.isdir(os.path.join(root, d)))
+    return list(sorted(l))
 
 def get_test_cases(root):
     # get all directories under root
