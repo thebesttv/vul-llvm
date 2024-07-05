@@ -1,0 +1,216 @@
+{
+  "project": "php",
+  "type": "docker",
+  "root": "/home/thebesttv/php",
+  "compile_commands": "/home/thebesttv/php/compile_commands.json",
+  "results": [
+    {
+      "type": "resourceLeak",
+      "locations": [
+        {
+          "type": "source",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+          "line": 3130,
+          "column": 14
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+          "line": 4635,
+          "column": 7
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+          "line": 4664,
+          "column": 9
+        },
+        {
+          "type": "sink",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+          "line": 4676,
+          "column": 2
+        }
+      ]
+    },
+    {
+      "type": "resourceLeak",
+      "locations": [
+        {
+          "type": "source",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+          "line": 3130,
+          "column": 14
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+          "line": 227,
+          "column": 7
+        },
+        {
+          "type": "sink",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+          "line": 244,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "type": "resourceLeak",
+      "locations": [
+        {
+          "type": "source",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+          "line": 3130,
+          "column": 14
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+          "line": 227,
+          "column": 7
+        },
+        {
+          "type": "sink",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+          "line": 252,
+          "column": 4
+        }
+      ]
+    },
+    {
+      "type": "resourceLeak",
+      "locations": [
+        {
+          "type": "source",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+          "line": 3130,
+          "column": 14
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+          "line": 227,
+          "column": 7
+        },
+        {
+          "type": "sink",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+          "line": 257,
+          "column": 8
+        }
+      ]
+    },
+    {
+      "type": "resourceLeak",
+      "locations": [
+        {
+          "type": "source",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_list.c",
+          "line": 333,
+          "column": 2
+        },
+        {
+          "type": "sink",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_list.c",
+          "line": 337,
+          "column": 2
+        }
+      ]
+    },
+    {
+      "type": "resourceLeak",
+      "locations": [
+        {
+          "type": "source",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+          "line": 3130,
+          "column": 14
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+          "line": 174,
+          "column": 36
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+          "line": 196,
+          "column": 21
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/main/SAPI.c",
+          "line": 951,
+          "column": 8
+        },
+        {
+          "type": "sink",
+          "file": "/home/thebesttv/php/src/php-8.3.3/main/SAPI.c",
+          "line": 955,
+          "column": 2
+        }
+      ]
+    },
+    {
+      "type": "resourceLeak",
+      "locations": [
+        {
+          "type": "source",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+          "line": 3130,
+          "column": 14
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+          "line": 174,
+          "column": 36
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+          "line": 196,
+          "column": 21
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/main/fastcgi.c",
+          "line": 1743,
+          "column": 21
+        },
+        {
+          "type": "sink",
+          "file": "/home/thebesttv/php/src/php-8.3.3/main/fastcgi.c",
+          "line": 1748,
+          "column": 2
+        }
+      ]
+    },
+    {
+      "type": "resourceLeak",
+      "locations": [
+        {
+          "type": "source",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+          "line": 3130,
+          "column": 14
+        },
+        {
+          "type": "stmt",
+          "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_llist.c",
+          "line": 36,
+          "column": 28
+        },
+        {
+          "type": "sink",
+          "file": "/home/thebesttv/php/src/php-8.3.3/main/streams/streams.c",
+          "line": 270,
+          "column": 3
+        }
+      ]
+    }
+  ]
+}
