@@ -58,7 +58,7 @@ def read_output(path):
     with open(path, 'r') as f:
         return f.read().strip()
 
-def run_case(root, dir, input_path, output_path, tool_path):
+def run_case(root, dir, input_path, output_path, tool_path, verbose: bool = False):
     logging.info(f"Running test case: {dir}")
 
     if dir.startswith(REAL_WORLD_DIR):
@@ -80,8 +80,11 @@ docker run -t \
 
     original_output = read_output(output_path)
     os.remove(output_path)
-    subprocess.run(cmd, shell=True, \
-                   check=True)
+    if verbose:
+        subprocess.run(cmd, shell=True, check=True)
+    else:
+        subprocess.run(cmd, shell=True, check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     new_output = read_output(output_path)
     if original_output != new_output:
