@@ -17,6 +17,8 @@ jobs:
     name: ${{ matrix.test_type }} test
     steps:
       - name: Maximize build space
+        # 由于 Full 版的真实项目基于 Docker image，所以需要更多的空间
+        if: ${{ matrix.test_type == 'Full' }}
         uses: easimon/maximize-build-space@master
         with:
           root-reserve-mb: 35840
