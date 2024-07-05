@@ -40,9 +40,13 @@ jobs:
           variant: sccache
       - name: Generate CMake
         run: |
-          ./build-release.sh \
+          if [ "${{ matrix.test_type }}" == "Quick" ]; then
+            ./build-release.sh \
               -DCMAKE_C_COMPILER_LAUNCHER=sccache \
               -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
+          else
+            ./build-release.sh
+          fi
       - name: Build tool
         run: |
           ./graph-generation/tool -h
