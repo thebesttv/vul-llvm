@@ -30,11 +30,11 @@ def get_directories(root):
     l = (d for d in os.listdir(root) if os.path.isdir(os.path.join(root, d)))
     return list(sorted(l))
 
-def get_test_cases(root):
+def get_test_cases(root, real_world: bool = False):
     # get all directories under root
     directories = get_directories(root)
     # 基于 docker 的真实项目测试集
-    if REAL_WORLD_DIR in directories:
+    if real_world and REAL_WORLD_DIR in directories:
         directories += [os.path.join(REAL_WORLD_DIR, d)
                         for d in get_directories(os.path.join(root, REAL_WORLD_DIR))]
     logging.info(f'Found {len(directories)} directories')
