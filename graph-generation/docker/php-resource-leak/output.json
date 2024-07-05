@@ -1,0 +1,1905 @@
+{
+    "project": "php",
+    "type": "docker",
+    "root": "/home/thebesttv/php",
+    "compile_commands": "/home/thebesttv/php/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/docker/php-resource-leak/input.json",
+    "results": [
+        {
+            "type": "resourceLeak",
+            "sourceIndex": 0,
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3130,
+                    "beginColumn": 2,
+                    "endLine": 3130,
+                    "endColumn": 26,
+                    "content": "void *tmp = malloc(len);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3131,
+                    "beginColumn": 6,
+                    "endLine": 3131,
+                    "endColumn": 27,
+                    "content": "EXPECTED(tmp || !len)",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3132,
+                    "beginColumn": 3,
+                    "endLine": 3132,
+                    "endColumn": 13,
+                    "content": "return tmp",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3128,
+                    "beginColumn": 1,
+                    "endLine": 3135,
+                    "endColumn": 2,
+                    "content": "ZEND_API void * __zend_malloc(size_t len)\n{\n\tvoid *tmp = malloc(len);\n\tif (EXPEC ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4635,
+                    "beginColumn": 7,
+                    "endLine": 4635,
+                    "endColumn": 47,
+                    "content": "pemalloc(sizeof(zend_class_constant), 1)",
+                    "stmtKind": "ConditionalOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4635,
+                    "beginColumn": 3,
+                    "endLine": 4635,
+                    "endColumn": 47,
+                    "content": "c = pemalloc(sizeof(zend_class_constant), 1)",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4639,
+                    "beginColumn": 2,
+                    "endLine": 4639,
+                    "endColumn": 35,
+                    "content": "ZVAL_COPY_VALUE(&c->value, value)",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4640,
+                    "beginColumn": 2,
+                    "endLine": 4640,
+                    "endColumn": 35,
+                    "content": "ZEND_CLASS_CONST_FLAGS(c) = flags",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4641,
+                    "beginColumn": 2,
+                    "endLine": 4641,
+                    "endColumn": 30,
+                    "content": "c->doc_comment = doc_comment",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4642,
+                    "beginColumn": 2,
+                    "endLine": 4642,
+                    "endColumn": 22,
+                    "content": "c->attributes = NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4643,
+                    "beginColumn": 2,
+                    "endLine": 4643,
+                    "endColumn": 12,
+                    "content": "c->ce = ce",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4644,
+                    "beginColumn": 2,
+                    "endLine": 4644,
+                    "endColumn": 16,
+                    "content": "c->type = type",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4646,
+                    "beginColumn": 6,
+                    "endLine": 4646,
+                    "endColumn": 21,
+                    "content": "Z_TYPE_P(value)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4646,
+                    "beginColumn": 6,
+                    "endLine": 4646,
+                    "endColumn": 40,
+                    "content": "Z_TYPE_P(value) == IS_CONSTANT_AST",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4654,
+                    "beginColumn": 7,
+                    "endLine": 4654,
+                    "endColumn": 55,
+                    "content": "zend_hash_add_ptr(&ce->constants_table, name, c)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4654,
+                    "beginColumn": 6,
+                    "endLine": 4654,
+                    "endColumn": 55,
+                    "content": "!zend_hash_add_ptr(&ce->constants_table, name, c)",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4659,
+                    "beginColumn": 2,
+                    "endLine": 4659,
+                    "endColumn": 10,
+                    "content": "return c",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4615,
+                    "beginColumn": 1,
+                    "endLine": 4660,
+                    "endColumn": 2,
+                    "content": "ZEND_API zend_class_constant *zend_declare_typed_class_constant(zend_class_entry ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4664,
+                    "beginColumn": 2,
+                    "endLine": 4664,
+                    "endColumn": 115,
+                    "content": "return zend_declare_typed_class_constant(ce, name, value, flags, doc_comment, (z ...",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4662,
+                    "beginColumn": 1,
+                    "endLine": 4665,
+                    "endColumn": 2,
+                    "content": "ZEND_API zend_class_constant *zend_declare_class_constant_ex(zend_class_entry *c ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4677,
+                    "beginColumn": 2,
+                    "endLine": 4677,
+                    "endColumn": 26,
+                    "content": "zend_string_release(key)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_API.c",
+                    "beginLine": 4667,
+                    "beginColumn": 1,
+                    "endLine": 4678,
+                    "endColumn": 2,
+                    "content": "ZEND_API void zend_declare_class_constant(zend_class_entry *ce, const char *name ..."
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "sourceIndex": 1,
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3130,
+                    "beginColumn": 2,
+                    "endLine": 3130,
+                    "endColumn": 26,
+                    "content": "void *tmp = malloc(len);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3131,
+                    "beginColumn": 6,
+                    "endLine": 3131,
+                    "endColumn": 27,
+                    "content": "EXPECTED(tmp || !len)",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3132,
+                    "beginColumn": 3,
+                    "endLine": 3132,
+                    "endColumn": 13,
+                    "content": "return tmp",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3128,
+                    "beginColumn": 1,
+                    "endLine": 3135,
+                    "endColumn": 2,
+                    "content": "ZEND_API void * __zend_malloc(size_t len)\n{\n\tvoid *tmp = malloc(len);\n\tif (EXPEC ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 227,
+                    "beginColumn": 7,
+                    "endLine": 227,
+                    "endColumn": 42,
+                    "content": "pemalloc(sizeof(zend_ini_entry), 1)",
+                    "stmtKind": "ConditionalOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 227,
+                    "beginColumn": 3,
+                    "endLine": 227,
+                    "endColumn": 42,
+                    "content": "p = pemalloc(sizeof(zend_ini_entry), 1)",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 228,
+                    "beginColumn": 13,
+                    "endLine": 228,
+                    "endColumn": 82,
+                    "content": "zend_string_init_interned(ini_entry->name, ini_entry->name_length, 1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 228,
+                    "beginColumn": 3,
+                    "endLine": 228,
+                    "endColumn": 82,
+                    "content": "p->name = zend_string_init_interned(ini_entry->name, ini_entry->name_length, 1)",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 229,
+                    "beginColumn": 3,
+                    "endLine": 229,
+                    "endColumn": 38,
+                    "content": "p->on_modify = ini_entry->on_modify",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 230,
+                    "beginColumn": 3,
+                    "endLine": 230,
+                    "endColumn": 34,
+                    "content": "p->mh_arg1 = ini_entry->mh_arg1",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 231,
+                    "beginColumn": 3,
+                    "endLine": 231,
+                    "endColumn": 34,
+                    "content": "p->mh_arg2 = ini_entry->mh_arg2",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 232,
+                    "beginColumn": 3,
+                    "endLine": 232,
+                    "endColumn": 34,
+                    "content": "p->mh_arg3 = ini_entry->mh_arg3",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 233,
+                    "beginColumn": 3,
+                    "endLine": 233,
+                    "endColumn": 18,
+                    "content": "p->value = NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 234,
+                    "beginColumn": 3,
+                    "endLine": 234,
+                    "endColumn": 23,
+                    "content": "p->orig_value = NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 235,
+                    "beginColumn": 3,
+                    "endLine": 235,
+                    "endColumn": 38,
+                    "content": "p->displayer = ini_entry->displayer",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 236,
+                    "beginColumn": 3,
+                    "endLine": 236,
+                    "endColumn": 40,
+                    "content": "p->modifiable = ini_entry->modifiable",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 238,
+                    "beginColumn": 3,
+                    "endLine": 238,
+                    "endColumn": 25,
+                    "content": "p->orig_modifiable = 0",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 239,
+                    "beginColumn": 3,
+                    "endLine": 239,
+                    "endColumn": 18,
+                    "content": "p->modified = 0",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 240,
+                    "beginColumn": 3,
+                    "endLine": 240,
+                    "endColumn": 35,
+                    "content": "p->module_number = module_number",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 242,
+                    "beginColumn": 7,
+                    "endLine": 242,
+                    "endColumn": 55,
+                    "content": "zend_hash_add_ptr(directives, p->name, (void*)p)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 242,
+                    "beginColumn": 7,
+                    "endLine": 242,
+                    "endColumn": 63,
+                    "content": "zend_hash_add_ptr(directives, p->name, (void*)p) == NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 243,
+                    "beginColumn": 8,
+                    "endLine": 243,
+                    "endColumn": 15,
+                    "content": "p->name",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 244,
+                    "beginColumn": 5,
+                    "endLine": 244,
+                    "endColumn": 39,
+                    "content": "zend_string_release_ex(p->name, 1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 246,
+                    "beginColumn": 4,
+                    "endLine": 246,
+                    "endColumn": 62,
+                    "content": "zend_unregister_ini_entries_ex(module_number, module_type)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 247,
+                    "beginColumn": 4,
+                    "endLine": 247,
+                    "endColumn": 18,
+                    "content": "return FAILURE",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 204,
+                    "beginColumn": 1,
+                    "endLine": 264,
+                    "endColumn": 2,
+                    "content": "ZEND_API zend_result zend_register_ini_entries_ex(const zend_ini_entry_def *ini_ ..."
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "sourceIndex": 2,
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3130,
+                    "beginColumn": 2,
+                    "endLine": 3130,
+                    "endColumn": 26,
+                    "content": "void *tmp = malloc(len);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3131,
+                    "beginColumn": 6,
+                    "endLine": 3131,
+                    "endColumn": 27,
+                    "content": "EXPECTED(tmp || !len)",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3132,
+                    "beginColumn": 3,
+                    "endLine": 3132,
+                    "endColumn": 13,
+                    "content": "return tmp",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3128,
+                    "beginColumn": 1,
+                    "endLine": 3135,
+                    "endColumn": 2,
+                    "content": "ZEND_API void * __zend_malloc(size_t len)\n{\n\tvoid *tmp = malloc(len);\n\tif (EXPEC ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 227,
+                    "beginColumn": 7,
+                    "endLine": 227,
+                    "endColumn": 42,
+                    "content": "pemalloc(sizeof(zend_ini_entry), 1)",
+                    "stmtKind": "ConditionalOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 227,
+                    "beginColumn": 3,
+                    "endLine": 227,
+                    "endColumn": 42,
+                    "content": "p = pemalloc(sizeof(zend_ini_entry), 1)",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 228,
+                    "beginColumn": 13,
+                    "endLine": 228,
+                    "endColumn": 82,
+                    "content": "zend_string_init_interned(ini_entry->name, ini_entry->name_length, 1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 228,
+                    "beginColumn": 3,
+                    "endLine": 228,
+                    "endColumn": 82,
+                    "content": "p->name = zend_string_init_interned(ini_entry->name, ini_entry->name_length, 1)",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 229,
+                    "beginColumn": 3,
+                    "endLine": 229,
+                    "endColumn": 38,
+                    "content": "p->on_modify = ini_entry->on_modify",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 230,
+                    "beginColumn": 3,
+                    "endLine": 230,
+                    "endColumn": 34,
+                    "content": "p->mh_arg1 = ini_entry->mh_arg1",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 231,
+                    "beginColumn": 3,
+                    "endLine": 231,
+                    "endColumn": 34,
+                    "content": "p->mh_arg2 = ini_entry->mh_arg2",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 232,
+                    "beginColumn": 3,
+                    "endLine": 232,
+                    "endColumn": 34,
+                    "content": "p->mh_arg3 = ini_entry->mh_arg3",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 233,
+                    "beginColumn": 3,
+                    "endLine": 233,
+                    "endColumn": 18,
+                    "content": "p->value = NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 234,
+                    "beginColumn": 3,
+                    "endLine": 234,
+                    "endColumn": 23,
+                    "content": "p->orig_value = NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 235,
+                    "beginColumn": 3,
+                    "endLine": 235,
+                    "endColumn": 38,
+                    "content": "p->displayer = ini_entry->displayer",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 236,
+                    "beginColumn": 3,
+                    "endLine": 236,
+                    "endColumn": 40,
+                    "content": "p->modifiable = ini_entry->modifiable",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 238,
+                    "beginColumn": 3,
+                    "endLine": 238,
+                    "endColumn": 25,
+                    "content": "p->orig_modifiable = 0",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 239,
+                    "beginColumn": 3,
+                    "endLine": 239,
+                    "endColumn": 18,
+                    "content": "p->modified = 0",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 240,
+                    "beginColumn": 3,
+                    "endLine": 240,
+                    "endColumn": 35,
+                    "content": "p->module_number = module_number",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 242,
+                    "beginColumn": 7,
+                    "endLine": 242,
+                    "endColumn": 55,
+                    "content": "zend_hash_add_ptr(directives, p->name, (void*)p)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 242,
+                    "beginColumn": 7,
+                    "endLine": 242,
+                    "endColumn": 63,
+                    "content": "zend_hash_add_ptr(directives, p->name, (void*)p) == NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 249,
+                    "beginColumn": 25,
+                    "endLine": 249,
+                    "endColumn": 66,
+                    "content": "zend_get_configuration_directive(p->name)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 249,
+                    "beginColumn": 8,
+                    "endLine": 249,
+                    "endColumn": 75,
+                    "content": "(default_value = zend_get_configuration_directive(p->name)) != NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 250,
+                    "beginColumn": 8,
+                    "endLine": 250,
+                    "endColumn": 21,
+                    "content": "!p->on_modify",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 252,
+                    "beginColumn": 40,
+                    "endLine": 252,
+                    "endColumn": 80,
+                    "content": "zend_string_copy(Z_STR_P(default_value))",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 252,
+                    "beginColumn": 15,
+                    "endLine": 252,
+                    "endColumn": 81,
+                    "content": "zend_new_interned_string(zend_string_copy(Z_STR_P(default_value)))",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 252,
+                    "beginColumn": 4,
+                    "endLine": 252,
+                    "endColumn": 81,
+                    "content": "p->value = zend_new_interned_string(zend_string_copy(Z_STR_P(default_value)))",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 261,
+                    "beginColumn": 3,
+                    "endLine": 261,
+                    "endColumn": 14,
+                    "content": "ini_entry++",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 226,
+                    "beginColumn": 9,
+                    "endLine": 226,
+                    "endColumn": 24,
+                    "content": "ini_entry->name",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 263,
+                    "beginColumn": 2,
+                    "endLine": 263,
+                    "endColumn": 16,
+                    "content": "return SUCCESS",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 204,
+                    "beginColumn": 1,
+                    "endLine": 264,
+                    "endColumn": 2,
+                    "content": "ZEND_API zend_result zend_register_ini_entries_ex(const zend_ini_entry_def *ini_ ..."
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "sourceIndex": 3,
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3130,
+                    "beginColumn": 2,
+                    "endLine": 3130,
+                    "endColumn": 26,
+                    "content": "void *tmp = malloc(len);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3131,
+                    "beginColumn": 6,
+                    "endLine": 3131,
+                    "endColumn": 27,
+                    "content": "EXPECTED(tmp || !len)",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3132,
+                    "beginColumn": 3,
+                    "endLine": 3132,
+                    "endColumn": 13,
+                    "content": "return tmp",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3128,
+                    "beginColumn": 1,
+                    "endLine": 3135,
+                    "endColumn": 2,
+                    "content": "ZEND_API void * __zend_malloc(size_t len)\n{\n\tvoid *tmp = malloc(len);\n\tif (EXPEC ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 227,
+                    "beginColumn": 7,
+                    "endLine": 227,
+                    "endColumn": 42,
+                    "content": "pemalloc(sizeof(zend_ini_entry), 1)",
+                    "stmtKind": "ConditionalOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 227,
+                    "beginColumn": 3,
+                    "endLine": 227,
+                    "endColumn": 42,
+                    "content": "p = pemalloc(sizeof(zend_ini_entry), 1)",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 228,
+                    "beginColumn": 13,
+                    "endLine": 228,
+                    "endColumn": 82,
+                    "content": "zend_string_init_interned(ini_entry->name, ini_entry->name_length, 1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 228,
+                    "beginColumn": 3,
+                    "endLine": 228,
+                    "endColumn": 82,
+                    "content": "p->name = zend_string_init_interned(ini_entry->name, ini_entry->name_length, 1)",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 229,
+                    "beginColumn": 3,
+                    "endLine": 229,
+                    "endColumn": 38,
+                    "content": "p->on_modify = ini_entry->on_modify",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 230,
+                    "beginColumn": 3,
+                    "endLine": 230,
+                    "endColumn": 34,
+                    "content": "p->mh_arg1 = ini_entry->mh_arg1",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 231,
+                    "beginColumn": 3,
+                    "endLine": 231,
+                    "endColumn": 34,
+                    "content": "p->mh_arg2 = ini_entry->mh_arg2",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 232,
+                    "beginColumn": 3,
+                    "endLine": 232,
+                    "endColumn": 34,
+                    "content": "p->mh_arg3 = ini_entry->mh_arg3",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 233,
+                    "beginColumn": 3,
+                    "endLine": 233,
+                    "endColumn": 18,
+                    "content": "p->value = NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 234,
+                    "beginColumn": 3,
+                    "endLine": 234,
+                    "endColumn": 23,
+                    "content": "p->orig_value = NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 235,
+                    "beginColumn": 3,
+                    "endLine": 235,
+                    "endColumn": 38,
+                    "content": "p->displayer = ini_entry->displayer",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 236,
+                    "beginColumn": 3,
+                    "endLine": 236,
+                    "endColumn": 40,
+                    "content": "p->modifiable = ini_entry->modifiable",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 238,
+                    "beginColumn": 3,
+                    "endLine": 238,
+                    "endColumn": 25,
+                    "content": "p->orig_modifiable = 0",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 239,
+                    "beginColumn": 3,
+                    "endLine": 239,
+                    "endColumn": 18,
+                    "content": "p->modified = 0",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 240,
+                    "beginColumn": 3,
+                    "endLine": 240,
+                    "endColumn": 35,
+                    "content": "p->module_number = module_number",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 242,
+                    "beginColumn": 7,
+                    "endLine": 242,
+                    "endColumn": 55,
+                    "content": "zend_hash_add_ptr(directives, p->name, (void*)p)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 242,
+                    "beginColumn": 7,
+                    "endLine": 242,
+                    "endColumn": 63,
+                    "content": "zend_hash_add_ptr(directives, p->name, (void*)p) == NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 249,
+                    "beginColumn": 25,
+                    "endLine": 249,
+                    "endColumn": 66,
+                    "content": "zend_get_configuration_directive(p->name)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 249,
+                    "beginColumn": 8,
+                    "endLine": 249,
+                    "endColumn": 75,
+                    "content": "(default_value = zend_get_configuration_directive(p->name)) != NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 254,
+                    "beginColumn": 15,
+                    "endLine": 254,
+                    "endColumn": 31,
+                    "content": "ini_entry->value",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 255,
+                    "beginColumn": 5,
+                    "endLine": 255,
+                    "endColumn": 76,
+                    "content": "zend_string_init_interned(ini_entry->value, ini_entry->value_length, 1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 254,
+                    "beginColumn": 4,
+                    "endLine": 255,
+                    "endColumn": 83,
+                    "content": "p->value = ini_entry->value ?\n\t\t\t\tzend_string_init_interned(ini_entry->value, in ...",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 257,
+                    "beginColumn": 8,
+                    "endLine": 257,
+                    "endColumn": 20,
+                    "content": "p->on_modify",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 261,
+                    "beginColumn": 3,
+                    "endLine": 261,
+                    "endColumn": 14,
+                    "content": "ini_entry++",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 226,
+                    "beginColumn": 9,
+                    "endLine": 226,
+                    "endColumn": 24,
+                    "content": "ini_entry->name",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 263,
+                    "beginColumn": 2,
+                    "endLine": 263,
+                    "endColumn": 16,
+                    "content": "return SUCCESS",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_ini.c",
+                    "beginLine": 204,
+                    "beginColumn": 1,
+                    "endLine": 264,
+                    "endColumn": 2,
+                    "content": "ZEND_API zend_result zend_register_ini_entries_ex(const zend_ini_entry_def *ini_ ..."
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "sourceIndex": 4,
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_list.c",
+                    "beginLine": 333,
+                    "beginColumn": 2,
+                    "endLine": 333,
+                    "endColumn": 60,
+                    "content": "ZVAL_NEW_PERSISTENT_RES(&tmp, -1, rsrc_pointer, rsrc_type)",
+                    "stmtKind": "IntegerLiteral"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_list.c",
+                    "beginLine": 334,
+                    "beginColumn": 2,
+                    "endLine": 334,
+                    "endColumn": 42,
+                    "content": "GC_MAKE_PERSISTENT_LOCAL(Z_COUNTED(tmp))",
+                    "stmtKind": "IntegerLiteral"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_list.c",
+                    "beginLine": 335,
+                    "beginColumn": 2,
+                    "endLine": 335,
+                    "endColumn": 31,
+                    "content": "GC_MAKE_PERSISTENT_LOCAL(key)",
+                    "stmtKind": "IntegerLiteral"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_list.c",
+                    "beginLine": 337,
+                    "beginColumn": 7,
+                    "endLine": 337,
+                    "endColumn": 56,
+                    "content": "zend_hash_update(&EG(persistent_list), key, &tmp)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_list.c",
+                    "beginLine": 337,
+                    "beginColumn": 2,
+                    "endLine": 337,
+                    "endColumn": 56,
+                    "content": "zv = zend_hash_update(&EG(persistent_list), key, &tmp)",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_list.c",
+                    "beginLine": 339,
+                    "beginColumn": 2,
+                    "endLine": 339,
+                    "endColumn": 20,
+                    "content": "return Z_RES_P(zv)",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_list.c",
+                    "beginLine": 328,
+                    "beginColumn": 1,
+                    "endLine": 340,
+                    "endColumn": 2,
+                    "content": "ZEND_API zend_resource* zend_register_persistent_resource_ex(zend_string *key, v ..."
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "sourceIndex": 5,
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3130,
+                    "beginColumn": 2,
+                    "endLine": 3130,
+                    "endColumn": 26,
+                    "content": "void *tmp = malloc(len);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3131,
+                    "beginColumn": 6,
+                    "endLine": 3131,
+                    "endColumn": 27,
+                    "content": "EXPECTED(tmp || !len)",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3132,
+                    "beginColumn": 3,
+                    "endLine": 3132,
+                    "endColumn": 13,
+                    "content": "return tmp",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3128,
+                    "beginColumn": 1,
+                    "endLine": 3135,
+                    "endColumn": 2,
+                    "content": "ZEND_API void * __zend_malloc(size_t len)\n{\n\tvoid *tmp = malloc(len);\n\tif (EXPEC ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 174,
+                    "beginColumn": 36,
+                    "endLine": 174,
+                    "endColumn": 102,
+                    "content": "pemalloc(ZEND_MM_ALIGNED_SIZE(_ZSTR_STRUCT_SIZE(len)), persistent)",
+                    "stmtKind": "ConditionalOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 174,
+                    "beginColumn": 2,
+                    "endLine": 174,
+                    "endColumn": 103,
+                    "content": "zend_string *ret = (zend_string *)pemalloc(ZEND_MM_ALIGNED_SIZE(_ZSTR_STRUCT_SIZ ...",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 176,
+                    "beginColumn": 2,
+                    "endLine": 176,
+                    "endColumn": 25,
+                    "content": "GC_SET_REFCOUNT(ret, 1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 177,
+                    "beginColumn": 36,
+                    "endLine": 177,
+                    "endColumn": 46,
+                    "content": "persistent",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 177,
+                    "beginColumn": 49,
+                    "endLine": 177,
+                    "endColumn": 66,
+                    "content": "IS_STR_PERSISTENT",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 177,
+                    "beginColumn": 36,
+                    "endLine": 177,
+                    "endColumn": 70,
+                    "content": "persistent ? IS_STR_PERSISTENT : 0",
+                    "stmtKind": "ConditionalOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 177,
+                    "beginColumn": 2,
+                    "endLine": 177,
+                    "endColumn": 90,
+                    "content": "GC_TYPE_INFO(ret) = GC_STRING | ((persistent ? IS_STR_PERSISTENT : 0) << GC_FLAG ...",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 178,
+                    "beginColumn": 2,
+                    "endLine": 178,
+                    "endColumn": 17,
+                    "content": "ZSTR_H(ret) = 0",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 179,
+                    "beginColumn": 2,
+                    "endLine": 179,
+                    "endColumn": 21,
+                    "content": "ZSTR_LEN(ret) = len",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 180,
+                    "beginColumn": 2,
+                    "endLine": 180,
+                    "endColumn": 12,
+                    "content": "return ret",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 172,
+                    "beginColumn": 1,
+                    "endLine": 181,
+                    "endColumn": 2,
+                    "content": "static zend_always_inline zend_string *zend_string_alloc(size_t len, bool persis ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 196,
+                    "beginColumn": 2,
+                    "endLine": 196,
+                    "endColumn": 56,
+                    "content": "zend_string *ret = zend_string_alloc(len, persistent);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 198,
+                    "beginColumn": 2,
+                    "endLine": 198,
+                    "endColumn": 33,
+                    "content": "memcpy(ZSTR_VAL(ret), str, len)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 199,
+                    "beginColumn": 2,
+                    "endLine": 199,
+                    "endColumn": 27,
+                    "content": "ZSTR_VAL(ret)[len] = '\\0'",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 200,
+                    "beginColumn": 2,
+                    "endLine": 200,
+                    "endColumn": 12,
+                    "content": "return ret",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 194,
+                    "beginColumn": 1,
+                    "endLine": 201,
+                    "endColumn": 2,
+                    "content": "static zend_always_inline zend_string *zend_string_init(const char *str, size_t  ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/SAPI.c",
+                    "beginLine": 951,
+                    "beginColumn": 2,
+                    "endLine": 951,
+                    "endColumn": 83,
+                    "content": "key = zend_string_init(post_entry->content_type, post_entry->content_type_len, 1 ...",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/SAPI.c",
+                    "beginLine": 952,
+                    "beginColumn": 2,
+                    "endLine": 952,
+                    "endColumn": 31,
+                    "content": "GC_MAKE_PERSISTENT_LOCAL(key)",
+                    "stmtKind": "IntegerLiteral"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/SAPI.c",
+                    "beginLine": 953,
+                    "beginColumn": 8,
+                    "endLine": 954,
+                    "endColumn": 49,
+                    "content": "zend_hash_add_mem(&SG(known_post_content_types), key,\n\t\t\t(void *) post_entry, si ...",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/SAPI.c",
+                    "beginLine": 954,
+                    "beginColumn": 52,
+                    "endLine": 954,
+                    "endColumn": 59,
+                    "content": "SUCCESS",
+                    "stmtKind": "DeclRefExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/SAPI.c",
+                    "beginLine": 953,
+                    "beginColumn": 2,
+                    "endLine": 954,
+                    "endColumn": 69,
+                    "content": "ret = zend_hash_add_mem(&SG(known_post_content_types), key,\n\t\t\t(void *) post_ent ...",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/SAPI.c",
+                    "beginLine": 955,
+                    "beginColumn": 2,
+                    "endLine": 955,
+                    "endColumn": 32,
+                    "content": "zend_string_release_ex(key, 1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/SAPI.c",
+                    "beginLine": 956,
+                    "beginColumn": 2,
+                    "endLine": 956,
+                    "endColumn": 12,
+                    "content": "return ret",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/SAPI.c",
+                    "beginLine": 944,
+                    "beginColumn": 1,
+                    "endLine": 957,
+                    "endColumn": 2,
+                    "content": "SAPI_API int sapi_register_post_entry(const sapi_post_entry *post_entry)\n{\n\tint  ..."
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "sourceIndex": 6,
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3130,
+                    "beginColumn": 2,
+                    "endLine": 3130,
+                    "endColumn": 26,
+                    "content": "void *tmp = malloc(len);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3131,
+                    "beginColumn": 6,
+                    "endLine": 3131,
+                    "endColumn": 27,
+                    "content": "EXPECTED(tmp || !len)",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3132,
+                    "beginColumn": 3,
+                    "endLine": 3132,
+                    "endColumn": 13,
+                    "content": "return tmp",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3128,
+                    "beginColumn": 1,
+                    "endLine": 3135,
+                    "endColumn": 2,
+                    "content": "ZEND_API void * __zend_malloc(size_t len)\n{\n\tvoid *tmp = malloc(len);\n\tif (EXPEC ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 174,
+                    "beginColumn": 36,
+                    "endLine": 174,
+                    "endColumn": 102,
+                    "content": "pemalloc(ZEND_MM_ALIGNED_SIZE(_ZSTR_STRUCT_SIZE(len)), persistent)",
+                    "stmtKind": "ConditionalOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 174,
+                    "beginColumn": 2,
+                    "endLine": 174,
+                    "endColumn": 103,
+                    "content": "zend_string *ret = (zend_string *)pemalloc(ZEND_MM_ALIGNED_SIZE(_ZSTR_STRUCT_SIZ ...",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 176,
+                    "beginColumn": 2,
+                    "endLine": 176,
+                    "endColumn": 25,
+                    "content": "GC_SET_REFCOUNT(ret, 1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 177,
+                    "beginColumn": 36,
+                    "endLine": 177,
+                    "endColumn": 46,
+                    "content": "persistent",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 177,
+                    "beginColumn": 49,
+                    "endLine": 177,
+                    "endColumn": 66,
+                    "content": "IS_STR_PERSISTENT",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 177,
+                    "beginColumn": 36,
+                    "endLine": 177,
+                    "endColumn": 70,
+                    "content": "persistent ? IS_STR_PERSISTENT : 0",
+                    "stmtKind": "ConditionalOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 177,
+                    "beginColumn": 2,
+                    "endLine": 177,
+                    "endColumn": 90,
+                    "content": "GC_TYPE_INFO(ret) = GC_STRING | ((persistent ? IS_STR_PERSISTENT : 0) << GC_FLAG ...",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 178,
+                    "beginColumn": 2,
+                    "endLine": 178,
+                    "endColumn": 17,
+                    "content": "ZSTR_H(ret) = 0",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 179,
+                    "beginColumn": 2,
+                    "endLine": 179,
+                    "endColumn": 21,
+                    "content": "ZSTR_LEN(ret) = len",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 180,
+                    "beginColumn": 2,
+                    "endLine": 180,
+                    "endColumn": 12,
+                    "content": "return ret",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 172,
+                    "beginColumn": 1,
+                    "endLine": 181,
+                    "endColumn": 2,
+                    "content": "static zend_always_inline zend_string *zend_string_alloc(size_t len, bool persis ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 196,
+                    "beginColumn": 2,
+                    "endLine": 196,
+                    "endColumn": 56,
+                    "content": "zend_string *ret = zend_string_alloc(len, persistent);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 198,
+                    "beginColumn": 2,
+                    "endLine": 198,
+                    "endColumn": 33,
+                    "content": "memcpy(ZSTR_VAL(ret), str, len)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 199,
+                    "beginColumn": 2,
+                    "endLine": 199,
+                    "endColumn": 27,
+                    "content": "ZSTR_VAL(ret)[len] = '\\0'",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 200,
+                    "beginColumn": 2,
+                    "endLine": 200,
+                    "endColumn": 12,
+                    "content": "return ret",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_string.h",
+                    "beginLine": 194,
+                    "beginColumn": 1,
+                    "endLine": 201,
+                    "endColumn": 2,
+                    "content": "static zend_always_inline zend_string *zend_string_init(const char *str, size_t  ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/fastcgi.c",
+                    "beginLine": 1743,
+                    "beginColumn": 2,
+                    "endLine": 1743,
+                    "endColumn": 57,
+                    "content": "zend_string *key = zend_string_init(name, name_len, 1);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/fastcgi.c",
+                    "beginLine": 1744,
+                    "beginColumn": 2,
+                    "endLine": 1744,
+                    "endColumn": 62,
+                    "content": "ZVAL_NEW_STR(&zvalue, zend_string_init(value, value_len, 1))",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/fastcgi.c",
+                    "beginLine": 1745,
+                    "beginColumn": 2,
+                    "endLine": 1745,
+                    "endColumn": 31,
+                    "content": "GC_MAKE_PERSISTENT_LOCAL(key)",
+                    "stmtKind": "IntegerLiteral"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/fastcgi.c",
+                    "beginLine": 1746,
+                    "beginColumn": 2,
+                    "endLine": 1746,
+                    "endColumn": 41,
+                    "content": "GC_MAKE_PERSISTENT_LOCAL(Z_STR(zvalue))",
+                    "stmtKind": "IntegerLiteral"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/fastcgi.c",
+                    "beginLine": 1747,
+                    "beginColumn": 2,
+                    "endLine": 1747,
+                    "endColumn": 46,
+                    "content": "zend_hash_add(&fcgi_mgmt_vars, key, &zvalue)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/fastcgi.c",
+                    "beginLine": 1748,
+                    "beginColumn": 2,
+                    "endLine": 1748,
+                    "endColumn": 32,
+                    "content": "zend_string_release_ex(key, 1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/fastcgi.c",
+                    "beginLine": 1740,
+                    "beginColumn": 1,
+                    "endLine": 1749,
+                    "endColumn": 2,
+                    "content": "void fcgi_set_mgmt_var(const char * name, size_t name_len, const char * value, s ..."
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "sourceIndex": 7,
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3130,
+                    "beginColumn": 2,
+                    "endLine": 3130,
+                    "endColumn": 26,
+                    "content": "void *tmp = malloc(len);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3131,
+                    "beginColumn": 6,
+                    "endLine": 3131,
+                    "endColumn": 27,
+                    "content": "EXPECTED(tmp || !len)",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3132,
+                    "beginColumn": 3,
+                    "endLine": 3132,
+                    "endColumn": 13,
+                    "content": "return tmp",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_alloc.c",
+                    "beginLine": 3128,
+                    "beginColumn": 1,
+                    "endLine": 3135,
+                    "endColumn": 2,
+                    "content": "ZEND_API void * __zend_malloc(size_t len)\n{\n\tvoid *tmp = malloc(len);\n\tif (EXPEC ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_llist.c",
+                    "beginLine": 36,
+                    "beginColumn": 28,
+                    "endLine": 36,
+                    "endColumn": 89,
+                    "content": "pemalloc(sizeof(zend_llist_element)+l->size-1, l->persistent)",
+                    "stmtKind": "ConditionalOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_llist.c",
+                    "beginLine": 36,
+                    "beginColumn": 2,
+                    "endLine": 36,
+                    "endColumn": 90,
+                    "content": "zend_llist_element *tmp = pemalloc(sizeof(zend_llist_element)+l->size-1, l->pers ...",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_llist.c",
+                    "beginLine": 38,
+                    "beginColumn": 2,
+                    "endLine": 38,
+                    "endColumn": 21,
+                    "content": "tmp->prev = l->tail",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_llist.c",
+                    "beginLine": 39,
+                    "beginColumn": 2,
+                    "endLine": 39,
+                    "endColumn": 18,
+                    "content": "tmp->next = NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_llist.c",
+                    "beginLine": 40,
+                    "beginColumn": 6,
+                    "endLine": 40,
+                    "endColumn": 13,
+                    "content": "l->tail",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_llist.c",
+                    "beginLine": 41,
+                    "beginColumn": 3,
+                    "endLine": 41,
+                    "endColumn": 22,
+                    "content": "l->tail->next = tmp",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_llist.c",
+                    "beginLine": 45,
+                    "beginColumn": 2,
+                    "endLine": 45,
+                    "endColumn": 15,
+                    "content": "l->tail = tmp",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_llist.c",
+                    "beginLine": 46,
+                    "beginColumn": 2,
+                    "endLine": 46,
+                    "endColumn": 37,
+                    "content": "memcpy(tmp->data, element, l->size)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_llist.c",
+                    "beginLine": 48,
+                    "beginColumn": 2,
+                    "endLine": 48,
+                    "endColumn": 12,
+                    "content": "++l->count",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_llist.c",
+                    "beginLine": 34,
+                    "beginColumn": 1,
+                    "endLine": 49,
+                    "endColumn": 2,
+                    "content": "ZEND_API void zend_llist_add_element(zend_llist *l, const void *element)\n{\n\tzend ..."
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/php/src/php-8.3.3/main/streams/streams.c",
+                    "beginLine": 241,
+                    "beginColumn": 1,
+                    "endLine": 272,
+                    "endColumn": 2,
+                    "content": "PHPAPI void php_stream_wrapper_log_error(const php_stream_wrapper *wrapper, int  ..."
+                }
+            ]
+        }
+    ]
+}
