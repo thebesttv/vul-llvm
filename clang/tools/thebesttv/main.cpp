@@ -656,7 +656,7 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
             findPathBetween(from, fromLine, getExit(to), INT_MAX, new_path, {},
                             "resourceLeak", sourceIndex, results);
         if (size == 0) {
-            logger.warn("Unable to find any path for NPE bug version!");
+            logger.warn("Unable to find any path for resource leak!");
         }
     } else {
         logger.info("Handle unknown type: {}", type);
