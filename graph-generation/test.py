@@ -112,7 +112,7 @@ if __name__ == '__main__':
                         help='Run test for real-world projects too')
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='Show tool output')
-    parser.add_argument('-d', '--dry-run', action='store_true',
+    parser.add_argument('-n', '--dryrun', action='store_true',
                         help='Only list test cases, do not run them')
 
     args = parser.parse_args()
