@@ -206,15 +206,18 @@ bool NpeSourceVisitor::VisitVarDecl(VarDecl *D) {
 bool NpeSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
     // 加入 NPE 可疑的 source 中
 
-    // equivalent to: !(S->isAssignmentOp() && !S->isCompoundAssignmentOp())
-    // i.e. is assignment & not compount assignment
-    if (S->getOpcode() != BO_Assign)
-        return true;
-
-    if (!isPointerType(S))
-        return true;
-
-    checkSourceAndMaybeSave(S->getSourceRange(), S->getRHS());
+    /**
+     * p = NULL / p = foo()
+     *
+     * S->getOpcode() == BO_Assign 等价于
+     *   !(S->isAssignmentOp() && !S->isCompoundAssignmentOp())
+     * i.e. is assignment & not compound assignment (e.g. +=, -=, *=)
+     */
+    if (S->getOpcode() == BO_Assign) {
+        if (isPointerType(S)) {
+            checkSourceAndMaybeSave(S->getSourceRange(), S->getRHS());
+        }
+    }
 
     return true;
 }
