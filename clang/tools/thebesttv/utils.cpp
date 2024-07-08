@@ -50,8 +50,7 @@ void dumpSourceLocation(const std::string &msg, const ASTContext &Context,
     if (loc.isMacroID()) {
         llvm::errs() << "MACRO S:" //
                      << SM.getSpellingLineNumber(loc) << ":"
-                     << SM.getSpellingColumnNumber(loc) << " "
-                     << "E:";
+                     << SM.getSpellingColumnNumber(loc) << " " << "E:";
     }
 
     llvm::errs() << SM.getExpansionLineNumber(loc) << ":"
