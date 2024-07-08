@@ -13,12 +13,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test_type: [Quick, Full]
+        # Quick: 缓存、只跑最基本的测试
+        # Medium: 缓存、跑所有测试
+        # Full: 从头编译、跑所有测试
+        test_type: [Quick, Medium, Full]
     name: ${{ matrix.test_type }} test
     steps:
       - name: Maximize build space
-        # 由于 Full 版的真实项目基于 Docker image，所以需要更多的空间
-        if: ${{ matrix.test_type == 'Full' }}
+        # 由于真实项目基于 Docker image，所以需要更多的空间
+        if: ${{ matrix.test_type != 'Quick' }}
         uses: easimon/maximize-build-space@master
         with:
           root-reserve-mb: 35840
@@ -36,14 +39,14 @@ jobs:
         with:
           python-version: '3.11'
       - name: ccache
-        # Quick 版本使用 ccache 加速编译，Full 版从头编译
-        if: ${{ matrix.test_type == 'Quick' }}
+        # Quick 和 Medium 版本使用 ccache 加速编译，Full 版从头编译
+        if: ${{ matrix.test_type != 'Full' }}
         uses: hendrikmuhs/ccache-action@v1
         with:
           variant: sccache
       - name: Generate CMake
         run: |
-          if [ "${{ matrix.test_type }}" == "Quick" ]; then
+          if [ "${{ matrix.test_type }}" != "Full" ]; then
             ./build-release.sh \
               -DCMAKE_C_COMPILER_LAUNCHER=sccache \
               -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
@@ -54,8 +57,8 @@ jobs:
         run: |
           ./graph-generation/tool -h
       - name: Pull Docker images
-        # Full 版才需要 Docker image
-        if: ${{ matrix.test_type == 'Full' }}
+        # 真实项目需要 Docker image
+        if: ${{ matrix.test_type != 'Quick' }}
         run: |
           docker pull thebesttv/arch:php
           docker pull thebesttv/arch:snd
