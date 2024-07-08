@@ -59,6 +59,7 @@ jobs:
         run: |
           docker pull thebesttv/arch:php
           docker pull thebesttv/arch:snd
+          df -h
       - name: Run test
         run: |
           if [ "${{ matrix.test_type }}" == "Quick" ]; then
