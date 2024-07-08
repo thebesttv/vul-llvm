@@ -31,6 +31,12 @@ std::string getFullSignature(const FunctionDecl *D) {
     return fullSignature;
 }
 
+std::string getNameFromFullSignature(const std::string &fullSignature) {
+    size_t pos = fullSignature.find("(");
+    requireTrue(pos != std::string::npos, "Invalid full signature");
+    return fullSignature.substr(0, pos);
+}
+
 void dumpSourceLocation(const std::string &msg, const ASTContext &Context,
                         const SourceLocation &loc) {
     auto &SM = Context.getSourceManager();
