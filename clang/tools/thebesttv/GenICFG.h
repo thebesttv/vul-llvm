@@ -39,8 +39,8 @@ class NpeSourceVisitor : public RecursiveASTVisitor<NpeSourceVisitor> {
     ASTContext *Context;
     int fid; // 当前访问函数的 fid
 
-    bool isNullPointerConstant(Expr *expr);
-    FunctionDecl *getDirectCallee(Expr *expr);
+    bool isNullPointerConstant(const Expr *expr);
+    const FunctionDecl *getDirectCallee(const Expr *expr);
 
     std::optional<typename std::set<ordered_json>::iterator>
     saveNpeSuspectedSources(const SourceRange &range);

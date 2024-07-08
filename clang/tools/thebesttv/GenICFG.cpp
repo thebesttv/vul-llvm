@@ -137,12 +137,12 @@ bool GenICFGVisitor::VisitCXXRecordDecl(CXXRecordDecl *D) {
     return true;
 }
 
-bool isPointerType(Expr *E) {
+bool isPointerType(const Expr *E) {
     auto type = E->getType().getTypePtrOrNull();
     return type && type->isAnyPointerType();
 }
 
-bool NpeSourceVisitor::isNullPointerConstant(Expr *expr) {
+bool NpeSourceVisitor::isNullPointerConstant(const Expr *expr) {
     if (!expr)
         return false;
     const auto &valueDependence =
@@ -151,8 +151,8 @@ bool NpeSourceVisitor::isNullPointerConstant(Expr *expr) {
     return result != Expr::NullPointerConstantKind::NPCK_NotNull;
 }
 
-FunctionDecl *NpeSourceVisitor::getDirectCallee(Expr *E) {
-    if (CallExpr *expr = dyn_cast<CallExpr>(E)) {
+const FunctionDecl *NpeSourceVisitor::getDirectCallee(const Expr *E) {
+    if (const CallExpr *expr = dyn_cast<CallExpr>(E)) {
         return expr->getDirectCallee();
     }
     return nullptr;
@@ -180,7 +180,7 @@ void NpeSourceVisitor::checkSourceAndMaybeSave(const SourceRange &range,
     if (isNullPointerConstant(rhs)) {
         // p = NULL
         saveNpeSuspectedSources(range);
-    } else if (FunctionDecl *calleeDecl = getDirectCallee(rhs)) {
+    } else if (const FunctionDecl *calleeDecl = getDirectCallee(rhs)) {
         // p = foo() && foo() = { ...; return NULL; }
         auto it = saveNpeSuspectedSources(range);
         if (it) {
