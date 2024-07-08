@@ -279,6 +279,45 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
             return predFirstResult;
         }
     }
+
+    /**
+     * Infer 有时会报告函数体末尾的 } 括号，导致无法匹配
+     *
+     * 这里在上面语句匹配失败后，试图匹配函数定义的结尾或开始。
+     */
+    if (isStmt && !requireExact) {
+        for (const auto &fi : functionsInFile.at(file)) {
+            // function is defined later than targetLoc
+            if (fi->line > line)
+                continue;
+
+            // search all CFG stmts in function for matching variable
+            ASTContext *Context = &fi->D->getASTContext();
+
+            auto bLoc =
+                Location::fromSourceLocation(*Context, fi->D->getBeginLoc());
+            auto eLoc =
+                Location::fromSourceLocation(*Context, fi->D->getEndLoc());
+
+            // 如果结尾和开始在同一行，那照理之前语句能匹配到
+            if (bLoc->line == eLoc->line)
+                continue;
+
+            // 优先匹配结尾
+            if (eLoc->line == line) {
+                logger.info("Found function exit in {} at {}:{}:{}",
+                            fi->signature, file, line, column);
+                return VarLocResult(fi, &fi->cfg->getExit());
+            }
+            // 然后匹配开始
+            if (bLoc->line == line) {
+                logger.info("Found function entry in {} at {}:{}:{}",
+                            fi->signature, file, line, column);
+                return VarLocResult(fi, &fi->cfg->getEntry());
+            }
+        }
+    }
+
     return VarLocResult();
 }
 
