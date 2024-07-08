@@ -121,6 +121,97 @@
             "type": "npe-good-source",
             "locations": [
                 {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp",
+                    "beginLine": 15,
+                    "beginColumn": 9,
+                    "endLine": 15,
+                    "endColumn": 18,
+                    "content": "p != NULL"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp",
+                    "beginLine": 17,
+                    "beginColumn": 9,
+                    "endLine": 17,
+                    "endColumn": 21,
+                    "content": "p != nullptr"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp",
+                    "beginLine": 19,
+                    "beginColumn": 9,
+                    "endLine": 19,
+                    "endColumn": 15,
+                    "content": "p != 0"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp",
+                    "beginLine": 21,
+                    "beginColumn": 9,
+                    "endLine": 21,
+                    "endColumn": 18,
+                    "content": "NULL != p"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp",
+                    "beginLine": 23,
+                    "beginColumn": 9,
+                    "endLine": 23,
+                    "endColumn": 21,
+                    "content": "nullptr != p"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 9,
+                    "endLine": 25,
+                    "endColumn": 15,
+                    "content": "0 != p"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp",
+                    "beginLine": 28,
+                    "beginColumn": 9,
+                    "endLine": 28,
+                    "endColumn": 18,
+                    "content": "p != NULL"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/single-source.cpp",
                     "beginLine": 17,
                     "beginColumn": 5,
