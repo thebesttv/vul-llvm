@@ -1,5 +1,15 @@
 {
     "root": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source",
     "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/compile_commands.json",
+    "mayNull": [
+        "extNull",
+        "extMayNull",
+        "A::oNull",
+        "A::oMayNull",
+        "A::sNull",
+        "A::sMayNull",
+        "A::B::iNull",
+        "A::B::iMayNull"
+    ],
     "results": []
 }

@@ -1,8 +1,122 @@
 {
     "root": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source",
     "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/compile_commands.json",
+    "mayNull": [
+        "extNull",
+        "extMayNull",
+        "A::oNull",
+        "A::oMayNull",
+        "A::sNull",
+        "A::sMayNull",
+        "A::B::iNull",
+        "A::B::iMayNull"
+    ],
     "source": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/input.json",
     "results": [
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/external.cpp",
+                    "beginLine": 28,
+                    "beginColumn": 5,
+                    "endLine": 28,
+                    "endColumn": 24,
+                    "content": "int *x2 = extNull()"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/external.cpp",
+                    "beginLine": 29,
+                    "beginColumn": 5,
+                    "endLine": 29,
+                    "endColumn": 27,
+                    "content": "int *x3 = extMayNull()"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/external.cpp",
+                    "beginLine": 33,
+                    "beginColumn": 5,
+                    "endLine": 33,
+                    "endColumn": 24,
+                    "content": "int *o2 = a.oNull()"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/external.cpp",
+                    "beginLine": 34,
+                    "beginColumn": 5,
+                    "endLine": 34,
+                    "endColumn": 27,
+                    "content": "int *o3 = a.oMayNull()"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/external.cpp",
+                    "beginLine": 37,
+                    "beginColumn": 5,
+                    "endLine": 37,
+                    "endColumn": 25,
+                    "content": "int *s2 = A::sNull()"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/external.cpp",
+                    "beginLine": 38,
+                    "beginColumn": 5,
+                    "endLine": 38,
+                    "endColumn": 28,
+                    "content": "int *s3 = A::sMayNull()"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/external.cpp",
+                    "beginLine": 41,
+                    "beginColumn": 5,
+                    "endLine": 41,
+                    "endColumn": 27,
+                    "content": "int *i2 = a.b->iNull()"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/external.cpp",
+                    "beginLine": 42,
+                    "beginColumn": 5,
+                    "endLine": 42,
+                    "endColumn": 30,
+                    "content": "int *i3 = a.b->iMayNull()"
+                }
+            ]
+        },
         {
             "type": "npe-good-source",
             "locations": [
