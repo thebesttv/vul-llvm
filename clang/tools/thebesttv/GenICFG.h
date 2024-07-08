@@ -51,6 +51,9 @@ class NpeSourceVisitor : public RecursiveASTVisitor<NpeSourceVisitor> {
      * 2. p = foo() && foo() = { ...; return NULL; }
      *    其中第二个判断（foo() 中包含 return NULL）在之后才会做。
      *    目前放到 main() 里做，在 generateICFG() 之后
+     * 3. p = foo() && 在 input.json 中指定 foo 可能返回 NULL
+     *    同样，判断在 main() 里做
+     * 4. p != NULL
      */
     void checkSourceAndMaybeSave(const SourceRange &range, Expr *rhs);
 
