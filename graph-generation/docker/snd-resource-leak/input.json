@@ -1,0 +1,187 @@
+{
+    "project": "snd",
+    "type": "docker",
+    "root": "/home/thebesttv/snd",
+    "compile_commands": "/home/thebesttv/snd/compile_commands.json",
+    "results": [
+        {
+            "type": "resourceLeak",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 6972,
+                    "column": 32
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 39731,
+                    "column": 3
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 51666,
+                    "column": 3
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 51688,
+                    "column": 1
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 1508,
+                    "column": 37
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 58567,
+                    "column": 7
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 58600,
+                    "column": 8
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 58727,
+                    "column": 80
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 95012,
+                    "column": 3
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 95526,
+                    "column": 1
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 1508,
+                    "column": 37
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 58567,
+                    "column": 7
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 58600,
+                    "column": 8
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 58665,
+                    "column": 71
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 95306,
+                    "column": 3
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/s7.c",
+                    "line": 95526,
+                    "column": 1
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/snd-chn.c",
+                    "line": 1887,
+                    "column": 29
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/snd/src/snd-24.1/snd-chn.c",
+                    "line": 1983,
+                    "column": 15
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/snd/src/snd-ruby-24.1/clm2xen.c",
+                    "line": 1036,
+                    "column": 25
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/snd/src/snd-ruby-24.1/clm2xen.c",
+                    "line": 1038,
+                    "column": 10
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/snd/src/snd-ruby-24.1/clm2xen.c",
+                    "line": 4387,
+                    "column": 37
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/snd/src/snd-ruby-24.1/clm2xen.c",
+                    "line": 4396,
+                    "column": 7
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/snd/src/snd-ruby-24.1/clm2xen.c",
+                    "line": 4482,
+                    "column": 37
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/snd/src/snd-ruby-24.1/clm2xen.c",
+                    "line": 4491,
+                    "column": 7
+                }
+            ]
+        }
+    ]
+}
