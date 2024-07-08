@@ -44,6 +44,12 @@ jobs:
         uses: hendrikmuhs/ccache-action@v1
         with:
           variant: sccache
+      - name: Pull Docker images in background
+        # 真实项目需要 Docker image
+        if: ${{ matrix.test_type != 'Quick' }}
+        run: |
+          docker pull thebesttv/arch:php &
+          docker pull thebesttv/arch:snd &
       - name: Generate CMake
         run: |
           if [ "${{ matrix.test_type }}" != "Full" ]; then
