@@ -940,10 +940,25 @@ int main(int argc, const char **argv) {
     generateICFG(*Global.cb);
 
     {
+        std::set<std::string> mayNullFunctions;
+        // 把 input.json 中 mayNull 的函数名加入到 mayNullFunctions
+        if (input.contains("mayNull")) {
+            for (const auto &f : input["mayNull"]) {
+                mayNullFunctions.insert(f.get<std::string>());
+            }
+        }
+
         // 更新 Global.npeSuspectedSources
         // 对所有 p = foo()，把函数中没有 return NULL 语句的都删掉
         for (auto p : Global.npeSuspectedSourcesItMap) {
             const std::string &signature = p.first;
+
+            // input.json 中手工指定的函数不会被删除
+            if (!mayNullFunctions.empty() && // 仅在需要时才获取函数名
+                mayNullFunctions.find(getNameFromFullSignature(signature)) !=
+                    mayNullFunctions.end())
+                continue;
+
             int fid = Global.getIdOfFunction(signature);
             if (fid == -1 || Global.functionReturnsNull[fid] == false)
                 for (auto it : p.second) {
