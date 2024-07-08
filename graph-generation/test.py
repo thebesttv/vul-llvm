@@ -128,7 +128,7 @@ if __name__ == '__main__':
 
     test_cases = get_test_cases(ROOT, args.all)
 
-    if args.dry_run:
+    if args.dryrun:
         sys.exit(0)
 
     for test in test_cases:
