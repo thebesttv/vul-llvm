@@ -58,6 +58,7 @@ jobs:
         if: ${{ matrix.test_type == 'Full' }}
         run: |
           docker pull thebesttv/arch:php
+          docker pull thebesttv/arch:snd
       - name: Run test
         run: |
           if [ "${{ matrix.test_type }}" == "Quick" ]; then
