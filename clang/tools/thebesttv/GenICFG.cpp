@@ -138,6 +138,8 @@ bool GenICFGVisitor::VisitCXXRecordDecl(CXXRecordDecl *D) {
 }
 
 bool isPointerType(const Expr *E) {
+    if (!E)
+        return false;
     auto type = E->getType().getTypePtrOrNull();
     return type && type->isAnyPointerType();
 }
