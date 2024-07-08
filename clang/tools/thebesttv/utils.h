@@ -95,6 +95,13 @@ void requireTrue(bool condition, std::string message = "");
  */
 std::string getFullSignature(const FunctionDecl *D);
 
+/**
+ * 从完整签名中获取函数名
+ *
+ * 例如：`foo`, `A::foo`
+ */
+std::string getNameFromFullSignature(const std::string &fullSignature);
+
 void dumpSourceLocation(const std::string &msg, const ASTContext &Context,
                         const SourceLocation &loc);
 
