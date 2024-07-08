@@ -219,6 +219,18 @@ bool NpeSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
         if (isPointerType(S)) {
             checkSourceAndMaybeSave(S->getSourceRange(), S->getRHS());
         }
+    } else if (S->getOpcode() == BO_NE) {
+        // 两边形如 p != NULL
+        auto inFormPNeNull = [this](const Expr *l, const Expr *r) {
+            return isPointerType(l) && !isNullPointerConstant(l) &&
+                   isNullPointerConstant(r);
+        };
+
+        // p != NULL 或 NULL != p
+        if (inFormPNeNull(S->getLHS(), S->getRHS()) ||
+            inFormPNeNull(S->getRHS(), S->getLHS())) {
+            saveNpeSuspectedSources(S->getSourceRange());
+        }
     }
 
     return true;
