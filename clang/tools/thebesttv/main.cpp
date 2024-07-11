@@ -879,6 +879,7 @@ int main(int argc, const char **argv) {
                                   {"no-npe-good-source"});
     args::Flag argNoNodes(argParser, "no-nodes", "Do not dump ICFG nodes",
                           {"no-nodes"});
+    args::Flag argDebug(argParser, "debug", "Debug mode", {"debug"});
 
     args::Positional<std::string> argIR(argParser, "IR", "Path to input.json",
                                         {args::Options::Required});
@@ -908,6 +909,7 @@ int main(int argc, const char **argv) {
     Global.noNpeGoodSource =
         getArgValue(argNoNpeGoodSource, "No npe-good-source");
     Global.noNodes = getArgValue(argNoNodes, "No nodes");
+    Global.debug = getArgValue(argDebug, "Debug");
 
     setClangPath(argv[0]);
 
@@ -978,6 +980,34 @@ int main(int argc, const char **argv) {
     fs::path outputDir = jsonPath.parent_path();
 
     generateFromInput(input, outputDir);
+
+    // 用于调试，查询每个 node 的信息
+    while (Global.debug) {
+        int node;
+        llvm::errs() << "> ";
+        std::cin >> node;
+        if (!std::cin)
+            break;
+
+        // print all successors & edge type
+        const auto &G = Global.icfg.G[node];
+
+        ordered_json dump;
+        dumpICFGNode(node, dump);
+        llvm::errs() << dump.size() << " stmts:\n";
+        for (const auto &j : dump) {
+            llvm::errs() << "  " << j["content"].get<std::string>() << "\n";
+        }
+
+        llvm::errs() << G.size() << " successors:\n";
+        for (const auto &e : G) {
+            std::string type = e.type == ICFG::Edge::Type::INTRA_PROC ? "intra"
+                               : e.type == ICFG::Edge::Type::CALL_EDGE
+                                   ? "call"
+                                   : "return";
+            llvm::errs() << "  " << e.target << " " << type << "\n";
+        }
+    }
 
     return 0;
 

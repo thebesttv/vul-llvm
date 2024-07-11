@@ -226,6 +226,7 @@ struct GlobalStat {
     bool keepAST;
     bool noNpeGoodSource;
     bool noNodes;
+    bool debug;
 };
 
 SourceLocation getEndOfMacroExpansion(SourceLocation loc, ASTContext &Context);
