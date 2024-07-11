@@ -1,0 +1,71 @@
+{
+    "project": "test_7_1",
+    "root": "/usr1/test_7_1/",
+    "compile_commands": "/usr1/test_7_1/compile_commands.json",
+    "source": "/usr1/test_7_1/input.json",
+    "results": [
+        {
+            "type": "npe-bug",
+            "CodeXIssueID": "0",
+            "sourceIndex": 0,
+            "nodes": [
+                2,
+                1,
+                0,
+                8
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/usr1/test_7_1/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 5,
+                    "endLine": 13,
+                    "endColumn": 31,
+                    "content": "IS_ID_VALID(id >= 2, NULL)",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/usr1/test_7_1/main.cpp",
+                    "beginLine": 14,
+                    "beginColumn": 5,
+                    "endLine": 14,
+                    "endColumn": 27,
+                    "content": "return (int *)&g_table",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/usr1/test_7_1/main.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 1,
+                    "endLine": 15,
+                    "endColumn": 2,
+                    "content": "int *func2(int id)\r\n{\r\n    IS_ID_VALID(id >= 2, NULL); // source\r\n    return (in ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/usr1/test_7_1/main.cpp",
+                    "beginLine": 19,
+                    "beginColumn": 5,
+                    "endLine": 19,
+                    "endColumn": 26,
+                    "content": "int *ptr = func2(id);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/usr1/test_7_1/main.cpp",
+                    "beginLine": 21,
+                    "beginColumn": 5,
+                    "endLine": 21,
+                    "endColumn": 18,
+                    "content": "return (*ptr)",
+                    "stmtKind": "ReturnStmt"
+                }
+            ]
+        }
+    ]
+}
+
