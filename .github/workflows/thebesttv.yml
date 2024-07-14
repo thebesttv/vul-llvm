@@ -40,10 +40,13 @@ jobs:
         run: ./graph-generation/tool -h
 
       - name: Get linuxdeploy
+        # Download binary & set PATH, see: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-system-path
         run: |
+          mkdir -p ~/.local/bin && cd ~/.local/bin
           wget -O linuxdeploy \
             https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20240109-1/linuxdeploy-x86_64.AppImage
           chmod +x linuxdeploy
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
       # - name: Create AppImage
       #   run: ./create-appimage.sh
       - name: Setup tmate session
