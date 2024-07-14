@@ -1,7 +1,7 @@
 name: Path-gen test
 
 permissions:
-  contents: read
+  contents: write
 
 on:
   workflow_dispatch:
