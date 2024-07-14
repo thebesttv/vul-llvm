@@ -53,6 +53,30 @@ jobs:
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
         timeout-minutes: 1440
+
+      # https://github.com/hashicorp/nomad-pack/blob/f11c6d6a6bcc0b7377de737ecc9ef59f2dbbe6d3/.github/workflows/nightly-release.yml#L35
+      # This will create a new GitHub Release called `nightly`
+      # If a release with this name already exists, it will overwrite the existing data
+      - name: Advance nightly tag
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            try {
+                await github.rest.git.deleteRef({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ref: "tags/nightly"
+                })
+            } catch (e) {
+              console.log("Warning: The nightly tag doesn't exist yet, so there's nothing to do. Trace: " + e)
+            }
+            await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/nightly",
+              sha: context.sha
+            })
+
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
