@@ -47,8 +47,8 @@ jobs:
             https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20240109-1/linuxdeploy-x86_64.AppImage
           chmod +x linuxdeploy
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-      # - name: Create AppImage
-      #   run: ./create-appimage.sh
+      - name: Create AppImage
+        run: ./create-appimage.sh
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         timeout-minutes: 1440
