@@ -53,6 +53,11 @@ jobs:
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
         timeout-minutes: 1440
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          fail_on_unmatched_files: true
+          files: build-release/tool-x86_64.AppImage
 
   build-and-test:
     runs-on: ubuntu-latest
