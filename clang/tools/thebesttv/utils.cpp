@@ -236,8 +236,38 @@ int run_program(const std::vector<std::string> &args, const std::string &pwd) {
     }
 }
 
+/**
+ * Detect if running inside AppImage.
+ *
+ * See: https://stackoverflow.com/a/75284996/11938767
+ */
+bool insideAppImage() { return std::getenv("APPIMAGE") != NULL; }
+
+/**
+ * resolve the symlink /proc/self/exe and return the result
+ */
+std::string getProcSelfExe() {
+    char buf[PATH_MAX];
+    ssize_t len = readlink("/proc/self/exe", buf, sizeof(buf) - 1);
+    if (len == -1) {
+        logger.error("readlink failed: {}", strerror(errno));
+        exit(1);
+    }
+    buf[len] = '\0';
+    return std::string(buf);
+}
+
 void setClangPath(const char *argv0) {
-    auto binPath = fs::canonical(argv0);
+    fs::path binPath;
+    if (insideAppImage()) {
+        logger.info("Running inside AppImage!");
+        // use /proc/self/exe to get the path to the running binary, see:
+        // https://github.com/AppImage/AppImageKit/issues/1035#issuecomment-600804342
+        binPath = getProcSelfExe();
+    } else {
+        // running normally
+        binPath = fs::canonical(argv0);
+    }
     logger.info("Binary path: {}", binPath);
 
     auto binDir = binPath.parent_path();
