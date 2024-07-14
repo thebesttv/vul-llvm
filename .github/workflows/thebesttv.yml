@@ -30,6 +30,7 @@ jobs:
         # 暂时用 cache 加速
         uses: hendrikmuhs/ccache-action@v1
         with:
+          key: ${{ github.job }}
           variant: sccache
       - name: Generate CMake
         run: |
@@ -120,6 +121,7 @@ jobs:
         if: ${{ matrix.test_type != 'Full' }}
         uses: hendrikmuhs/ccache-action@v1
         with:
+          key: ${{ github.job }}
           variant: sccache
       - name: Pull Docker images in background
         # 真实项目需要 Docker image
