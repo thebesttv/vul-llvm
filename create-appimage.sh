@@ -9,7 +9,13 @@ ninja
 rm -rf AppDir
 mkdir AppDir
 DESTDIR=AppDir ninja install || true
-NO_STRIP=true linuxdeploy \
+# Do not strip libraries when running local (ie., when GA is not set).
+# In ArchLinux, trying to strip libraries will cause error
+if [ -z "$GITHUB_ACTIONS" ]; then
+    export NO_STRIP=true
+fi
+
+linuxdeploy \
     --appdir AppDir --output appimage \
     -d ../graph-generation/tool.desktop \
     -i ../graph-generation/tool.png
