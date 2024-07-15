@@ -43,7 +43,8 @@ class NpeSourceVisitor : public RecursiveASTVisitor<NpeSourceVisitor> {
     const FunctionDecl *getDirectCallee(const Expr *expr);
 
     std::optional<typename std::set<ordered_json>::iterator>
-    saveNpeSuspectedSources(const SourceRange &range);
+    saveNpeSuspectedSources(const SourceRange &range,
+                            const std::optional<SourceRange> &varRange);
 
     /**
      * source 的保存策略：
@@ -54,8 +55,11 @@ class NpeSourceVisitor : public RecursiveASTVisitor<NpeSourceVisitor> {
      * 3. p = foo() && 在 input.json 中指定 foo 可能返回 NULL
      *    同样，判断在 main() 里做
      * 4. p != NULL
+     *
+     * `varRange` 对应变量位置
      */
-    void checkSourceAndMaybeSave(const SourceRange &range, Expr *rhs);
+    void checkSourceAndMaybeSave(const SourceRange &range, const Expr *rhs,
+                                 const std::optional<SourceRange> &varRange);
 
   public:
     explicit NpeSourceVisitor(ASTContext *Context, int fid)

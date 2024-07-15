@@ -161,7 +161,8 @@ const FunctionDecl *NpeSourceVisitor::getDirectCallee(const Expr *E) {
 }
 
 std::optional<typename std::set<ordered_json>::iterator>
-NpeSourceVisitor::saveNpeSuspectedSources(const SourceRange &range) {
+NpeSourceVisitor::saveNpeSuspectedSources(
+    const SourceRange &range, const std::optional<SourceRange> &varRange) {
     ordered_json loc;
     // something wrong with location
     if (!saveLocationInfo(*Context, range, loc))
@@ -171,20 +172,30 @@ NpeSourceVisitor::saveNpeSuspectedSources(const SourceRange &range) {
     if (!Global.isUnderProject(file))
         return std::nullopt;
 
+    // 导出变量位置
+    if (varRange.has_value()) {
+        ordered_json varLoc;
+        if (!saveLocationInfo(*Context, varRange.value(), varLoc))
+            return std::nullopt;
+        varLoc.erase("file"); // 肯定是同一个文件
+        loc["variable"] = varLoc;
+    }
+
     return reservoirSamplingAddElement(Global.npeSuspectedSources, loc, 100000);
 }
 
-void NpeSourceVisitor::checkSourceAndMaybeSave(const SourceRange &range,
-                                               Expr *rhs) {
+void NpeSourceVisitor::checkSourceAndMaybeSave(
+    const SourceRange &range, const Expr *rhs,
+    const std::optional<SourceRange> &varRange) {
     if (!rhs || !isPointerType(rhs))
         return;
 
     if (isNullPointerConstant(rhs)) {
         // p = NULL
-        saveNpeSuspectedSources(range);
+        saveNpeSuspectedSources(range, varRange);
     } else if (const FunctionDecl *calleeDecl = getDirectCallee(rhs)) {
         // p = foo() && foo() = { ...; return NULL; }
-        auto it = saveNpeSuspectedSources(range);
+        auto it = saveNpeSuspectedSources(range, varRange);
         if (it) {
             // callee 可能还没被处理过，记录 signature，而不是 fid
             std::string callee = getFullSignature(calleeDecl);
@@ -200,7 +211,10 @@ bool NpeSourceVisitor::VisitVarDecl(VarDecl *D) {
     if (!D->getParentFunctionOrMethod())
         return true;
 
-    checkSourceAndMaybeSave(D->getSourceRange(), D->getInit());
+    // D->getLocation() 对应变量位置，会自动转化为 SourceRange
+    // 见 https://stackoverflow.com/a/9054913/11938767
+    checkSourceAndMaybeSave(D->getSourceRange(), D->getInit(),
+                            D->getLocation());
 
     return true;
 }
@@ -217,7 +231,8 @@ bool NpeSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
      */
     if (S->getOpcode() == BO_Assign) {
         if (isPointerType(S)) {
-            checkSourceAndMaybeSave(S->getSourceRange(), S->getRHS());
+            checkSourceAndMaybeSave(S->getSourceRange(), S->getRHS(),
+                                    S->getLHS()->getSourceRange());
         }
     } else if (S->getOpcode() == BO_NE) {
         // 两边形如 p != NULL
@@ -227,9 +242,12 @@ bool NpeSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
         };
 
         // p != NULL 或 NULL != p
-        if (inFormPNeNull(S->getLHS(), S->getRHS()) ||
-            inFormPNeNull(S->getRHS(), S->getLHS())) {
-            saveNpeSuspectedSources(S->getSourceRange());
+        if (inFormPNeNull(S->getLHS(), S->getRHS())) {
+            saveNpeSuspectedSources(S->getSourceRange(),
+                                    S->getLHS()->getSourceRange());
+        } else if (inFormPNeNull(S->getRHS(), S->getLHS())) {
+            saveNpeSuspectedSources(S->getSourceRange(),
+                                    S->getRHS()->getSourceRange());
         }
     }
 
