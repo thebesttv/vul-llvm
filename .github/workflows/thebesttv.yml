@@ -26,6 +26,9 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-20.04
     name: Create AppImage
+    concurrency:
+      group: ${{ github.job }}
+      cancel-in-progress: true
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
