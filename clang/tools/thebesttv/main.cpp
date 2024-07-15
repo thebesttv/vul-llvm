@@ -13,6 +13,7 @@
 
 #include "lib/args.hxx"
 
+#include "clang/Basic/Version.h"
 #include "llvm/Support/InitLLVM.h"
 #include "llvm/Support/PrettyStackTrace.h"
 
@@ -881,6 +882,8 @@ int main(int argc, const char **argv) {
                           {"no-nodes"});
     args::Flag argDebug(argParser, "debug", "Debug mode", {"debug"});
 
+    args::Flag argVersion(argParser, "version", "Display version", {"version"});
+
     args::Positional<std::string> argIR(argParser, "IR", "Path to input.json",
                                         {args::Options::Required});
 
@@ -894,9 +897,18 @@ int main(int argc, const char **argv) {
         std::cerr << argParser;
         return 1;
     } catch (const args::ValidationError &e) {
-        std::cerr << e.what() << std::endl;
-        std::cerr << argParser;
-        return 1;
+        // 通常是因为没有给 IR，但如果给了 version，就跳过
+        if (!argVersion) {
+            std::cerr << e.what() << std::endl;
+            std::cerr << argParser;
+            return 1;
+        }
+    }
+
+    if (argVersion) {
+        std::cout << "Tool " << clang::getClangFullRepositoryVersion()
+                  << std::endl;
+        return 0;
     }
 
     logger.info("AST & ICFG generation method: sequential");
