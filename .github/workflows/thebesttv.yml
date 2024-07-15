@@ -16,6 +16,7 @@ on:
 jobs:
   create-appimage:
     if: github.ref == 'refs/heads/tbt-17'
+    needs: build-and-test
     runs-on: ubuntu-20.04
     name: Create AppImage
     steps:
