@@ -633,7 +633,14 @@
                     "beginColumn": 5,
                     "endLine": 20,
                     "endColumn": 14,
-                    "content": "A *a1 = 0"
+                    "content": "A *a1 = 0",
+                    "variable": {
+                        "beginLine": 20,
+                        "beginColumn": 8,
+                        "endLine": 20,
+                        "endColumn": 10,
+                        "content": "a1"
+                    }
                 }
             ]
         },
@@ -646,7 +653,14 @@
                     "beginColumn": 5,
                     "endLine": 21,
                     "endColumn": 20,
-                    "content": "A *a2 = nullptr"
+                    "content": "A *a2 = nullptr",
+                    "variable": {
+                        "beginLine": 21,
+                        "beginColumn": 8,
+                        "endLine": 21,
+                        "endColumn": 10,
+                        "content": "a2"
+                    }
                 }
             ]
         },
@@ -659,7 +673,14 @@
                     "beginColumn": 5,
                     "endLine": 23,
                     "endColumn": 31,
-                    "content": "A *c1 = fooHasReturnNull()"
+                    "content": "A *c1 = fooHasReturnNull()",
+                    "variable": {
+                        "beginLine": 23,
+                        "beginColumn": 8,
+                        "endLine": 23,
+                        "endColumn": 10,
+                        "content": "c1"
+                    }
                 }
             ]
         }

@@ -22,7 +22,14 @@
                     "beginColumn": 5,
                     "endLine": 28,
                     "endColumn": 24,
-                    "content": "int *x2 = extNull()"
+                    "content": "int *x2 = extNull()",
+                    "variable": {
+                        "beginLine": 28,
+                        "beginColumn": 10,
+                        "endLine": 28,
+                        "endColumn": 12,
+                        "content": "x2"
+                    }
                 }
             ]
         },
@@ -35,7 +42,14 @@
                     "beginColumn": 5,
                     "endLine": 29,
                     "endColumn": 27,
-                    "content": "int *x3 = extMayNull()"
+                    "content": "int *x3 = extMayNull()",
+                    "variable": {
+                        "beginLine": 29,
+                        "beginColumn": 10,
+                        "endLine": 29,
+                        "endColumn": 12,
+                        "content": "x3"
+                    }
                 }
             ]
         },
@@ -48,7 +62,14 @@
                     "beginColumn": 5,
                     "endLine": 33,
                     "endColumn": 24,
-                    "content": "int *o2 = a.oNull()"
+                    "content": "int *o2 = a.oNull()",
+                    "variable": {
+                        "beginLine": 33,
+                        "beginColumn": 10,
+                        "endLine": 33,
+                        "endColumn": 12,
+                        "content": "o2"
+                    }
                 }
             ]
         },
@@ -61,7 +82,14 @@
                     "beginColumn": 5,
                     "endLine": 34,
                     "endColumn": 27,
-                    "content": "int *o3 = a.oMayNull()"
+                    "content": "int *o3 = a.oMayNull()",
+                    "variable": {
+                        "beginLine": 34,
+                        "beginColumn": 10,
+                        "endLine": 34,
+                        "endColumn": 12,
+                        "content": "o3"
+                    }
                 }
             ]
         },
@@ -74,7 +102,14 @@
                     "beginColumn": 5,
                     "endLine": 37,
                     "endColumn": 25,
-                    "content": "int *s2 = A::sNull()"
+                    "content": "int *s2 = A::sNull()",
+                    "variable": {
+                        "beginLine": 37,
+                        "beginColumn": 10,
+                        "endLine": 37,
+                        "endColumn": 12,
+                        "content": "s2"
+                    }
                 }
             ]
         },
@@ -87,7 +122,14 @@
                     "beginColumn": 5,
                     "endLine": 38,
                     "endColumn": 28,
-                    "content": "int *s3 = A::sMayNull()"
+                    "content": "int *s3 = A::sMayNull()",
+                    "variable": {
+                        "beginLine": 38,
+                        "beginColumn": 10,
+                        "endLine": 38,
+                        "endColumn": 12,
+                        "content": "s3"
+                    }
                 }
             ]
         },
@@ -100,7 +142,14 @@
                     "beginColumn": 5,
                     "endLine": 41,
                     "endColumn": 27,
-                    "content": "int *i2 = a.b->iNull()"
+                    "content": "int *i2 = a.b->iNull()",
+                    "variable": {
+                        "beginLine": 41,
+                        "beginColumn": 10,
+                        "endLine": 41,
+                        "endColumn": 12,
+                        "content": "i2"
+                    }
                 }
             ]
         },
@@ -113,7 +162,14 @@
                     "beginColumn": 5,
                     "endLine": 42,
                     "endColumn": 30,
-                    "content": "int *i3 = a.b->iMayNull()"
+                    "content": "int *i3 = a.b->iMayNull()",
+                    "variable": {
+                        "beginLine": 42,
+                        "beginColumn": 10,
+                        "endLine": 42,
+                        "endColumn": 12,
+                        "content": "i3"
+                    }
                 }
             ]
         },
@@ -126,7 +182,14 @@
                     "beginColumn": 9,
                     "endLine": 15,
                     "endColumn": 18,
-                    "content": "p != NULL"
+                    "content": "p != NULL",
+                    "variable": {
+                        "beginLine": 15,
+                        "beginColumn": 9,
+                        "endLine": 15,
+                        "endColumn": 10,
+                        "content": "p"
+                    }
                 }
             ]
         },
@@ -139,7 +202,14 @@
                     "beginColumn": 9,
                     "endLine": 17,
                     "endColumn": 21,
-                    "content": "p != nullptr"
+                    "content": "p != nullptr",
+                    "variable": {
+                        "beginLine": 17,
+                        "beginColumn": 9,
+                        "endLine": 17,
+                        "endColumn": 10,
+                        "content": "p"
+                    }
                 }
             ]
         },
@@ -152,7 +222,14 @@
                     "beginColumn": 9,
                     "endLine": 19,
                     "endColumn": 15,
-                    "content": "p != 0"
+                    "content": "p != 0",
+                    "variable": {
+                        "beginLine": 19,
+                        "beginColumn": 9,
+                        "endLine": 19,
+                        "endColumn": 10,
+                        "content": "p"
+                    }
                 }
             ]
         },
@@ -165,7 +242,14 @@
                     "beginColumn": 9,
                     "endLine": 21,
                     "endColumn": 18,
-                    "content": "NULL != p"
+                    "content": "NULL != p",
+                    "variable": {
+                        "beginLine": 21,
+                        "beginColumn": 17,
+                        "endLine": 21,
+                        "endColumn": 18,
+                        "content": "p"
+                    }
                 }
             ]
         },
@@ -178,7 +262,14 @@
                     "beginColumn": 9,
                     "endLine": 23,
                     "endColumn": 21,
-                    "content": "nullptr != p"
+                    "content": "nullptr != p",
+                    "variable": {
+                        "beginLine": 23,
+                        "beginColumn": 20,
+                        "endLine": 23,
+                        "endColumn": 21,
+                        "content": "p"
+                    }
                 }
             ]
         },
@@ -191,7 +282,14 @@
                     "beginColumn": 9,
                     "endLine": 25,
                     "endColumn": 15,
-                    "content": "0 != p"
+                    "content": "0 != p",
+                    "variable": {
+                        "beginLine": 25,
+                        "beginColumn": 14,
+                        "endLine": 25,
+                        "endColumn": 15,
+                        "content": "p"
+                    }
                 }
             ]
         },
@@ -204,7 +302,14 @@
                     "beginColumn": 9,
                     "endLine": 28,
                     "endColumn": 18,
-                    "content": "p != NULL"
+                    "content": "p != NULL",
+                    "variable": {
+                        "beginLine": 28,
+                        "beginColumn": 9,
+                        "endLine": 28,
+                        "endColumn": 10,
+                        "content": "p"
+                    }
                 }
             ]
         },
@@ -217,7 +322,14 @@
                     "beginColumn": 5,
                     "endLine": 17,
                     "endColumn": 16,
-                    "content": "int *x1 = 0"
+                    "content": "int *x1 = 0",
+                    "variable": {
+                        "beginLine": 17,
+                        "beginColumn": 10,
+                        "endLine": 17,
+                        "endColumn": 12,
+                        "content": "x1"
+                    }
                 }
             ]
         },
@@ -230,7 +342,14 @@
                     "beginColumn": 5,
                     "endLine": 18,
                     "endColumn": 19,
-                    "content": "int *x2 = NULL"
+                    "content": "int *x2 = NULL",
+                    "variable": {
+                        "beginLine": 18,
+                        "beginColumn": 10,
+                        "endLine": 18,
+                        "endColumn": 12,
+                        "content": "x2"
+                    }
                 }
             ]
         },
@@ -243,7 +362,14 @@
                     "beginColumn": 5,
                     "endLine": 19,
                     "endColumn": 22,
-                    "content": "int *x3 = nullptr"
+                    "content": "int *x3 = nullptr",
+                    "variable": {
+                        "beginLine": 19,
+                        "beginColumn": 10,
+                        "endLine": 19,
+                        "endColumn": 12,
+                        "content": "x3"
+                    }
                 }
             ]
         },
@@ -256,7 +382,14 @@
                     "beginColumn": 5,
                     "endLine": 29,
                     "endColumn": 21,
-                    "content": "int *z2 = null()"
+                    "content": "int *z2 = null()",
+                    "variable": {
+                        "beginLine": 29,
+                        "beginColumn": 10,
+                        "endLine": 29,
+                        "endColumn": 12,
+                        "content": "z2"
+                    }
                 }
             ]
         },
@@ -269,7 +402,14 @@
                     "beginColumn": 5,
                     "endLine": 30,
                     "endColumn": 24,
-                    "content": "int *z3 = mayNull()"
+                    "content": "int *z3 = mayNull()",
+                    "variable": {
+                        "beginLine": 30,
+                        "beginColumn": 10,
+                        "endLine": 30,
+                        "endColumn": 12,
+                        "content": "z3"
+                    }
                 }
             ]
         }

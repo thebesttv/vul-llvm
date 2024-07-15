@@ -189,7 +189,14 @@
                     "beginColumn": 5,
                     "endLine": 42,
                     "endColumn": 21,
-                    "content": "tmp->next = NULL"
+                    "content": "tmp->next = NULL",
+                    "variable": {
+                        "beginLine": 42,
+                        "beginColumn": 5,
+                        "endLine": 42,
+                        "endColumn": 14,
+                        "content": "tmp->next"
+                    }
                 }
             ]
         }

@@ -117,7 +117,14 @@
                     "beginColumn": 5,
                     "endLine": 25,
                     "endColumn": 20,
-                    "content": "int *rbd = NULL"
+                    "content": "int *rbd = NULL",
+                    "variable": {
+                        "beginLine": 25,
+                        "beginColumn": 10,
+                        "endLine": 25,
+                        "endColumn": 13,
+                        "content": "rbd"
+                    }
                 }
             ]
         }
