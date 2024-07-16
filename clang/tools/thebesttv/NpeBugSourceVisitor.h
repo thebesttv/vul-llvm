@@ -82,7 +82,7 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
         if (!D->getParentFunctionOrMethod())
             return true;
 
-        if (D->getInit()) {
+        if (D->hasInit()) {
             setMatchAndMaybeDumpJson(D->getSourceRange(), D->getLocation());
         }
 
