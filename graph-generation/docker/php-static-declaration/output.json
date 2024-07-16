@@ -13,36 +13,6 @@
                     "type": "stmt",
                     "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_compile.c",
                     "beginLine": 1194,
-                    "beginColumn": 39,
-                    "endLine": 1194,
-                    "endColumn": 51,
-                    "content": "compile_time",
-                    "stmtKind": "ImplicitCastExpr"
-                },
-                {
-                    "type": "stmt",
-                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_compile.c",
-                    "beginLine": 1194,
-                    "beginColumn": 54,
-                    "endLine": 1194,
-                    "endColumn": 72,
-                    "content": "CG(function_table)",
-                    "stmtKind": "ImplicitCastExpr"
-                },
-                {
-                    "type": "stmt",
-                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_compile.c",
-                    "beginLine": 1194,
-                    "beginColumn": 39,
-                    "endLine": 1194,
-                    "endColumn": 93,
-                    "content": "compile_time ? CG(function_table) : EG(function_table)",
-                    "stmtKind": "ConditionalOperator"
-                },
-                {
-                    "type": "stmt",
-                    "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_compile.c",
-                    "beginLine": 1194,
                     "beginColumn": 13,
                     "endLine": 1194,
                     "endColumn": 102,
