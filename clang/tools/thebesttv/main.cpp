@@ -714,7 +714,7 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
 void generatePathFromOneEntry(int sourceIndex, const ordered_json &sourceEntry,
                               FunctionLocator &locator,
                               ordered_json &jResults) {
-    std::string type = sourceEntry["type"].template get<std::string>();
+    std::string bugType = sourceEntry["type"].template get<std::string>();
 
     const ordered_json &locations = sourceEntry["locations"];
     VarLocResult from, to;
@@ -781,7 +781,7 @@ void generatePathFromOneEntry(int sourceIndex, const ordered_json &sourceEntry,
         previousFid = varLoc.fid;
     }
 
-    handleInputEntry(from, fromLine, to, toLine, path, type, sourceIndex,
+    handleInputEntry(from, fromLine, to, toLine, path, bugType, sourceIndex,
                      jResults);
 }
 
