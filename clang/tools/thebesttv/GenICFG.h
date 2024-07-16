@@ -34,51 +34,77 @@ class GenICFGVisitor : public RecursiveASTVisitor<GenICFGVisitor> {
     bool VisitCXXRecordDecl(clang::CXXRecordDecl *D);
 };
 
-class NpeSourceVisitor : public RecursiveASTVisitor<NpeSourceVisitor> {
-
+class NpeSourceMatcher {
+  protected:
     ASTContext *Context;
     int fid; // 当前访问函数的 fid
 
     bool isNullPointerConstant(const Expr *expr);
     const FunctionDecl *getDirectCallee(const Expr *expr);
 
+    /**
+     * - `range` 对应语句位置
+     * - `varRange` 对应变量位置
+     */
     std::optional<ordered_json>
     dumpNpeSource(const SourceRange &range,
                   const std::optional<SourceRange> &varRange);
+
+    virtual void
+    handleFormPEqNull(const SourceRange &range,
+                      const std::optional<SourceRange> &varRange) = 0;
+    virtual void
+    handleFormPEqFoo(const FunctionDecl *calleeDecl, const SourceRange &range,
+                     const std::optional<SourceRange> &varRange) = 0;
+    virtual void
+    handleFormPNeNull(const SourceRange &range,
+                      const std::optional<SourceRange> &varRange) = 0;
+
+    void checkFormPEqNullOrFoo(const SourceRange &range, const Expr *rhs,
+                               const std::optional<SourceRange> &varRange);
+
+  public:
+    explicit NpeSourceMatcher(ASTContext *Context, int fid)
+        : Context(Context), fid(fid) {}
+
+    bool VisitVarDecl(VarDecl *D);
+    bool VisitBinaryOperator(BinaryOperator *S);
+};
+
+/**
+ * source 的保存策略：
+ * 1. p = NULL
+ * 2. p = foo() && foo() = { ...; return NULL; }
+ *    其中第二个判断（foo() 中包含 return NULL）在之后才会做。
+ *    目前放到 main() 里做，在 generateICFG() 之后
+ * 3. p = foo() && 在 input.json 中指定 foo 可能返回 NULL
+ *    同样，判断在 main() 里做
+ * 4. p != NULL
+ */
+class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
+                             public NpeSourceMatcher {
 
     std::optional<typename std::set<ordered_json>::iterator>
     saveNpeSuspectedSources(const SourceRange &range,
                             const std::optional<SourceRange> &varRange);
 
+  protected:
     void handleFormPEqNull(const SourceRange &range,
-                           const std::optional<SourceRange> &varRange);
+                           const std::optional<SourceRange> &varRange) override;
     void handleFormPEqFoo(const FunctionDecl *calleeDecl,
                           const SourceRange &range,
-                          const std::optional<SourceRange> &varRange);
+                          const std::optional<SourceRange> &varRange) override;
     void handleFormPNeNull(const SourceRange &range,
-                           const std::optional<SourceRange> &varRange);
-
-    /**
-     * source 的保存策略：
-     * 1. p = NULL
-     * 2. p = foo() && foo() = { ...; return NULL; }
-     *    其中第二个判断（foo() 中包含 return NULL）在之后才会做。
-     *    目前放到 main() 里做，在 generateICFG() 之后
-     * 3. p = foo() && 在 input.json 中指定 foo 可能返回 NULL
-     *    同样，判断在 main() 里做
-     * 4. p != NULL
-     *
-     * `varRange` 对应变量位置
-     */
-    void checkFormPEqNullOrFoo(const SourceRange &range, const Expr *rhs,
-                               const std::optional<SourceRange> &varRange);
+                           const std::optional<SourceRange> &varRange) override;
 
   public:
-    explicit NpeSourceVisitor(ASTContext *Context, int fid)
-        : Context(Context), fid(fid) {}
+    explicit NpeGoodSourceVisitor(ASTContext *Context, int fid)
+        : NpeSourceMatcher(Context, fid) {}
 
-    bool VisitVarDecl(VarDecl *D);
-    bool VisitBinaryOperator(BinaryOperator *S);
+    bool VisitVarDecl(VarDecl *D) { return NpeSourceMatcher::VisitVarDecl(D); }
+    bool VisitBinaryOperator(BinaryOperator *S) {
+        return NpeSourceMatcher::VisitBinaryOperator(S);
+    }
     bool VisitReturnStmt(ReturnStmt *S);
 };
 

@@ -107,7 +107,7 @@ bool GenICFGVisitor::VisitFunctionDecl(FunctionDecl *D) {
     int fid = Global.getIdOfFunction(fullSignature, pLoc->file);
     Global.icfg.addFunction(fid, *cfg);
 
-    NpeSourceVisitor(Context, fid).TraverseDecl(D);
+    NpeGoodSourceVisitor(Context, fid).TraverseDecl(D);
 
     /*
     // traverse CFGBlocks
@@ -144,7 +144,7 @@ bool isPointerType(const Expr *E) {
     return type && type->isAnyPointerType();
 }
 
-bool NpeSourceVisitor::isNullPointerConstant(const Expr *expr) {
+bool NpeSourceMatcher::isNullPointerConstant(const Expr *expr) {
     if (!expr)
         return false;
     const auto &valueDependence =
@@ -153,7 +153,7 @@ bool NpeSourceVisitor::isNullPointerConstant(const Expr *expr) {
     return result != Expr::NullPointerConstantKind::NPCK_NotNull;
 }
 
-const FunctionDecl *NpeSourceVisitor::getDirectCallee(const Expr *E) {
+const FunctionDecl *NpeSourceMatcher::getDirectCallee(const Expr *E) {
     if (const CallExpr *expr = dyn_cast<CallExpr>(E)) {
         return expr->getDirectCallee();
     }
@@ -161,7 +161,7 @@ const FunctionDecl *NpeSourceVisitor::getDirectCallee(const Expr *E) {
 }
 
 std::optional<ordered_json>
-NpeSourceVisitor::dumpNpeSource(const SourceRange &range,
+NpeSourceMatcher::dumpNpeSource(const SourceRange &range,
                                 const std::optional<SourceRange> &varRange) {
     ordered_json loc;
     // something wrong with location
@@ -184,7 +184,7 @@ NpeSourceVisitor::dumpNpeSource(const SourceRange &range,
 }
 
 std::optional<typename std::set<ordered_json>::iterator>
-NpeSourceVisitor::saveNpeSuspectedSources(
+NpeGoodSourceVisitor::saveNpeSuspectedSources(
     const SourceRange &range, const std::optional<SourceRange> &varRange) {
     auto loc = dumpNpeSource(range, varRange);
     if (!loc)
@@ -193,7 +193,7 @@ NpeSourceVisitor::saveNpeSuspectedSources(
                                        100000);
 }
 
-void NpeSourceVisitor::checkFormPEqNullOrFoo(
+void NpeSourceMatcher::checkFormPEqNullOrFoo(
     const SourceRange &range, const Expr *rhs,
     const std::optional<SourceRange> &varRange) {
     if (!rhs || !isPointerType(rhs))
@@ -208,7 +208,7 @@ void NpeSourceVisitor::checkFormPEqNullOrFoo(
     }
 }
 
-bool NpeSourceVisitor::VisitVarDecl(VarDecl *D) {
+bool NpeSourceMatcher::VisitVarDecl(VarDecl *D) {
     // 加入 NPE 可疑的 source 中
 
     // must be declared within a function
@@ -222,7 +222,7 @@ bool NpeSourceVisitor::VisitVarDecl(VarDecl *D) {
     return true;
 }
 
-bool NpeSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
+bool NpeSourceMatcher::VisitBinaryOperator(BinaryOperator *S) {
     // 加入 NPE 可疑的 source 中
 
     /**
@@ -257,13 +257,13 @@ bool NpeSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
     return true;
 }
 
-void NpeSourceVisitor::handleFormPEqNull(
+void NpeGoodSourceVisitor::handleFormPEqNull(
     const SourceRange &range, const std::optional<SourceRange> &varRange) {
     // p = null
     saveNpeSuspectedSources(range, varRange);
 }
 
-void NpeSourceVisitor::handleFormPEqFoo(
+void NpeGoodSourceVisitor::handleFormPEqFoo(
     const FunctionDecl *calleeDecl, const SourceRange &range,
     const std::optional<SourceRange> &varRange) {
     // p = foo() && foo() = { ...; return NULL; }
@@ -275,13 +275,13 @@ void NpeSourceVisitor::handleFormPEqFoo(
     }
 }
 
-void NpeSourceVisitor::handleFormPNeNull(
+void NpeGoodSourceVisitor::handleFormPNeNull(
     const SourceRange &range, const std::optional<SourceRange> &varRange) {
     // p != null
     saveNpeSuspectedSources(range, varRange);
 }
 
-bool NpeSourceVisitor::VisitReturnStmt(ReturnStmt *S) {
+bool NpeGoodSourceVisitor::VisitReturnStmt(ReturnStmt *S) {
     Expr *value = S->getRetValue();
     if (isNullPointerConstant(value)) {
         Global.functionReturnsNull[fid] = true;
