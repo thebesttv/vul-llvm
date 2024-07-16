@@ -159,4 +159,21 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
         // return result.empty() ? original : result;
         return result;
     }
+
+    void dump(const Stmt *stmt, ordered_json &j) {
+        dumpJson = true;
+        dumpedJson.clear();
+        currentStage = RETURN_NULL_OR_NPE_GOOD_SOURCE;
+        isMatch = false;
+        if (const DeclStmt *declStmt = dyn_cast<DeclStmt>(stmt)) {
+            TraverseDeclStmt(const_cast<DeclStmt *>(declStmt));
+        } else if (const BinaryOperator *binOp =
+                       dyn_cast<BinaryOperator>(stmt)) {
+            VisitBinaryOperator(const_cast<BinaryOperator *>(binOp));
+        }
+
+        if (isMatch && dumpedJson.contains("variable")) {
+            j["variable"] = dumpedJson["variable"];
+        }
+    }
 };

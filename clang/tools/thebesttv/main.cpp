@@ -363,7 +363,8 @@ VarLocResult locateVariable(const FunctionLocator &locator, const Location &loc,
     return result;
 }
 
-void dumpICFGNode(int u, ordered_json &jPath, int beginSid = 0) {
+void dumpICFGNode(int u, ordered_json &jPath, int beginSid = 0,
+                  bool dumpFirstVar = false) {
     auto [fid, bid] = Global.icfg.functionBlockOfNodeId[u];
     requireTrue(fid != -1);
 
@@ -423,6 +424,8 @@ void dumpICFGNode(int u, ordered_json &jPath, int beginSid = 0) {
             }
 
             // print all non-child stmts
+            NpeBugSourceVisitor visitor(&Context, fid);
+            bool first = true;
             for (const Stmt *S : allStmts) {
                 if (isChild.find(S) != isChild.end())
                     continue;
@@ -440,8 +443,11 @@ void dumpICFGNode(int u, ordered_json &jPath, int beginSid = 0) {
                 ordered_json j;
                 j["type"] = "stmt";
                 saveLocationInfo(Context, S->getSourceRange(), j);
+                if (dumpFirstVar && first)
+                    visitor.dump(S, j);
                 j["stmtKind"] = std::string(S->getStmtClassName());
                 jPath.push_back(j);
+                first = false;
             }
 
             goto dumpICFGNodeExit;
@@ -509,7 +515,7 @@ void saveAsJson(int fromLine, int toLine,
         jPath["sourceIndex"] = sourceIndex; // input.json 中 results 对应的下标
         if (!Global.noNodes)
             jPath["nodes"] = path;
-        dumpICFGNode(path[0], locations, fromSid);
+        dumpICFGNode(path[0], locations, fromSid, type == "npe-bug");
         for (int i = 1; i < path.size(); i++) {
             dumpICFGNode(path[i], locations);
         }
