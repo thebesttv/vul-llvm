@@ -42,6 +42,10 @@ class NpeSourceVisitor : public RecursiveASTVisitor<NpeSourceVisitor> {
     bool isNullPointerConstant(const Expr *expr);
     const FunctionDecl *getDirectCallee(const Expr *expr);
 
+    std::optional<ordered_json>
+    dumpNpeSource(const SourceRange &range,
+                  const std::optional<SourceRange> &varRange);
+
     std::optional<typename std::set<ordered_json>::iterator>
     saveNpeSuspectedSources(const SourceRange &range,
                             const std::optional<SourceRange> &varRange);

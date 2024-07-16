@@ -160,9 +160,9 @@ const FunctionDecl *NpeSourceVisitor::getDirectCallee(const Expr *E) {
     return nullptr;
 }
 
-std::optional<typename std::set<ordered_json>::iterator>
-NpeSourceVisitor::saveNpeSuspectedSources(
-    const SourceRange &range, const std::optional<SourceRange> &varRange) {
+std::optional<ordered_json>
+NpeSourceVisitor::dumpNpeSource(const SourceRange &range,
+                                const std::optional<SourceRange> &varRange) {
     ordered_json loc;
     // something wrong with location
     if (!saveLocationInfo(*Context, range, loc))
@@ -180,8 +180,17 @@ NpeSourceVisitor::saveNpeSuspectedSources(
         varLoc.erase("file"); // 肯定是同一个文件
         loc["variable"] = varLoc;
     }
+    return loc;
+}
 
-    return reservoirSamplingAddElement(Global.npeSuspectedSources, loc, 100000);
+std::optional<typename std::set<ordered_json>::iterator>
+NpeSourceVisitor::saveNpeSuspectedSources(
+    const SourceRange &range, const std::optional<SourceRange> &varRange) {
+    auto loc = dumpNpeSource(range, varRange);
+    if (!loc)
+        return std::nullopt;
+    return reservoirSamplingAddElement(Global.npeSuspectedSources, loc.value(),
+                                       100000);
 }
 
 void NpeSourceVisitor::checkSourceAndMaybeSave(
