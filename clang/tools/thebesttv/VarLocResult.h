@@ -6,10 +6,10 @@
 struct VarLocResult {
     int fid, bid, sid;
 
-    VarLocResult() : fid(-1), bid(-1), sid(-1) {}
-    VarLocResult(int fid, int bid, int sid = -1)
+    VarLocResult() : fid(-1), bid(-1), sid(0) {}
+    VarLocResult(int fid, int bid, int sid = 0)
         : fid(fid), bid(bid), sid(sid) {}
-    VarLocResult(const std::unique_ptr<FunctionInfo> &fi, int bid, int sid = -1)
+    VarLocResult(const std::unique_ptr<FunctionInfo> &fi, int bid, int sid = 0)
         : fid(Global.getIdOfFunction(fi->signature, fi->file)), bid(bid),
           sid(sid) {}
     VarLocResult(const std::unique_ptr<FunctionInfo> &fi, const CFGBlock *block,
