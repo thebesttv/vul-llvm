@@ -363,7 +363,7 @@ VarLocResult locateVariable(const FunctionLocator &locator, const Location &loc,
     return result;
 }
 
-void dumpICFGNode(int u, ordered_json &jPath) {
+void dumpICFGNode(int u, ordered_json &jPath, int beginSid = 0) {
     auto [fid, bid] = Global.icfg.functionBlockOfNodeId[u];
     requireTrue(fid != -1);
 
@@ -410,17 +410,15 @@ void dumpICFGNode(int u, ordered_json &jPath) {
             std::set<const Stmt *> isChild;
 
             // iterate over all elements to find stmts & record children
-            for (auto EI = B.begin(); EI != B.end(); ++EI) {
-                const CFGElement &E = *EI;
-                if (std::optional<CFGStmt> CS = E.getAs<CFGStmt>()) {
-                    const Stmt *S = CS->getStmt();
+            for (int sid = 0; sid < fi->G[bid].size(); sid++) {
+                const Stmt *S = fi->G[bid][sid];
+                if (sid >= beginSid)
                     allStmts.push_back(S);
 
-                    // iterate over childern
-                    for (const Stmt *child : S->children()) {
-                        if (child != nullptr)
-                            isChild.insert(child);
-                    }
+                // iterate over childern
+                for (const Stmt *child : S->children()) {
+                    if (child != nullptr)
+                        isChild.insert(child);
                 }
             }
 
@@ -495,7 +493,7 @@ void deduplicateAndFixLocations(ordered_json &locations, int fromLine,
 void saveAsJson(int fromLine, int toLine,
                 const std::set<std::vector<int>> &results,
                 const std::string &type, int sourceIndex,
-                ordered_json &jResults) {
+                ordered_json &jResults, int fromSid) {
     std::vector<std::vector<int>> sortedResults(results.begin(), results.end());
     // sort based on length
     std::sort(sortedResults.begin(), sortedResults.end(),
@@ -511,8 +509,9 @@ void saveAsJson(int fromLine, int toLine,
         jPath["sourceIndex"] = sourceIndex; // input.json 中 results 对应的下标
         if (!Global.noNodes)
             jPath["nodes"] = path;
-        for (int x : path) {
-            dumpICFGNode(x, locations);
+        dumpICFGNode(path[0], locations, fromSid);
+        for (int i = 1; i < path.size(); i++) {
+            dumpICFGNode(path[i], locations);
         }
         deduplicateAndFixLocations(locations, fromLine, toLine);
         jPath["locations"] = locations;
@@ -549,7 +548,8 @@ int findPathBetween(const VarLocResult &from, int fromLine, VarLocResult to,
     auto pFinder = DfsPathFinder(icfg);
     pFinder.search(u, v, pointsToPass, pointsToAvoid, Global.callDepth);
 
-    saveAsJson(fromLine, toLine, pFinder.results, type, sourceIndex, jResults);
+    saveAsJson(fromLine, toLine, pFinder.results, type, sourceIndex, jResults,
+               from.sid);
     return pFinder.results.size();
 }
 
