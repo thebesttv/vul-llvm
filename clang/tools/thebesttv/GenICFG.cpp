@@ -257,6 +257,14 @@ bool NpeSourceMatcher::VisitBinaryOperator(BinaryOperator *S) {
     return true;
 }
 
+bool NpeSourceMatcher::VisitReturnStmt(ReturnStmt *S) {
+    Expr *value = S->getRetValue();
+    if (isNullPointerConstant(value)) {
+        handleFormReturnNull(S->getSourceRange());
+    }
+    return true;
+}
+
 void NpeGoodSourceVisitor::handleFormPEqNull(
     const SourceRange &range, const std::optional<SourceRange> &varRange) {
     // p = null
@@ -281,12 +289,8 @@ void NpeGoodSourceVisitor::handleFormPNeNull(
     saveNpeSuspectedSources(range, varRange);
 }
 
-bool NpeGoodSourceVisitor::VisitReturnStmt(ReturnStmt *S) {
-    Expr *value = S->getRetValue();
-    if (isNullPointerConstant(value)) {
-        Global.functionReturnsNull[fid] = true;
-    }
-    return true;
+void NpeGoodSourceVisitor::handleFormReturnNull(const SourceRange &range) {
+    Global.functionReturnsNull[fid] = true;
 }
 
 void GenICFGConsumer::HandleTranslationUnit(clang::ASTContext &Context) {

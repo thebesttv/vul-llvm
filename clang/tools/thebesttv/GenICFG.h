@@ -59,6 +59,7 @@ class NpeSourceMatcher {
     virtual void
     handleFormPNeNull(const SourceRange &range,
                       const std::optional<SourceRange> &varRange) = 0;
+    virtual void handleFormReturnNull(const SourceRange &range) = 0;
 
     void checkFormPEqNullOrFoo(const SourceRange &range, const Expr *rhs,
                                const std::optional<SourceRange> &varRange);
@@ -69,6 +70,7 @@ class NpeSourceMatcher {
 
     bool VisitVarDecl(VarDecl *D);
     bool VisitBinaryOperator(BinaryOperator *S);
+    bool VisitReturnStmt(ReturnStmt *S);
 };
 
 /**
@@ -96,6 +98,7 @@ class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
                           const std::optional<SourceRange> &varRange) override;
     void handleFormPNeNull(const SourceRange &range,
                            const std::optional<SourceRange> &varRange) override;
+    void handleFormReturnNull(const SourceRange &range) override;
 
   public:
     explicit NpeGoodSourceVisitor(ASTContext *Context, int fid)
@@ -105,7 +108,9 @@ class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
     bool VisitBinaryOperator(BinaryOperator *S) {
         return NpeSourceMatcher::VisitBinaryOperator(S);
     }
-    bool VisitReturnStmt(ReturnStmt *S);
+    bool VisitReturnStmt(ReturnStmt *S) {
+        return NpeSourceMatcher::VisitReturnStmt(S);
+    }
 };
 
 class GenICFGConsumer : public clang::ASTConsumer {
