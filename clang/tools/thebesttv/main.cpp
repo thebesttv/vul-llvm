@@ -189,14 +189,12 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
         // 分别获取，succ / pred 优先的匹配结果
 
         VarLocResult succFirstResult;
-        const Stmt *succFirstStmt = nullptr;
         // 优先访问 succ，也就是根据 Block ID 从小到大遍历
         for (int bid = 0; bid < fi->n; bid++) {
             for (const Stmt *stmt : fi->G[bid]) {
                 auto result = locate(stmt, bid);
                 if (result) {
                     succFirstResult = result.value();
-                    succFirstStmt = stmt;
                     goto succFirstFound;
                 }
             }
@@ -204,14 +202,12 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
     succFirstFound:
 
         VarLocResult predFirstResult;
-        const Stmt *predFirstStmt = nullptr;
         // 优先访问 pred，即从大到小，反向遍历
         for (int bid = fi->n - 1; bid >= 0; bid--) {
             for (const Stmt *stmt : fi->G[bid]) {
                 auto result = locate(stmt, bid);
                 if (result) {
                     predFirstResult = result.value();
-                    predFirstStmt = stmt;
                     goto predFirstFound;
                 }
             }
