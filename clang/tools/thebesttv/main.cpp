@@ -192,54 +192,37 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
             return VarLocResult();
         };
 
-        // 分别获取，succ / pred 优先的匹配结果
-
-        VarLocResult succFirstResult;
-        // 优先访问 succ，也就是根据 Block ID 从小到大遍历
+        std::vector<VarLocResult> locResults;
         for (int bid = 0; bid < fi->n; bid++) {
             for (int sid = 0; sid < fi->G[bid].size(); sid++) {
                 auto result = locate(bid, sid);
                 if (result) {
-                    succFirstResult = result.value();
-                    goto succFirstFound;
+                    locResults.push_back(result.value());
                 }
             }
         }
-    succFirstFound:
 
-        VarLocResult predFirstResult;
-        // 优先访问 pred，即从大到小，反向遍历
-        for (int bid = fi->n - 1; bid >= 0; bid--) {
-            for (int sid = 0; sid < fi->G[bid].size(); sid++) {
-                auto result = locate(bid, sid);
-                if (result) {
-                    predFirstResult = result.value();
-                    goto predFirstFound;
-                }
-            }
-        }
-    predFirstFound:
-
-        // 如果有一个找不到，另一个也应该找不到
-        if (!succFirstResult.isValid() || !predFirstResult.isValid())
+        if (locResults.empty())
             continue;
+
+        // 分别获取，succ / pred 优先的匹配结果
+        //   优先访问 succ，也就是根据 Block ID 从小到大遍历
+        const VarLocResult &succFirstResult = locResults.front();
+        //   优先访问 pred，即从大到小，反向遍历
+        const VarLocResult &predFirstResult = locResults.back();
 
         // 如果函数调用比较复杂，会横跨多个 CFGBlock，其中 CallExpr 在几个 block
         // 的中间。从而导致 succ 优先无法匹配到 CallExpr。
         // 因此搜索所有匹配的语句，看有没有 CallExpr。
         // 复杂函数调用样例：zval *zv = xxx(... ? CG(...) : EG(...), lcname);
         const CallExpr *callExpr = nullptr;
-        for (int bid = 0; bid < fi->n; bid++) {
-            for (int sid = 0; sid < fi->G[bid].size(); sid++) {
-                const Stmt *stmt = fi->G[bid][sid];
-                auto result = locate(bid, sid);
-                if (result && dyn_cast<CallExpr>(stmt)) {
-                    callExpr = dyn_cast<CallExpr>(stmt);
-                    goto callExprFound;
-                }
+        for (const auto &r : locResults) {
+            const Stmt *stmt = fi->G[r.bid][r.sid];
+            if (dyn_cast<CallExpr>(stmt)) {
+                callExpr = dyn_cast<CallExpr>(stmt);
+                break;
             }
         }
-    callExprFound:
 
         // 匹配到了 CallExpr，说明语句形如 p = foo() 或 foo()
         // 此时如果能确定这条语句是 foo() 返回后指向的，就对应处理
