@@ -25,3 +25,11 @@ struct VarLocResult {
 
     bool isValid() const { return fid != -1; }
 };
+
+template <> struct fmt::formatter<VarLocResult> : fmt::formatter<std::string> {
+    auto format(const VarLocResult &p,
+                format_context &ctx) const -> decltype(ctx.out()) {
+        return formatter<std::string>::format(
+            fmt::format("(F{} B{} S{})", p.fid, p.bid, p.sid), ctx);
+    }
+};
