@@ -2,7 +2,7 @@
 
 int main() {
     int x = 42;
-    A *p = new A(&x);
+    A *p = 0;
 
     modifyPointer(p);
 

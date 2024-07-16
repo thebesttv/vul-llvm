@@ -183,7 +183,7 @@
                     "beginColumn": 1,
                     "endLine": 14,
                     "endColumn": 2,
-                    "content": "int main() {\n    int x = 42;\n    A *p = new A(&x);\n\n    modifyPointer(p);\n\n    A ..."
+                    "content": "int main() {\n    int x = 42;\n    A *p = 0;\n\n    modifyPointer(p);\n\n    A *q = p; ..."
                 }
             ]
         },
@@ -215,8 +215,8 @@
                     "beginLine": 5,
                     "beginColumn": 5,
                     "endLine": 5,
-                    "endColumn": 22,
-                    "content": "A *p = new A(&x);",
+                    "endColumn": 14,
+                    "content": "A *p = 0;",
                     "stmtKind": "DeclStmt"
                 },
                 {
@@ -442,8 +442,8 @@
                     "beginLine": 5,
                     "beginColumn": 5,
                     "endLine": 5,
-                    "endColumn": 22,
-                    "content": "A *p = new A(&x);",
+                    "endColumn": 14,
+                    "content": "A *p = 0;",
                     "stmtKind": "DeclStmt"
                 },
                 {
