@@ -50,6 +50,14 @@ class NpeSourceVisitor : public RecursiveASTVisitor<NpeSourceVisitor> {
     saveNpeSuspectedSources(const SourceRange &range,
                             const std::optional<SourceRange> &varRange);
 
+    void handleFormPEqNull(const SourceRange &range,
+                           const std::optional<SourceRange> &varRange);
+    void handleFormPEqFoo(const FunctionDecl *calleeDecl,
+                          const SourceRange &range,
+                          const std::optional<SourceRange> &varRange);
+    void handleFormPNeNull(const SourceRange &range,
+                           const std::optional<SourceRange> &varRange);
+
     /**
      * source 的保存策略：
      * 1. p = NULL
