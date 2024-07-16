@@ -70,8 +70,8 @@ class NpeSourceVisitor : public RecursiveASTVisitor<NpeSourceVisitor> {
      *
      * `varRange` 对应变量位置
      */
-    void checkSourceAndMaybeSave(const SourceRange &range, const Expr *rhs,
-                                 const std::optional<SourceRange> &varRange);
+    void checkFormPEqNullOrFoo(const SourceRange &range, const Expr *rhs,
+                               const std::optional<SourceRange> &varRange);
 
   public:
     explicit NpeSourceVisitor(ASTContext *Context, int fid)

@@ -193,7 +193,7 @@ NpeSourceVisitor::saveNpeSuspectedSources(
                                        100000);
 }
 
-void NpeSourceVisitor::checkSourceAndMaybeSave(
+void NpeSourceVisitor::checkFormPEqNullOrFoo(
     const SourceRange &range, const Expr *rhs,
     const std::optional<SourceRange> &varRange) {
     if (!rhs || !isPointerType(rhs))
@@ -217,8 +217,7 @@ bool NpeSourceVisitor::VisitVarDecl(VarDecl *D) {
 
     // D->getLocation() 对应变量位置，会自动转化为 SourceRange
     // 见 https://stackoverflow.com/a/9054913/11938767
-    checkSourceAndMaybeSave(D->getSourceRange(), D->getInit(),
-                            D->getLocation());
+    checkFormPEqNullOrFoo(D->getSourceRange(), D->getInit(), D->getLocation());
 
     return true;
 }
@@ -235,8 +234,8 @@ bool NpeSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
      */
     if (S->getOpcode() == BO_Assign) {
         if (isPointerType(S)) {
-            checkSourceAndMaybeSave(S->getSourceRange(), S->getRHS(),
-                                    S->getLHS()->getSourceRange());
+            checkFormPEqNullOrFoo(S->getSourceRange(), S->getRHS(),
+                                  S->getLHS()->getSourceRange());
         }
     } else if (S->getOpcode() == BO_NE) {
         // 两边形如 p != NULL
