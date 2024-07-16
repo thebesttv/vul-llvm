@@ -84,6 +84,7 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
 
         if (D->hasInit()) {
             setMatchAndMaybeDumpJson(D->getSourceRange(), D->getLocation());
+            return false;
         }
 
         return true;
@@ -98,6 +99,7 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
                 varRange = S->getLHS()->getSourceRange();
             }
             setMatchAndMaybeDumpJson(S->getSourceRange(), varRange);
+            return false;
         } else if (S->getOpcode() == BO_NE) {
             // 两边形如 p != NULL
             auto inFormPNeNull = [this](const Expr *l, const Expr *r) {
@@ -109,9 +111,11 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
             if (inFormPNeNull(S->getLHS(), S->getRHS())) {
                 handleFormPNeNull(S->getSourceRange(),
                                   S->getLHS()->getSourceRange());
+                return false;
             } else if (inFormPNeNull(S->getRHS(), S->getLHS())) {
                 handleFormPNeNull(S->getSourceRange(),
                                   S->getRHS()->getSourceRange());
+                return false;
             }
         }
 
@@ -120,14 +124,19 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
     bool VisitReturnStmt(ReturnStmt *S) {
         if (currentStage != RETURN_NULL_OR_NPE_GOOD_SOURCE)
             return true;
-        return NpeSourceMatcher::VisitReturnStmt(S);
+        Expr *value = S->getRetValue();
+        if (isNullPointerConstant(value)) {
+            setMatchAndMaybeDumpJson(S->getSourceRange(), std::nullopt);
+            return false;
+        }
+        return true;
     }
 
     bool VisitCallExpr(CallExpr *expr) {
         if (currentStage != RETURN_NULL_OR_NPE_GOOD_SOURCE)
             return true;
         setMatchAndMaybeDumpJson(expr->getSourceRange(), std::nullopt);
-        return true;
+        return false;
     }
 
     bool VisitExpr(Expr *E) {
@@ -135,6 +144,7 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
             return true;
         if (isNullPointerConstant(E)) {
             setMatchAndMaybeDumpJson(E->getSourceRange(), std::nullopt);
+            return false;
         }
         return true;
     }
