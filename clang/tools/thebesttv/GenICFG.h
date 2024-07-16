@@ -39,6 +39,7 @@ class NpeSourceMatcher {
     ASTContext *Context;
     int fid; // 当前访问函数的 fid
 
+    static bool isPointerType(const Expr *E);
     bool isNullPointerConstant(const Expr *expr);
     const FunctionDecl *getDirectCallee(const Expr *expr);
 

@@ -137,7 +137,7 @@ bool GenICFGVisitor::VisitCXXRecordDecl(CXXRecordDecl *D) {
     return true;
 }
 
-bool isPointerType(const Expr *E) {
+bool NpeSourceMatcher::isPointerType(const Expr *E) {
     if (!E)
         return false;
     auto type = E->getType().getTypePtrOrNull();
