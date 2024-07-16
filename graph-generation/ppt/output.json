@@ -24,6 +24,13 @@
                     "endLine": 12,
                     "endColumn": 19,
                     "content": "int *p = NULL;",
+                    "variable": {
+                        "beginLine": 12,
+                        "beginColumn": 10,
+                        "endLine": 12,
+                        "endColumn": 11,
+                        "content": "p"
+                    },
                     "stmtKind": "DeclStmt"
                 },
                 {

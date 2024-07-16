@@ -25,6 +25,13 @@
                     "endLine": 46,
                     "endColumn": 36,
                     "content": "int *data = (int *)AllocBuff();",
+                    "variable": {
+                        "beginLine": 46,
+                        "beginColumn": 10,
+                        "endLine": 46,
+                        "endColumn": 14,
+                        "content": "data"
+                    },
                     "stmtKind": "DeclStmt"
                 },
                 {

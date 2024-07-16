@@ -217,6 +217,13 @@
                     "endLine": 5,
                     "endColumn": 14,
                     "content": "A *p = 0;",
+                    "variable": {
+                        "beginLine": 5,
+                        "beginColumn": 8,
+                        "endLine": 5,
+                        "endColumn": 9,
+                        "content": "p"
+                    },
                     "stmtKind": "DeclStmt"
                 },
                 {

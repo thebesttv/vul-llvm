@@ -26,6 +26,13 @@
                     "endLine": 15,
                     "endColumn": 20,
                     "content": "rbd != NULL",
+                    "variable": {
+                        "beginLine": 15,
+                        "beginColumn": 9,
+                        "endLine": 15,
+                        "endColumn": 12,
+                        "content": "rbd"
+                    },
                     "stmtKind": "BinaryOperator"
                 },
                 {
