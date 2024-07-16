@@ -111,6 +111,7 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
 
         // search all CFG stmts in function for matching variable
         ASTContext *Context = &fi->D->getASTContext();
+        const int fid = Global.getIdOfFunction(fi->signature, fi->file);
 
         auto locate = [&](const int bid,
                           const int sid) -> std::optional<VarLocResult> {
@@ -135,7 +136,7 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
 
                 if ((requireExact && matchExact) ||
                     (!requireExact && matchInexact)) {
-                    auto result = VarLocResult(fi, bid, sid);
+                    auto result = VarLocResult(fid, bid, sid);
                     int nodeId =
                         Global.icfg
                             .nodeIdOfFunctionBlock[{result.fid, result.bid}];
@@ -150,7 +151,7 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
                 if (!var.empty()) {
                     logger.info("Found var '{}' in {} block {} at {}:{}:{}",
                                 var, fi->signature, bid, file, line, column);
-                    return VarLocResult(fi, bid, sid);
+                    return VarLocResult(fid, bid, sid);
                 }
             }
             return std::nullopt;
