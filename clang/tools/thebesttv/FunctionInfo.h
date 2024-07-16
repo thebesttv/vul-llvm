@@ -11,7 +11,9 @@ struct FunctionInfo {
     int column;
 
     std::unique_ptr<CFG> cfg;
-    std::vector<std::pair<const Stmt *, const CFGBlock *>> stmtBlockPairs;
+
+    int n;                                    // number of blocks
+    std::vector<std::vector<const Stmt *>> G; // G[bid][stmtIdx] = stmt
 
     static std::unique_ptr<FunctionInfo> fromDecl(FunctionDecl *D) {
         // ensure that the function has a body
@@ -40,27 +42,30 @@ struct FunctionInfo {
         fi->line = pLoc->line;
         fi->column = pLoc->column;
         fi->cfg = std::move(cfg);
-        fi->buildStmtBlockPairs();
+        fi->buildStmtBlockGraph();
         return fi;
     }
 
   private:
-    void buildStmtBlockPairs() {
+    void buildStmtBlockGraph() {
+        this->n = cfg->getNumBlockIDs();
         // cfg->begin() & cfg->end() 返回的 Block ID 是递增的
         // CFG 中的 succ 的 ID 更小，对应也就是先访问 succ 再 pred
+        G.resize(this->n);
         for (auto BI = cfg->begin(); BI != cfg->end(); ++BI) {
             const CFGBlock &B = **BI;
+            int bid = B.getBlockID();
 
             // swith 的 case 语句等
             if (B.getLabel() != nullptr) {
-                stmtBlockPairs.push_back({B.getLabel(), &B});
+                G[bid].push_back(B.getLabel());
             }
 
             for (auto EI = B.begin(); EI != B.end(); ++EI) {
                 const CFGElement &E = *EI;
                 if (std::optional<CFGStmt> CS = E.getAs<CFGStmt>()) {
                     const Stmt *S = CS->getStmt();
-                    stmtBlockPairs.push_back({S, &B});
+                    G[bid].push_back(S);
                 }
             }
         }

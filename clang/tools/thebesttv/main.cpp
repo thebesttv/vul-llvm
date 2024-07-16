@@ -91,9 +91,10 @@ struct VarLocResult {
 
     VarLocResult() : fid(-1), bid(-1) {}
     VarLocResult(int fid, int bid) : fid(fid), bid(bid) {}
+    VarLocResult(const std::unique_ptr<FunctionInfo> &fi, const int bid)
+        : fid(Global.getIdOfFunction(fi->signature, fi->file)), bid(bid) {}
     VarLocResult(const std::unique_ptr<FunctionInfo> &fi, const CFGBlock *block)
-        : fid(Global.getIdOfFunction(fi->signature, fi->file)),
-          bid(block->getBlockID()) {}
+        : VarLocResult(fi, block->getBlockID()) {}
 
     bool operator==(const VarLocResult &other) const {
         return fid == other.fid && bid == other.bid;
@@ -130,9 +131,8 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
         // search all CFG stmts in function for matching variable
         ASTContext *Context = &fi->D->getASTContext();
 
-        auto locate =
-            [&](const Stmt *stmt,
-                const CFGBlock *block) -> std::optional<VarLocResult> {
+        auto locate = [&](const Stmt *stmt,
+                          const int bid) -> std::optional<VarLocResult> {
             if (isStmt) {
                 // search for stmt
                 auto bLoc =
@@ -151,13 +151,12 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
 
                 if ((requireExact && matchExact) ||
                     (!requireExact && matchInexact)) {
-                    int id = block->getBlockID();
-                    auto result = VarLocResult(fi, block);
+                    auto result = VarLocResult(fi, bid);
                     int nodeId =
                         Global.icfg
                             .nodeIdOfFunctionBlock[{result.fid, result.bid}];
                     logger.info("Found stmt in {} B{} ({}) at {}:{}:{}",
-                                fi->signature, id, nodeId, file, line, column);
+                                fi->signature, bid, nodeId, file, line, column);
                     return result;
                 }
             } else {
@@ -165,10 +164,9 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
                 const std::string var =
                     visitor.findVarInStmt(Context, stmt, file, line, column);
                 if (!var.empty()) {
-                    int id = block->getBlockID();
                     logger.info("Found var '{}' in {} block {} at {}:{}:{}",
-                                var, fi->signature, id, file, line, column);
-                    return VarLocResult(fi, block);
+                                var, fi->signature, bid, file, line, column);
+                    return VarLocResult(fi, bid);
                 }
             }
             return std::nullopt;
@@ -193,30 +191,32 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
         VarLocResult succFirstResult;
         const Stmt *succFirstStmt = nullptr;
         // 优先访问 succ，也就是根据 Block ID 从小到大遍历
-        for (auto it = fi->stmtBlockPairs.cbegin();
-             it != fi->stmtBlockPairs.cend(); it++) {
-            const auto &[stmt, block] = *it;
-            auto result = locate(stmt, block);
-            if (result) {
-                succFirstResult = result.value();
-                succFirstStmt = stmt;
-                break;
+        for (int bid = 0; bid < fi->n; bid++) {
+            for (const Stmt *stmt : fi->G[bid]) {
+                auto result = locate(stmt, bid);
+                if (result) {
+                    succFirstResult = result.value();
+                    succFirstStmt = stmt;
+                    goto succFirstFound;
+                }
             }
         }
+    succFirstFound:
 
         VarLocResult predFirstResult;
         const Stmt *predFirstStmt = nullptr;
         // 优先访问 pred，即从大到小，反向遍历
-        for (auto it = fi->stmtBlockPairs.crbegin();
-             it != fi->stmtBlockPairs.crend(); it++) {
-            const auto &[stmt, block] = *it;
-            auto result = locate(stmt, block);
-            if (result) {
-                predFirstResult = result.value();
-                predFirstStmt = stmt;
-                break;
+        for (int bid = fi->n - 1; bid >= 0; bid--) {
+            for (const Stmt *stmt : fi->G[bid]) {
+                auto result = locate(stmt, bid);
+                if (result) {
+                    predFirstResult = result.value();
+                    predFirstStmt = stmt;
+                    goto predFirstFound;
+                }
             }
         }
+    predFirstFound:
 
         // 如果有一个找不到，另一个也应该找不到
         if (!succFirstResult.isValid() || !predFirstResult.isValid())
@@ -227,15 +227,16 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
         // 因此搜索所有匹配的语句，看有没有 CallExpr。
         // 复杂函数调用样例：zval *zv = xxx(... ? CG(...) : EG(...), lcname);
         const CallExpr *callExpr = nullptr;
-        for (auto it = fi->stmtBlockPairs.cbegin();
-             it != fi->stmtBlockPairs.cend(); it++) {
-            const auto &[stmt, block] = *it;
-            auto result = locate(stmt, block);
-            if (result && dyn_cast<CallExpr>(stmt)) {
-                callExpr = dyn_cast<CallExpr>(stmt);
-                break;
+        for (int bid = 0; bid < fi->n; bid++) {
+            for (const Stmt *stmt : fi->G[bid]) {
+                auto result = locate(stmt, bid);
+                if (result && dyn_cast<CallExpr>(stmt)) {
+                    callExpr = dyn_cast<CallExpr>(stmt);
+                    goto callExprFound;
+                }
             }
         }
+    callExprFound:
 
         // 匹配到了 CallExpr，说明语句形如 p = foo() 或 foo()
         // 此时如果能确定这条语句是 foo() 返回后指向的，就对应处理
