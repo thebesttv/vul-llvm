@@ -4,6 +4,7 @@
 #include "GenAST.h"
 #include "GenICFG.h"
 #include "ICFG.h"
+#include "NpeBugSourceVisitor.h"
 #include "PathFinder.h"
 #include "VarFinder.h"
 #include "VarLocResult.h"
@@ -101,7 +102,7 @@ void fixCompilationDatabase(fs::path path) {
 VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
                             int line, int column, bool isStmt,
                             bool requireExact, bool succFirst, int previousFid,
-                            int nextFid) {
+                            int nextFid, bool isNpeSource) {
     FindVarVisitor visitor;
 
     for (const auto &fi : functionsInFile.at(file)) {
@@ -179,6 +180,11 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
                     locResults.push_back(result.value());
                 }
             }
+        }
+
+        if (isNpeSource) {
+            locResults =
+                NpeBugSourceVisitor(Context, fid).transform(locResults, fi->G);
         }
 
         if (locResults.empty())
@@ -321,7 +327,8 @@ struct FunctionLocator {
 };
 
 VarLocResult locateVariable(const FunctionLocator &locator, const Location &loc,
-                            bool succFirst, int previousFid, int nextFid) {
+                            bool succFirst, int previousFid, int nextFid,
+                            bool isNpeSource) {
     int fid = locator.getFid(loc);
     if (fid == -1) {
         return VarLocResult();
@@ -352,7 +359,7 @@ VarLocResult locateVariable(const FunctionLocator &locator, const Location &loc,
     */
     auto result =
         locateVariable(functionsInFile, loc.file, loc.line, loc.column, true,
-                       false, succFirst, previousFid, nextFid);
+                       false, succFirst, previousFid, nextFid, isNpeSource);
     return result;
 }
 
@@ -723,7 +730,8 @@ void generatePathFromOneEntry(int sourceIndex, const ordered_json &sourceEntry,
         }
 
         VarLocResult varLoc =
-            locateVariable(locator, jsonLoc, succFirst, previousFid, nextFid);
+            locateVariable(locator, jsonLoc, succFirst, previousFid, nextFid,
+                           bugType == "npe" && type == "source");
         if (!varLoc.isValid()) {
             logger.error("Error: cannot locate {} at {}", type, loc);
             // 跳过无法定位的中间路径
