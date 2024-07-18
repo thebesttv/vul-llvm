@@ -4677,19 +4677,24 @@ CFGBlock *CFGBuilder::VisitCXXForRangeStmt(CXXForRangeStmt *S) {
   ConditionBlock->setTerminator(S);
 
   // Now add the actual condition to the condition block.
+  /**
+   * 由于 ICFG 需要把函数调用作为 block 的最后一条，会导致 ConditionBlock 包括多个 Block。
+   * 这里 `BeginConditionBlock` 是开始，`ConditionBlock` 是结束。
+   */
+  CFGBlock *BeginConditionBlock = nullptr;
   if (Expr *C = S->getCond()) {
     Block = ConditionBlock;
-    CFGBlock *BeginConditionBlock = addStmt(C);
+    BeginConditionBlock = addStmt(C);
     if (badCFG)
       return nullptr;
-    assert(BeginConditionBlock == ConditionBlock &&
-           "condition block in for-range was unexpectedly complex");
     (void)BeginConditionBlock;
+  } else {
+    BeginConditionBlock = ConditionBlock;
   }
 
   // The condition block is the implicit successor for the loop body as well as
   // any code above the loop.
-  Succ = ConditionBlock;
+  Succ = BeginConditionBlock;
 
   // See if this is a known constant.
   TryResult KnownVal(true);
