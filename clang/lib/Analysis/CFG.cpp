@@ -4629,6 +4629,15 @@ CFGBlock *CFGBuilder::VisitCXXCatchStmt(CXXCatchStmt *CS) {
   return CatchBlock;
 }
 
+/**
+ * Range-For 生成流程：
+ * - 确定 `LoopSuccessor`
+ * - 加入 Condition Block: __begin != __end
+ * - 加入 Loop Body，包括
+ *   - Loop Increment: ++__begin
+ *   - 真正的 body: statement
+ * - 加入 Begin & End Stmt，即初始化 __begin 和 __end
+ */
 CFGBlock *CFGBuilder::VisitCXXForRangeStmt(CXXForRangeStmt *S) {
   // C++0x for-range statements are specified as [stmt.ranged]:
   //
