@@ -1,0 +1,7 @@
+[
+    {
+        "command": "c++ -c main.cpp",
+        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/range-for",
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp"
+    }
+]

@@ -1,0 +1,29 @@
+{
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/range-for",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/compile_commands.json",
+    "results": [
+        {
+            "type": "simple",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "line": 11,
+                    "column": 5
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "line": 14,
+                    "column": 5
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "line": 18,
+                    "column": 5
+                }
+            ]
+        }
+    ]
+}

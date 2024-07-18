@@ -1,0 +1,162 @@
+{
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/range-for",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/input.json",
+    "results": [
+        {
+            "type": "simple",
+            "sourceIndex": 0,
+            "nodes": [
+                15,
+                14,
+                13,
+                6,
+                5,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 5,
+                    "endLine": 11,
+                    "endColumn": 17,
+                    "content": "int sum = 0;",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 20,
+                    "endLine": 12,
+                    "endColumn": 21,
+                    "content": "v",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 18,
+                    "endLine": 12,
+                    "endColumn": 19,
+                    "content": ":",
+                    "stmtKind": "CXXMemberCallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 10,
+                    "endLine": 12,
+                    "endColumn": 22,
+                    "content": "int num : v)",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 9,
+                    "endLine": 13,
+                    "endColumn": 26,
+                    "content": "std::cout << \"> \"",
+                    "stmtKind": "CXXOperatorCallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 9,
+                    "endLine": 13,
+                    "endColumn": 33,
+                    "content": "std::cout << \"> \" << num",
+                    "stmtKind": "CXXOperatorCallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 9,
+                    "endLine": 13,
+                    "endColumn": 46,
+                    "content": "std::cout << \"> \" << num << std::endl",
+                    "stmtKind": "CXXOperatorCallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 14,
+                    "beginColumn": 9,
+                    "endLine": 14,
+                    "endColumn": 19,
+                    "content": "sum += num",
+                    "stmtKind": "CompoundAssignOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 18,
+                    "endLine": 12,
+                    "endColumn": 19,
+                    "content": ":",
+                    "stmtKind": "CXXOperatorCallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 16,
+                    "beginColumn": 5,
+                    "endLine": 16,
+                    "endColumn": 25,
+                    "content": "std::cout << \"sum: \"",
+                    "stmtKind": "CXXOperatorCallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 16,
+                    "beginColumn": 5,
+                    "endLine": 16,
+                    "endColumn": 32,
+                    "content": "std::cout << \"sum: \" << sum",
+                    "stmtKind": "CXXOperatorCallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 16,
+                    "beginColumn": 5,
+                    "endLine": 16,
+                    "endColumn": 45,
+                    "content": "std::cout << \"sum: \" << sum << std::endl",
+                    "stmtKind": "CXXOperatorCallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 18,
+                    "beginColumn": 5,
+                    "endLine": 18,
+                    "endColumn": 13,
+                    "content": "return 0",
+                    "stmtKind": "ReturnStmt"
+                }
+            ]
+        }
+    ]
+}
