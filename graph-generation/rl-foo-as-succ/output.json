@@ -199,26 +199,6 @@
                     }
                 }
             ]
-        },
-        {
-            "type": "resourceLeak-good-source",
-            "locations": [
-                {
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
-                    "beginLine": 30,
-                    "beginColumn": 5,
-                    "endLine": 30,
-                    "endColumn": 28,
-                    "content": "void *tmp = malloc(len)",
-                    "variable": {
-                        "beginLine": 30,
-                        "beginColumn": 11,
-                        "endLine": 30,
-                        "endColumn": 14,
-                        "content": "tmp"
-                    }
-                }
-            ]
         }
     ]
 }

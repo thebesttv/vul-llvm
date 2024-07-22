@@ -688,8 +688,11 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
                             "resourceLeak-bug", sourceIndex, results);
         if (size == 0) {
             logger.warn("Unable to find any path for resource leak!");
+        } else {
+            // 路径经过的所有 stmt 都认为 RL bad source
+            removeBadSourceFromResults(results,
+                                       Global.resourceLeakSuspectedSources);
         }
-        // TODO: 路径中经过的所有 stmt 都认为是 RL bad source
     } else if (type == "resourceLeak-bad-source") {
         logger.info("Removing bad Resource Leak source ...");
         requireTrue(from.isValid());
