@@ -2,3 +2,4 @@
 
 *.o
 *.path-gen-ast
+a.out
