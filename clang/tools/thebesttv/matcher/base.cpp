@@ -2,6 +2,11 @@
 #include "../DumpPath.h"
 
 const FunctionDecl *BaseMatcher::getDirectCallee(const Expr *E) {
+    // 如果是 CastExpr，递归查找
+    if (const CastExpr *expr = dyn_cast<CastExpr>(E)) {
+        return getDirectCallee(expr->getSubExpr());
+    }
+
     if (const CallExpr *expr = dyn_cast<CallExpr>(E)) {
         return expr->getDirectCallee();
     }
