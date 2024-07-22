@@ -4,10 +4,10 @@
 #include "GenAST.h"
 #include "GenICFG.h"
 #include "ICFG.h"
-#include "NpeBugSourceVisitor.h"
 #include "PathFinder.h"
 #include "VarFinder.h"
 #include "VarLocResult.h"
+#include "matcher/npe.h"
 #include "utils.h"
 #include <fstream>
 #include <iostream>
