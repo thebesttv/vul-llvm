@@ -103,6 +103,26 @@
                     "stmtKind": "CallExpr"
                 }
             ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/ppt/main.c",
+                    "beginLine": 14,
+                    "beginColumn": 9,
+                    "endLine": 14,
+                    "endColumn": 39,
+                    "content": "p = (int *)malloc(sizeof(int))",
+                    "variable": {
+                        "beginLine": 14,
+                        "beginColumn": 9,
+                        "endLine": 14,
+                        "endColumn": 10,
+                        "content": "p"
+                    }
+                }
+            ]
         }
     ]
 }

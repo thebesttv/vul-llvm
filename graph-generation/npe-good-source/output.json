@@ -512,6 +512,46 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/single-source.cpp",
+                    "beginLine": 22,
+                    "beginColumn": 5,
+                    "endLine": 22,
+                    "endColumn": 41,
+                    "content": "int *y1 = (int *)malloc(sizeof(int))",
+                    "variable": {
+                        "beginLine": 22,
+                        "beginColumn": 10,
+                        "endLine": 22,
+                        "endColumn": 12,
+                        "content": "y1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/single-source.cpp",
+                    "beginLine": 23,
+                    "beginColumn": 5,
+                    "endLine": 23,
+                    "endColumn": 22,
+                    "content": "int *y2 = new int",
+                    "variable": {
+                        "beginLine": 23,
+                        "beginColumn": 10,
+                        "endLine": 23,
+                        "endColumn": 12,
+                        "content": "y2"
+                    }
+                }
+            ]
         }
     ]
 }

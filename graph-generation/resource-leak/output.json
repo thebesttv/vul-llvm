@@ -281,6 +281,26 @@
                     "content": "int main(int argc, char *argv[]) {\n    Node *node = createNode(1);\n    if (argc  ..."
                 }
             ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 5,
+                    "endLine": 11,
+                    "endColumn": 46,
+                    "content": "Node *node = (Node *)malloc(sizeof(Node))",
+                    "variable": {
+                        "beginLine": 11,
+                        "beginColumn": 11,
+                        "endLine": 11,
+                        "endColumn": 15,
+                        "content": "node"
+                    }
+                }
+            ]
         }
     ]
 }
