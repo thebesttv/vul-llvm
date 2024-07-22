@@ -559,32 +559,34 @@ int findPathBetween(const VarLocResult &from, int fromLine, VarLocResult to,
     return pFinder.results.size();
 }
 
+// 根据有缺陷的 source 位置，删除可疑的 source
+void removeBadSource(const std::string &sourceFile, int sourceLine,
+                     std::set<ordered_json> &suspectedSources) {
+    for (auto it = suspectedSources.begin(); it != suspectedSources.end();) {
+        const auto &loc = *it;
+        const std::string &file = loc["file"];
+        int beginLine = loc["beginLine"];
+        int endLine = loc["endLine"];
+
+        if (beginLine <= sourceLine && sourceLine <= endLine &&
+            file == sourceFile) {
+            logger.info("Removing suspected good source: {}:{}:{}", file,
+                        beginLine, loc["beginColumn"]);
+            it = suspectedSources.erase(it);
+        } else {
+            it++;
+        }
+    };
+};
+
+void removeNpeBadSource(const std::string &sourceFile, int sourceLine) {
+    removeBadSource(sourceFile, sourceLine, Global.npeSuspectedSources);
+};
+
 void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
                       int toLine, const std::vector<VarLocResult> &path,
                       const std::string &type, int sourceIndex,
                       ordered_json &jFinalResults) {
-
-    // 根据有缺陷的 source 位置，删除可疑的 source
-    auto removeNpeBadSource = [](const std::string &sourceFile,
-                                 int sourceLine) {
-        auto &npeSuspectedSources = Global.npeSuspectedSources;
-        for (auto it = npeSuspectedSources.begin();
-             it != npeSuspectedSources.end();) {
-            const auto &loc = *it;
-            const std::string &file = loc["file"];
-            int beginLine = loc["beginLine"];
-            int endLine = loc["endLine"];
-
-            if (beginLine <= sourceLine && sourceLine <= endLine &&
-                file == sourceFile) {
-                logger.info("Removing suspected good source: {}:{}:{}", file,
-                            beginLine, loc["beginColumn"]);
-                it = npeSuspectedSources.erase(it);
-            } else {
-                it++;
-            }
-        };
-    };
 
     // 获取 loc 所在函数的出口
     auto getExit = [](const VarLocResult &loc) {
