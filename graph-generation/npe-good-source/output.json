@@ -412,6 +412,46 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/single-source.cpp",
+                    "beginLine": 34,
+                    "beginColumn": 5,
+                    "endLine": 34,
+                    "endColumn": 35,
+                    "content": "int *c2 = (int *)(int *)null()",
+                    "variable": {
+                        "beginLine": 34,
+                        "beginColumn": 10,
+                        "endLine": 34,
+                        "endColumn": 12,
+                        "content": "c2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/single-source.cpp",
+                    "beginLine": 35,
+                    "beginColumn": 5,
+                    "endLine": 35,
+                    "endColumn": 45,
+                    "content": "int *c3 = (int *)(int *)(int *)mayNull()",
+                    "variable": {
+                        "beginLine": 35,
+                        "beginColumn": 10,
+                        "endLine": 35,
+                        "endColumn": 12,
+                        "content": "c3"
+                    }
+                }
+            ]
         }
     ]
 }

@@ -28,4 +28,9 @@ int main() {
     int *z1 = nonNull();
     int *z2 = null();
     int *z3 = mayNull();
+
+    // 加入 cast 的情况
+    int *c1 = (int *)nonNull();
+    int *c2 = (int *)(int *)null();
+    int *c3 = (int *)(int *)(int *)mayNull();
 }
