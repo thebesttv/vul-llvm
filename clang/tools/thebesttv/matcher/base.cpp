@@ -26,8 +26,8 @@ bool BaseMatcher::isPointerType(const Expr *E) {
 }
 
 std::optional<ordered_json>
-BaseMatcher::dumpNpeSource(const SourceRange &range,
-                           const std::optional<SourceRange> &varRange) {
+BaseMatcher::dumpSource(const SourceRange &range,
+                        const std::optional<SourceRange> &varRange) {
     ordered_json loc;
     // something wrong with location
     if (!saveLocationInfo(*Context, range, loc))

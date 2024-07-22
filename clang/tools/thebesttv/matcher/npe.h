@@ -91,7 +91,7 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
                                   const std::optional<SourceRange> &varRange) {
         isMatch = true;
         if (dumpJson) {
-            auto json = dumpNpeSource(range, varRange);
+            auto json = dumpSource(range, varRange);
             if (json) {
                 dumpedJson = json.value();
             }

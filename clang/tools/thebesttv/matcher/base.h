@@ -17,8 +17,19 @@ class BaseMatcher {
      * - `varRange` 对应变量位置
      */
     std::optional<ordered_json>
-    dumpNpeSource(const SourceRange &range,
-                  const std::optional<SourceRange> &varRange);
+    dumpSource(const SourceRange &range,
+               const std::optional<SourceRange> &varRange);
+
+    std::optional<typename std::set<ordered_json>::iterator>
+    saveSuspectedSource(const SourceRange &range,
+                        const std::optional<SourceRange> &varRange,
+                        std::set<ordered_json> &suspectedSources,
+                        int n = 100000) {
+        auto loc = dumpSource(range, varRange);
+        if (!loc)
+            return std::nullopt;
+        return reservoirSamplingAddElement(suspectedSources, loc.value(), n);
+    }
 
   public:
     explicit BaseMatcher(ASTContext *Context, int fid)
