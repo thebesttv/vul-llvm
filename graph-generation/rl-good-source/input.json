@@ -1,0 +1,8 @@
+{
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/compile_commands.json",
+    "mayMalloc": [
+        "foo"
+    ],
+    "results": []
+}

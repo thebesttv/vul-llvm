@@ -1,0 +1,7 @@
+[
+    {
+        "command": "c++ -c main.cpp",
+        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source",
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp"
+    }
+]

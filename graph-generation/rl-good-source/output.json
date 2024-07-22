@@ -1,0 +1,170 @@
+{
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/compile_commands.json",
+    "mayMalloc": [
+        "foo"
+    ],
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/input.json",
+    "results": [
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp",
+                    "beginLine": 14,
+                    "beginColumn": 5,
+                    "endLine": 14,
+                    "endColumn": 33,
+                    "content": "void *a1 = malloc(sizeof(A))",
+                    "variable": {
+                        "beginLine": 14,
+                        "beginColumn": 11,
+                        "endLine": 14,
+                        "endColumn": 13,
+                        "content": "a1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp",
+                    "beginLine": 15,
+                    "beginColumn": 5,
+                    "endLine": 15,
+                    "endColumn": 35,
+                    "content": "A *a2 = (A *)malloc(sizeof(A))",
+                    "variable": {
+                        "beginLine": 15,
+                        "beginColumn": 8,
+                        "endLine": 15,
+                        "endColumn": 10,
+                        "content": "a2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp",
+                    "beginLine": 16,
+                    "beginColumn": 5,
+                    "endLine": 16,
+                    "endColumn": 45,
+                    "content": "A *a3 = (A *)(A *)(A *)malloc(sizeof(A))",
+                    "variable": {
+                        "beginLine": 16,
+                        "beginColumn": 8,
+                        "endLine": 16,
+                        "endColumn": 10,
+                        "content": "a3"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp",
+                    "beginLine": 17,
+                    "beginColumn": 5,
+                    "endLine": 17,
+                    "endColumn": 18,
+                    "content": "A *a4 = foo()",
+                    "variable": {
+                        "beginLine": 17,
+                        "beginColumn": 8,
+                        "endLine": 17,
+                        "endColumn": 10,
+                        "content": "a4"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp",
+                    "beginLine": 20,
+                    "beginColumn": 5,
+                    "endLine": 20,
+                    "endColumn": 35,
+                    "content": "void *b1 = (void *)new A(argc)",
+                    "variable": {
+                        "beginLine": 20,
+                        "beginColumn": 11,
+                        "endLine": 20,
+                        "endColumn": 13,
+                        "content": "b1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp",
+                    "beginLine": 21,
+                    "beginColumn": 5,
+                    "endLine": 21,
+                    "endColumn": 24,
+                    "content": "A *b2 = new A(argc)",
+                    "variable": {
+                        "beginLine": 21,
+                        "beginColumn": 8,
+                        "endLine": 21,
+                        "endColumn": 10,
+                        "content": "b2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp",
+                    "beginLine": 23,
+                    "beginColumn": 5,
+                    "endLine": 23,
+                    "endColumn": 32,
+                    "content": "a1 = (A *)malloc(sizeof(A))",
+                    "variable": {
+                        "beginLine": 23,
+                        "beginColumn": 5,
+                        "endLine": 23,
+                        "endColumn": 7,
+                        "content": "a1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp",
+                    "beginLine": 24,
+                    "beginColumn": 5,
+                    "endLine": 24,
+                    "endColumn": 15,
+                    "content": "a4 = foo()",
+                    "variable": {
+                        "beginLine": 24,
+                        "beginColumn": 5,
+                        "endLine": 24,
+                        "endColumn": 7,
+                        "content": "a4"
+                    }
+                }
+            ]
+        }
+    ]
+}
