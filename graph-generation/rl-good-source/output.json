@@ -31,26 +31,6 @@
             "locations": [
                 {
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp",
-                    "beginLine": 15,
-                    "beginColumn": 5,
-                    "endLine": 15,
-                    "endColumn": 35,
-                    "content": "A *a2 = (A *)malloc(sizeof(A))",
-                    "variable": {
-                        "beginLine": 15,
-                        "beginColumn": 8,
-                        "endLine": 15,
-                        "endColumn": 10,
-                        "content": "a2"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "resourceLeak-good-source",
-            "locations": [
-                {
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp",
                     "beginLine": 16,
                     "beginColumn": 5,
                     "endLine": 16,

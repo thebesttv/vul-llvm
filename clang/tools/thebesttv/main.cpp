@@ -582,6 +582,11 @@ void removeBadSource(const std::string &sourceFile, int sourceLine,
 void removeNpeBadSource(const std::string &sourceFile, int sourceLine) {
     removeBadSource(sourceFile, sourceLine, Global.npeSuspectedSources);
 };
+void removeResourceLeakBadSource(const std::string &sourceFile,
+                                 int sourceLine) {
+    removeBadSource(sourceFile, sourceLine,
+                    Global.resourceLeakSuspectedSources);
+};
 
 void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
                       int toLine, const std::vector<VarLocResult> &path,
@@ -679,6 +684,13 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
         if (size == 0) {
             logger.warn("Unable to find any path for resource leak!");
         }
+        // TODO: 路径中经过的所有 stmt 都认为是 RL bad source
+    } else if (type == "resourceLeak-bad-source") {
+        logger.info("Removing bad Resource Leak source ...");
+        requireTrue(from.isValid());
+
+        auto &fromFile = Global.functionLocations[from.fid].file;
+        removeResourceLeakBadSource(fromFile, fromLine);
     } else {
         logger.info("Handle unknown type: {}", type);
         requireTrue(from.isValid());
@@ -689,8 +701,6 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
         }
         findPathBetween(from, fromLine, to, toLine, path, {}, type, sourceIndex,
                         results);
-        // TODO: 路径中经过的所有 stmt 都认为是 RL bad source
-        // TODO: 处理 RL-bad-source
     }
 
     // 将生成的路径结果加入到最终结果中

@@ -4,5 +4,17 @@
     "mayMalloc": [
         "foo"
     ],
-    "results": []
+    "results": [
+        {
+            "type": "resourceLeak-bad-source",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-good-source/main.cpp",
+                    "line": 15,
+                    "column": 5
+                }
+            ]
+        }
+    ]
 }
