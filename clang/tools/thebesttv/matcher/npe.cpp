@@ -3,6 +3,7 @@
 bool NpeSourceMatcher::isNullPointerConstant(const Expr *expr) {
     if (!expr)
         return false;
+    expr = uncast(expr);
     const auto &valueDependence =
         Expr::NullPointerConstantValueDependence::NPC_ValueDependentIsNotNull;
     auto result = expr->isNullPointerConstant(*Context, valueDependence);

@@ -1,12 +1,17 @@
 #include "base.h"
 #include "../DumpPath.h"
 
-const FunctionDecl *BaseMatcher::getDirectCallee(const Expr *E) {
-    // 如果是 CastExpr，递归查找
-    if (const CastExpr *expr = dyn_cast<CastExpr>(E)) {
-        return getDirectCallee(expr->getSubExpr());
+const Expr *BaseMatcher::uncast(const Expr *E) {
+    if (!E)
+        return nullptr;
+    while (const auto *CE = dyn_cast<CastExpr>(E)) {
+        E = CE->getSubExpr();
     }
+    return E;
+}
 
+const FunctionDecl *BaseMatcher::getDirectCallee(const Expr *E) {
+    E = uncast(E);
     if (const CallExpr *expr = dyn_cast<CallExpr>(E)) {
         return expr->getDirectCallee();
     }
