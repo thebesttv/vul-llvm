@@ -1,5 +1,4 @@
 #include "npe.h"
-#include "../DumpPath.h"
 
 bool NpeSourceMatcher::isPointerType(const Expr *E) {
     if (!E)
@@ -15,36 +14,6 @@ bool NpeSourceMatcher::isNullPointerConstant(const Expr *expr) {
         Expr::NullPointerConstantValueDependence::NPC_ValueDependentIsNotNull;
     auto result = expr->isNullPointerConstant(*Context, valueDependence);
     return result != Expr::NullPointerConstantKind::NPCK_NotNull;
-}
-
-const FunctionDecl *NpeSourceMatcher::getDirectCallee(const Expr *E) {
-    if (const CallExpr *expr = dyn_cast<CallExpr>(E)) {
-        return expr->getDirectCallee();
-    }
-    return nullptr;
-}
-
-std::optional<ordered_json>
-NpeSourceMatcher::dumpNpeSource(const SourceRange &range,
-                                const std::optional<SourceRange> &varRange) {
-    ordered_json loc;
-    // something wrong with location
-    if (!saveLocationInfo(*Context, range, loc))
-        return std::nullopt;
-    // source outside current project
-    const std::string &file = loc["file"];
-    if (!Global.isUnderProject(file))
-        return std::nullopt;
-
-    // 导出变量位置
-    if (varRange.has_value()) {
-        ordered_json varLoc;
-        if (!saveLocationInfo(*Context, varRange.value(), varLoc))
-            return std::nullopt;
-        varLoc.erase("file"); // 肯定是同一个文件
-        loc["variable"] = varLoc;
-    }
-    return loc;
 }
 
 std::optional<typename std::set<ordered_json>::iterator>

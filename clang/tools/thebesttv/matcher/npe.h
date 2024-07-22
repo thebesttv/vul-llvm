@@ -1,23 +1,11 @@
 #pragma once
 
-#include "VarLocResult.h"
+#include "base.h"
 
-class NpeSourceMatcher {
+class NpeSourceMatcher : public BaseMatcher {
   protected:
-    ASTContext *Context;
-    int fid; // 当前访问函数的 fid
-
     static bool isPointerType(const Expr *E);
     bool isNullPointerConstant(const Expr *expr);
-    const FunctionDecl *getDirectCallee(const Expr *expr);
-
-    /**
-     * - `range` 对应语句位置
-     * - `varRange` 对应变量位置
-     */
-    std::optional<ordered_json>
-    dumpNpeSource(const SourceRange &range,
-                  const std::optional<SourceRange> &varRange);
 
     virtual void
     handleFormPEqNull(const SourceRange &range,
@@ -35,7 +23,7 @@ class NpeSourceMatcher {
 
   public:
     explicit NpeSourceMatcher(ASTContext *Context, int fid)
-        : Context(Context), fid(fid) {}
+        : BaseMatcher(Context, fid) {}
 
     bool VisitVarDecl(VarDecl *D);
     bool VisitBinaryOperator(BinaryOperator *S);

@@ -7,6 +7,7 @@ add_clang_tool(thebesttv
     CompilationDatabase.cpp
     GenAST.cpp
     DumpPath.cpp
+    matcher/base.cpp
     matcher/npe.cpp
 )
 
