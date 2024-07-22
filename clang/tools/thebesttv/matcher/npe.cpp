@@ -13,7 +13,7 @@ bool NpeSourceMatcher::isNullPointerConstant(const Expr *expr) {
 std::optional<typename std::set<ordered_json>::iterator>
 NpeGoodSourceVisitor::saveNpeSuspectedSources(
     const SourceRange &range, const std::optional<SourceRange> &varRange) {
-    saveSuspectedSource(range, varRange, Global.npeSuspectedSources);
+    return saveSuspectedSource(range, varRange, Global.npeSuspectedSources);
 }
 
 void NpeSourceMatcher::checkFormPEqNullOrFoo(
