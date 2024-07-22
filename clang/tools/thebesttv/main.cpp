@@ -768,6 +768,16 @@ void generatePathFromOneEntry(int sourceIndex, const ordered_json &sourceEntry,
                      jResults);
 }
 
+void dumpSourceToOutput(const std::set<ordered_json> sources,
+                        const std::string &type, ordered_json &results) {
+    for (const auto &loc : sources) {
+        ordered_json j;
+        j["type"] = type;
+        j["locations"].push_back(loc);
+        results.push_back(j);
+    }
+}
+
 void generateFromInput(const ordered_json &input, fs::path outputDir) {
     logger.info("--- Path-finding ---");
 
@@ -797,12 +807,8 @@ void generateFromInput(const ordered_json &input, fs::path outputDir) {
     }
 
     if (!Global.noNpeGoodSource) {
-        for (const auto &loc : Global.npeSuspectedSources) {
-            ordered_json j;
-            j["type"] = "npe-good-source";
-            j["locations"].push_back(loc);
-            output["results"].push_back(j);
-        }
+        dumpSourceToOutput(Global.npeSuspectedSources, "npe-good-source",
+                           output["results"]);
     }
 
     std::ofstream o(jsonResult);
