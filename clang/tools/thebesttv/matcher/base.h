@@ -8,6 +8,7 @@ class BaseMatcher {
     int fid; // 当前访问函数的 fid
 
     const FunctionDecl *getDirectCallee(const Expr *expr);
+    static bool isPointerType(const Expr *expr);
 
     /**
      * - `range` 对应语句位置

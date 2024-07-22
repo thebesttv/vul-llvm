@@ -4,7 +4,6 @@
 
 class NpeSourceMatcher : public BaseMatcher {
   protected:
-    static bool isPointerType(const Expr *E);
     bool isNullPointerConstant(const Expr *expr);
 
     virtual void

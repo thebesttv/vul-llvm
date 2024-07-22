@@ -8,6 +8,13 @@ const FunctionDecl *BaseMatcher::getDirectCallee(const Expr *E) {
     return nullptr;
 }
 
+bool BaseMatcher::isPointerType(const Expr *E) {
+    if (!E)
+        return false;
+    auto type = E->getType().getTypePtrOrNull();
+    return type && type->isAnyPointerType();
+}
+
 std::optional<ordered_json>
 BaseMatcher::dumpNpeSource(const SourceRange &range,
                            const std::optional<SourceRange> &varRange) {

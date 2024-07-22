@@ -1,12 +1,5 @@
 #include "npe.h"
 
-bool NpeSourceMatcher::isPointerType(const Expr *E) {
-    if (!E)
-        return false;
-    auto type = E->getType().getTypePtrOrNull();
-    return type && type->isAnyPointerType();
-}
-
 bool NpeSourceMatcher::isNullPointerConstant(const Expr *expr) {
     if (!expr)
         return false;
