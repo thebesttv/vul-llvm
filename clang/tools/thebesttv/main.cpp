@@ -673,7 +673,7 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
 
         int size =
             findPathBetween(from, fromLine, getExit(to), INT_MAX, new_path, {},
-                            "resourceLeak", sourceIndex, results);
+                            "resourceLeak-bug", sourceIndex, results);
         if (size == 0) {
             logger.warn("Unable to find any path for resource leak!");
         }

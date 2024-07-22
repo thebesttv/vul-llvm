@@ -6,7 +6,7 @@
     "source": "/home/thebesttv/vul/llvm-project/graph-generation/docker/snd-resource-leak/input.json",
     "results": [
         {
-            "type": "resourceLeak",
+            "type": "resourceLeak-bug",
             "sourceIndex": 0,
             "locations": [
                 {
@@ -179,7 +179,7 @@
             ]
         },
         {
-            "type": "resourceLeak",
+            "type": "resourceLeak-bug",
             "sourceIndex": 1,
             "locations": [
                 {
@@ -4890,7 +4890,7 @@
             ]
         },
         {
-            "type": "resourceLeak",
+            "type": "resourceLeak-bug",
             "sourceIndex": 2,
             "locations": [
                 {
@@ -7041,7 +7041,7 @@
             ]
         },
         {
-            "type": "resourceLeak",
+            "type": "resourceLeak-bug",
             "sourceIndex": 3,
             "locations": [
                 {
@@ -7126,7 +7126,7 @@
             ]
         },
         {
-            "type": "resourceLeak",
+            "type": "resourceLeak-bug",
             "sourceIndex": 4,
             "locations": [
                 {
@@ -7181,7 +7181,7 @@
             ]
         },
         {
-            "type": "resourceLeak",
+            "type": "resourceLeak-bug",
             "sourceIndex": 5,
             "locations": [
                 {
@@ -7306,7 +7306,7 @@
             ]
         },
         {
-            "type": "resourceLeak",
+            "type": "resourceLeak-bug",
             "sourceIndex": 6,
             "locations": [
                 {

@@ -6,7 +6,7 @@
     "source": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/input.json",
     "results": [
         {
-            "type": "resourceLeak",
+            "type": "resourceLeak-bug",
             "sourceIndex": 0,
             "nodes": [
                 6,
