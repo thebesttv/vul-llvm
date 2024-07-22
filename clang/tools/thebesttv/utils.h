@@ -219,6 +219,10 @@ struct GlobalStat {
     // 判断函数是否包含 return NULL 语句
     std::map<int, bool> functionReturnsNull; // fid -> whether func returns null
 
+    std::set<ordered_json>
+        resourceLeakSuspectedSources;         // 每个元素是可疑的 source
+    std::set<std::string> mayMallocFunctions; // 类似 malloc 的函数
+
     int ASTPoolSize;
     int callDepth;
     int dfsTick;

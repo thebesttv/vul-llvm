@@ -3,6 +3,7 @@
 #include "GenAST.h"
 #include "ICFG.h"
 #include "matcher/npe.h"
+#include "matcher/resourceLeak.h"
 #include "utils.h"
 
 #include "lib/BS_thread_pool.hpp"
@@ -109,6 +110,7 @@ bool GenICFGVisitor::VisitFunctionDecl(FunctionDecl *D) {
     Global.icfg.addFunction(fid, *cfg);
 
     NpeGoodSourceVisitor(Context, fid).TraverseDecl(D);
+    ResourceLeakGoodSourceVisitor(Context, fid).TraverseDecl(D);
 
     /*
     // traverse CFGBlocks

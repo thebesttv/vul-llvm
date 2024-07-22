@@ -687,6 +687,8 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
         }
         findPathBetween(from, fromLine, to, toLine, path, {}, type, sourceIndex,
                         results);
+        // TODO: 路径中经过的所有 stmt 都认为是 RL bad source
+        // TODO: 处理 RL-bad-source
     }
 
     // 将生成的路径结果加入到最终结果中
@@ -809,6 +811,8 @@ void generateFromInput(const ordered_json &input, fs::path outputDir) {
     if (!Global.noNpeGoodSource) {
         dumpSourceToOutput(Global.npeSuspectedSources, "npe-good-source",
                            output["results"]);
+        dumpSourceToOutput(Global.resourceLeakSuspectedSources,
+                           "resourceLeak-good-source", output["results"]);
     }
 
     std::ofstream o(jsonResult);
@@ -935,6 +939,17 @@ int main(int argc, const char **argv) {
         auto allFiles = Global.cb->getAllFiles();
         Global.allFiles =
             std::set<std::string>(allFiles.begin(), allFiles.end());
+    }
+
+    {
+        auto &mayMallocFunctions = Global.mayMallocFunctions;
+        // 加入默认的 malloc 函数
+        mayMallocFunctions.insert("malloc");
+        if (input.contains("mayMalloc")) {
+            for (const auto &f : input["mayMalloc"]) {
+                mayMallocFunctions.insert(f.get<std::string>());
+            }
+        }
     }
 
     generateICFG(*Global.cb);
