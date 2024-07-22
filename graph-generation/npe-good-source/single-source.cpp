@@ -33,4 +33,8 @@ int main() {
     int *c1 = (int *)nonNull();
     int *c2 = (int *)(int *)null();
     int *c3 = (int *)(int *)(int *)mayNull();
+
+    x1 = (int *)0;
+    x2 = (int *)(int *)NULL;
+    x3 = (int *)(int *)(int *)nullptr;
 }

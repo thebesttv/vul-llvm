@@ -452,6 +452,66 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/single-source.cpp",
+                    "beginLine": 37,
+                    "beginColumn": 5,
+                    "endLine": 37,
+                    "endColumn": 18,
+                    "content": "x1 = (int *)0",
+                    "variable": {
+                        "beginLine": 37,
+                        "beginColumn": 5,
+                        "endLine": 37,
+                        "endColumn": 7,
+                        "content": "x1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/single-source.cpp",
+                    "beginLine": 38,
+                    "beginColumn": 5,
+                    "endLine": 38,
+                    "endColumn": 28,
+                    "content": "x2 = (int *)(int *)NULL",
+                    "variable": {
+                        "beginLine": 38,
+                        "beginColumn": 5,
+                        "endLine": 38,
+                        "endColumn": 7,
+                        "content": "x2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/single-source.cpp",
+                    "beginLine": 39,
+                    "beginColumn": 5,
+                    "endLine": 39,
+                    "endColumn": 38,
+                    "content": "x3 = (int *)(int *)(int *)nullptr",
+                    "variable": {
+                        "beginLine": 39,
+                        "beginColumn": 5,
+                        "endLine": 39,
+                        "endColumn": 7,
+                        "content": "x3"
+                    }
+                }
+            ]
         }
     ]
 }
