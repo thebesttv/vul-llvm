@@ -578,6 +578,20 @@ void removeBadSource(const std::string &sourceFile, int sourceLine,
         }
     };
 };
+void removeBadSourceFromResults(ordered_json &results,
+                                std::set<ordered_json> &suspectedSources) {
+    for (const auto &path : results) {
+        if (!path.contains("locations"))
+            continue;
+        for (const auto &loc : path["locations"]) {
+            if (loc.contains("type") && loc["type"] == "stmt" &&
+                loc.contains("file") && loc.contains("beginLine")) {
+                removeBadSource(loc["file"], loc["beginLine"],
+                                suspectedSources);
+            }
+        }
+    }
+};
 
 void removeNpeBadSource(const std::string &sourceFile, int sourceLine) {
     removeBadSource(sourceFile, sourceLine, Global.npeSuspectedSources);
@@ -615,16 +629,7 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
             logger.warn("Unable to find any path for NPE bug version!");
         } else {
             // 路径经过的所有 stmt 都认为 NPE bad source
-            for (const auto &path : results) {
-                if (!path.contains("locations"))
-                    continue;
-                for (const auto &loc : path["locations"]) {
-                    if (loc.contains("type") && loc["type"] == "stmt" &&
-                        loc.contains("file") && loc.contains("beginLine")) {
-                        removeNpeBadSource(loc["file"], loc["beginLine"]);
-                    }
-                }
-            }
+            removeBadSourceFromResults(results, Global.npeSuspectedSources);
         }
 
         // 无缺陷版本：source -> sink 所在函数的出口
