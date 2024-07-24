@@ -1017,7 +1017,7 @@ int main(int argc, const char **argv) {
     // 用于调试，查询每个 node 的信息
     while (Global.debug) {
         int node;
-        llvm::errs() << "> ";
+        fmt::print("> ");
         std::cin >> node;
         if (!std::cin)
             break;
@@ -1031,18 +1031,18 @@ int main(int argc, const char **argv) {
 
         ordered_json dump;
         dumpICFGNode(node, dump);
-        llvm::errs() << dump.size() << " stmts:\n";
+        fmt::print("{} stmts:\n", dump.size());
         for (const auto &j : dump) {
-            llvm::errs() << "  " << j["content"].get<std::string>() << "\n";
+            fmt::print("  {}\n", j["content"].get<std::string>());
         }
 
-        llvm::errs() << G.size() << " successors:\n";
+        fmt::print("{} successors:\n", G.size());
         for (const auto &e : G) {
             std::string type = e.type == ICFG::Edge::Type::INTRA_PROC ? "intra"
                                : e.type == ICFG::Edge::Type::CALL_EDGE
                                    ? "call"
                                    : "return";
-            llvm::errs() << "  " << e.target << " " << type << "\n";
+            fmt::print("  {} {}\n", e.target, type);
         }
     }
 
@@ -1050,7 +1050,7 @@ int main(int argc, const char **argv) {
 
     while (true) {
         std::string methodName;
-        llvm::errs() << "> ";
+        fmt::print("> ");
         std::getline(std::cin, methodName);
         if (!std::cin)
             break;
@@ -1060,9 +1060,9 @@ int main(int argc, const char **argv) {
         for (const auto &[caller, callees] : Global.callGraph) {
             if (caller.find(methodName) != 0)
                 continue;
-            llvm::errs() << caller << "\n";
+            fmt::print("{}\n", caller);
             for (const auto &callee : callees) {
-                llvm::errs() << "  " << callee << "\n";
+                fmt::print("  {}\n", callee);
             }
         }
     }
