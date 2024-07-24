@@ -210,7 +210,8 @@ void generateICFG(const CompilationDatabase &cb) {
         // 如果 keepAST 为 true，那很可能磁盘上已经有上一次的 AST dump 了
         //     就算没有，getASTOfFile() 也会重新生成
         // 如果 keepAST 为 false，就保留之前的逻辑，显式调用 generateASTDump()
-        int ret = Global.keepAST ? 0 : generateASTDump(cmd);
+        int ret =
+            (!Global.fromASTDump || Global.keepAST) ? 0 : generateASTDump(cmd);
         if (ret == 0) {
             bool result = updateICFGWithASTDump(cmd.Filename);
             if (result == true) {
