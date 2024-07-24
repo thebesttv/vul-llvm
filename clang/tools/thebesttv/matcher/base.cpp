@@ -13,7 +13,7 @@ const Expr *BaseMatcher::uncast(const Expr *E) {
 const FunctionDecl *BaseMatcher::getDirectCallee(const Expr *E) {
     E = uncast(E);
     if (const CallExpr *expr = dyn_cast<CallExpr>(E)) {
-        return expr->getDirectCallee();
+        return ::getDirectCallee(expr);
     }
     return nullptr;
 }

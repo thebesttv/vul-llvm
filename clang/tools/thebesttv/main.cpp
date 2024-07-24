@@ -215,7 +215,7 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
         // 2. 对于 foo()，在 succ 中不会再有语句，应该返回空值，跳过这条
         if (callExpr) {
             std::string calleeSignature =
-                getFullSignature(callExpr->getDirectCallee());
+                getFullSignature(getDirectCallee(callExpr));
             int calleeFid = Global.getIdOfFunction(calleeSignature);
             if (calleeFid != -1) { // 保证了 previousFid 和 nextFid 都不是 -1
                 if (succFirstResult != predFirstResult) {

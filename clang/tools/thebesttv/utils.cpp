@@ -1,5 +1,6 @@
 #include "utils.h"
 
+#include <fmt/color.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
@@ -35,6 +36,30 @@ std::string getNameFromFullSignature(const std::string &fullSignature) {
     size_t pos = fullSignature.find("(");
     requireTrue(pos != std::string::npos, "Invalid full signature");
     return fullSignature.substr(0, pos);
+}
+
+const FunctionDecl *getPossibleOriginalTemplate(const FunctionDecl *D) {
+    if (!D)
+        return nullptr;
+    if (auto *info = D->getTemplateSpecializationInfo()) {
+        if (FunctionTemplateDecl *FTD = info->getTemplate()) {
+            if (auto originalDecl = FTD->getTemplatedDecl()) {
+                logger.info(
+                    "Replacing specialization {} with original template: {}",
+                    fmt::format(fg(fmt::color::green), getFullSignature(D)),
+                    fmt::format(fg(fmt::color::green),
+                                getFullSignature(originalDecl)));
+                return originalDecl;
+            }
+        }
+    }
+    return D;
+}
+
+const FunctionDecl *getDirectCallee(const CallExpr *E) {
+    if (!E)
+        return nullptr;
+    return getPossibleOriginalTemplate(E->getDirectCallee());
 }
 
 void dumpSourceLocation(const std::string &msg, const ASTContext &Context,

@@ -33,6 +33,7 @@
 // doesn't seem useful
 // #include "spdlog/fmt/ostr.h"
 #include "spdlog/spdlog.h"
+#include <fmt/printf.h>
 #include <fmt/ranges.h>
 
 using json = nlohmann::json;
@@ -102,6 +103,18 @@ std::string getFullSignature(const FunctionDecl *D);
  * 例如：`foo`, `A::foo`
  */
 std::string getNameFromFullSignature(const std::string &fullSignature);
+
+/**
+ * 如果 `D` 是模板函数的 specialization，那么返回原始的模板函数。
+ * 否则返回 `D`。
+ */
+const FunctionDecl *getPossibleOriginalTemplate(const FunctionDecl *D);
+
+/**
+ * 如果 callee 是模板函数的 specialization，那么返回原始的模板函数。
+ * 否则返回 callee。
+ */
+const FunctionDecl *getDirectCallee(const CallExpr *E);
 
 void dumpSourceLocation(const std::string &msg, const ASTContext &Context,
                         const SourceLocation &loc);
