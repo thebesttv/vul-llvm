@@ -1,0 +1,379 @@
+{
+    "project": "demo",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/template",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/template/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/template/input.json",
+    "results": [
+        {
+            "type": "test_int",
+            "sourceIndex": 0,
+            "nodes": [
+                32,
+                17,
+                16,
+                15,
+                13,
+                31,
+                30
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 33,
+                    "beginColumn": 13,
+                    "endLine": 33,
+                    "endColumn": 18,
+                    "content": "a = 1",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 33,
+                    "beginColumn": 20,
+                    "endLine": 33,
+                    "endColumn": 25,
+                    "content": "b = 2",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 34,
+                    "beginColumn": 18,
+                    "endLine": 34,
+                    "endColumn": 31,
+                    "content": "minimum(a, b)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 23,
+                    "endLine": 19,
+                    "endColumn": 2,
+                    "content": "T minimum(const T &lhs, const T &rhs) {\n    bool result = lhs < rhs;\n    if (res ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 5,
+                    "endLine": 13,
+                    "endColumn": 29,
+                    "content": "bool result = lhs < rhs;",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 14,
+                    "beginColumn": 9,
+                    "endLine": 14,
+                    "endColumn": 15,
+                    "content": "result",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 15,
+                    "beginColumn": 9,
+                    "endLine": 15,
+                    "endColumn": 19,
+                    "content": "return lhs",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 23,
+                    "endLine": 19,
+                    "endColumn": 2,
+                    "content": "T minimum(const T &lhs, const T &rhs) {\n    bool result = lhs < rhs;\n    if (res ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 34,
+                    "beginColumn": 9,
+                    "endLine": 34,
+                    "endColumn": 32,
+                    "content": "auto c = minimum(a, b);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 35,
+                    "beginColumn": 9,
+                    "endLine": 35,
+                    "endColumn": 14,
+                    "content": "foo()",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 36,
+                    "beginColumn": 9,
+                    "endLine": 36,
+                    "endColumn": 19,
+                    "content": "int d = c;",
+                    "stmtKind": "DeclStmt"
+                }
+            ]
+        },
+        {
+            "type": "test_Node",
+            "sourceIndex": 1,
+            "nodes": [
+                30,
+                17,
+                16,
+                14,
+                13,
+                29,
+                28
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 40,
+                    "beginColumn": 14,
+                    "endLine": 40,
+                    "endColumn": 21,
+                    "content": "a(1, 2)",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 40,
+                    "beginColumn": 23,
+                    "endLine": 40,
+                    "endColumn": 30,
+                    "content": "b(3, 4)",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 41,
+                    "beginColumn": 18,
+                    "endLine": 41,
+                    "endColumn": 37,
+                    "content": "minimum<Node>(a, b)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 23,
+                    "endLine": 19,
+                    "endColumn": 2,
+                    "content": "T minimum(const T &lhs, const T &rhs) {\n    bool result = lhs < rhs;\n    if (res ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 5,
+                    "endLine": 13,
+                    "endColumn": 29,
+                    "content": "bool result = lhs < rhs;",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 14,
+                    "beginColumn": 9,
+                    "endLine": 14,
+                    "endColumn": 15,
+                    "content": "result",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 17,
+                    "beginColumn": 9,
+                    "endLine": 17,
+                    "endColumn": 19,
+                    "content": "return rhs",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 23,
+                    "endLine": 19,
+                    "endColumn": 2,
+                    "content": "T minimum(const T &lhs, const T &rhs) {\n    bool result = lhs < rhs;\n    if (res ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 41,
+                    "beginColumn": 9,
+                    "endLine": 41,
+                    "endColumn": 38,
+                    "content": "auto c = minimum<Node>(a, b);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 42,
+                    "beginColumn": 9,
+                    "endLine": 42,
+                    "endColumn": 14,
+                    "content": "foo()",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 43,
+                    "beginColumn": 9,
+                    "endLine": 43,
+                    "endColumn": 20,
+                    "content": "auto d = c;",
+                    "stmtKind": "DeclStmt"
+                }
+            ]
+        },
+        {
+            "type": "test_rangeFor",
+            "sourceIndex": 2,
+            "nodes": [
+                28,
+                23,
+                22,
+                20,
+                21,
+                20,
+                19,
+                18,
+                27
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 47,
+                    "beginColumn": 9,
+                    "endLine": 47,
+                    "endColumn": 30,
+                    "content": "std::vector<int *> v;",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 48,
+                    "beginColumn": 17,
+                    "endLine": 48,
+                    "endColumn": 33,
+                    "content": "test_template(v)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 21,
+                    "beginColumn": 23,
+                    "endLine": 27,
+                    "endColumn": 2,
+                    "content": "int test_template(T &dataList) {\n    int x = 10;\n    for (auto &item : dataList) ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 22,
+                    "beginColumn": 5,
+                    "endLine": 22,
+                    "endColumn": 16,
+                    "content": "int x = 10;",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 23,
+                    "beginColumn": 23,
+                    "endLine": 23,
+                    "endColumn": 31,
+                    "content": "dataList",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 23,
+                    "beginColumn": 10,
+                    "endLine": 23,
+                    "endColumn": 32,
+                    "content": "auto &item : dataList)",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 24,
+                    "beginColumn": 9,
+                    "endLine": 24,
+                    "endColumn": 14,
+                    "content": "*item",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 26,
+                    "beginColumn": 5,
+                    "endLine": 26,
+                    "endColumn": 13,
+                    "content": "return x",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 21,
+                    "beginColumn": 23,
+                    "endLine": 27,
+                    "endColumn": 2,
+                    "content": "int test_template(T &dataList) {\n    int x = 10;\n    for (auto &item : dataList) ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 48,
+                    "beginColumn": 9,
+                    "endLine": 48,
+                    "endColumn": 34,
+                    "content": "int x = test_template(v);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 49,
+                    "beginColumn": 9,
+                    "endLine": 49,
+                    "endColumn": 15,
+                    "content": "x = 20",
+                    "stmtKind": "BinaryOperator"
+                }
+            ]
+        }
+    ]
+}
