@@ -1025,6 +1025,10 @@ int main(int argc, const char **argv) {
         // print all successors & edge type
         const auto &G = Global.icfg.G[node];
 
+        auto [fid, bid] = Global.icfg.functionBlockOfNodeId[node];
+        fmt::print("Node {} is in {} B{}\n", node,
+                   Global.functionLocations[fid].name, bid);
+
         ordered_json dump;
         dumpICFGNode(node, dump);
         llvm::errs() << dump.size() << " stmts:\n";
