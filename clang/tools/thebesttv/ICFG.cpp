@@ -1,5 +1,6 @@
 #include "ICFG.h"
 #include "utils.h"
+#include <fmt/color.h>
 
 int ICFG::getNodeId(int fid, int bid) {
     auto it = nodeIdOfFunctionBlock.find({fid, bid});
@@ -60,6 +61,21 @@ void ICFG::tryAndAddCallSite(int fid, const CFGBlock &B) {
     const FunctionDecl *calleeDecl = expr->getDirectCallee();
     if (!calleeDecl)
         return;
+
+    // 如果是模板函数的 specialization，那么要替换成原始的模板函数
+    if (auto *info = calleeDecl->getTemplateSpecializationInfo()) {
+        if (FunctionTemplateDecl *FTD = info->getTemplate()) {
+            if (auto originalDecl = FTD->getTemplatedDecl()) {
+                logger.info(
+                    "Replacing specialization {} with original template: {}",
+                    fmt::format(fg(fmt::color::green),
+                                getFullSignature(calleeDecl)),
+                    fmt::format(fg(fmt::color::green),
+                                getFullSignature(originalDecl)));
+                calleeDecl = originalDecl;
+            }
+        }
+    }
 
     // callsite block has only one successor
     requireTrue(B.succ_size() == 1);
