@@ -544,6 +544,8 @@ class CFGBuilder {
   using CachedBoolEvalsTy = llvm::DenseMap<Expr *, TryResult>;
   CachedBoolEvalsTy CachedBoolEvals;
 
+  bool isTemplate = false;
+
 public:
   explicit CFGBuilder(ASTContext *astContext,
                       const CFG::BuildOptions &buildOpts)
@@ -1540,6 +1542,10 @@ std::unique_ptr<CFG> CFGBuilder::buildCFG(const Decl *D, Stmt *Statement) {
   assert(cfg.get());
   if (!Statement)
     return nullptr;
+
+  if (D->isTemplated()) {
+    isTemplate = true;
+  }
 
   // Create an empty block that will serve as the exit block for the CFG.  Since
   // this is the first block added to the CFG, it will be implicitly registered
@@ -4706,7 +4712,10 @@ CFGBlock *CFGBuilder::VisitCXXForRangeStmt(CXXForRangeStmt *S) {
   Succ = BeginConditionBlock;
 
   // See if this is a known constant.
-  TryResult KnownVal(true);
+  TryResult KnownVal;
+  if (!isTemplate) {
+    KnownVal = TryResult(true);
+  }
 
   if (S->getCond())
     KnownVal = tryEvaluateBool(S->getCond());
