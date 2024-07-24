@@ -33,6 +33,7 @@
 // doesn't seem useful
 // #include "spdlog/fmt/ostr.h"
 #include "spdlog/spdlog.h"
+#include <fmt/ranges.h>
 
 using json = nlohmann::json;
 using ordered_json = nlohmann::ordered_json;
