@@ -72,6 +72,18 @@ bool GenICFGVisitor::VisitFunctionDecl(FunctionDecl *D) {
         }
     }
 
+    /**
+     * 对于模板函数，有两种处理方法：
+     * 1. 直接把模板函数加入 ICFG 中，不考虑 template 实例化。
+     *    这需要把 ICFG 中的函数调用重定向到原始的模板函数，而不是实例化后的。
+     * 2. 把模板函数的所有实例化结果加入 ICFG 中。
+     *    但这样在 input.json 进行匹配的时候，无法确定是哪个实例化后的函数。
+     * 所以暂时采用第一种方法。
+     */
+    if (D->isTemplated()) {
+        logger.warn("Loading template function: {}", fullSignature);
+    }
+
     std::unique_ptr<CFG> cfg = CFG::buildCFG(
         D, D->getBody(), &D->getASTContext(), CFG::BuildOptions());
     if (!cfg) {
