@@ -4719,6 +4719,7 @@ CFGBlock *CFGBuilder::VisitCXXForRangeStmt(CXXForRangeStmt *S) {
     SaveAndRestore save_Block(Block), save_Succ(Succ);
     SaveAndRestore save_continue(ContinueJumpTarget);
 
+    /*
     // Generate increment code in its own basic block.  This is the target of
     // continue statements.
     Block = nullptr;
@@ -4735,6 +4736,7 @@ CFGBlock *CFGBuilder::VisitCXXForRangeStmt(CXXForRangeStmt *S) {
     assert(Block);
     if (badCFG)
       return nullptr;
+    */
     Block = nullptr;
 
     // Add implicit scope and dtors for loop variable.
@@ -4765,8 +4767,10 @@ CFGBlock *CFGBuilder::VisitCXXForRangeStmt(CXXForRangeStmt *S) {
 
   // Add the initialization statements.
   Block = createBlock();
-  addStmt(S->getBeginStmt());
-  addStmt(S->getEndStmt());
+  if (S->getBeginStmt())
+    addStmt(S->getBeginStmt());
+  if (S->getEndStmt())
+    addStmt(S->getEndStmt());
   CFGBlock *Head = addStmt(S->getRangeStmt());
   if (S->getInit())
     Head = addStmt(S->getInit());
