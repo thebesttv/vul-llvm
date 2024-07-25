@@ -1,0 +1,292 @@
+{
+    "project": "demo",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/input.json",
+    "results": [
+        {
+            "type": "npe-bug",
+            "sourceIndex": 0,
+            "nodes": [
+                1,
+                0,
+                13,
+                12
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 19,
+                    "beginColumn": 5,
+                    "endLine": 19,
+                    "endColumn": 19,
+                    "content": "return nullptr",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 1,
+                    "endLine": 20,
+                    "endColumn": 2,
+                    "content": "int *Test::GetPtr(int input)\n{\n    for (int num : v1) {\n        if (num == input ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 24,
+                    "beginColumn": 5,
+                    "endLine": 24,
+                    "endColumn": 30,
+                    "content": "int *ptr = GetPtr(input);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 5,
+                    "endLine": 25,
+                    "endColumn": 22,
+                    "content": "std::cout << *ptr",
+                    "stmtKind": "CXXOperatorCallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 5,
+                    "endLine": 25,
+                    "endColumn": 35,
+                    "content": "std::cout << *ptr << std::endl",
+                    "stmtKind": "CXXOperatorCallExpr"
+                }
+            ]
+        },
+        {
+            "type": "npe-bug",
+            "sourceIndex": 1,
+            "nodes": [
+                27,
+                26,
+                20,
+                19,
+                17,
+                18
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 47,
+                    "beginColumn": 5,
+                    "endLine": 47,
+                    "endColumn": 29,
+                    "content": "data1.push_back(nullptr)",
+                    "stmtKind": "CXXMemberCallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 48,
+                    "beginColumn": 5,
+                    "endLine": 48,
+                    "endColumn": 20,
+                    "content": "data2 = nullptr",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 49,
+                    "beginColumn": 5,
+                    "endLine": 49,
+                    "endColumn": 25,
+                    "content": "test_template(data1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 30,
+                    "beginColumn": 1,
+                    "endLine": 35,
+                    "endColumn": 2,
+                    "content": "void test_template(T &dataList)\n{\n    for (auto &item : dataList) {\n        std: ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 32,
+                    "beginColumn": 23,
+                    "endLine": 32,
+                    "endColumn": 31,
+                    "content": "dataList",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 32,
+                    "beginColumn": 10,
+                    "endLine": 32,
+                    "endColumn": 32,
+                    "content": "auto &item : dataList)",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 33,
+                    "beginColumn": 9,
+                    "endLine": 33,
+                    "endColumn": 40,
+                    "content": "std::cout << *item << std::endl",
+                    "stmtKind": "BinaryOperator"
+                }
+            ]
+        },
+        {
+            "type": "npe-fix",
+            "sourceIndex": 1,
+            "nodes": [
+                27,
+                26,
+                20,
+                19,
+                17,
+                16
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 47,
+                    "beginColumn": 5,
+                    "endLine": 47,
+                    "endColumn": 29,
+                    "content": "data1.push_back(nullptr)",
+                    "stmtKind": "CXXMemberCallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 48,
+                    "beginColumn": 5,
+                    "endLine": 48,
+                    "endColumn": 20,
+                    "content": "data2 = nullptr",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 49,
+                    "beginColumn": 5,
+                    "endLine": 49,
+                    "endColumn": 25,
+                    "content": "test_template(data1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 30,
+                    "beginColumn": 1,
+                    "endLine": 35,
+                    "endColumn": 2,
+                    "content": "void test_template(T &dataList)\n{\n    for (auto &item : dataList) {\n        std: ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 32,
+                    "beginColumn": 23,
+                    "endLine": 32,
+                    "endColumn": 31,
+                    "content": "dataList",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 30,
+                    "beginColumn": 1,
+                    "endLine": 35,
+                    "endColumn": 2,
+                    "content": "void test_template(T &dataList)\n{\n    for (auto &item : dataList) {\n        std: ..."
+                }
+            ]
+        },
+        {
+            "type": "npe-bug",
+            "sourceIndex": 2,
+            "nodes": [
+                26,
+                25,
+                23,
+                22
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 48,
+                    "beginColumn": 5,
+                    "endLine": 48,
+                    "endColumn": 20,
+                    "content": "data2 = nullptr",
+                    "variable": {
+                        "beginLine": 48,
+                        "beginColumn": 5,
+                        "endLine": 48,
+                        "endColumn": 10,
+                        "content": "data2"
+                    },
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 49,
+                    "beginColumn": 5,
+                    "endLine": 49,
+                    "endColumn": 25,
+                    "content": "test_template(data1)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 50,
+                    "beginColumn": 5,
+                    "endLine": 50,
+                    "endColumn": 26,
+                    "content": "test_template2(data2)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 38,
+                    "beginColumn": 1,
+                    "endLine": 41,
+                    "endColumn": 2,
+                    "content": "void test_template2(T &item)\n{\n    std::cout << *item << std::endl; // sink\n}"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
+                    "beginLine": 40,
+                    "beginColumn": 5,
+                    "endLine": 40,
+                    "endColumn": 36,
+                    "content": "std::cout << *item << std::endl",
+                    "stmtKind": "BinaryOperator"
+                }
+            ]
+        }
+    ]
+}
