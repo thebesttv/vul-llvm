@@ -488,7 +488,7 @@ void deduplicateAndFixLocations(ordered_json &locations, int fromLine,
     // 输出会包含 BB 中的所有语句。
     // 如果 source 不是 BB 中第一条，它前面的语句也会被输出。
     // 这里删除路径中，可能存在的 source 之前的、sink 之后的语句。
-    while (!result.empty() && result.front()["beginLine"] < fromLine)
+    while (!result.empty() && result.front()["endLine"] < fromLine)
         result.pop_front();
     while (!result.empty() && result.back()["beginLine"] > toLine)
         result.pop_back();
