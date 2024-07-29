@@ -614,13 +614,20 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
         return VarLocResult(fid, Global.icfg.entryExitOfFunction[fid].second);
     };
 
+    auto requireFromValid = [&from]() {
+        requireTrue(from.isValid(), "FROM location invalid");
+    };
+    auto requireToValid = [&to]() {
+        requireTrue(to.isValid(), "TO location invalid");
+    };
+
     // 用于暂时存放路径生成结果
     ordered_json results;
 
     if (type == "npe") {
         logger.info("Handle known type: {}", type);
-        requireTrue(from.isValid());
-        requireTrue(to.isValid());
+        requireFromValid();
+        requireToValid();
 
         logger.info("Generating NPE bug version ...");
         int size = findPathBetween(from, fromLine, to, toLine, path, {},
@@ -656,7 +663,7 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
         removeNpeBadSource(fromFile, fromLine);
     } else if (type == "npe-bad-source") {
         logger.info("Removing bad NPE source ...");
-        requireTrue(from.isValid());
+        requireFromValid();
 
         auto &fromFile = Global.functionLocations[from.fid].file;
         removeNpeBadSource(fromFile, fromLine);
@@ -677,8 +684,8 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
          *   而非 leak 的位置） ，所以暂时不处理。
          */
         logger.info("Handle known type: {}", type);
-        requireTrue(from.isValid());
-        requireTrue(to.isValid());
+        requireFromValid();
+        requireToValid();
 
         auto new_path = std::vector<VarLocResult>(path);
         new_path.push_back(to);
@@ -695,13 +702,13 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
         }
     } else if (type == "resourceLeak-bad-source") {
         logger.info("Removing bad Resource Leak source ...");
-        requireTrue(from.isValid());
+        requireFromValid();
 
         auto &fromFile = Global.functionLocations[from.fid].file;
         removeResourceLeakBadSource(fromFile, fromLine);
     } else {
         logger.info("Handle unknown type: {}", type);
-        requireTrue(from.isValid());
+        requireFromValid();
         if (!to.isValid()) {
             logger.warn("Missing sink! Using exit of source instead");
             to = getExit(from);
