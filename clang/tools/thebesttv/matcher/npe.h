@@ -37,7 +37,7 @@ class NpeSourceMatcher : public BaseMatcher {
  *    目前放到 main() 里做，在 generateICFG() 之后
  * 3. p = foo() && 在 input.json 中指定 foo 可能返回 NULL
  *    同样，判断在 main() 里做
- * 4. p != NULL
+ * 4. p == NULL / p != NULL
  */
 class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
                              public NpeSourceMatcher {
@@ -76,7 +76,7 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
     std::vector<std::pair<int, ordered_json>> npeSources, nullConstants;
 
     enum {
-        // return null, p = xxx, p != null
+        // return null, p = xxx, p == null, p != null
         // 额外匹配foo()，因为 Infer 可能报告 ld = foo()，然后再进入 foo()
         RETURN_NULL_OR_NPE_GOOD_SOURCE,
         // nullptr, NULL, 0
@@ -166,8 +166,8 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
             }
             setMatchAndMaybeDumpJson(S->getSourceRange(), varRange);
             return false;
-        } else if (S->getOpcode() == BO_NE) {
-            // 两边形如 p != NULL
+        } else if (S->getOpcode() == BO_EQ || S->getOpcode() == BO_NE) {
+            // 两边形如 p == NULL 或 p != NULL
             auto inFormPNeNull = [this](const Expr *l, const Expr *r) {
                 return isPointerType(l) && !isNullPointerConstant(l) &&
                        isNullPointerConstant(r);

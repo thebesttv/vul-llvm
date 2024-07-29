@@ -60,8 +60,8 @@ bool NpeSourceMatcher::VisitBinaryOperator(BinaryOperator *S) {
             checkFormPEqNullOrFoo(S->getSourceRange(), S->getRHS(),
                                   S->getLHS()->getSourceRange());
         }
-    } else if (S->getOpcode() == BO_NE) {
-        // 两边形如 p != NULL
+    } else if (S->getOpcode() == BO_EQ || S->getOpcode() == BO_NE) {
+        // 两边形如 p == NULL 或 p != NULL
         auto inFormPNeNull = [this](const Expr *l, const Expr *r) {
             return isPointerType(l) && !isNullPointerConstant(l) &&
                    isNullPointerConstant(r);
