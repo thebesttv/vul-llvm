@@ -178,6 +178,46 @@
             "locations": [
                 {
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp",
+                    "beginLine": 9,
+                    "beginColumn": 9,
+                    "endLine": 9,
+                    "endColumn": 18,
+                    "content": "p == NULL",
+                    "variable": {
+                        "beginLine": 9,
+                        "beginColumn": 9,
+                        "endLine": 9,
+                        "endColumn": 10,
+                        "content": "p"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 9,
+                    "endLine": 11,
+                    "endColumn": 18,
+                    "content": "NULL == p",
+                    "variable": {
+                        "beginLine": 11,
+                        "beginColumn": 17,
+                        "endLine": 11,
+                        "endColumn": 18,
+                        "content": "p"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp",
                     "beginLine": 15,
                     "beginColumn": 9,
                     "endLine": 15,
