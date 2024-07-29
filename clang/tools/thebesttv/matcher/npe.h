@@ -148,7 +148,7 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
         if (!D->getParentFunctionOrMethod())
             return true;
 
-        if (D->hasInit()) {
+        if (D->hasInit() && isPointerType(D->getInit())) {
             setMatchAndMaybeDumpJson(D->getSourceRange(), D->getLocation());
             return false;
         }
@@ -160,12 +160,14 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
             return true;
 
         if (S->getOpcode() == BO_Assign) {
-            std::optional<SourceRange> varRange = std::nullopt;
-            if (S->getLHS()) {
-                varRange = S->getLHS()->getSourceRange();
+            if (isPointerType(S)) {
+                std::optional<SourceRange> varRange = std::nullopt;
+                if (S->getLHS()) {
+                    varRange = S->getLHS()->getSourceRange();
+                }
+                setMatchAndMaybeDumpJson(S->getSourceRange(), varRange);
+                return false;
             }
-            setMatchAndMaybeDumpJson(S->getSourceRange(), varRange);
-            return false;
         } else if (S->getOpcode() == BO_EQ || S->getOpcode() == BO_NE) {
             // 两边形如 p == NULL 或 p != NULL
             auto inFormPNeNull = [this](const Expr *l, const Expr *r) {
