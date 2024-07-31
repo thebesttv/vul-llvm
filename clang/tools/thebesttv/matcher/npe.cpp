@@ -1,7 +1,7 @@
 #include "npe.h"
 
 bool NpeSourceMatcher::isNullPointerConstant(const Expr *expr) {
-    if (!expr)
+    if (!expr || !isPointerType(expr))
         return false;
     expr = uncast(expr);
     const auto &valueDependence =
