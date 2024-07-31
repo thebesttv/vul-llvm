@@ -18,6 +18,106 @@
             "type": "npe-good-source",
             "locations": [
                 {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/chain-return.cpp",
+                    "beginLine": 43,
+                    "beginColumn": 5,
+                    "endLine": 43,
+                    "endColumn": 14,
+                    "content": "p = f0(n)",
+                    "variable": {
+                        "beginLine": 43,
+                        "beginColumn": 5,
+                        "endLine": 43,
+                        "endColumn": 6,
+                        "content": "p"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/chain-return.cpp",
+                    "beginLine": 44,
+                    "beginColumn": 5,
+                    "endLine": 44,
+                    "endColumn": 14,
+                    "content": "p = f1(n)",
+                    "variable": {
+                        "beginLine": 44,
+                        "beginColumn": 5,
+                        "endLine": 44,
+                        "endColumn": 6,
+                        "content": "p"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/chain-return.cpp",
+                    "beginLine": 45,
+                    "beginColumn": 5,
+                    "endLine": 45,
+                    "endColumn": 14,
+                    "content": "p = f2(n)",
+                    "variable": {
+                        "beginLine": 45,
+                        "beginColumn": 5,
+                        "endLine": 45,
+                        "endColumn": 6,
+                        "content": "p"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/chain-return.cpp",
+                    "beginLine": 46,
+                    "beginColumn": 5,
+                    "endLine": 46,
+                    "endColumn": 14,
+                    "content": "p = f3(n)",
+                    "variable": {
+                        "beginLine": 46,
+                        "beginColumn": 5,
+                        "endLine": 46,
+                        "endColumn": 6,
+                        "content": "p"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/chain-return.cpp",
+                    "beginLine": 48,
+                    "beginColumn": 5,
+                    "endLine": 48,
+                    "endColumn": 14,
+                    "content": "p = f5(n)",
+                    "variable": {
+                        "beginLine": 48,
+                        "beginColumn": 5,
+                        "endLine": 48,
+                        "endColumn": 6,
+                        "content": "p"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/external.cpp",
                     "beginLine": 28,
                     "beginColumn": 5,
