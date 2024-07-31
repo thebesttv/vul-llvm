@@ -4,6 +4,7 @@
     "mayNull": [
         "extNull",
         "extMayNull",
+        "overrideNull",
         "A::oNull",
         "A::oMayNull",
         "A::sNull",

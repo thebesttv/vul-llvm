@@ -13,5 +13,10 @@
         "command": "c++ -c pNeNull.cpp",
         "directory": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source",
         "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp"
+    },
+    {
+        "command": "c++ -c chain-return.cpp",
+        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source",
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/chain-return.cpp"
     }
 ]
