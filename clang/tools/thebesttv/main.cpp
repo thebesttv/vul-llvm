@@ -989,6 +989,8 @@ int main(int argc, const char **argv) {
                 mayNullFunctions.insert(f.get<std::string>());
             }
         }
+        // 将 input.json 中手工指定的函数加入返回图中，并计算 mayNull
+        Global.returnGraph.propagate(mayNullFunctions);
 
         // 更新 Global.npeSuspectedSources
         // 对所有 p = foo()，把函数中没有 return NULL 语句的都删掉
@@ -1001,8 +1003,7 @@ int main(int argc, const char **argv) {
                     mayNullFunctions.end())
                 continue;
 
-            int fid = Global.getIdOfFunction(signature);
-            if (fid == -1 || Global.functionReturnsNull[fid] == false)
+            if (Global.returnGraph.mayNull(signature) == false)
                 for (auto it : p.second) {
                     Global.npeSuspectedSources.erase(it);
                 }

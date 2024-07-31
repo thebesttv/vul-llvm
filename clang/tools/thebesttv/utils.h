@@ -231,13 +231,95 @@ struct GlobalStat {
 
     std::string clangPath, clangppPath;
 
+    /**
+     * 返回图，类似 Call Graph，但只有 return foo() 算作函数调用。
+     */
+    class ReturnGraph {
+      private:
+        // 由于 G 中可能包含外部函数，所以用 signature 作为 key，而不是 fid
+        std::map<std::string, std::set<std::string>> G;
+        // 被传播到的函数都是可能返回 null 的
+        std::map<std::string, bool> visited;
+        // 把初始可能返回 null 的函数加入队列，然后在图上传播
+        std::queue<std::string> q;
+
+        /**
+         * 处理 input.json 中指定的可能返回 NULL 的函数
+         *
+         * 遍历 G 中有出度的函数（即 return foo() 中的 foo），
+         * 如果函数名在 input.json 的 mayNull 中指定，就加入队列。
+         */
+        void
+        processMayNullFunctions(const std::set<std::string> &mayNullFunctions) {
+            for (const auto &it : G) {
+                const auto &signature = it.first;
+                const auto &name = getNameFromFullSignature(signature);
+                if (mayNullFunctions.find(name) != mayNullFunctions.end()) {
+                    logger.info("  MayNull from input.json: {}", signature);
+                    q.push(signature);
+                }
+            }
+        }
+
+      public:
+        /**
+         * `fid` 对应的函数在 return 时调用了 `callee`
+         *
+         * 添加从 `callee` 到 `fid`(签名) 的反向边
+         */
+        void addEdge(int fid, const std::string &callee) {
+            G[callee].insert(Global.getSignatureOfFunction(fid));
+        }
+
+        /**
+         * `fid` 对应的函数直接返回 NULL。有两种可能：
+         * 1. 函数体中包含了 return null 语句
+         * 2. 在 input.json 的 mayNull 中指定了该函数可能返回 NULL
+         */
+        void addNullFunction(int fid) {
+            q.push(Global.getSignatureOfFunction(fid));
+        }
+
+        /**
+         * 根据调用图计算函数是否可能返回 NULL
+         */
+        void propagate(const std::set<std::string> &mayNullFunctions) {
+            logger.info("Propagating mayNull functions ...");
+            processMayNullFunctions(mayNullFunctions);
+
+            visited.clear();
+            while (!q.empty()) {
+                const auto &u = q.front();
+                q.pop();
+
+                if (visited[u])
+                    continue;
+
+                visited[u] = true;
+                // logger.info("MayNull from propagation: {}", u);
+
+                for (const auto &v : G[u]) {
+                    q.push(v);
+                    // logger.info("  Add: {}", v);
+                }
+            }
+        }
+
+        /**
+         * 判断函数是否可能返回 null
+         */
+        bool mayNull(const std::string &signature) {
+            return visited[signature];
+        }
+    };
+
     std::set<ordered_json> npeSuspectedSources; // 每个元素是可疑的 source
     // 对于加入 npeSuspectedSources 的 p = foo()，
     // 把 foo() map 到集合中的迭代器上，用于之后的删除
     std::map<std::string, std::vector<std::set<ordered_json>::iterator>>
         npeSuspectedSourcesItMap;
-    // 判断函数是否包含 return NULL 语句
-    std::map<int, bool> functionReturnsNull; // fid -> whether func returns null
+    // 通过返回图计算函数是否可能返回 null
+    ReturnGraph returnGraph;
 
     std::set<ordered_json>
         resourceLeakSuspectedSources;         // 每个元素是可疑的 source

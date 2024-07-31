@@ -88,7 +88,12 @@ bool NpeGoodSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
 bool NpeGoodSourceVisitor::VisitReturnStmt(ReturnStmt *S) {
     Expr *value = S->getRetValue();
     if (isNullPointerConstant(value)) {
-        Global.functionReturnsNull[fid] = true;
+        // return null
+        Global.returnGraph.addNullFunction(fid);
+    } else if (const FunctionDecl *calleeDecl = getDirectCallee(value)) {
+        // return foo()
+        std::string callee = getFullSignature(calleeDecl);
+        Global.returnGraph.addEdge(fid, callee);
     }
     return true;
 }
