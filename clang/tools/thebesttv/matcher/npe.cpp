@@ -16,7 +16,7 @@ NpeGoodSourceVisitor::saveNpeSuspectedSources(
     return saveSuspectedSource(range, varRange, Global.npeSuspectedSources);
 }
 
-void NpeSourceMatcher::checkFormPEqNullOrFoo(
+void NpeGoodSourceVisitor::checkFormPEqNullOrFoo(
     const SourceRange &range, const Expr *rhs,
     const std::optional<SourceRange> &varRange) {
     if (!rhs || !isPointerType(rhs))
@@ -31,7 +31,7 @@ void NpeSourceMatcher::checkFormPEqNullOrFoo(
     }
 }
 
-bool NpeSourceMatcher::VisitVarDecl(VarDecl *D) {
+bool NpeGoodSourceVisitor::VisitVarDecl(VarDecl *D) {
     // 加入 NPE 可疑的 source 中
 
     // must be declared within a function
@@ -45,7 +45,7 @@ bool NpeSourceMatcher::VisitVarDecl(VarDecl *D) {
     return true;
 }
 
-bool NpeSourceMatcher::VisitBinaryOperator(BinaryOperator *S) {
+bool NpeGoodSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
     // 加入 NPE 可疑的 source 中
 
     /**
@@ -80,7 +80,7 @@ bool NpeSourceMatcher::VisitBinaryOperator(BinaryOperator *S) {
     return true;
 }
 
-bool NpeSourceMatcher::VisitReturnStmt(ReturnStmt *S) {
+bool NpeGoodSourceVisitor::VisitReturnStmt(ReturnStmt *S) {
     Expr *value = S->getRetValue();
     if (isNullPointerConstant(value)) {
         handleFormReturnNull(S->getSourceRange());
