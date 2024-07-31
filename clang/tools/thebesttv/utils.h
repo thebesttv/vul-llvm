@@ -289,7 +289,8 @@ struct GlobalStat {
 
             visited.clear();
             while (!q.empty()) {
-                const auto &u = q.front();
+                // 不能引用队头，因为马上就 pop 了
+                const auto u = q.front();
                 q.pop();
 
                 if (visited[u])
