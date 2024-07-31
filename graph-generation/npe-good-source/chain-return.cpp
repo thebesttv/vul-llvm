@@ -37,7 +37,7 @@ int *f0(int n) {
         return f2(n);
 }
 
-int main() {
+int chainReturnMain() {
     int *p, n;
 
     p = f0(n);

@@ -12,7 +12,7 @@ int *mayNull() {
     }
 }
 
-int main() {
+int singleSourceMain() {
     // 形如 p = null，会包括
     int *x1 = 0;
     int *x2 = NULL;

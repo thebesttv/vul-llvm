@@ -23,7 +23,7 @@ class A {
     B *b;
 };
 
-int main() {
+int externalMain() {
     int *x1 = extNonNull();
     int *x2 = extNull();
     int *x3 = extMayNull();

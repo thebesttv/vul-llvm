@@ -1,7 +1,7 @@
 // 测试形如 p != NULL 的 NPE good source 的生成
 #include <cstdlib>
 
-int main() {
+int pNeNullMain() {
     int *p;
     int i;
 
