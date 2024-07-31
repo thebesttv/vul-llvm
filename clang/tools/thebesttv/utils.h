@@ -224,6 +224,7 @@ struct GlobalStat {
      * 返回 `fid` 对应函数的 signature
      */
     const std::string &getSignatureOfFunction(int fid) {
+        requireTrue(fid >= 0 && fid < functionLocations.size(), "Invalid fid");
         return functionLocations[fid].name;
     }
 
