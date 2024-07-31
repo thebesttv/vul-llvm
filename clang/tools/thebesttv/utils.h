@@ -220,6 +220,12 @@ struct GlobalStat {
             return it->second;
         }
     }
+    /**
+     * 返回 `fid` 对应函数的 signature
+     */
+    const std::string &getSignatureOfFunction(int fid) {
+        return functionLocations[fid].name;
+    }
 
     ICFG icfg;
 
