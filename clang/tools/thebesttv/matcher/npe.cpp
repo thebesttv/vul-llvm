@@ -16,7 +16,7 @@ NpeGoodSourceVisitor::saveNpeSuspectedSources(
     return saveSuspectedSource(range, varRange, Global.npeSuspectedSources);
 }
 
-void NpeSourceMatcher::checkFormPEqNullOrFoo(
+void NpeGoodSourceVisitor::checkFormPEqNullOrFoo(
     const SourceRange &range, const Expr *rhs,
     const std::optional<SourceRange> &varRange) {
     if (!rhs || !isPointerType(rhs))
@@ -24,14 +24,19 @@ void NpeSourceMatcher::checkFormPEqNullOrFoo(
 
     if (isNullPointerConstant(rhs)) {
         // p = NULL
-        handleFormPEqNull(range, varRange);
+        saveNpeSuspectedSources(range, varRange);
     } else if (const FunctionDecl *calleeDecl = getDirectCallee(rhs)) {
-        // p = foo()
-        handleFormPEqFoo(calleeDecl, range, varRange);
+        // p = foo() && foo() = { ...; return NULL; }
+        auto it = saveNpeSuspectedSources(range, varRange);
+        if (it) {
+            // callee 可能还没被处理过，记录 signature，而不是 fid
+            std::string callee = getFullSignature(calleeDecl);
+            Global.npeSuspectedSourcesItMap[callee].push_back(it.value());
+        }
     }
 }
 
-bool NpeSourceMatcher::VisitVarDecl(VarDecl *D) {
+bool NpeGoodSourceVisitor::VisitVarDecl(VarDecl *D) {
     // 加入 NPE 可疑的 source 中
 
     // must be declared within a function
@@ -45,7 +50,7 @@ bool NpeSourceMatcher::VisitVarDecl(VarDecl *D) {
     return true;
 }
 
-bool NpeSourceMatcher::VisitBinaryOperator(BinaryOperator *S) {
+bool NpeGoodSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
     // 加入 NPE 可疑的 source 中
 
     /**
@@ -69,49 +74,21 @@ bool NpeSourceMatcher::VisitBinaryOperator(BinaryOperator *S) {
 
         // p != NULL 或 NULL != p
         if (inFormPNeNull(S->getLHS(), S->getRHS())) {
-            handleFormPNeNull(S->getSourceRange(),
-                              S->getLHS()->getSourceRange());
+            saveNpeSuspectedSources(S->getSourceRange(),
+                                    S->getLHS()->getSourceRange());
         } else if (inFormPNeNull(S->getRHS(), S->getLHS())) {
-            handleFormPNeNull(S->getSourceRange(),
-                              S->getRHS()->getSourceRange());
+            saveNpeSuspectedSources(S->getSourceRange(),
+                                    S->getRHS()->getSourceRange());
         }
     }
 
     return true;
 }
 
-bool NpeSourceMatcher::VisitReturnStmt(ReturnStmt *S) {
+bool NpeGoodSourceVisitor::VisitReturnStmt(ReturnStmt *S) {
     Expr *value = S->getRetValue();
     if (isNullPointerConstant(value)) {
-        handleFormReturnNull(S->getSourceRange());
+        Global.functionReturnsNull[fid] = true;
     }
     return true;
-}
-
-void NpeGoodSourceVisitor::handleFormPEqNull(
-    const SourceRange &range, const std::optional<SourceRange> &varRange) {
-    // p = null
-    saveNpeSuspectedSources(range, varRange);
-}
-
-void NpeGoodSourceVisitor::handleFormPEqFoo(
-    const FunctionDecl *calleeDecl, const SourceRange &range,
-    const std::optional<SourceRange> &varRange) {
-    // p = foo() && foo() = { ...; return NULL; }
-    auto it = saveNpeSuspectedSources(range, varRange);
-    if (it) {
-        // callee 可能还没被处理过，记录 signature，而不是 fid
-        std::string callee = getFullSignature(calleeDecl);
-        Global.npeSuspectedSourcesItMap[callee].push_back(it.value());
-    }
-}
-
-void NpeGoodSourceVisitor::handleFormPNeNull(
-    const SourceRange &range, const std::optional<SourceRange> &varRange) {
-    // p != null
-    saveNpeSuspectedSources(range, varRange);
-}
-
-void NpeGoodSourceVisitor::handleFormReturnNull(const SourceRange &range) {
-    Global.functionReturnsNull[fid] = true;
 }

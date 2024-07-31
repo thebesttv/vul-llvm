@@ -6,27 +6,9 @@ class NpeSourceMatcher : public BaseMatcher {
   protected:
     bool isNullPointerConstant(const Expr *expr);
 
-    virtual void
-    handleFormPEqNull(const SourceRange &range,
-                      const std::optional<SourceRange> &varRange) = 0;
-    virtual void
-    handleFormPEqFoo(const FunctionDecl *calleeDecl, const SourceRange &range,
-                     const std::optional<SourceRange> &varRange) = 0;
-    virtual void
-    handleFormPNeNull(const SourceRange &range,
-                      const std::optional<SourceRange> &varRange) = 0;
-    virtual void handleFormReturnNull(const SourceRange &range) = 0;
-
-    void checkFormPEqNullOrFoo(const SourceRange &range, const Expr *rhs,
-                               const std::optional<SourceRange> &varRange);
-
   public:
     explicit NpeSourceMatcher(ASTContext *Context, int fid)
         : BaseMatcher(Context, fid) {}
-
-    bool VisitVarDecl(VarDecl *D);
-    bool VisitBinaryOperator(BinaryOperator *S);
-    bool VisitReturnStmt(ReturnStmt *S);
 };
 
 /**
@@ -46,27 +28,16 @@ class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
     saveNpeSuspectedSources(const SourceRange &range,
                             const std::optional<SourceRange> &varRange);
 
-  protected:
-    void handleFormPEqNull(const SourceRange &range,
-                           const std::optional<SourceRange> &varRange) override;
-    void handleFormPEqFoo(const FunctionDecl *calleeDecl,
-                          const SourceRange &range,
-                          const std::optional<SourceRange> &varRange) override;
-    void handleFormPNeNull(const SourceRange &range,
-                           const std::optional<SourceRange> &varRange) override;
-    void handleFormReturnNull(const SourceRange &range) override;
+    void checkFormPEqNullOrFoo(const SourceRange &range, const Expr *rhs,
+                               const std::optional<SourceRange> &varRange);
 
   public:
     explicit NpeGoodSourceVisitor(ASTContext *Context, int fid)
         : NpeSourceMatcher(Context, fid) {}
 
-    bool VisitVarDecl(VarDecl *D) { return NpeSourceMatcher::VisitVarDecl(D); }
-    bool VisitBinaryOperator(BinaryOperator *S) {
-        return NpeSourceMatcher::VisitBinaryOperator(S);
-    }
-    bool VisitReturnStmt(ReturnStmt *S) {
-        return NpeSourceMatcher::VisitReturnStmt(S);
-    }
+    bool VisitVarDecl(VarDecl *D);
+    bool VisitBinaryOperator(BinaryOperator *S);
+    bool VisitReturnStmt(ReturnStmt *S);
 };
 
 class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
@@ -96,29 +67,6 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
                 dumpedJson = json.value();
             }
         }
-    }
-
-  protected:
-    void
-    handleFormPEqNull(const SourceRange &range,
-                      const std::optional<SourceRange> &varRange) override {
-        setMatchAndMaybeDumpJson(range, varRange);
-    }
-
-    void handleFormPEqFoo(const FunctionDecl *calleeDecl,
-                          const SourceRange &range,
-                          const std::optional<SourceRange> &varRange) override {
-        setMatchAndMaybeDumpJson(range, varRange);
-    }
-
-    void
-    handleFormPNeNull(const SourceRange &range,
-                      const std::optional<SourceRange> &varRange) override {
-        setMatchAndMaybeDumpJson(range, varRange);
-    }
-
-    void handleFormReturnNull(const SourceRange &range) override {
-        setMatchAndMaybeDumpJson(range, std::nullopt);
     }
 
     std::vector<VarLocResult>
@@ -177,12 +125,12 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
 
             // p != NULL 或 NULL != p
             if (inFormPNeNull(S->getLHS(), S->getRHS())) {
-                handleFormPNeNull(S->getSourceRange(),
-                                  S->getLHS()->getSourceRange());
+                setMatchAndMaybeDumpJson(S->getSourceRange(),
+                                         S->getLHS()->getSourceRange());
                 return false;
             } else if (inFormPNeNull(S->getRHS(), S->getLHS())) {
-                handleFormPNeNull(S->getSourceRange(),
-                                  S->getRHS()->getSourceRange());
+                setMatchAndMaybeDumpJson(S->getSourceRange(),
+                                         S->getRHS()->getSourceRange());
                 return false;
             }
         }
