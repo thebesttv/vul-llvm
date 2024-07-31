@@ -278,6 +278,7 @@ struct GlobalStat {
          */
         void addNullFunction(int fid) {
             const auto &signature = Global.getSignatureOfFunction(fid);
+            logger.trace("  Direct mayNull: {} (F{})", signature, fid);
             q.push(signature);
         }
 
@@ -298,11 +299,11 @@ struct GlobalStat {
                     continue;
 
                 visited[u] = true;
-                // logger.info("MayNull from propagation: {}", u);
+                logger.trace("  MayNull from propagation: {}", u);
 
                 for (const auto &v : G[u]) {
                     q.push(v);
-                    // logger.info("  Add: {}", v);
+                    logger.trace("    Add: {}", v);
                 }
             }
         }
