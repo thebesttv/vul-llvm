@@ -28,15 +28,6 @@ class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
     saveNpeSuspectedSources(const SourceRange &range,
                             const std::optional<SourceRange> &varRange);
 
-    void handleFormPEqNull(const SourceRange &range,
-                           const std::optional<SourceRange> &varRange);
-    void handleFormPEqFoo(const FunctionDecl *calleeDecl,
-                          const SourceRange &range,
-                          const std::optional<SourceRange> &varRange);
-    void handleFormPNeNull(const SourceRange &range,
-                           const std::optional<SourceRange> &varRange);
-    void handleFormReturnNull(const SourceRange &range);
-
     void checkFormPEqNullOrFoo(const SourceRange &range, const Expr *rhs,
                                const std::optional<SourceRange> &varRange);
 
@@ -76,26 +67,6 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
                 dumpedJson = json.value();
             }
         }
-    }
-
-    void handleFormPEqNull(const SourceRange &range,
-                           const std::optional<SourceRange> &varRange) {
-        setMatchAndMaybeDumpJson(range, varRange);
-    }
-
-    void handleFormPEqFoo(const FunctionDecl *calleeDecl,
-                          const SourceRange &range,
-                          const std::optional<SourceRange> &varRange) {
-        setMatchAndMaybeDumpJson(range, varRange);
-    }
-
-    void handleFormPNeNull(const SourceRange &range,
-                           const std::optional<SourceRange> &varRange) {
-        setMatchAndMaybeDumpJson(range, varRange);
-    }
-
-    void handleFormReturnNull(const SourceRange &range) {
-        setMatchAndMaybeDumpJson(range, std::nullopt);
     }
 
     std::vector<VarLocResult>
@@ -154,12 +125,12 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
 
             // p != NULL 或 NULL != p
             if (inFormPNeNull(S->getLHS(), S->getRHS())) {
-                handleFormPNeNull(S->getSourceRange(),
-                                  S->getLHS()->getSourceRange());
+                setMatchAndMaybeDumpJson(S->getSourceRange(),
+                                         S->getLHS()->getSourceRange());
                 return false;
             } else if (inFormPNeNull(S->getRHS(), S->getLHS())) {
-                handleFormPNeNull(S->getSourceRange(),
-                                  S->getRHS()->getSourceRange());
+                setMatchAndMaybeDumpJson(S->getSourceRange(),
+                                         S->getRHS()->getSourceRange());
                 return false;
             }
         }
