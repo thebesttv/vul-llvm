@@ -277,7 +277,8 @@ struct GlobalStat {
          * 2. 在 input.json 的 mayNull 中指定了该函数可能返回 NULL
          */
         void addNullFunction(int fid) {
-            q.push(Global.getSignatureOfFunction(fid));
+            const auto &signature = Global.getSignatureOfFunction(fid);
+            q.push(signature);
         }
 
         /**
