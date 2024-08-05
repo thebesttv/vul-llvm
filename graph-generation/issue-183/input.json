@@ -1,0 +1,25 @@
+{
+    "project": "test_8_1",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-183/",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-183/compile_commands.json",
+    "results": [
+        {
+            "type": "npe",
+            "CodeXIssueID": "0",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-183/main.cpp",
+                    "line": 16,
+                    "column": 17
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-183/main.cpp",
+                    "line": 18,
+                    "column": 14
+                }
+            ]
+        }
+    ]
+}
