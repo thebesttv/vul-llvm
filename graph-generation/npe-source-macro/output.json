@@ -92,6 +92,14 @@
                     "endLine": 10,
                     "endColumn": 17,
                     "content": "crossFile(p)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                        "beginLine": 10,
+                        "beginColumn": 15,
+                        "endLine": 10,
+                        "endColumn": 16,
+                        "content": "p"
+                    },
                     "stmtKind": "BinaryOperator"
                 },
                 {
