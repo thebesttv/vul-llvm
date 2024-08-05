@@ -43,6 +43,19 @@ bool saveLocationInfo(ASTContext &Context, const SourceRange &range,
     if (eLoc) {
         j["endLine"] = eLoc->line;
         j["endColumn"] = eLoc->column;
+        if (bLoc && bLoc->file != eLoc->file) {
+            /**
+             * 由于宏，begin & end 可能在不同文件中
+             *
+             * 例如，对于以下宏定义
+             *   #define setToNull(p) p->data = nullptr
+             * 在使用时，有
+             *   setToNull(o);
+             * 那么 begin 是 o，end 是 data，两个可能在不同文件中。
+             */
+            j["endColumnFile"] = eLoc->file;
+            allGood = false;
+        }
     } else {
         j["endLine"] = -1;
         j["endColumn"] = -1;
