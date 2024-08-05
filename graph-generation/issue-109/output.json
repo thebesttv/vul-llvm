@@ -27,6 +27,7 @@
                     "endColumn": 20,
                     "content": "rbd != NULL",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-109/test_1.c",
                         "beginLine": 15,
                         "beginColumn": 9,
                         "endLine": 15,
@@ -126,6 +127,7 @@
                     "endColumn": 20,
                     "content": "int *rbd = NULL",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-109/test_1.c",
                         "beginLine": 25,
                         "beginColumn": 10,
                         "endLine": 25,

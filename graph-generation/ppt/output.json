@@ -25,6 +25,7 @@
                     "endColumn": 19,
                     "content": "int *p = NULL;",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/ppt/main.c",
                         "beginLine": 12,
                         "beginColumn": 10,
                         "endLine": 12,
@@ -115,6 +116,7 @@
                     "endColumn": 39,
                     "content": "p = (int *)malloc(sizeof(int))",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/ppt/main.c",
                         "beginLine": 14,
                         "beginColumn": 9,
                         "endLine": 14,

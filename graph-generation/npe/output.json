@@ -218,6 +218,7 @@
                     "endColumn": 14,
                     "content": "A *p = 0;",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe/main.cpp",
                         "beginLine": 5,
                         "beginColumn": 8,
                         "endLine": 5,
@@ -642,6 +643,7 @@
                     "endColumn": 14,
                     "content": "A *a1 = 0",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe/main.cpp",
                         "beginLine": 20,
                         "beginColumn": 8,
                         "endLine": 20,
@@ -662,6 +664,7 @@
                     "endColumn": 20,
                     "content": "A *a2 = nullptr",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe/main.cpp",
                         "beginLine": 21,
                         "beginColumn": 8,
                         "endLine": 21,
@@ -682,6 +685,7 @@
                     "endColumn": 31,
                     "content": "A *c1 = fooHasReturnNull()",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe/main.cpp",
                         "beginLine": 23,
                         "beginColumn": 8,
                         "endLine": 23,

@@ -26,6 +26,7 @@
                     "endColumn": 36,
                     "content": "int *data = (int *)AllocBuff();",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-98/test_1.c",
                         "beginLine": 46,
                         "beginColumn": 10,
                         "endLine": 46,

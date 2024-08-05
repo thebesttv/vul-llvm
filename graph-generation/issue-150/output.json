@@ -239,6 +239,7 @@
                     "endColumn": 20,
                     "content": "data2 = nullptr",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-150/main.cpp",
                         "beginLine": 48,
                         "beginColumn": 5,
                         "endLine": 48,

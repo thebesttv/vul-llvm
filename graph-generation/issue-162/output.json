@@ -20,6 +20,7 @@
                     "endColumn": 27,
                     "content": "int *ptr = GetPtr2(a);",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                         "beginLine": 25,
                         "beginColumn": 10,
                         "endLine": 25,
@@ -56,6 +57,7 @@
                     "endColumn": 26,
                     "content": "int *ptr = GetPtr(a);",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                         "beginLine": 31,
                         "beginColumn": 10,
                         "endLine": 31,
@@ -93,6 +95,7 @@
                     "endColumn": 38,
                     "content": "int flag = (ptr != NULL) ? 0 : 1;",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                         "beginLine": 39,
                         "beginColumn": 17,
                         "endLine": 39,
@@ -190,6 +193,7 @@
                     "endColumn": 38,
                     "content": "int flag = (ptr == NULL) ? 0 : 1;",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                         "beginLine": 49,
                         "beginColumn": 17,
                         "endLine": 49,
@@ -286,6 +290,7 @@
                     "endColumn": 13,
                     "content": "int *ptr = \n\t\tGetPtr(a);",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                         "beginLine": 76,
                         "beginColumn": 7,
                         "endLine": 76,
@@ -317,6 +322,7 @@
                     "endColumn": 28,
                     "content": "ptr != NULL",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                         "beginLine": 58,
                         "beginColumn": 17,
                         "endLine": 58,
@@ -337,6 +343,7 @@
                     "endColumn": 28,
                     "content": "ptr == NULL",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                         "beginLine": 67,
                         "beginColumn": 17,
                         "endLine": 67,

@@ -191,6 +191,7 @@
                     "endColumn": 20,
                     "content": "tmp == NULL",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
                         "beginLine": 31,
                         "beginColumn": 9,
                         "endLine": 31,
@@ -211,6 +212,7 @@
                     "endColumn": 21,
                     "content": "tmp->next = NULL",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/rl-foo-as-succ/main.c",
                         "beginLine": 42,
                         "beginColumn": 5,
                         "endLine": 42,

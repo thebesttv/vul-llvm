@@ -22,6 +22,7 @@
                     "endColumn": 32,
                     "content": "IS_ID_VALID(ptr != NULL, 1)",
                     "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-183/main.cpp",
                         "beginLine": 16,
                         "beginColumn": 17,
                         "endLine": 16,
