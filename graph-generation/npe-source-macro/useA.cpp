@@ -18,5 +18,11 @@ int mainUseA() {
     bothInSource(p->data);
     n += *p->data;
 
+#define cross(p) p->data = nullptr
+
+    // begin & end 在同一文件，但不同位置
+    cross(p);
+    n += *p->data;
+
     return n;
 }

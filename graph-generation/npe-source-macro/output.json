@@ -187,6 +187,43 @@
                     "stmtKind": "CompoundAssignOperator"
                 }
             ]
+        },
+        {
+            "type": "npe-bug",
+            "sourceIndex": 5,
+            "nodes": [
+                16
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "beginLine": 24,
+                    "beginColumn": 5,
+                    "endLine": 24,
+                    "endColumn": 13,
+                    "content": "cross(p)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                        "beginLine": 24,
+                        "beginColumn": 11,
+                        "endLine": 24,
+                        "endColumn": 12,
+                        "content": "p"
+                    },
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 5,
+                    "endLine": 25,
+                    "endColumn": 18,
+                    "content": "n += *p->data",
+                    "stmtKind": "CompoundAssignOperator"
+                }
+            ]
         }
     ]
 }
