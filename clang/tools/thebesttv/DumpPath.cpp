@@ -55,6 +55,8 @@ bool saveLocationInfo(ASTContext &Context, const SourceRange &range,
              */
             j["endColumnFile"] = eLoc->file;
             allGood = false;
+            // 直接返回，没必要继续了，用不了这个 dump
+            return allGood;
         }
     } else {
         j["endLine"] = -1;
