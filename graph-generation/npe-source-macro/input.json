@@ -35,6 +35,57 @@
                     "column": 5
                 }
             ]
+        },
+        {
+            "type": "npe",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "line": 10,
+                    "column": 5
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "line": 11,
+                    "column": 5
+                }
+            ]
+        },
+        {
+            "type": "npe",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "line": 14,
+                    "column": 5
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "line": 15,
+                    "column": 5
+                }
+            ]
+        },
+        {
+            "type": "npe",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "line": 18,
+                    "column": 5
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "line": 19,
+                    "column": 5
+                }
+            ]
         }
     ]
 }

@@ -1,7 +1,12 @@
 [
     {
-        "command": "cc -c main.cpp",
+        "command": "c++ -c main.cpp",
         "directory": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro",
         "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/main.cpp"
+    },
+    {
+        "command": "c++ -c useA.cpp",
+        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro",
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp"
     }
 ]
