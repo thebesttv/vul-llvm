@@ -42,7 +42,7 @@ BaseMatcher::dumpSource(const SourceRange &range,
     // 导出变量位置
     if (varRange.has_value()) {
         ordered_json varLoc;
-        if (!saveLocationInfo(*Context, varRange.value(), varLoc))
+        if (!saveLocationInfo(*Context, varRange.value(), varLoc, false))
             return std::nullopt;
         varLoc.erase("file"); // 肯定是同一个文件
         loc["variable"] = varLoc;

@@ -1,13 +1,13 @@
 #include "DumpPath.h"
 
 bool saveLocationInfo(ASTContext &Context, const SourceRange &range,
-                      ordered_json &j) {
+                      ordered_json &j, bool getExpansionLocation) {
     bool allGood = true;
     SourceManager &SM = Context.getSourceManager();
 
     SourceLocation b = range.getBegin();
     if (b.isMacroID()) {
-        b = SM.getExpansionLoc(b);
+        b = getExpansionLocation ? SM.getExpansionLoc(b) : SM.getSpellingLoc(b);
     }
     auto bLoc = Location::fromSourceLocation(Context, b);
     if (bLoc) {
@@ -31,7 +31,8 @@ bool saveLocationInfo(ASTContext &Context, const SourceRange &range,
     SourceLocation _e = range.getEnd();
     if (_e.isMacroID()) {
         // _e = SM.getExpansionLoc(_e);
-        _e = getEndOfMacroExpansion(_e, Context);
+        _e = getExpansionLocation ? getEndOfMacroExpansion(_e, Context)
+                                  : SM.getSpellingLoc(_e);
     }
     SourceLocation e =
         Lexer::getLocForEndOfToken(_e, 0, SM, Context.getLangOpts());
