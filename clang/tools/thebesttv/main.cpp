@@ -845,6 +845,8 @@ void generateFromInput(const ordered_json &input, fs::path outputDir) {
     std::ofstream o(jsonResult);
     o << output.dump(4, ' ', false, json::error_handler_t::replace)
       << std::endl;
+    // 判断是否成功写入
+    requireTrue(o.good(), "Failed to write to output.json");
     o.close();
 }
 
