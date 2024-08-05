@@ -3,8 +3,18 @@
 #include "base.h"
 
 class NpeSourceMatcher : public BaseMatcher {
+  private:
+    /**
+     * 对于 MemberExpr (o.x, o->x)，若由于宏导致两者不在同一个文件中，则只返回 o
+     */
+    const Expr *getProperVar(const Expr *E);
+
   protected:
     bool isNullPointerConstant(const Expr *expr);
+
+    SourceRange getProperSourceRange(const Expr *E) {
+        return getProperVar(E)->getSourceRange();
+    }
 
   public:
     explicit NpeSourceMatcher(ASTContext *Context, int fid)
@@ -111,7 +121,7 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
             if (isPointerType(S)) {
                 std::optional<SourceRange> varRange = std::nullopt;
                 if (S->getLHS()) {
-                    varRange = S->getLHS()->getSourceRange();
+                    varRange = getProperSourceRange(S->getLHS());
                 }
                 setMatchAndMaybeDumpJson(S->getSourceRange(), varRange);
                 return false;
@@ -126,11 +136,11 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
             // p != NULL 或 NULL != p
             if (inFormPNeNull(S->getLHS(), S->getRHS())) {
                 setMatchAndMaybeDumpJson(S->getSourceRange(),
-                                         S->getLHS()->getSourceRange());
+                                         getProperSourceRange(S->getLHS()));
                 return false;
             } else if (inFormPNeNull(S->getRHS(), S->getLHS())) {
                 setMatchAndMaybeDumpJson(S->getSourceRange(),
-                                         S->getRHS()->getSourceRange());
+                                         getProperSourceRange(S->getRHS()));
                 return false;
             }
         }

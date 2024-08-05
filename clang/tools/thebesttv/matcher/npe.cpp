@@ -1,4 +1,5 @@
 #include "npe.h"
+#include "DumpPath.h"
 
 bool NpeSourceMatcher::isNullPointerConstant(const Expr *expr) {
     if (!expr || !isPointerType(expr))
@@ -8,6 +9,16 @@ bool NpeSourceMatcher::isNullPointerConstant(const Expr *expr) {
         Expr::NullPointerConstantValueDependence::NPC_ValueDependentIsNotNull;
     auto result = expr->isNullPointerConstant(*Context, valueDependence);
     return result != Expr::NullPointerConstantKind::NPCK_NotNull;
+}
+
+const Expr *NpeSourceMatcher::getProperVar(const Expr *E) {
+    if (const auto *expr = dyn_cast<MemberExpr>(uncast(E))) {
+        ordered_json j;
+        if (!saveLocationInfo(*Context, expr->getSourceRange(), j, false)) {
+            return expr->getBase();
+        }
+    }
+    return E;
 }
 
 std::optional<typename std::set<ordered_json>::iterator>
@@ -63,7 +74,7 @@ bool NpeGoodSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
     if (S->getOpcode() == BO_Assign) {
         if (isPointerType(S)) {
             checkFormPEqNullOrFoo(S->getSourceRange(), S->getRHS(),
-                                  S->getLHS()->getSourceRange());
+                                  getProperSourceRange(S->getLHS()));
         }
     } else if (S->getOpcode() == BO_EQ || S->getOpcode() == BO_NE) {
         // 两边形如 p == NULL 或 p != NULL
@@ -75,10 +86,10 @@ bool NpeGoodSourceVisitor::VisitBinaryOperator(BinaryOperator *S) {
         // p != NULL 或 NULL != p
         if (inFormPNeNull(S->getLHS(), S->getRHS())) {
             saveNpeSuspectedSources(S->getSourceRange(),
-                                    S->getLHS()->getSourceRange());
+                                    getProperSourceRange(S->getLHS()));
         } else if (inFormPNeNull(S->getRHS(), S->getLHS())) {
             saveNpeSuspectedSources(S->getSourceRange(),
-                                    S->getRHS()->getSourceRange());
+                                    getProperSourceRange(S->getRHS()));
         }
     }
 
