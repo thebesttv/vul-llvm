@@ -12,7 +12,8 @@ bool NpeSourceMatcher::isNullPointerConstant(const Expr *expr) {
 }
 
 const Expr *NpeSourceMatcher::getProperVar(const Expr *E) {
-    if (const auto *expr = dyn_cast<MemberExpr>(uncast(E))) {
+    E = uncast(E);
+    if (const auto *expr = dyn_cast<MemberExpr>(E)) {
         ordered_json j;
         if (!saveLocationInfo(*Context, expr->getSourceRange(), j, false)) {
             return expr->getBase();
