@@ -91,7 +91,8 @@ jobs:
             })
 
       - name: Release
-        uses: softprops/action-gh-release@v2
+        # According to: https://github.com/gleam-lang/gleam/commit/658df75fb184a33fb3bd82f06e6212d852a04a54
+        uses: softprops/action-gh-release@0bd7e8b279c9b5b36661d552472fbbfe671fe26e
         with:
           name: Nightly
           tag_name: nightly
