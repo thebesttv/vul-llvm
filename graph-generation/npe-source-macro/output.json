@@ -224,6 +224,126 @@
                     "stmtKind": "CompoundAssignOperator"
                 }
             ]
+        },
+        {
+            "type": "npe-bug",
+            "sourceIndex": 6,
+            "nodes": [
+                23,
+                22
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "beginLine": 33,
+                    "beginColumn": 9,
+                    "endLine": 33,
+                    "endColumn": 21,
+                    "content": "IS_NULL(ptr)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                        "beginLine": 33,
+                        "beginColumn": 17,
+                        "endLine": 33,
+                        "endColumn": 20,
+                        "content": "ptr"
+                    },
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "beginLine": 34,
+                    "beginColumn": 9,
+                    "endLine": 34,
+                    "endColumn": 15,
+                    "content": "return",
+                    "stmtKind": "ReturnStmt"
+                }
+            ]
+        },
+        {
+            "type": "npe-fix",
+            "sourceIndex": 6,
+            "nodes": [
+                23,
+                21,
+                20,
+                18
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "beginLine": 33,
+                    "beginColumn": 9,
+                    "endLine": 33,
+                    "endColumn": 21,
+                    "content": "IS_NULL(ptr)",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "beginLine": 36,
+                    "beginColumn": 5,
+                    "endLine": 36,
+                    "endColumn": 13,
+                    "content": "*ptr = 1",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "beginLine": 38,
+                    "beginColumn": 9,
+                    "endLine": 38,
+                    "endColumn": 21,
+                    "content": "IS_NULL(ptr)",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "beginLine": 39,
+                    "beginColumn": 9,
+                    "endLine": 39,
+                    "endColumn": 15,
+                    "content": "return",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "beginLine": 32,
+                    "beginColumn": 1,
+                    "endLine": 42,
+                    "endColumn": 2,
+                    "content": "void testIsNull(int *ptr) {\n    if (IS_NULL(ptr)) {\n        return;\n    }\n    *p ..."
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "beginLine": 38,
+                    "beginColumn": 9,
+                    "endLine": 38,
+                    "endColumn": 21,
+                    "content": "IS_NULL(ptr)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                        "beginLine": 38,
+                        "beginColumn": 17,
+                        "endLine": 38,
+                        "endColumn": 20,
+                        "content": "ptr"
+                    }
+                }
+            ]
         }
     ]
 }

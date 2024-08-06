@@ -26,3 +26,17 @@ int mainUseA() {
 
     return n;
 }
+
+#define IS_NULL(x) (x == nullptr)
+
+void testIsNull(int *ptr) {
+    if (IS_NULL(ptr)) {
+        return;
+    }
+    *ptr = 1;
+
+    if (IS_NULL(ptr)) {
+        return;
+    }
+    *ptr = 1;
+}

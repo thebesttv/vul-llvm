@@ -103,6 +103,23 @@
                     "column": 5
                 }
             ]
+        },
+        {
+            "type": "npe",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "line": 33,
+                    "column": 17
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-source-macro/useA.cpp",
+                    "line": 34,
+                    "column": 9
+                }
+            ]
         }
     ]
 }
