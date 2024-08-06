@@ -4,8 +4,14 @@
 const Expr *BaseMatcher::uncast(const Expr *E) {
     if (!E)
         return nullptr;
-    while (const auto *CE = dyn_cast<CastExpr>(E)) {
-        E = CE->getSubExpr();
+    while (true) {
+        if (const auto *CE = dyn_cast<CastExpr>(E)) {
+            E = CE->getSubExpr();
+        } else if (const auto *PE = dyn_cast<ParenExpr>(E)) {
+            E = PE->getSubExpr();
+        } else {
+            break;
+        }
     }
     return E;
 }

@@ -7,7 +7,11 @@ class BaseMatcher {
     ASTContext *Context;
     int fid; // 当前访问函数的 fid
 
-    // 递归查找 CastExpr，直到找到非 CastExpr 为止
+    /**
+     * 递归去除 cast 和括号，包括以下情况：
+     * - CastExpr
+     * - ParenExpr
+     */
     const Expr *uncast(const Expr *expr);
     const FunctionDecl *getDirectCallee(const Expr *expr);
     static bool isPointerType(const Expr *expr);
