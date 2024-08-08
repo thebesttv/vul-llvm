@@ -336,6 +336,7 @@ void printCloc(const std::vector<std::string> &allFiles) {
         ofs << file << "\n";
     ofs.close();
 
+    using namespace llvm;
     // run cloc on all files
     if (ErrorOr<std::string> P = sys::findProgramByName("cloc")) {
         std::string programPath = *P;

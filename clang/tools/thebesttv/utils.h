@@ -41,7 +41,6 @@ using ordered_json = nlohmann::ordered_json;
 
 using namespace clang;
 using namespace clang::tooling;
-using namespace llvm;
 namespace fs = std::filesystem;
 
 struct FunctionInfo;
