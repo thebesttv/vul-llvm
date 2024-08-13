@@ -11,7 +11,7 @@
                     "type": "source",
                     "file": "/home/thebesttv/php/src/php-8.3.3/Zend/zend_list.c",
                     "line": 69,
-                    "column": 2,
+                    "column": 10,
                     "var": "ld"
                 },
                 {
