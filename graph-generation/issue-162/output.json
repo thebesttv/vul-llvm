@@ -82,6 +82,8 @@
             "type": "npe-bug",
             "sourceIndex": 2,
             "nodes": [
+                27,
+                25,
                 24,
                 22
             ],
@@ -90,10 +92,10 @@
                     "type": "stmt",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                     "beginLine": 39,
-                    "beginColumn": 5,
+                    "beginColumn": 17,
                     "endLine": 39,
-                    "endColumn": 38,
-                    "content": "int flag = (ptr != NULL) ? 0 : 1;",
+                    "endColumn": 28,
+                    "content": "ptr != NULL",
                     "variable": {
                         "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                         "beginLine": 39,
@@ -102,6 +104,26 @@
                         "endColumn": 20,
                         "content": "ptr"
                     },
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 39,
+                    "beginColumn": 32,
+                    "endLine": 39,
+                    "endColumn": 33,
+                    "content": "0",
+                    "stmtKind": "IntegerLiteral"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 39,
+                    "beginColumn": 5,
+                    "endLine": 39,
+                    "endColumn": 38,
+                    "content": "int flag = (ptr != NULL) ? 0 : 1;",
                     "stmtKind": "DeclStmt"
                 },
                 {
@@ -130,11 +152,33 @@
             "type": "npe-fix",
             "sourceIndex": 2,
             "nodes": [
+                27,
+                25,
                 24,
                 23,
                 21
             ],
             "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 39,
+                    "beginColumn": 17,
+                    "endLine": 39,
+                    "endColumn": 28,
+                    "content": "ptr != NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 39,
+                    "beginColumn": 32,
+                    "endLine": 39,
+                    "endColumn": 33,
+                    "content": "0",
+                    "stmtKind": "IntegerLiteral"
+                },
                 {
                     "type": "stmt",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
@@ -180,6 +224,8 @@
             "type": "npe-bug",
             "sourceIndex": 3,
             "nodes": [
+                35,
+                33,
                 32,
                 30
             ],
@@ -188,10 +234,10 @@
                     "type": "stmt",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                     "beginLine": 49,
-                    "beginColumn": 5,
+                    "beginColumn": 17,
                     "endLine": 49,
-                    "endColumn": 38,
-                    "content": "int flag = (ptr == NULL) ? 0 : 1;",
+                    "endColumn": 28,
+                    "content": "ptr == NULL",
                     "variable": {
                         "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                         "beginLine": 49,
@@ -200,6 +246,26 @@
                         "endColumn": 20,
                         "content": "ptr"
                     },
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 49,
+                    "beginColumn": 32,
+                    "endLine": 49,
+                    "endColumn": 33,
+                    "content": "0",
+                    "stmtKind": "IntegerLiteral"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 49,
+                    "beginColumn": 5,
+                    "endLine": 49,
+                    "endColumn": 38,
+                    "content": "int flag = (ptr == NULL) ? 0 : 1;",
                     "stmtKind": "DeclStmt"
                 },
                 {
@@ -228,11 +294,33 @@
             "type": "npe-fix",
             "sourceIndex": 3,
             "nodes": [
+                35,
+                33,
                 32,
                 31,
                 29
             ],
             "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 49,
+                    "beginColumn": 17,
+                    "endLine": 49,
+                    "endColumn": 28,
+                    "content": "ptr == NULL",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 49,
+                    "beginColumn": 32,
+                    "endLine": 49,
+                    "endColumn": 33,
+                    "content": "0",
+                    "stmtKind": "IntegerLiteral"
+                },
                 {
                     "type": "stmt",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",

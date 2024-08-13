@@ -29,7 +29,7 @@
                     "type": "source",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                     "line": 31,
-                    "column": 21
+                    "column": 9
                 },
                 {
                     "type": "sink",
@@ -65,7 +65,7 @@
                     "type": "source",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
                     "line": 49,
-                    "column": 13
+                    "column": 17
                 },
                 {
                     "type": "sink",
@@ -82,8 +82,8 @@
                 {
                     "type": "source",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
-                    "line": 77,
-                    "column": 16
+                    "line": 76,
+                    "column": 10
                 },
                 {
                     "type": "sink",
