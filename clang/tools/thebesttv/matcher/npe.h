@@ -1,5 +1,6 @@
 #pragma once
 
+#include "DumpPath.h"
 #include "base.h"
 
 class NpeSourceMatcher : public BaseMatcher {
@@ -86,19 +87,73 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
         }
     }
 
+    struct Item {
+        VarLocResult varLoc;
+        int beginLine, beginColumn, endLine, endColumn;
+        int size;
+        bool withinRange;
+
+        Item(const VarLocResult &varLoc, const ordered_json &j, int line,
+             int column)
+            : varLoc(varLoc) {
+            beginLine = j["beginLine"];
+            beginColumn = j["beginColumn"];
+            endLine = j["endLine"];
+            endColumn = j["endColumn"];
+
+            withinRange =
+                ((line == beginLine && column >= beginColumn) ||
+                 (line > beginLine)) &&
+                ((line == endLine && column <= endColumn) || (line < endLine));
+            size = (endColumn - beginColumn) + (endLine - beginLine) * 100;
+        }
+
+        bool operator<(const Item &rhs) const {
+            // 优先级：withinRange > size
+            if (withinRange != rhs.withinRange)
+                return withinRange;
+            return size < rhs.size;
+        }
+    };
+
+    /**
+     * 根据 source 点的行号、列号进行匹配
+     *
+     * 对所有匹配的语句，根据以下两个 key 进行排序：
+     * - `withinRange`: source 是否在 stmt 以内，以内的优先
+     * - `size`: stmt 的大小，小的优先
+     */
     std::vector<VarLocResult>
     traverseAndMatch(const std::vector<VarLocResult> original,
-                     const decltype(FunctionInfo::G) &G) {
-        std::vector<VarLocResult> result;
+                     const decltype(FunctionInfo::G) &G, int line, int column) {
+        std::vector<Item> matches;
         for (const auto &varLoc : original) {
-            const Stmt *stmt = G[varLoc.bid][varLoc.sid];
+            Stmt *stmt = const_cast<Stmt *>(G[varLoc.bid][varLoc.sid]);
+
             isMatch = false;
-            this->TraverseStmt(const_cast<Stmt *>(stmt));
-            if (isMatch) {
-                result.push_back(varLoc);
+            this->TraverseStmt(stmt);
+            if (!isMatch)
+                continue;
+
+            ordered_json j;
+            if (saveLocationInfo(*Context, stmt->getSourceRange(), j)) {
+                auto x = Item(varLoc, j, line, column);
+                matches.push_back(x);
+                // stmt->dumpColor();
+                // logger.info(
+                //     "Begin: {}:{}, end: {}:{}, size: {}, within range: {}",
+                //     x.beginLine, x.beginColumn, x.endLine, x.endColumn,
+                //     x.size, x.withinRange);
+                // logger.info("{}", j["content"].get<std::string>());
             }
         }
-        return result;
+
+        if (matches.empty())
+            return {};
+
+        // 返回最匹配的结果
+        std::sort(matches.begin(), matches.end());
+        return {matches.front().varLoc};
     }
 
   public:
@@ -184,18 +239,19 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
 
     std::vector<VarLocResult>
     transform(const std::vector<VarLocResult> original,
-              const decltype(FunctionInfo::G) &G) {
+              const decltype(FunctionInfo::G) &G, int line, int column) {
         dumpJson = false;
 
         logger.info("In NpeBugSourceVisitor::transform");
 
         currentStage = RETURN_NULL_OR_NPE_GOOD_SOURCE;
-        std::vector<VarLocResult> result = traverseAndMatch(original, G);
+        std::vector<VarLocResult> result =
+            traverseAndMatch(original, G, line, column);
         logger.info("> stage1: {}", fmt::join(result, ", "));
 
         if (result.empty()) {
             currentStage = NULL_CONSTANT;
-            result = traverseAndMatch(original, G);
+            result = traverseAndMatch(original, G, line, column);
             logger.info("> stage2: {}", fmt::join(result, ", "));
         }
 

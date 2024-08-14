@@ -183,8 +183,8 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
         }
 
         if (isNpeSource) {
-            locResults =
-                NpeBugSourceVisitor(Context, fid).transform(locResults, fi->G);
+            locResults = NpeBugSourceVisitor(Context, fid)
+                             .transform(locResults, fi->G, line, column);
         }
 
         if (locResults.empty())
