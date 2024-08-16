@@ -66,7 +66,6 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
 
     enum {
         // return null, p = xxx, p == null, p != null
-        // 额外匹配foo()，因为 Infer 可能报告 ld = foo()，然后再进入 foo()
         RETURN_NULL_OR_NPE_GOOD_SOURCE,
         // nullptr, NULL, 0
         NULL_CONSTANT
@@ -220,12 +219,12 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
         return true;
     }
 
-    bool VisitCallExpr(CallExpr *expr) {
-        if (currentStage != RETURN_NULL_OR_NPE_GOOD_SOURCE)
-            return true;
-        setMatchAndMaybeDumpJson(expr->getSourceRange(), std::nullopt);
-        return false;
-    }
+    // bool VisitCallExpr(CallExpr *expr) {
+    //     if (currentStage != RETURN_NULL_OR_NPE_GOOD_SOURCE)
+    //         return true;
+    //     setMatchAndMaybeDumpJson(expr->getSourceRange(), std::nullopt);
+    //     return false;
+    // }
 
     bool VisitExpr(Expr *E) {
         if (currentStage != NULL_CONSTANT)
