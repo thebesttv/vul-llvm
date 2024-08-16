@@ -1,3 +1,11 @@
+## `npe`
+
+这是现在解析出来的 Infer 结果。
+
+## `old-parsing-result-for-testing`
+
+这是之前解析出来的 Infer 结果，保留这个结果是为了测试以下情况：
+
 对于 php 项目的函数
 `static void zend_compile_stmt(zend_ast *ast);`
 函数声明和定义在同一个文件中：
