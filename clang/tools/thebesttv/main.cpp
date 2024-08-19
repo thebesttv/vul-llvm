@@ -190,61 +190,54 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
         if (locResults.empty())
             continue;
 
+        // 如果函数调用比较复杂，会横跨多个 CFGBlock，其中 CallExpr 在几个 block
+        // 的中间。从而导致 succ 优先无法匹配到 CallExpr。
+        // 因此搜索所有匹配的语句，看有没有 CallExpr。
+        // 复杂函数调用样例：zval *zv = xxx(... ? CG(...) : EG(...), lcname);
+        for (const auto &r : locResults) {
+            const Stmt *stmt = fi->G[r.bid][r.sid];
+            const CallExpr *callExpr = dyn_cast<CallExpr>(stmt);
+            if (!callExpr)
+                continue;
+
+            // 匹配到 CallExpr，说明语句形如 p = foo() 或 foo() 等。
+            // 此时位于 foo()。
+            // 根据路径上下文，判断即将进入 foo() 还是已经退出 foo()。
+            // - 如果即将进入，那定位到 foo() 即可，返回当前 BB
+            // - 如果已经退出，那需要定位到返回后的 BB，默认是 ICFG 中下一个 BB
+
+            std::string calleeSignature =
+                getFullSignature(getDirectCallee(callExpr));
+            int calleeFid = Global.getIdOfFunction(calleeSignature);
+            if (calleeFid == -1) // 保证了 previousFid 和 nextFid 都不是 -1
+                continue;
+
+            int nodeId = Global.icfg.nodeIdOfFunctionBlock[{r.fid, r.bid}];
+            logger.info("Found CallExpr {} in {} B{} ({}) at {}:{}:{}",
+                        calleeSignature, fi->signature, r.bid, nodeId, file,
+                        line, column);
+
+            if (calleeFid == previousFid) {
+                // 已经退出 foo()，要返回下一个 BB
+                auto succ = getFirstIntraProcSucc(r);
+                logger.info(
+                    "  Just left call, returning next BB: B{} ({})", succ.bid,
+                    Global.icfg.nodeIdOfFunctionBlock[{succ.fid, succ.bid}]);
+                return succ;
+            } else if (calleeFid == nextFid) {
+                // 即将进入 foo()，返回当前 BB
+                logger.info(
+                    "  About to enter call, returning current BB: B{} ({})",
+                    r.bid, nodeId);
+                return r;
+            }
+        }
+
         // 分别获取，succ / pred 优先的匹配结果
         //   优先访问 succ，也就是根据 Block ID 从小到大遍历
         const VarLocResult &succFirstResult = locResults.front();
         //   优先访问 pred，即从大到小，反向遍历
         const VarLocResult &predFirstResult = locResults.back();
-
-        // 如果函数调用比较复杂，会横跨多个 CFGBlock，其中 CallExpr 在几个 block
-        // 的中间。从而导致 succ 优先无法匹配到 CallExpr。
-        // 因此搜索所有匹配的语句，看有没有 CallExpr。
-        // 复杂函数调用样例：zval *zv = xxx(... ? CG(...) : EG(...), lcname);
-        const CallExpr *callExpr = nullptr;
-        for (const auto &r : locResults) {
-            const Stmt *stmt = fi->G[r.bid][r.sid];
-            if (dyn_cast<CallExpr>(stmt)) {
-                callExpr = dyn_cast<CallExpr>(stmt);
-                break;
-            }
-        }
-
-        // 匹配到了 CallExpr，说明语句形如 p = foo() 或 foo()
-        // 此时如果能确定这条语句是 foo() 返回后指向的，就对应处理
-        // 1. 对于 p = foo()，应该匹配 succ 的 p = foo()
-        // 2. 对于 foo()，在 succ 中不会再有语句，应该返回空值，跳过这条
-        if (callExpr) {
-            std::string calleeSignature =
-                getFullSignature(getDirectCallee(callExpr));
-            int calleeFid = Global.getIdOfFunction(calleeSignature);
-            if (calleeFid != -1) { // 保证了 previousFid 和 nextFid 都不是 -1
-                if (succFirstResult != predFirstResult) {
-                    logger.info("Stmt in form of 'p = foo()'");
-                    if (calleeFid == previousFid) {
-                        // 应该是 foo() 返回后的那条语句
-                        logger.info("  Succ first");
-                        return succFirstResult;
-                    } else if (calleeFid == nextFid) {
-                        // 应该是进入 foo() 之前的那条语句
-                        logger.info("  Pred first");
-                        return predFirstResult;
-                    }
-                } else {
-                    logger.info("Stmt in form of 'foo()'");
-                    if (calleeFid == previousFid) {
-                        // 由于 foo() 只在 pred 有 CallExpr，succ 就没有了
-                        // 所以直接返回非法值，跳过这条语句
-                        auto succ = getFirstIntraProcSucc(succFirstResult);
-                        logger.info("  Returning successor of foo's block: B{}",
-                                    succ.bid);
-                        return succ;
-                    } else if (calleeFid == nextFid) {
-                        logger.info("  Pred first");
-                        return predFirstResult;
-                    }
-                }
-            }
-        }
 
         if (succFirst) {
             return succFirstResult;
