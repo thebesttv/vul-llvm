@@ -1,0 +1,67 @@
+{
+    "project": "demo",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-185",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-185/compile_commands.json",
+    "results": [
+        {
+            "type": "npe",
+            "CodeXIssueID": "0",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-185/main.cpp",
+                    "line": 23,
+                    "column": 25,
+                    "var": "GetPtr(a)"
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-185/main.cpp",
+                    "line": 18,
+                    "column": 13,
+                    "var": "ptr"
+                }
+            ]
+        },
+        {
+            "type": "npe",
+            "CodeXIssueID": "1",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-185/main.cpp",
+                    "line": 30,
+                    "column": 21,
+                    "var": "GetPtr(a)"
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-185/main.cpp",
+                    "line": 18,
+                    "column": 13,
+                    "var": "ptr"
+                }
+            ]
+        },
+        {
+            "type": "npe",
+            "CodeXIssueID": "0",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-185/main.cpp",
+                    "line": 36,
+                    "column": 22,
+                    "var": "GetPtr(a)"
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-185/main.cpp",
+                    "line": 18,
+                    "column": 13,
+                    "var": "ptr"
+                }
+            ]
+        }
+    ]
+}
