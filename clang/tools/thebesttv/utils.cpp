@@ -52,6 +52,9 @@ const FunctionDecl *getPossibleOriginalTemplate(const FunctionDecl *D) {
                 return originalDecl;
             }
         }
+    } else if (auto *F = D->getInstantiatedFromMemberFunction()) {
+        // e.g. TypeTest<int>::size() -> TypeTest::size()
+        return F;
     }
     return D;
 }
