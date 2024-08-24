@@ -42,6 +42,8 @@ const FunctionDecl *getPossibleOriginalTemplate(const FunctionDecl *D) {
     if (!D)
         return nullptr;
     if (auto *info = D->getTemplateSpecializationInfo()) {
+        // e.g. test_template2(int *&) -> test_template2(T &)
+        // 不能用 D->getInstantiatedFromDecl()，不清楚为什么
         if (FunctionTemplateDecl *FTD = info->getTemplate()) {
             if (auto originalDecl = FTD->getTemplatedDecl()) {
                 logger.info(
