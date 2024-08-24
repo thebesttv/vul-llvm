@@ -1,0 +1,135 @@
+{
+    "project": "demo",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/input.json",
+    "results": [
+        {
+            "type": "npe-bug",
+            "sourceIndex": 0,
+            "nodes": [
+                9,
+                2,
+                1
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/main.cpp",
+                    "beginLine": 23,
+                    "beginColumn": 2,
+                    "endLine": 23,
+                    "endColumn": 40,
+                    "content": "TypeTest<int> *newList = GetNewList();",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/main.cpp",
+                        "beginLine": 23,
+                        "beginColumn": 17,
+                        "endLine": 23,
+                        "endColumn": 24,
+                        "content": "newList"
+                    },
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/main.cpp",
+                    "beginLine": 24,
+                    "beginColumn": 15,
+                    "endLine": 24,
+                    "endColumn": 30,
+                    "content": "newList->size()",
+                    "stmtKind": "CXXMemberCallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/main.cpp",
+                    "beginLine": 6,
+                    "beginColumn": 2,
+                    "endLine": 9,
+                    "endColumn": 6,
+                    "content": "int size()\n    {\n        return int(end_ - buffer_); // sink1 col 9 var:this\n    ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/main.cpp",
+                    "beginLine": 8,
+                    "beginColumn": 9,
+                    "endLine": 8,
+                    "endColumn": 35,
+                    "content": "return int(end_ - buffer_)",
+                    "stmtKind": "ReturnStmt"
+                }
+            ]
+        },
+        {
+            "type": "npe-bug",
+            "sourceIndex": 1,
+            "nodes": [
+                13,
+                6,
+                5,
+                4
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/main.cpp",
+                    "beginLine": 30,
+                    "beginColumn": 2,
+                    "endLine": 30,
+                    "endColumn": 41,
+                    "content": "TypeTest<int> *newList2 = GetNewList();",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/main.cpp",
+                        "beginLine": 30,
+                        "beginColumn": 17,
+                        "endLine": 30,
+                        "endColumn": 25,
+                        "content": "newList2"
+                    },
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/main.cpp",
+                    "beginLine": 31,
+                    "beginColumn": 2,
+                    "endLine": 31,
+                    "endColumn": 28,
+                    "content": "newList->usr_ptr(newList2)",
+                    "stmtKind": "CXXMemberCallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/main.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 2,
+                    "endLine": 14,
+                    "endColumn": 3,
+                    "content": "void usr_ptr(TypeTest *input)\n\t{\n\t\tprintf(\"%d\", input->size()); // sink2 col 22\n ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 16,
+                    "endLine": 13,
+                    "endColumn": 29,
+                    "content": "input->size()",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-214/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 3,
+                    "endLine": 13,
+                    "endColumn": 30,
+                    "content": "printf(\"%d\", input->size())",
+                    "stmtKind": "CallExpr"
+                }
+            ]
+        }
+    ]
+}
