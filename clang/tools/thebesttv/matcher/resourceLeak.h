@@ -37,7 +37,7 @@ class ResourceLeakGoodSourceVisitor
         return false;
     }
 
-    std::optional<typename std::set<ordered_json>::iterator>
+    std::optional<SrcWeakPtr>
     saveSuspectedSource(const SourceRange &range,
                         const std::optional<SourceRange> &varRange) {
         return BaseMatcher::saveSuspectedSource(

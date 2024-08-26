@@ -42,7 +42,7 @@ class NpeSourceMatcher : public BaseMatcher {
 class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
                              public NpeSourceMatcher {
 
-    std::optional<typename std::set<ordered_json>::iterator>
+    std::optional<SrcWeakPtr>
     saveNpeSuspectedSources(const SourceRange &range,
                             const std::optional<SourceRange> &varRange);
 

@@ -554,9 +554,9 @@ int findPathBetween(const VarLocResult &from, int fromLine, VarLocResult to,
 
 // 根据有缺陷的 source 位置，删除可疑的 source
 void removeBadSource(const std::string &sourceFile, int sourceLine,
-                     std::set<ordered_json> &suspectedSources) {
+                     SrcSet &suspectedSources) {
     for (auto it = suspectedSources.begin(); it != suspectedSources.end();) {
-        const auto &loc = *it;
+        const auto &loc = **it; // iterator -> shared_ptr -> json
         const std::string &file = loc["file"];
         int beginLine = loc["beginLine"];
         int endLine = loc["endLine"];
@@ -572,7 +572,7 @@ void removeBadSource(const std::string &sourceFile, int sourceLine,
     };
 };
 void removeBadSourceFromResults(ordered_json &results,
-                                std::set<ordered_json> &suspectedSources) {
+                                SrcSet &suspectedSources) {
     for (const auto &path : results) {
         if (!path.contains("locations"))
             continue;
@@ -790,9 +790,10 @@ void generatePathFromOneEntry(int sourceIndex, const ordered_json &sourceEntry,
                      jResults);
 }
 
-void dumpSourceToOutput(const std::set<ordered_json> sources,
+void dumpSourceToOutput(const SrcSet &sources, //
                         const std::string &type, ordered_json &results) {
-    for (const auto &loc : sources) {
+    for (const auto &p : sources) {
+        const auto &loc = *p;
         ordered_json j;
         j["type"] = type;
         j["locations"].push_back(loc);
@@ -989,7 +990,7 @@ int main(int argc, const char **argv) {
 
         // 更新 Global.npeSuspectedSources
         // 对所有 p = foo()，把函数中没有 return NULL 语句的都删掉
-        for (auto p : Global.npeSuspectedSourcesItMap) {
+        for (auto p : Global.npeSuspectedSourcesFunMap) {
             const std::string &signature = p.first;
 
             // input.json 中手工指定的函数不会被删除
@@ -999,8 +1000,10 @@ int main(int argc, const char **argv) {
                 continue;
 
             if (Global.returnGraph.mayNull(signature) == false)
-                for (auto it : p.second) {
-                    Global.npeSuspectedSources.erase(it);
+                for (auto weakPtr : p.second) {
+                    // 如果 weakPtr 对应的 shared_ptr 还存在，就删除
+                    if (auto p = weakPtr.lock())
+                        Global.npeSuspectedSources.erase(p);
                 }
         }
     }

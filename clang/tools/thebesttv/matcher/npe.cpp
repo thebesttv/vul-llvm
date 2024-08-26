@@ -22,7 +22,7 @@ const Expr *NpeSourceMatcher::getProperVar(const Expr *E) {
     return E;
 }
 
-std::optional<typename std::set<ordered_json>::iterator>
+std::optional<SrcWeakPtr> //
 NpeGoodSourceVisitor::saveNpeSuspectedSources(
     const SourceRange &range, const std::optional<SourceRange> &varRange) {
     return saveSuspectedSource(range, varRange, Global.npeSuspectedSources);
@@ -43,7 +43,7 @@ void NpeGoodSourceVisitor::checkFormPEqNullOrFoo(
         if (it) {
             // callee 可能还没被处理过，记录 signature，而不是 fid
             std::string callee = getFullSignature(calleeDecl);
-            Global.npeSuspectedSourcesItMap[callee].push_back(it.value());
+            Global.npeSuspectedSourcesFunMap[callee].push_back(it.value());
         }
     }
 }

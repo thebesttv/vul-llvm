@@ -159,6 +159,17 @@ struct NamedLocation : public Location {
     }
 };
 
+// 用于维护 xxx-good-source 的一些类型
+using SrcPtr = std::shared_ptr<ordered_json>; // 集合元素
+using SrcWeakPtr = std::weak_ptr<ordered_json>; // 记录集合元素，用于删除
+struct SrcPtrCompare { // 集合的比较器，比较指针内容，而不是指针本身
+    bool operator()(const SrcPtr &lhs, const SrcPtr &rhs) const {
+        // 集合需要确保指针解引用一定是成功的
+        return *lhs < *rhs;
+    }
+};
+using SrcSet = std::set<SrcPtr, SrcPtrCompare>; // SuspectedSources 集合
+
 struct GlobalStat {
     std::unique_ptr<CompilationDatabase> cb;
     std::set<std::string> allFiles; // cc.json 中的所有文件，不包括头文件
@@ -316,16 +327,19 @@ struct GlobalStat {
         }
     };
 
-    std::set<ordered_json> npeSuspectedSources; // 每个元素是可疑的 source
-    // 对于加入 npeSuspectedSources 的 p = foo()，
-    // 把 foo() map 到集合中的迭代器上，用于之后的删除
-    std::map<std::string, std::vector<std::set<ordered_json>::iterator>>
-        npeSuspectedSourcesItMap;
+    SrcSet npeSuspectedSources; // 每个元素是可疑的 source
+    /**
+     * 对于加入 npeSuspectedSources 的 p = foo()，
+     * 把 foo() map 到集合中的指针对应的 weak_ptr 上，用于之后的删除。
+     *
+     * 重点：使用 weak_ptr，保证 reservoirSamplingAddElement() 删除了
+     * 集合中某个元素后，指针对应内存可以被及时释放，而不是因为这里的引用而留在内存中。
+     */
+    std::map<std::string, std::vector<SrcWeakPtr>> npeSuspectedSourcesFunMap;
     // 通过返回图计算函数是否可能返回 null
     ReturnGraph returnGraph;
 
-    std::set<ordered_json>
-        resourceLeakSuspectedSources;         // 每个元素是可疑的 source
+    SrcSet resourceLeakSuspectedSources;      // 每个元素是可疑的 source
     std::set<std::string> mayMallocFunctions; // 类似 malloc 的函数
 
     int ASTPoolSize;
@@ -380,47 +394,14 @@ void setClangPath(const char *argv0);
  */
 int randomInt(int a, int b);
 
-template <typename T>
-std::optional<typename std::set<T>::iterator>
-returnOnInsertSuccess(std::set<T> &s, const T &e) {
-    auto p = s.insert(e);
-    if (p.second)
-        return p.first;
-    return std::nullopt;
-}
-
 /**
  * 水池采样。判断是否要将元素 element 加入集合 reservoir，采样大小为
  * sampleSize。
+ *
+ * 返回是否加入了集合。如果集合中已有该元素，返回 false。
  */
-template <typename T>
-std::optional<typename std::set<T>::iterator>
-reservoirSamplingAddElement(std::set<T> &reservoir, const T &element,
-                            int sampleSize) {
-    // 当前集合大小
-    int currentSize = reservoir.size();
-
-    // 如果当前集合大小小于样本大小，直接将元素添加到集合中
-    if (currentSize < sampleSize) {
-        return returnOnInsertSuccess(reservoir, element);
-    } else {
-        // 否则，以概率 sampleSize / currentSize 将元素替换掉集合中的一个元素
-        int replaceIndex = randomInt(0, currentSize - 1);
-        if (replaceIndex >= sampleSize) // 不替换
-            return std::nullopt;
-
-        // 元素存在，当作替换成功
-        if (reservoir.find(element) != reservoir.end())
-            return reservoir.find(element);
-
-        // 随机选中一个元素，并将其替换为新元素
-        auto it = reservoir.begin();
-        std::advance(it, replaceIndex);
-        reservoir.erase(it);
-        return returnOnInsertSuccess(reservoir, element);
-    }
-    return std::nullopt;
-}
+bool reservoirSamplingAddElement(SrcSet &reservoir, const SrcPtr &element,
+                                 int sampleSize);
 
 class ProgressBar {
   private:
