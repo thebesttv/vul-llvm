@@ -95,6 +95,11 @@ bool GenICFGVisitor::VisitFunctionDecl(FunctionDecl *D) {
     fileAndIdOfFunction[fullSignature][pLoc->file] = functionCnt++;
     functionLocations.emplace_back(*pLoc, fullSignature);
 
+    // 记录函数结束位置，如果无法获得，就 fallback 成开始位置
+    std::unique_ptr<Location> eLoc =
+        Location::fromSourceLocation(D->getASTContext(), D->getEndLoc());
+    Global.functionEndLocations.push_back(eLoc ? *eLoc : *pLoc);
+
     CallGraph CG;
     CG.addToCallGraph(D);
     // CG.dump();

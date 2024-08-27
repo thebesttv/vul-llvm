@@ -188,6 +188,7 @@ struct GlobalStat {
     int functionCnt;
     std::map<std::string, std::map<std::string, int>> fileAndIdOfFunction;
     std::vector<NamedLocation> functionLocations;
+    std::vector<Location> functionEndLocations;
 
     /**
      * 获取函数的 fid
