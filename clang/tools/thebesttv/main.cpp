@@ -850,7 +850,7 @@ ordered_json dumpFuncList() {
     for (int i = 0; i < Global.functionLocations.size(); i++) {
         const auto &loc = Global.functionLocations[i];
         const auto &endLoc = Global.functionEndLocations[i];
-        logger.info("  {} {}", i, loc.name);
+        logger.trace("  {}: {}", i, loc.name);
         ordered_json j;
         j["signature"] = loc.name;
         j["file"] = loc.file;
