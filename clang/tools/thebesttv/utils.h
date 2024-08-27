@@ -402,6 +402,9 @@ int randomInt(int a, int b);
  * element 是当前第 i 个元素，k 是采样大小。
  *
  * 返回是否加入了集合。如果集合中已有该元素，返回 false。
+ *
+ * 算法：Simple: Algorithm R
+ * https://en.wikipedia.org/wiki/Reservoir_sampling
  */
 bool reservoirSamplingAddElement(int i, const SrcPtr &element, //
                                  int k, SrcSet &reservoir);
