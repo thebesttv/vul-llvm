@@ -801,12 +801,10 @@ void dumpSourceToOutput(const SrcSet &sources, //
     }
 }
 
-void generateFromInput(const ordered_json &input, fs::path outputDir) {
+ordered_json generateFromInput(const ordered_json &input) {
     logger.info("--- Path-finding ---");
 
     FunctionLocator locator;
-    fs::path jsonResult = outputDir / "output.json";
-    logger.info("Result will be saved to: {}", jsonResult);
 
     int total = input["results"].size();
     logger.info("There are {} results to search", total);
@@ -836,12 +834,7 @@ void generateFromInput(const ordered_json &input, fs::path outputDir) {
                            "resourceLeak-good-source", output["results"]);
     }
 
-    std::ofstream o(jsonResult);
-    o << output.dump(4, ' ', false, json::error_handler_t::replace)
-      << std::endl;
-    // 判断是否成功写入
-    requireTrue(o.good(), "Failed to write to output.json");
-    o.close();
+    return output;
 }
 
 ordered_json dumpFuncList() {
@@ -1057,7 +1050,8 @@ int main(int argc, const char **argv) {
                         outputDir / "func-list.json");
     }
 
-    generateFromInput(input, outputDir);
+    writeJsonToFile("Output", generateFromInput(input),
+                    outputDir / "output.json");
 
     // 用于调试，查询每个 node 的信息
     while (Global.debug) {
