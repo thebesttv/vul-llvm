@@ -323,20 +323,15 @@ bool reservoirSamplingAddElement(int i, const SrcPtr &element, //
                                  int k, SrcSet &reservoir) {
     int j;
     if (reservoir.size() < k) {
-        goto insertElement;
+        reservoir.push_back(element);
+        return true;
     }
     j = randomInt(0, i - 1);
     if (j < k) {
-        auto it = reservoir.begin();
-        std::advance(it, j);
-        reservoir.erase(it);
-        goto insertElement;
+        reservoir[j] = element;
+        return true;
     }
     return false;
-
-insertElement:
-    auto p = reservoir.insert(element);
-    return p.second;
 }
 
 /*****************************************************************

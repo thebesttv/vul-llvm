@@ -168,7 +168,8 @@ struct SrcPtrCompare { // 集合的比较器，比较指针内容，而不是指
         return *lhs < *rhs;
     }
 };
-using SrcSet = std::set<SrcPtr, SrcPtrCompare>; // SuspectedSources 集合
+// 用于存放 SuspectedSources 的容器。因为中途需要频繁增删，改用数组
+using SrcSet = std::vector<SrcPtr>;
 
 struct GlobalStat {
     std::unique_ptr<CompilationDatabase> cb;

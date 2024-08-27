@@ -1015,7 +1015,11 @@ int main(int argc, const char **argv) {
         // 将 input.json 中手工指定的函数加入返回图中，并计算 mayNull
         Global.returnGraph.propagate(mayNullFunctions);
 
-        // 更新 Global.npeSuspectedSources
+        auto sources =
+            std::set<SrcPtr, SrcPtrCompare>(Global.npeSuspectedSources.begin(),
+                                            Global.npeSuspectedSources.end());
+
+        // 更新 sources：
         // 对所有 p = foo()，把函数中没有 return NULL 语句的都删掉
         for (auto p : Global.npeSuspectedSourcesFunMap) {
             const std::string &signature = p.first;
@@ -1030,9 +1034,12 @@ int main(int argc, const char **argv) {
                 for (auto weakPtr : p.second) {
                     // 如果 weakPtr 对应的 shared_ptr 还存在，就删除
                     if (auto p = weakPtr.lock())
-                        Global.npeSuspectedSources.erase(p);
+                        sources.erase(p);
                 }
         }
+
+        Global.npeSuspectedSources = std::vector<SrcPtr>(
+            sources.begin(), sources.end());
     }
 
     {
