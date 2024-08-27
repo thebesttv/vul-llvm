@@ -844,6 +844,35 @@ void generateFromInput(const ordered_json &input, fs::path outputDir) {
     o.close();
 }
 
+ordered_json dumpFuncList() {
+    logger.info("Generating function list ...");
+    ordered_json output;
+    for (int i = 0; i < Global.functionLocations.size(); i++) {
+        const auto &loc = Global.functionLocations[i];
+        const auto &endLoc = Global.functionEndLocations[i];
+        logger.info("  {} {}", i, loc.name);
+        ordered_json j;
+        j["signature"] = loc.name;
+        j["file"] = loc.file;
+        j["beginLine"] = loc.line;
+        j["beginColumn"] = loc.column;
+        j["endLine"] = endLoc.line;
+        j["endColumn"] = endLoc.column;
+        output.push_back(j);
+    }
+    return output;
+}
+
+void writeJsonToFile(const std::string &title, const ordered_json &j,
+                     const fs::path &path) {
+    std::ofstream o(path);
+    o << j.dump(4, ' ', false, json::error_handler_t::replace) << std::endl;
+    // 判断是否成功写入
+    requireTrue(o.good(), "Failed to write to " + path.string());
+    logger.info("{} wrote to {}", title, path);
+    o.close();
+}
+
 int getArgValue(args::ValueFlag<int> &arg, const int defaultValue,
                 const std::string &name) {
     int v = defaultValue;
@@ -875,6 +904,9 @@ int main(int argc, const char **argv) {
         "  ./tool --no-npe-good-source npe/input.json\n");
 
     args::HelpFlag help(argParser, "help", "Display help menu", {'h', "help"});
+
+    args::Flag argFuncList(argParser, "func-list",
+                           "Generate function list as well", {"func-list"});
 
     args::ValueFlag<int> argPoolSize(
         argParser, "N",
@@ -1017,6 +1049,11 @@ int main(int argc, const char **argv) {
     }
 
     fs::path outputDir = jsonPath.parent_path();
+
+    if (argFuncList) {
+        writeJsonToFile("Function list", dumpFuncList(),
+                        outputDir / "func-list.json");
+    }
 
     generateFromInput(input, outputDir);
 
