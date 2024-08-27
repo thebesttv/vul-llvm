@@ -396,13 +396,14 @@ void setClangPath(const char *argv0);
 int randomInt(int a, int b);
 
 /**
- * 水池采样。判断是否要将元素 element 加入集合 reservoir，采样大小为
- * sampleSize。
+ * 水池采样。
+ * 判断是否要将元素 element 加入集合 reservoir。
+ * element 是当前第 i 个元素，k 是采样大小。
  *
  * 返回是否加入了集合。如果集合中已有该元素，返回 false。
  */
-bool reservoirSamplingAddElement(SrcSet &reservoir, const SrcPtr &element,
-                                 int sampleSize);
+bool reservoirSamplingAddElement(int i, const SrcPtr &element, //
+                                 int k, SrcSet &reservoir);
 
 class ProgressBar {
   private:

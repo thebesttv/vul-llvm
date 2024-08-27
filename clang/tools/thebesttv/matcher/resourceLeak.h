@@ -40,8 +40,9 @@ class ResourceLeakGoodSourceVisitor
     std::optional<SrcWeakPtr>
     saveSuspectedSource(const SourceRange &range,
                         const std::optional<SourceRange> &varRange) {
+        static int index = 0;
         return BaseMatcher::saveSuspectedSource(
-            range, varRange, Global.resourceLeakSuspectedSources);
+            range, varRange, Global.resourceLeakSuspectedSources, index);
     }
 
     void checkFormPEqMalloc(const SourceRange &range, const Expr *rhs,

@@ -28,12 +28,12 @@ class BaseMatcher {
     saveSuspectedSource(const SourceRange &range,
                         const std::optional<SourceRange> &varRange,
                         SrcSet &suspectedSources, //
-                        int n = 100000) {
+                        int &index, int n = 100000) {
         auto loc = dumpSource(range, varRange);
         if (!loc)
             return std::nullopt;
         SrcPtr p = std::make_shared<ordered_json>(loc.value());
-        if (reservoirSamplingAddElement(suspectedSources, p, n)) {
+        if (reservoirSamplingAddElement(index++, p, n, suspectedSources)) {
             return p; // 插入成功，则返回对应的 weak_ptr
         }
         return std::nullopt;

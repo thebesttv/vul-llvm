@@ -25,7 +25,9 @@ const Expr *NpeSourceMatcher::getProperVar(const Expr *E) {
 std::optional<SrcWeakPtr> //
 NpeGoodSourceVisitor::saveNpeSuspectedSources(
     const SourceRange &range, const std::optional<SourceRange> &varRange) {
-    return saveSuspectedSource(range, varRange, Global.npeSuspectedSources);
+    static int index = 0;
+    return saveSuspectedSource(range, varRange, Global.npeSuspectedSources,
+                               index);
 }
 
 void NpeGoodSourceVisitor::checkFormPEqNullOrFoo(

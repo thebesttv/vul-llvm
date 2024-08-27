@@ -319,27 +319,16 @@ int randomInt(int a, int b) {
     return dis(gen);
 }
 
-bool reservoirSamplingAddElement(SrcSet &reservoir, const SrcPtr &element,
-                                 int sampleSize) {
-    // 当前集合大小
-    int currentSize = reservoir.size();
-
-    // 如果当前集合大小小于样本大小，直接将元素添加到集合中
-    if (currentSize < sampleSize) {
+bool reservoirSamplingAddElement(int i, const SrcPtr &element, //
+                                 int k, SrcSet &reservoir) {
+    int j;
+    if (reservoir.size() < k) {
         goto insertElement;
-    } else {
-        // 否则，以概率 sampleSize / currentSize 将元素替换掉集合中的一个元素
-        int replaceIndex = randomInt(0, currentSize - 1);
-        if (replaceIndex >= sampleSize) // 不替换
-            return false;
-
-        // 元素存在，无须插入，这次插入失败
-        if (reservoir.find(element) != reservoir.end())
-            return false;
-
-        // 随机选中一个元素，并将其替换为新元素
+    }
+    j = randomInt(0, i - 1);
+    if (j < k) {
         auto it = reservoir.begin();
-        std::advance(it, replaceIndex);
+        std::advance(it, j);
         reservoir.erase(it);
         goto insertElement;
     }
