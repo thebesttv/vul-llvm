@@ -851,6 +851,7 @@ ordered_json dumpFuncList() {
         const auto &loc = Global.functionLocations[i];
         const auto &endLoc = Global.functionEndLocations[i];
         logger.trace("  {}: {}", i, loc.name);
+
         ordered_json j;
         j["signature"] = loc.name;
         j["file"] = loc.file;
@@ -858,6 +859,7 @@ ordered_json dumpFuncList() {
         j["beginColumn"] = loc.column;
         j["endLine"] = endLoc.line;
         j["endColumn"] = endLoc.column;
+
         output.push_back(j);
     }
     return output;
