@@ -901,7 +901,7 @@ int main(int argc, const char **argv) {
     args::HelpFlag help(argParser, "help", "Display help menu", {'h', "help"});
 
     args::Flag argFuncList(argParser, "func-list",
-                           "Generate function list as well", {"func-list"});
+                           "Generate function list only", {"func-list"});
 
     args::ValueFlag<int> argPoolSize(
         argParser, "N",
@@ -1048,10 +1048,10 @@ int main(int argc, const char **argv) {
     if (argFuncList) {
         writeJsonToFile("Function list", dumpFuncList(),
                         outputDir / "func-list.json");
+    } else {
+        writeJsonToFile("Output", generateFromInput(input),
+                        outputDir / "output.json");
     }
-
-    writeJsonToFile("Output", generateFromInput(input),
-                    outputDir / "output.json");
 
     // 用于调试，查询每个 node 的信息
     while (Global.debug) {
