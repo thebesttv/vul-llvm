@@ -1038,8 +1038,8 @@ int main(int argc, const char **argv) {
                 }
         }
 
-        Global.npeSuspectedSources = std::vector<SrcPtr>(
-            sources.begin(), sources.end());
+        Global.npeSuspectedSources =
+            std::vector<SrcPtr>(sources.begin(), sources.end());
     }
 
     {
