@@ -509,7 +509,7 @@ void saveAsJson(int fromLine, int toLine,
         if (!Global.noNodes)
             jPath["nodes"] = path;
         dumpICFGNode(path[0], locations, fromSid, type == "npe-bug");
-        for (int i = 1; i < path.size(); i++) {
+        for (size_t i = 1; i < path.size(); i++) {
             dumpICFGNode(path[i], locations);
         }
         deduplicateAndFixLocations(locations, fromLine, toLine);
@@ -840,7 +840,7 @@ ordered_json generateFromInput(const ordered_json &input) {
 ordered_json dumpFuncList() {
     logger.info("Generating function list ...");
     ordered_json output;
-    for (int i = 0; i < Global.functionLocations.size(); i++) {
+    for (size_t i = 0; i < Global.functionLocations.size(); i++) {
         const auto &loc = Global.functionLocations[i];
         const auto &endLoc = Global.functionEndLocations[i];
         logger.trace("  {}: {}", i, loc.name);
