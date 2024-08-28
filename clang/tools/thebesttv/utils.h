@@ -411,8 +411,8 @@ bool reservoirSamplingAddElement(int i, const SrcPtr &element, //
 
 class ProgressBar {
   private:
-    indicators::BlockProgressBar bar;
     const int totalSize;
+    indicators::BlockProgressBar bar;
 
   public:
     ProgressBar(std::string msg, int totalSize, int barWidth = 60)
