@@ -90,14 +90,19 @@ jobs:
               sha: context.sha
             })
 
+      # https://github.com/hashicorp/nomad-pack/blob/f11c6d6a6bcc0b7377de737ecc9ef59f2dbbe6d3/.github/workflows/nightly-release.yml#L55
+      # This will create a new GitHub Release called `nightly`
+      # If a release with this name already exists, it will overwrite the existing data
       - name: Release
-        # According to: https://github.com/gleam-lang/gleam/commit/658df75fb184a33fb3bd82f06e6212d852a04a54
-        uses: softprops/action-gh-release@0bd7e8b279c9b5b36661d552472fbbfe671fe26e
+        uses: ncipollo/release-action@2c591bcc8ecdcd2db72b97d6147f871fcd833ba5 # v1.14.0
         with:
           name: Nightly
-          tag_name: nightly
-          fail_on_unmatched_files: true
-          files: build-release/tool-x86_64.AppImage
+          artifacts: "build-release/tool-x86_64.AppImage"
+          tag: nightly
+          prerelease: false
+          allowUpdates: true
+          removeArtifacts: true
+          draft: false
 
   build-and-test:
     runs-on: ubuntu-latest
