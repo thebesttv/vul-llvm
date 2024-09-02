@@ -1017,11 +1017,7 @@ int main(int argc, const char **argv) {
     {
         std::set<std::string> mayNullFunctions;
         // 把 input.json 中 mayNull 的函数名加入到 mayNullFunctions
-        if (input.contains("mayNull")) {
-            for (const auto &f : input["mayNull"]) {
-                mayNullFunctions.insert(f.get<std::string>());
-            }
-        }
+        addFromInput(input, "mayNull", mayNullFunctions, {});
         // 将 input.json 中手工指定的函数加入返回图中，并计算 mayNull
         Global.returnGraph.propagate(mayNullFunctions);
 
