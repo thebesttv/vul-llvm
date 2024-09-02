@@ -703,7 +703,19 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
         auto &fromFile = Global.functionLocations[from.fid].file;
         removeResourceLeakBadSource(fromFile, fromLine);
     } else if (type == "doubleFree") {
-        // TODO
+        logger.info("Handle known type: {}", type);
+        requireFromValid();
+        requireToValid();
+
+        int size = findPathBetween(from, fromLine, to, toLine, path, {},
+                                   "doubleFree-bug", sourceIndex, results);
+        if (size == 0) {
+            logger.warn("Unable to find any path for double free!");
+        } else {
+            // 路径经过的所有 stmt 都认为 DF bad source
+            removeBadSourceFromResults(results,
+                                       Global.doubleFreeSuspectedSources);
+        }
     } else if (type == "doubleFree-bad-source") {
         logger.info("Removing bad Double Free source ...");
         requireFromValid();
