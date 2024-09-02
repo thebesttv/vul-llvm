@@ -1,0 +1,31 @@
+{
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/compile_commands.json",
+    "mayFree": [
+        "bar"
+    ],
+    "results": [
+        {
+            "type": "doubleFree-bad-source",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                    "line": 15,
+                    "column": 5
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-bad-source",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                    "line": 25,
+                    "column": 5
+                }
+            ]
+        }
+    ]
+}

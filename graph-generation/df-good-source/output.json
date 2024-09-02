@@ -1,0 +1,157 @@
+{
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/compile_commands.json",
+    "mayFree": [
+        "bar"
+    ],
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/input.json",
+    "results": [
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                    "beginLine": 17,
+                    "beginColumn": 5,
+                    "endLine": 17,
+                    "endColumn": 22,
+                    "content": "int *b1 = new int",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                        "beginLine": 17,
+                        "beginColumn": 10,
+                        "endLine": 17,
+                        "endColumn": 12,
+                        "content": "b1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                    "beginLine": 20,
+                    "beginColumn": 5,
+                    "endLine": 20,
+                    "endColumn": 26,
+                    "content": "int *b2 = new int[10]",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                        "beginLine": 20,
+                        "beginColumn": 10,
+                        "endLine": 20,
+                        "endColumn": 12,
+                        "content": "b2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                    "beginLine": 24,
+                    "beginColumn": 5,
+                    "endLine": 24,
+                    "endColumn": 22,
+                    "content": "int *b3 = new int",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                        "beginLine": 24,
+                        "beginColumn": 10,
+                        "endLine": 24,
+                        "endColumn": 12,
+                        "content": "b3"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                    "beginLine": 8,
+                    "beginColumn": 5,
+                    "endLine": 8,
+                    "endColumn": 13,
+                    "content": "free(a1)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                        "beginLine": 8,
+                        "beginColumn": 10,
+                        "endLine": 8,
+                        "endColumn": 12,
+                        "content": "a1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 5,
+                    "endLine": 11,
+                    "endColumn": 12,
+                    "content": "bar(a2)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                        "beginLine": 11,
+                        "beginColumn": 9,
+                        "endLine": 11,
+                        "endColumn": 11,
+                        "content": "a2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                    "beginLine": 18,
+                    "beginColumn": 5,
+                    "endLine": 18,
+                    "endColumn": 14,
+                    "content": "delete b1",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                        "beginLine": 18,
+                        "beginColumn": 12,
+                        "endLine": 18,
+                        "endColumn": 14,
+                        "content": "b1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                    "beginLine": 21,
+                    "beginColumn": 5,
+                    "endLine": 21,
+                    "endColumn": 16,
+                    "content": "delete[] b2",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/df-good-source/main.cpp",
+                        "beginLine": 21,
+                        "beginColumn": 14,
+                        "endLine": 21,
+                        "endColumn": 16,
+                        "content": "b2"
+                    }
+                }
+            ]
+        }
+    ]
+}
