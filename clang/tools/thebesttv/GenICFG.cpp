@@ -2,6 +2,7 @@
 #include "DumpPath.h"
 #include "GenAST.h"
 #include "ICFG.h"
+#include "matcher/doubleFree.h"
 #include "matcher/npe.h"
 #include "matcher/resourceLeak.h"
 #include "utils.h"
@@ -128,6 +129,7 @@ bool GenICFGVisitor::VisitFunctionDecl(FunctionDecl *D) {
 
     NpeGoodSourceVisitor(Context, fid).TraverseDecl(D);
     ResourceLeakGoodSourceVisitor(Context, fid).TraverseDecl(D);
+    DoubleFreeGoodSourceVisitor(Context, fid).TraverseDecl(D);
 
     /*
     // traverse CFGBlocks

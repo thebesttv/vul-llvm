@@ -594,6 +594,9 @@ void removeResourceLeakBadSource(const std::string &sourceFile,
     removeBadSource(sourceFile, sourceLine,
                     Global.resourceLeakSuspectedSources);
 };
+void removeDoubleFreeBadSource(const std::string &sourceFile, int sourceLine) {
+    removeBadSource(sourceFile, sourceLine, Global.doubleFreeSuspectedSources);
+};
 
 void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
                       int toLine, const std::vector<VarLocResult> &path,
@@ -699,6 +702,14 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
 
         auto &fromFile = Global.functionLocations[from.fid].file;
         removeResourceLeakBadSource(fromFile, fromLine);
+    } else if (type == "doubleFree") {
+        // TODO
+    } else if (type == "doubleFree-bad-source") {
+        logger.info("Removing bad Double Free source ...");
+        requireFromValid();
+
+        auto &fromFile = Global.functionLocations[from.fid].file;
+        removeDoubleFreeBadSource(fromFile, fromLine);
     } else {
         logger.info("Handle unknown type: {}", type);
         requireFromValid();
@@ -832,6 +843,8 @@ ordered_json generateFromInput(const ordered_json &input) {
                            output["results"]);
         dumpSourceToOutput(Global.resourceLeakSuspectedSources,
                            "resourceLeak-good-source", output["results"]);
+        dumpSourceToOutput(Global.doubleFreeSuspectedSources,
+                           "doubleFree-good-source", output["results"]);
     }
 
     return output;
@@ -1011,6 +1024,9 @@ int main(int argc, const char **argv) {
     // resourceLeak-good-source
     addFromInput(input, "mayMalloc", Global.mayMallocFunctions,
                  {"malloc" /* , "calloc", "realloc" */});
+    // doubleFree-good-source
+    addFromInput(input, "mayFree", Global.mayFreeFunctions,
+                 {"free" /* , "realloc" */});
 
     generateICFG(*Global.cb);
 

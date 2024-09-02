@@ -344,6 +344,9 @@ struct GlobalStat {
     SrcSet resourceLeakSuspectedSources;      // 每个元素是可疑的 source
     std::set<std::string> mayMallocFunctions; // 类似 malloc 的函数
 
+    SrcSet doubleFreeSuspectedSources;      // 每个元素是可疑的 source
+    std::set<std::string> mayFreeFunctions; // 类似 free 的函数
+
     int ASTPoolSize;
     int callDepth;
     int dfsTick;
