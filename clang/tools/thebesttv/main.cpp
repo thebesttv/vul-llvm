@@ -1008,12 +1008,13 @@ int main(int argc, const char **argv) {
             std::set<std::string>(allFiles.begin(), allFiles.end());
     }
 
-    // resourceLeak
+    // resourceLeak-good-source
     addFromInput(input, "mayMalloc", Global.mayMallocFunctions,
                  {"malloc" /* , "calloc", "realloc" */});
 
     generateICFG(*Global.cb);
 
+    // npe-good-source
     {
         std::set<std::string> mayNullFunctions;
         // 把 input.json 中 mayNull 的函数名加入到 mayNullFunctions
