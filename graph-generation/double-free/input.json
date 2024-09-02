@@ -1,0 +1,25 @@
+{
+    "project": "gemini_pro-5076",
+    "type": "FormAI",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/double-free",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/compile_commands.json",
+    "results": [
+        {
+            "type": "doubleFree",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "line": 68,
+                    "column": 9
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "line": 89,
+                    "column": 11
+                }
+            ]
+        }
+    ]
+}

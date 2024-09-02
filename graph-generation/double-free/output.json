@@ -1,0 +1,386 @@
+{
+    "project": "gemini_pro-5076",
+    "type": "FormAI",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/double-free",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/input.json",
+    "results": [
+        {
+            "type": "doubleFree-bug",
+            "sourceIndex": 0,
+            "nodes": [
+                39,
+                38,
+                36,
+                74,
+                73,
+                64,
+                63
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 68,
+                    "beginColumn": 9,
+                    "endLine": 68,
+                    "endColumn": 20,
+                    "content": "free(state)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 69,
+                    "beginColumn": 9,
+                    "endLine": 69,
+                    "endColumn": 18,
+                    "content": "return -1",
+                    "stmtKind": "ReturnStmt"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 63,
+                    "beginColumn": 1,
+                    "endLine": 73,
+                    "endColumn": 2,
+                    "content": "int email_client_connect(struct email_client_state *state) {\n    if (connect(sta ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 107,
+                    "beginColumn": 9,
+                    "endLine": 107,
+                    "endColumn": 42,
+                    "content": "email_client_connect(state) == -1",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 108,
+                    "beginColumn": 9,
+                    "endLine": 108,
+                    "endColumn": 34,
+                    "content": "email_client_close(state)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 88,
+                    "beginColumn": 1,
+                    "endLine": 94,
+                    "endColumn": 2,
+                    "content": "int email_client_close(struct email_client_state *state) {\n    close(state->sock ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 89,
+                    "beginColumn": 5,
+                    "endLine": 89,
+                    "endColumn": 25,
+                    "content": "close(state->sockfd)",
+                    "stmtKind": "CallExpr"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 24,
+                    "beginColumn": 9,
+                    "endLine": 24,
+                    "endColumn": 22,
+                    "content": "state == NULL",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 24,
+                        "beginColumn": 9,
+                        "endLine": 24,
+                        "endColumn": 14,
+                        "content": "state"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 30,
+                    "beginColumn": 9,
+                    "endLine": 30,
+                    "endColumn": 28,
+                    "content": "state->host == NULL",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 30,
+                        "beginColumn": 9,
+                        "endLine": 30,
+                        "endColumn": 20,
+                        "content": "state->host"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 47,
+                    "beginColumn": 9,
+                    "endLine": 47,
+                    "endColumn": 24,
+                    "content": "hostent == NULL",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 47,
+                        "beginColumn": 9,
+                        "endLine": 47,
+                        "endColumn": 16,
+                        "content": "hostent"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 102,
+                    "beginColumn": 5,
+                    "endLine": 102,
+                    "endColumn": 81,
+                    "content": "struct email_client_state *state = email_client_init(argv[1], atoi(argv[2]))",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 102,
+                        "beginColumn": 32,
+                        "endLine": 102,
+                        "endColumn": 37,
+                        "content": "state"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 103,
+                    "beginColumn": 9,
+                    "endLine": 103,
+                    "endColumn": 22,
+                    "content": "state == NULL",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 103,
+                        "beginColumn": 9,
+                        "endLine": 103,
+                        "endColumn": 14,
+                        "content": "state"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 23,
+                    "beginColumn": 5,
+                    "endLine": 23,
+                    "endColumn": 81,
+                    "content": "struct email_client_state *state = malloc(sizeof(struct email_client_state))",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 23,
+                        "beginColumn": 32,
+                        "endLine": 23,
+                        "endColumn": 37,
+                        "content": "state"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 32,
+                    "beginColumn": 9,
+                    "endLine": 32,
+                    "endColumn": 20,
+                    "content": "free(state)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 32,
+                        "beginColumn": 14,
+                        "endLine": 32,
+                        "endColumn": 19,
+                        "content": "state"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 41,
+                    "beginColumn": 9,
+                    "endLine": 41,
+                    "endColumn": 26,
+                    "content": "free(state->host)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 41,
+                        "beginColumn": 14,
+                        "endLine": 41,
+                        "endColumn": 25,
+                        "content": "state->host"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 42,
+                    "beginColumn": 9,
+                    "endLine": 42,
+                    "endColumn": 20,
+                    "content": "free(state)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 42,
+                        "beginColumn": 14,
+                        "endLine": 42,
+                        "endColumn": 19,
+                        "content": "state"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 50,
+                    "beginColumn": 9,
+                    "endLine": 50,
+                    "endColumn": 26,
+                    "content": "free(state->host)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 50,
+                        "beginColumn": 14,
+                        "endLine": 50,
+                        "endColumn": 25,
+                        "content": "state->host"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 51,
+                    "beginColumn": 9,
+                    "endLine": 51,
+                    "endColumn": 20,
+                    "content": "free(state)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 51,
+                        "beginColumn": 14,
+                        "endLine": 51,
+                        "endColumn": 19,
+                        "content": "state"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 67,
+                    "beginColumn": 9,
+                    "endLine": 67,
+                    "endColumn": 26,
+                    "content": "free(state->host)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 67,
+                        "beginColumn": 14,
+                        "endLine": 67,
+                        "endColumn": 25,
+                        "content": "state->host"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 90,
+                    "beginColumn": 5,
+                    "endLine": 90,
+                    "endColumn": 22,
+                    "content": "free(state->host)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 90,
+                        "beginColumn": 10,
+                        "endLine": 90,
+                        "endColumn": 21,
+                        "content": "state->host"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "doubleFree-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 91,
+                    "beginColumn": 5,
+                    "endLine": 91,
+                    "endColumn": 16,
+                    "content": "free(state)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 91,
+                        "beginColumn": 10,
+                        "endLine": 91,
+                        "endColumn": 15,
+                        "content": "state"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+[
+    {
+        "command": "cc -c gemini_pro-5076.c",
+        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/double-free",
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c"
+    }
+]
