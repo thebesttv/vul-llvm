@@ -67,6 +67,10 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
         timeout-minutes: 1440
 
+      - name: Delete old release
+        # if release doesn't exist, gh will fail
+        run: gh release delete -y --cleanup-tag nightly || true
+
       # https://github.com/hashicorp/nomad-pack/blob/f11c6d6a6bcc0b7377de737ecc9ef59f2dbbe6d3/.github/workflows/nightly-release.yml#L35
       # This will create a new GitHub Release called `nightly`
       # If a release with this name already exists, it will overwrite the existing data
