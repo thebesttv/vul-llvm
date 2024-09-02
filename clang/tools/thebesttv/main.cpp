@@ -858,6 +858,23 @@ ordered_json dumpFuncList() {
     return output;
 }
 
+/**
+ * 将 input.json 中 mayMalloc 和 mayFree 等手工指定的函数，添加到集合中。
+ * defaults 是集合中默认会添加的函数。
+ */
+void addFromInput(const ordered_json &input, std::string key,
+                  std::set<std::string> &output,
+                  std::initializer_list<std::string> defaults) {
+    // 加入一些默认的函数
+    output.insert(defaults.begin(), defaults.end());
+    // 从输入的 key 中加入函数
+    if (input.contains(key)) {
+        for (const auto &f : input[key]) {
+            output.insert(f.get<std::string>());
+        }
+    }
+}
+
 void writeJsonToFile(const std::string &title, const ordered_json &j,
                      const fs::path &path) {
     std::ofstream o(path);
@@ -991,16 +1008,9 @@ int main(int argc, const char **argv) {
             std::set<std::string>(allFiles.begin(), allFiles.end());
     }
 
-    {
-        auto &mayMallocFunctions = Global.mayMallocFunctions;
-        // 加入默认的 malloc 函数
-        mayMallocFunctions.insert("malloc");
-        if (input.contains("mayMalloc")) {
-            for (const auto &f : input["mayMalloc"]) {
-                mayMallocFunctions.insert(f.get<std::string>());
-            }
-        }
-    }
+    // resourceLeak
+    addFromInput(input, "mayMalloc", Global.mayMallocFunctions,
+                 {"malloc" /* , "calloc", "realloc" */});
 
     generateICFG(*Global.cb);
 
