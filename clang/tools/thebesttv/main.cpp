@@ -824,13 +824,28 @@ void dumpSourceToOutput(const SrcSet &sources, //
     }
 }
 
-ordered_json generateFromInput(const ordered_json &input) {
+/**
+ * 从输入的 input.json 中生成路径。
+ *
+ * @param input 输入的 JSON
+ * @param beginIndex 开始下标，inclusive
+ * @param endIndex 结束下标，exclusive，如果是-1表示到最后
+ */
+ordered_json generateFromInput(const ordered_json &input, int beginIndex,
+                               int endIndex) {
     logger.info("--- Path-finding ---");
 
     FunctionLocator locator;
 
     int total = input["results"].size();
-    logger.info("There are {} results to search", total);
+
+    if (endIndex == -1)
+        endIndex = total;
+    requireTrue(beginIndex >= 0 && beginIndex <= endIndex && endIndex <= total,
+                "Invalid begin/end index");
+
+    logger.info("There are {} results, of which {} will be searched: [{}, {})",
+                total, endIndex - beginIndex, beginIndex, endIndex);
 
     ordered_json output(input);
     // 先把 results 删除，然后加上 source，最后加上空的 results
@@ -839,15 +854,15 @@ ordered_json generateFromInput(const ordered_json &input) {
     output["results"] = ordered_json::array();
 
     int index = 0;
-    for (const ordered_json &result : input["results"]) {
+    for (int index = beginIndex; index < endIndex; index++) {
+        const ordered_json &result = input["results"][index];
         std::string type = result["type"].template get<std::string>();
-        logger.info("[{}/{}] type: {}", index + 1, total, type);
+        logger.info("[{}/{}) type: {}", index, endIndex, type);
         try {
             generatePathFromOneEntry(index, result, locator, output["results"]);
         } catch (const std::exception &e) {
             logger.error("Exception encountered: {}", e.what());
         }
-        index++;
     }
 
     if (!Global.noNpeGoodSource) {
@@ -944,6 +959,12 @@ int main(int argc, const char **argv) {
 
     args::Flag argFuncList(argParser, "func-list",
                            "Generate function list only", {"func-list"});
+
+    // 指定搜索路径的下标范围: [begin, end)
+    args::ValueFlag<int> argBeginIndex(
+        argParser, "N", "Begin index (inclusive, default 0)", {'b', "begin"});
+    args::ValueFlag<int> argEndIndex(
+        argParser, "N", "End index (exclusive, default -1)", {'e', "end"});
 
     args::ValueFlag<int> argPoolSize(
         argParser, "N",
@@ -1091,8 +1112,10 @@ int main(int argc, const char **argv) {
         writeJsonToFile("Function list", dumpFuncList(),
                         outputDir / "func-list.json");
     } else {
-        writeJsonToFile("Output", generateFromInput(input),
-                        outputDir / "output.json");
+        int beginIndex = getArgValue(argBeginIndex, 0, "Begin index");
+        int endIndex = getArgValue(argEndIndex, -1, "End index");
+        auto result = generateFromInput(input, beginIndex, endIndex);
+        writeJsonToFile("Output", result, outputDir / "output.json");
     }
 
     // 用于调试，查询每个 node 的信息
