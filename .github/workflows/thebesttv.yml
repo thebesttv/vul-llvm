@@ -68,6 +68,8 @@ jobs:
         timeout-minutes: 1440
 
       - name: Delete old release
+        env:
+          GH_TOKEN: ${{ github.token }}
         # if release doesn't exist, gh will fail
         run: gh release delete -y --cleanup-tag nightly || true
 
