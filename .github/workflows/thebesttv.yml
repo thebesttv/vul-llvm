@@ -96,19 +96,16 @@ jobs:
               sha: context.sha
             })
 
-      # https://github.com/hashicorp/nomad-pack/blob/f11c6d6a6bcc0b7377de737ecc9ef59f2dbbe6d3/.github/workflows/nightly-release.yml#L55
-      # This will create a new GitHub Release called `nightly`
-      # If a release with this name already exists, it will overwrite the existing data
-      - name: Release
-        uses: ncipollo/release-action@2c591bcc8ecdcd2db72b97d6147f871fcd833ba5 # v1.14.0
-        with:
-          name: Nightly
-          artifacts: "build-release/tool-x86_64.AppImage"
-          tag: nightly
-          prerelease: false
-          allowUpdates: true
-          removeArtifacts: true
-          draft: false
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create \
+              --latest \
+              --title Nightly \
+              --generate-notes \
+              nightly \
+              build-release/tool-x86_64.AppImage
 
   build-and-test:
     runs-on: ubuntu-latest
