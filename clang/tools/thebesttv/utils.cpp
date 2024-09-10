@@ -73,6 +73,18 @@ const FunctionDecl *getDirectCallee(const CXXConstructExpr *E) {
     return getPossibleOriginalTemplate(E->getConstructor());
 }
 
+std::unique_ptr<CFG> buildCFG(const Decl *D) {
+    static auto option = CFG::BuildOptions();
+    option.AddInitializers = true;
+    // option.AddCXXDefaultInitExprInCtors = true;
+    // option.AddCXXNewAllocator = true;
+    // option.AddRichCXXConstructors = true;
+    // option.MarkElidedCXXConstructors = true;
+    // option.AddVirtualBaseBranches = true;
+
+    return CFG::buildCFG(D, D->getBody(), &D->getASTContext(), option);
+}
+
 void dumpSourceLocation(const std::string &msg, const ASTContext &Context,
                         const SourceLocation &loc) {
     auto &SM = Context.getSourceManager();

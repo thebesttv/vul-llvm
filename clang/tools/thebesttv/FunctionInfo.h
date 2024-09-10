@@ -28,8 +28,7 @@ struct FunctionInfo {
 
         // build CFG
 
-        auto cfg = CFG::buildCFG(D, D->getBody(), &D->getASTContext(),
-                                 CFG::BuildOptions());
+        auto cfg = buildCFG(D);
         // CFG may be null (may be because the function is in STL, e.g.
         // "std::destroy_at")
         if (!cfg)

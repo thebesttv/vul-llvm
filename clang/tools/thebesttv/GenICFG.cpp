@@ -85,8 +85,7 @@ bool GenICFGVisitor::VisitFunctionDecl(FunctionDecl *D) {
         logger.warn("Loading template function: {}", fullSignature);
     }
 
-    std::unique_ptr<CFG> cfg = CFG::buildCFG(
-        D, D->getBody(), &D->getASTContext(), CFG::BuildOptions());
+    std::unique_ptr<CFG> cfg = buildCFG(D);
     if (!cfg) {
         logger.error("Unable to create CFG for function {} in {}:{}:{}",
                      fullSignature, pLoc->file, pLoc->line, pLoc->column);

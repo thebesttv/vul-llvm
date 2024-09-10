@@ -116,6 +116,11 @@ const FunctionDecl *getPossibleOriginalTemplate(const FunctionDecl *D);
 const FunctionDecl *getDirectCallee(const CallExpr *E);
 const FunctionDecl *getDirectCallee(const CXXConstructExpr *E);
 
+/**
+ * 调用 CFG::buildCFG() 来构造 CFG。用于统一 BuildOptions。
+ */
+std::unique_ptr<CFG> buildCFG(const Decl *D);
+
 void dumpSourceLocation(const std::string &msg, const ASTContext &Context,
                         const SourceLocation &loc);
 

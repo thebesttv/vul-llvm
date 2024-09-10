@@ -94,8 +94,7 @@ class FunctionDeclVisitor : public RecursiveASTVisitor<FunctionDeclVisitor>,
         llvm::errs() << "--------- CFG dump: " << D->getQualifiedNameAsString()
                      << "\n";
         // build CFG
-        auto cfg = CFG::buildCFG(D, D->getBody(), &D->getASTContext(),
-                                 CFG::BuildOptions());
+        auto cfg = buildCFG(D);
         cfg->dump(D->getASTContext().getLangOpts(), true);
         // cfg->viewCFG(D->getASTContext().getLangOpts());
 
