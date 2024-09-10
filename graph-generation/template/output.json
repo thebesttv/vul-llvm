@@ -8,13 +8,13 @@
             "type": "test_int",
             "sourceIndex": 0,
             "nodes": [
-                32,
+                36,
                 17,
                 16,
                 15,
                 13,
-                31,
-                30
+                35,
+                34
             ],
             "locations": [
                 {
@@ -131,25 +131,16 @@
             "type": "test_Node",
             "sourceIndex": 1,
             "nodes": [
-                30,
+                32,
                 17,
                 16,
                 14,
                 13,
-                29,
-                28
+                31,
+                30,
+                29
             ],
             "locations": [
-                {
-                    "type": "stmt",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
-                    "beginLine": 40,
-                    "beginColumn": 14,
-                    "endLine": 40,
-                    "endColumn": 21,
-                    "content": "a(1, 2)",
-                    "stmtKind": "DeclStmt"
-                },
                 {
                     "type": "stmt",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
@@ -237,6 +228,16 @@
                     "endColumn": 14,
                     "content": "foo()",
                     "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 43,
+                    "beginColumn": 18,
+                    "endLine": 43,
+                    "endColumn": 19,
+                    "content": "c",
+                    "stmtKind": "CXXConstructExpr"
                 },
                 {
                     "type": "stmt",

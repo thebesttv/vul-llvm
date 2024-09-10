@@ -4824,7 +4824,11 @@ CFGBlock *CFGBuilder::VisitCXXConstructExpr(CXXConstructExpr *C,
   // constructor C, they're for its arguments only.
   findConstructionContextsForArguments(C);
 
-  autoCreateBlock();
+  // 如果当前有 block，就创建一个新的 block
+  // 保证 CXXConstructExpr 是 block 的最后一个 stmt
+  if (Block) Succ = Block;
+  Block = createBlock();
+
   appendConstructor(Block, C);
 
   return VisitChildren(C);
