@@ -1140,6 +1140,18 @@ int main(int argc, const char **argv) {
 
         ordered_json dump;
         dumpICFGNode(node, dump);
+        // 优先处理 entry & exit
+        if (dump.size() == 1) {
+            auto &j = dump[0];
+            std::string type = j["type"].get<std::string>();
+            if (type != "stmt") {
+                fmt::print("{} of function:\n", type);
+                fmt::print("  {}\n", j["content"].get<std::string>());
+                continue;
+            }
+        }
+
+        // stmt
         fmt::print("{} stmts:\n", dump.size());
         for (const auto &j : dump) {
             fmt::print("  {}\n", j["content"].get<std::string>());
