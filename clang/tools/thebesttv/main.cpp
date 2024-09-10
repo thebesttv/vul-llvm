@@ -14,6 +14,7 @@
 #include <unistd.h>
 
 #include "lib/args.hxx"
+#include <fmt/color.h>
 
 #include "clang/Basic/Version.h"
 #include "llvm/Support/InitLLVM.h"
@@ -1154,6 +1155,8 @@ int main(int argc, const char **argv) {
         // stmt
         fmt::print("{} stmts:\n", dump.size());
         for (const auto &j : dump) {
+            std::string kind = j["stmtKind"].get<std::string>();
+            fmt::print(" {}:\n", fmt::format(fg(fmt::color::green), kind));
             fmt::print("  {}\n", j["content"].get<std::string>());
         }
 
