@@ -53,11 +53,12 @@ void ICFG::tryAndAddCallSite(int fid, const CFGBlock &B) {
     if (!CS) // the last element is not a CFGBlock
         return;
 
-    const CallExpr *expr = dyn_cast<CallExpr>(CS->getStmt());
-    if (!expr) // the last stmt is not a CallExpr
-        return;
+    const FunctionDecl *calleeDecl = nullptr;
 
-    const FunctionDecl *calleeDecl = getDirectCallee(expr);
+    if (const auto *expr = dyn_cast<CallExpr>(CS->getStmt())) {
+        calleeDecl = getDirectCallee(expr);
+    }
+
     if (!calleeDecl)
         return;
 
