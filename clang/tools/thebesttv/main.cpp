@@ -197,9 +197,15 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
         // 复杂函数调用样例：zval *zv = xxx(... ? CG(...) : EG(...), lcname);
         for (const auto &r : locResults) {
             const Stmt *stmt = fi->G[r.bid][r.sid];
-            const CallExpr *callExpr = dyn_cast<CallExpr>(stmt);
-            if (!callExpr)
+
+            const FunctionDecl *callee = nullptr;
+            if (auto *expr = dyn_cast<CallExpr>(stmt)) {
+                callee = getDirectCallee(expr);
+            } else if (auto *expr = dyn_cast<CXXConstructExpr>(stmt)) {
+                callee = getDirectCallee(expr);
+            } else {
                 continue;
+            }
 
             // 匹配到 CallExpr，说明语句形如 p = foo() 或 foo() 等。
             // 此时位于 foo()。
@@ -207,8 +213,7 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
             // - 如果即将进入，那定位到 foo() 即可，返回当前 BB
             // - 如果已经退出，那需要定位到返回后的 BB，默认是 ICFG 中下一个 BB
 
-            std::string calleeSignature =
-                getFullSignature(getDirectCallee(callExpr));
+            std::string calleeSignature = getFullSignature(callee);
             int calleeFid = Global.getIdOfFunction(calleeSignature);
             if (calleeFid == -1) // 保证了 previousFid 和 nextFid 都不是 -1
                 continue;

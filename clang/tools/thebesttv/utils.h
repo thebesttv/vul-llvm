@@ -114,6 +114,7 @@ const FunctionDecl *getPossibleOriginalTemplate(const FunctionDecl *D);
  * 否则返回 callee。
  */
 const FunctionDecl *getDirectCallee(const CallExpr *E);
+const FunctionDecl *getDirectCallee(const CXXConstructExpr *E);
 
 void dumpSourceLocation(const std::string &msg, const ASTContext &Context,
                         const SourceLocation &loc);

@@ -67,6 +67,12 @@ const FunctionDecl *getDirectCallee(const CallExpr *E) {
     return getPossibleOriginalTemplate(E->getDirectCallee());
 }
 
+const FunctionDecl *getDirectCallee(const CXXConstructExpr *E) {
+    if (!E)
+        return nullptr;
+    return getPossibleOriginalTemplate(E->getConstructor());
+}
+
 void dumpSourceLocation(const std::string &msg, const ASTContext &Context,
                         const SourceLocation &loc) {
     auto &SM = Context.getSourceManager();

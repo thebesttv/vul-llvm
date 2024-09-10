@@ -57,6 +57,8 @@ void ICFG::tryAndAddCallSite(int fid, const CFGBlock &B) {
 
     if (const auto *expr = dyn_cast<CallExpr>(CS->getStmt())) {
         calleeDecl = getDirectCallee(expr);
+    } else if (const auto *expr = dyn_cast<CXXConstructExpr>(CS->getStmt())) {
+        calleeDecl = getDirectCallee(expr);
     }
 
     if (!calleeDecl)
