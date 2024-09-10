@@ -71,8 +71,14 @@
                 {
                     "type": "source",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
-                    "line": 32,
+                    "line": 33,
                     "column": 6
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "line": 25,
+                    "column": 5
                 },
                 {
                     "type": "stmt",

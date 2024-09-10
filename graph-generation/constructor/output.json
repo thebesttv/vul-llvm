@@ -239,16 +239,6 @@
                 {
                     "type": "stmt",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
-                    "beginLine": 32,
-                    "beginColumn": 5,
-                    "endLine": 32,
-                    "endColumn": 15,
-                    "content": "int x = 0;",
-                    "stmtKind": "DeclStmt"
-                },
-                {
-                    "type": "stmt",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
                     "beginLine": 33,
                     "beginColumn": 13,
                     "endLine": 33,
@@ -317,16 +307,6 @@
                     "type": "stmt",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
                     "beginLine": 25,
-                    "beginColumn": 39,
-                    "endLine": 25,
-                    "endColumn": 48,
-                    "content": "Base1(n1)",
-                    "stmtKind": "CXXConstructExpr"
-                },
-                {
-                    "type": "stmt",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
-                    "beginLine": 25,
                     "beginColumn": 50,
                     "endLine": 25,
                     "endColumn": 59,
@@ -370,16 +350,6 @@
                     "endLine": 18,
                     "endColumn": 6,
                     "content": "Base2(int n) {\n        y = n;\n        y++;\n    }"
-                },
-                {
-                    "type": "stmt",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
-                    "beginLine": 25,
-                    "beginColumn": 50,
-                    "endLine": 25,
-                    "endColumn": 59,
-                    "content": "Base2(n2)",
-                    "stmtKind": "CXXConstructExpr"
                 },
                 {
                     "type": "stmt",
