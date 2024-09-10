@@ -81,7 +81,7 @@
             "type": "npe-bug",
             "sourceIndex": 2,
             "nodes": [
-                16
+                17
             ],
             "locations": [
                 {
@@ -118,7 +118,7 @@
             "type": "npe-bug",
             "sourceIndex": 3,
             "nodes": [
-                16
+                17
             ],
             "locations": [
                 {
@@ -155,7 +155,7 @@
             "type": "npe-bug",
             "sourceIndex": 4,
             "nodes": [
-                16
+                17
             ],
             "locations": [
                 {
@@ -192,7 +192,7 @@
             "type": "npe-bug",
             "sourceIndex": 5,
             "nodes": [
-                16
+                17
             ],
             "locations": [
                 {
@@ -229,8 +229,8 @@
             "type": "npe-bug",
             "sourceIndex": 6,
             "nodes": [
-                23,
-                22
+                24,
+                23
             ],
             "locations": [
                 {
