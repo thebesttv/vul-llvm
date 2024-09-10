@@ -65,6 +65,9 @@ struct FunctionInfo {
                 if (std::optional<CFGStmt> CS = E.getAs<CFGStmt>()) {
                     const Stmt *S = CS->getStmt();
                     G[bid].push_back(S);
+                } else if (auto CI = E.getAs<CFGInitializer>()) {
+                    auto *I = CI->getInitializer();
+                    G[bid].push_back(I->getInit());
                 }
             }
         }
