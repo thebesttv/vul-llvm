@@ -218,6 +218,221 @@
             ]
         },
         {
+            "type": "multi",
+            "sourceIndex": 3,
+            "nodes": [
+                26,
+                23,
+                22,
+                15,
+                14,
+                13,
+                21,
+                18,
+                17,
+                16,
+                20,
+                19,
+                25
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 32,
+                    "beginColumn": 5,
+                    "endLine": 32,
+                    "endColumn": 15,
+                    "content": "int x = 0;",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 33,
+                    "beginColumn": 13,
+                    "endLine": 33,
+                    "endColumn": 26,
+                    "content": "d(10, 20, 30)",
+                    "stmtKind": "CXXConstructExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 5,
+                    "endLine": 28,
+                    "endColumn": 6,
+                    "content": "Derived(int n1, int n2, int n3) : Base1(n1), Base2(n2) {\n        z = n3;\n        ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 39,
+                    "endLine": 25,
+                    "endColumn": 48,
+                    "content": "Base1(n1)",
+                    "stmtKind": "CXXConstructExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 5,
+                    "beginColumn": 5,
+                    "endLine": 8,
+                    "endColumn": 6,
+                    "content": "Base1(int n) {\n        x = n;\n        x++;\n    }"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 6,
+                    "beginColumn": 9,
+                    "endLine": 6,
+                    "endColumn": 14,
+                    "content": "x = n",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 7,
+                    "beginColumn": 9,
+                    "endLine": 7,
+                    "endColumn": 12,
+                    "content": "x++",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 5,
+                    "beginColumn": 5,
+                    "endLine": 8,
+                    "endColumn": 6,
+                    "content": "Base1(int n) {\n        x = n;\n        x++;\n    }"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 39,
+                    "endLine": 25,
+                    "endColumn": 48,
+                    "content": "Base1(n1)",
+                    "stmtKind": "CXXConstructExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 50,
+                    "endLine": 25,
+                    "endColumn": 59,
+                    "content": "Base2(n2)",
+                    "stmtKind": "CXXConstructExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 15,
+                    "beginColumn": 5,
+                    "endLine": 18,
+                    "endColumn": 6,
+                    "content": "Base2(int n) {\n        y = n;\n        y++;\n    }"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 16,
+                    "beginColumn": 9,
+                    "endLine": 16,
+                    "endColumn": 14,
+                    "content": "y = n",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 17,
+                    "beginColumn": 9,
+                    "endLine": 17,
+                    "endColumn": 12,
+                    "content": "y++",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 15,
+                    "beginColumn": 5,
+                    "endLine": 18,
+                    "endColumn": 6,
+                    "content": "Base2(int n) {\n        y = n;\n        y++;\n    }"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 50,
+                    "endLine": 25,
+                    "endColumn": 59,
+                    "content": "Base2(n2)",
+                    "stmtKind": "CXXConstructExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 26,
+                    "beginColumn": 9,
+                    "endLine": 26,
+                    "endColumn": 15,
+                    "content": "z = n3",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 27,
+                    "beginColumn": 9,
+                    "endLine": 27,
+                    "endColumn": 12,
+                    "content": "z++",
+                    "stmtKind": "UnaryOperator"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 25,
+                    "beginColumn": 5,
+                    "endLine": 28,
+                    "endColumn": 6,
+                    "content": "Derived(int n1, int n2, int n3) : Base1(n1), Base2(n2) {\n        z = n3;\n        ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 33,
+                    "beginColumn": 5,
+                    "endLine": 33,
+                    "endColumn": 27,
+                    "content": "Derived d(10, 20, 30);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 34,
+                    "beginColumn": 5,
+                    "endLine": 34,
+                    "endColumn": 29,
+                    "content": "int y = d.x + d.y + d.z;",
+                    "stmtKind": "DeclStmt"
+                }
+            ]
+        },
+        {
             "type": "npe-good-source",
             "locations": [
                 {

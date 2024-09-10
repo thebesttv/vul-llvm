@@ -3,5 +3,10 @@
         "command": "c++ -c main.cpp",
         "directory": "/home/thebesttv/vul/llvm-project/graph-generation/constructor",
         "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp"
+    },
+    {
+        "command": "c++ -c multi.cpp",
+        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/constructor",
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp"
     }
 ]

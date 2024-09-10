@@ -64,6 +64,41 @@
                     "column": 5
                 }
             ]
+        },
+        {
+            "type": "multi",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "line": 32,
+                    "column": 6
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "line": 6,
+                    "column": 9
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "line": 16,
+                    "column": 9
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "line": 27,
+                    "column": 9
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "line": 34,
+                    "column": 5
+                }
+            ]
         }
     ]
 }
