@@ -1,0 +1,69 @@
+{
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/constructor",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/compile_commands.json",
+    "results": [
+        {
+            "type": "simple",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "line": 7,
+                    "column": 13
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "line": 20,
+                    "column": 5
+                }
+            ]
+        },
+        {
+            "type": "simple",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "line": 19,
+                    "column": 10
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "line": 7,
+                    "column": 13
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "line": 20,
+                    "column": 5
+                }
+            ]
+        },
+        {
+            "type": "simple",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "line": 22,
+                    "column": 10
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "line": 12,
+                    "column": 13
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "line": 23,
+                    "column": 5
+                }
+            ]
+        }
+    ]
+}

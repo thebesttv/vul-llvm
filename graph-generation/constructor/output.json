@@ -1,0 +1,263 @@
+{
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/constructor",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/input.json",
+    "results": [
+        {
+            "type": "simple",
+            "sourceIndex": 0,
+            "nodes": [
+                1,
+                0,
+                10
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 7,
+                    "beginColumn": 13,
+                    "endLine": 7,
+                    "endColumn": 24,
+                    "content": "p = nullptr",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 5,
+                    "beginColumn": 5,
+                    "endLine": 8,
+                    "endColumn": 6,
+                    "content": "Node(int x) {\n        if (x)\n            p = nullptr;\n    }"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 19,
+                    "beginColumn": 5,
+                    "endLine": 19,
+                    "endColumn": 16,
+                    "content": "Node x1(1);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 20,
+                    "beginColumn": 5,
+                    "endLine": 20,
+                    "endColumn": 14,
+                    "content": "y = *x1.p",
+                    "stmtKind": "BinaryOperator"
+                }
+            ]
+        },
+        {
+            "type": "simple",
+            "sourceIndex": 1,
+            "nodes": [
+                11,
+                3,
+                2,
+                1,
+                0,
+                10
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 19,
+                    "beginColumn": 10,
+                    "endLine": 19,
+                    "endColumn": 15,
+                    "content": "x1(1)",
+                    "stmtKind": "CXXConstructExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 5,
+                    "beginColumn": 5,
+                    "endLine": 8,
+                    "endColumn": 6,
+                    "content": "Node(int x) {\n        if (x)\n            p = nullptr;\n    }"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 6,
+                    "beginColumn": 13,
+                    "endLine": 6,
+                    "endColumn": 14,
+                    "content": "x",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 7,
+                    "beginColumn": 13,
+                    "endLine": 7,
+                    "endColumn": 24,
+                    "content": "p = nullptr",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 5,
+                    "beginColumn": 5,
+                    "endLine": 8,
+                    "endColumn": 6,
+                    "content": "Node(int x) {\n        if (x)\n            p = nullptr;\n    }"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 19,
+                    "beginColumn": 5,
+                    "endLine": 19,
+                    "endColumn": 16,
+                    "content": "Node x1(1);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 20,
+                    "beginColumn": 5,
+                    "endLine": 20,
+                    "endColumn": 14,
+                    "content": "y = *x1.p",
+                    "stmtKind": "BinaryOperator"
+                }
+            ]
+        },
+        {
+            "type": "simple",
+            "sourceIndex": 2,
+            "nodes": [
+                10,
+                7,
+                6,
+                5,
+                4,
+                9
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 22,
+                    "beginColumn": 10,
+                    "endLine": 22,
+                    "endColumn": 18,
+                    "content": "x2(1, 2)",
+                    "stmtKind": "CXXConstructExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 10,
+                    "beginColumn": 5,
+                    "endLine": 13,
+                    "endColumn": 6,
+                    "content": "Node(int x, int y) {\n        if (x + y)\n            p = nullptr;\n    }"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 13,
+                    "endLine": 11,
+                    "endColumn": 18,
+                    "content": "x + y",
+                    "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 13,
+                    "endLine": 12,
+                    "endColumn": 24,
+                    "content": "p = nullptr",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "exit",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 10,
+                    "beginColumn": 5,
+                    "endLine": 13,
+                    "endColumn": 6,
+                    "content": "Node(int x, int y) {\n        if (x + y)\n            p = nullptr;\n    }"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 22,
+                    "beginColumn": 5,
+                    "endLine": 22,
+                    "endColumn": 19,
+                    "content": "Node x2(1, 2);",
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 23,
+                    "beginColumn": 5,
+                    "endLine": 23,
+                    "endColumn": 14,
+                    "content": "y = *x2.p",
+                    "stmtKind": "BinaryOperator"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 7,
+                    "beginColumn": 13,
+                    "endLine": 7,
+                    "endColumn": 24,
+                    "content": "p = nullptr",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                        "beginLine": 7,
+                        "beginColumn": 13,
+                        "endLine": 7,
+                        "endColumn": 14,
+                        "content": "p"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 13,
+                    "endLine": 12,
+                    "endColumn": 24,
+                    "content": "p = nullptr",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                        "beginLine": 12,
+                        "beginColumn": 13,
+                        "endLine": 12,
+                        "endColumn": 14,
+                        "content": "p"
+                    }
+                }
+            ]
+        }
+    ]
+}
