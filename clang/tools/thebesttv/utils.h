@@ -352,7 +352,7 @@ struct GlobalStat {
     int dfsTick;
     int dfsTimeout;
     bool keepAST;
-    bool noNpeGoodSource;
+    bool noGoodSource;
     bool noNodes;
     bool debug;
 };

@@ -865,7 +865,7 @@ ordered_json generateFromInput(const ordered_json &input, int beginIndex,
         }
     }
 
-    if (!Global.noNpeGoodSource) {
+    if (!Global.noGoodSource) {
         dumpSourceToOutput(Global.npeSuspectedSources, "npe-good-source",
                            output["results"]);
         dumpSourceToOutput(Global.resourceLeakSuspectedSources,
@@ -953,7 +953,7 @@ int main(int argc, const char **argv) {
         "Example:\n"
         "  ./tool npe/input.json\n"
         "  ./tool -d10 -t60 npe/input.json\n"
-        "  ./tool --no-npe-good-source npe/input.json\n");
+        "  ./tool --no-good-source npe/input.json\n");
 
     args::HelpFlag help(argParser, "help", "Display help menu", {'h', "help"});
 
@@ -978,9 +978,9 @@ int main(int argc, const char **argv) {
         argParser, "N", "DFS timeout in seconds, default 30", {'t'});
     args::Flag argKeepAST(argParser, "keep-ast", "Keep AST dumps on disk",
                           {"keep-ast"});
-    args::Flag argNoNpeGoodSource(argParser, "no-npe-good-source",
-                                  "Do not generate npe-good-source",
-                                  {"no-npe-good-source"});
+    args::Flag argNoGoodSource(argParser, "no-good-source",
+                               "Do not generate xxx-good-source",
+                               {"no-good-source"});
     args::Flag argNoNodes(argParser, "no-nodes", "Do not dump ICFG nodes",
                           {"no-nodes"});
     args::Flag argDebug(argParser, "debug", "Debug mode", {"debug"});
@@ -1021,8 +1021,7 @@ int main(int argc, const char **argv) {
     Global.dfsTick = getArgValue(argDfsTick, 1'000'000, "DFS tick");
     Global.dfsTimeout = getArgValue(argDfsTimeout, 30, "DFS timeout");
     Global.keepAST = getArgValue(argKeepAST, "Keep AST");
-    Global.noNpeGoodSource =
-        getArgValue(argNoNpeGoodSource, "No npe-good-source");
+    Global.noGoodSource = getArgValue(argNoGoodSource, "No good-source");
     Global.noNodes = getArgValue(argNoNodes, "No nodes");
     Global.debug = getArgValue(argDebug, "Debug");
 

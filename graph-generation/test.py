@@ -72,7 +72,7 @@ docker run -t \
     -v {root}/..:{docker_root} \
     {image} \
     sudo {docker_root}/build-release/bin/thebesttv \
-        --no-npe-good-source --no-nodes \
+        --no-good-source --no-nodes \
         {docker_root}/graph-generation/{dir}/input.json \
 '''
     else:
