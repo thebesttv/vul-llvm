@@ -42,36 +42,6 @@
                     "stmtKind": "ReturnStmt"
                 }
             ]
-        },
-        {
-            "type": "npe-fix",
-            "sourceIndex": 0,
-            "nodes": [
-                4,
-                3,
-                0
-            ],
-            "locations": [
-                {
-                    "type": "stmt",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-183/main.cpp",
-                    "beginLine": 16,
-                    "beginColumn": 5,
-                    "endLine": 16,
-                    "endColumn": 32,
-                    "content": "IS_ID_VALID(ptr != NULL, 1)",
-                    "stmtKind": "BinaryOperator"
-                },
-                {
-                    "type": "exit",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-183/main.cpp",
-                    "beginLine": 13,
-                    "beginColumn": 1,
-                    "endLine": 19,
-                    "endColumn": 2,
-                    "content": "int func1(int id)\n{\n    int *ptr = func2(id);\n    IS_ID_VALID(ptr != NULL, 1);\n\n ..."
-                }
-            ]
         }
     ]
 }
