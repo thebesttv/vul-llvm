@@ -635,25 +635,28 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
             removeBadSourceFromResults(results, Global.npeSuspectedSources);
         }
 
-        // 无缺陷版本：source -> sink 所在函数的出口
-        // 尽量符合原始缺陷路径。如果找不到，就一步步减小路径
-        logger.info("Generating NPE fix version ...");
-        auto sinkExit = getExit(to);
-        std::vector<VarLocResult> p = path;
-        bool found = false;
-        while (true) {
-            int result = findPathBetween(from, fromLine, sinkExit, INT_MAX, p,
-                                         {to}, "npe-fix", sourceIndex, results);
-            if (result) {
-                found = true;
-                break;
+        if (Global.npeFix) {
+            // 无缺陷版本：source -> sink 所在函数的出口
+            // 尽量符合原始缺陷路径。如果找不到，就一步步减小路径
+            logger.info("Generating NPE fix version ...");
+            auto sinkExit = getExit(to);
+            std::vector<VarLocResult> p = path;
+            bool found = false;
+            while (true) {
+                int result =
+                    findPathBetween(from, fromLine, sinkExit, INT_MAX, p, {to},
+                                    "npe-fix", sourceIndex, results);
+                if (result) {
+                    found = true;
+                    break;
+                }
+                if (p.empty()) // no more path to find
+                    break;
+                p.pop_back();
             }
-            if (p.empty()) // no more path to find
-                break;
-            p.pop_back();
+            if (!found)
+                logger.warn("Unable to find any path for NPE fix version!");
         }
-        if (!found)
-            logger.warn("Unable to find any path for NPE fix version!");
 
         auto &fromFile = Global.functionLocations[from.fid].file;
         removeNpeBadSource(fromFile, fromLine);
@@ -983,6 +986,8 @@ int main(int argc, const char **argv) {
                                {"no-good-source"});
     args::Flag argNoNodes(argParser, "no-nodes", "Do not dump ICFG nodes",
                           {"no-nodes"});
+    args::Flag argNpeFix(argParser, "npe-fix",
+                         "Generate npe-fix (default false)", {"npe-fix"});
     args::Flag argDebug(argParser, "debug", "Debug mode", {"debug"});
 
     args::Flag argVersion(argParser, "version", "Display version", {"version"});
@@ -1023,6 +1028,7 @@ int main(int argc, const char **argv) {
     Global.keepAST = getArgValue(argKeepAST, "Keep AST");
     Global.noGoodSource = getArgValue(argNoGoodSource, "No good-source");
     Global.noNodes = getArgValue(argNoNodes, "No nodes");
+    Global.npeFix = getArgValue(argNpeFix, "NPE fix");
     Global.debug = getArgValue(argDebug, "Debug");
 
     setClangPath(argv[0]);

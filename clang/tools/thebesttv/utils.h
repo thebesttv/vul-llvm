@@ -354,6 +354,7 @@ struct GlobalStat {
     bool keepAST;
     bool noGoodSource;
     bool noNodes;
+    bool npeFix;
     bool debug;
 };
 
