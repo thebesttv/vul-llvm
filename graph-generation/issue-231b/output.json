@@ -1,0 +1,108 @@
+{
+    "project": "demo",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/input.json",
+    "results": [
+        {
+            "type": "npe-bug",
+            "sourceIndex": 0,
+            "nodes": [
+                12,
+                10,
+                9,
+                6,
+                5,
+                2,
+                1
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/main2.cpp",
+                    "beginLine": 40,
+                    "beginColumn": 5,
+                    "endLine": 40,
+                    "endColumn": 33,
+                    "content": "TestStru *table = GetData();",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/main2.cpp",
+                        "beginLine": 40,
+                        "beginColumn": 15,
+                        "endLine": 40,
+                        "endColumn": 20,
+                        "content": "table"
+                    },
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/main2.cpp",
+                    "beginLine": 41,
+                    "beginColumn": 5,
+                    "endLine": 41,
+                    "endColumn": 19,
+                    "content": "UsePtr(*table)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/main2.cpp",
+                    "beginLine": 31,
+                    "beginColumn": 1,
+                    "endLine": 35,
+                    "endColumn": 2,
+                    "content": "void UsePtr(const TestStru &table)\n{\n    TestClass2 table2(&table);\n    UsePtr2( ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/main2.cpp",
+                    "beginLine": 33,
+                    "beginColumn": 16,
+                    "endLine": 33,
+                    "endColumn": 30,
+                    "content": "table2(&table)",
+                    "stmtKind": "CXXConstructExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/main2.cpp",
+                    "beginLine": 19,
+                    "beginColumn": 5,
+                    "endLine": 20,
+                    "endColumn": 56,
+                    "content": "explicit TestClass2(const TestStru *table) : \n\t\tTestClass1<TestStru>(const_cast< ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/main2.cpp",
+                    "beginLine": 20,
+                    "beginColumn": 3,
+                    "endLine": 20,
+                    "endColumn": 54,
+                    "content": "TestClass1<TestStru>(const_cast<TestStru *>(table))",
+                    "stmtKind": "CXXConstructExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/main2.cpp",
+                    "beginLine": 6,
+                    "beginColumn": 5,
+                    "endLine": 9,
+                    "endColumn": 6,
+                    "content": "TestClass1(T *data) : data_(data)\n    {\n        ptr = &data->ptr; // sink\n    }"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/main2.cpp",
+                    "beginLine": 8,
+                    "beginColumn": 9,
+                    "endLine": 8,
+                    "endColumn": 25,
+                    "content": "ptr = &data->ptr",
+                    "stmtKind": "BinaryOperator"
+                }
+            ]
+        }
+    ]
+}
