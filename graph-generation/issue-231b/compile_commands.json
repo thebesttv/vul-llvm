@@ -1,0 +1,7 @@
+[
+    {
+        "command": "c++ -c main2.cpp",
+        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b",
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-231b/main2.cpp"
+    }
+]
