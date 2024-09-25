@@ -1,0 +1,6 @@
+{
+    "project": "demo",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-239",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-239/compile_commands.json",
+    "results": []
+}
