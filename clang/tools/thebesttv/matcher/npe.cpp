@@ -30,6 +30,14 @@ NpeGoodSourceVisitor::saveNpeSuspectedSources(
                                index);
 }
 
+/**
+ * 对于形如 p = NULL 或 p = foo() 的情况，加入 NPE 可疑的 source 中。
+ * 来源的语句可以是 VarDecl，或 BinaryOperator 中的赋值语句。
+ *
+ * @param range 表达式的位置
+ * @param rhs RHS，根据它是 NULL 还是 foo() 行为不同
+ * @param varRange LHS变量的位置，用于标记变量名
+ */
 void NpeGoodSourceVisitor::checkFormPEqNullOrFoo(
     const SourceRange &range, const Expr *rhs,
     const std::optional<SourceRange> &varRange) {
