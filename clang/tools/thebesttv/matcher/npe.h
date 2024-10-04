@@ -42,6 +42,7 @@ class NpeSourceMatcher : public BaseMatcher {
 class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
                              public NpeSourceMatcher {
 
+    // 加入 NPE 可疑的 source 中
     std::optional<SrcWeakPtr>
     saveNpeSuspectedSources(const SourceRange &range,
                             const std::optional<SourceRange> &varRange);
