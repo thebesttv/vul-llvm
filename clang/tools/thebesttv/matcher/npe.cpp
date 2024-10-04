@@ -30,6 +30,17 @@ NpeGoodSourceVisitor::saveNpeSuspectedSources(
                                index);
 }
 
+void NpeGoodSourceVisitor::saveNpeSuspectedSourcesWithCallee(
+    const SourceRange &range, const std::optional<SourceRange> &varRange,
+    const FunctionDecl *calleeDecl) {
+    auto it = saveNpeSuspectedSources(range, varRange);
+    if (it) {
+        // callee 可能还没被处理过，记录 signature，而不是 fid
+        std::string callee = getFullSignature(calleeDecl);
+        Global.npeSuspectedSourcesFunMap[callee].push_back(it.value());
+    }
+}
+
 /**
  * 对于形如 p = NULL 或 p = foo() 的情况，加入 NPE 可疑的 source 中。
  * 来源的语句可以是 VarDecl，或 BinaryOperator 中的赋值语句。
@@ -49,12 +60,7 @@ void NpeGoodSourceVisitor::checkFormPEqNullOrFoo(
         saveNpeSuspectedSources(range, varRange);
     } else if (const FunctionDecl *calleeDecl = getDirectCallee(rhs)) {
         // p = foo() && foo() = { ...; return NULL; }
-        auto it = saveNpeSuspectedSources(range, varRange);
-        if (it) {
-            // callee 可能还没被处理过，记录 signature，而不是 fid
-            std::string callee = getFullSignature(calleeDecl);
-            Global.npeSuspectedSourcesFunMap[callee].push_back(it.value());
-        }
+        saveNpeSuspectedSourcesWithCallee(range, varRange, calleeDecl);
     }
 }
 

@@ -45,6 +45,12 @@ class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
     std::optional<SrcWeakPtr>
     saveNpeSuspectedSources(const SourceRange &range,
                             const std::optional<SourceRange> &varRange);
+    // source 与函数 callee 是否可能返回 null 相关。
+    // 如果 callee 可能返回 null，就是 NPE 可疑的 source。
+    // 否则，会在之后被删除。
+    void saveNpeSuspectedSourcesWithCallee(
+        const SourceRange &range, const std::optional<SourceRange> &varRange,
+        const FunctionDecl *calleeDecl);
 
     void checkFormPEqNullOrFoo(const SourceRange &range, const Expr *rhs,
                                const std::optional<SourceRange> &varRange);
