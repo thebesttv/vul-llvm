@@ -38,6 +38,7 @@ class NpeSourceMatcher : public BaseMatcher {
  * 3. p = foo() && 在 input.json 中指定 foo 可能返回 NULL
  *    同样，判断在 main() 里做
  * 4. p == NULL / p != NULL
+ * 5. 对 foo() 解引用，包括 *foo()、foo()[i]、foo()->x
  */
 class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
                              public NpeSourceMatcher {
@@ -63,6 +64,13 @@ class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
     bool VisitVarDecl(VarDecl *D);
     bool VisitBinaryOperator(BinaryOperator *S);
     bool VisitReturnStmt(ReturnStmt *S);
+
+    // 5 中形如 *foo() 的情况
+    bool VisitUnaryOperator(UnaryOperator *S);
+    // 5 中形如 foo()[i] 的情况
+    bool VisitArraySubscriptExpr(ArraySubscriptExpr *S);
+    // 5 中形如 foo()->x 的情况
+    bool VisitMemberExpr(MemberExpr *S);
 };
 
 class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,

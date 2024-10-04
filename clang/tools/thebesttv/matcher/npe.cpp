@@ -125,3 +125,47 @@ bool NpeGoodSourceVisitor::VisitReturnStmt(ReturnStmt *S) {
     }
     return true;
 }
+
+bool NpeGoodSourceVisitor::VisitUnaryOperator(UnaryOperator *S) {
+    if (S->getOpcode() == UO_Deref) {
+        auto *E = S->getSubExpr();
+        if (isPointerType(E)) {
+            // *E
+            if (const FunctionDecl *calleeDecl = getDirectCallee(E)) {
+                // *foo()
+                saveNpeSuspectedSourcesWithCallee(
+                    S->getSourceRange(), getProperSourceRange(E), calleeDecl);
+            }
+        }
+    }
+
+    return true;
+}
+
+bool NpeGoodSourceVisitor::VisitArraySubscriptExpr(ArraySubscriptExpr *S) {
+    auto *E = S->getBase();
+    if (isPointerType(E)) {
+        // E[i]
+        if (const FunctionDecl *calleeDecl = getDirectCallee(E)) {
+            // foo()[i]
+            saveNpeSuspectedSourcesWithCallee(
+                S->getSourceRange(), getProperSourceRange(E), calleeDecl);
+        }
+    }
+
+    return true;
+}
+
+bool NpeGoodSourceVisitor::VisitMemberExpr(MemberExpr *S) {
+    auto *E = S->getBase();
+    if (isPointerType(E)) {
+        // E->x
+        if (const FunctionDecl *calleeDecl = getDirectCallee(E)) {
+            // foo()->x
+            saveNpeSuspectedSourcesWithCallee(
+                S->getSourceRange(), getProperSourceRange(E), calleeDecl);
+        }
+    }
+
+    return true;
+}
