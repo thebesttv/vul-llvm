@@ -38,4 +38,6 @@ int pNeNullMain() {
         ;
     if (0 != i)
         ;
+
+    return 0;
 }

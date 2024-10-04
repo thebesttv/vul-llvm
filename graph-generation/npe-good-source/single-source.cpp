@@ -37,4 +37,6 @@ int singleSourceMain() {
     x1 = (int *)0;
     x2 = (int *)(int *)NULL;
     x3 = (int *)(int *)(int *)nullptr;
+
+    return 0;
 }

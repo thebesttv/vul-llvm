@@ -40,4 +40,6 @@ int externalMain() {
     int *i1 = a.b->iNonNull();
     int *i2 = a.b->iNull();
     int *i3 = a.b->iMayNull();
+
+    return 0;
 }
