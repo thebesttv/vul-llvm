@@ -1,13 +1,13 @@
 [
     {
+        "command": "c++ -c chain-return.cpp",
+        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source",
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/chain-return.cpp"
+    },
+    {
         "command": "c++ -c external.cpp",
         "directory": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source",
         "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/external.cpp"
-    },
-    {
-        "command": "c++ -c single-source.cpp",
-        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source",
-        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/single-source.cpp"
     },
     {
         "command": "c++ -c pNeNull.cpp",
@@ -15,8 +15,13 @@
         "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/pNeNull.cpp"
     },
     {
-        "command": "c++ -c chain-return.cpp",
+        "command": "c++ -c refFoo.cpp",
         "directory": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source",
-        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/chain-return.cpp"
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp"
+    },
+    {
+        "command": "c++ -c single-source.cpp",
+        "directory": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source",
+        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/single-source.cpp"
     }
 ]
