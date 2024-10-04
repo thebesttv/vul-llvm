@@ -38,7 +38,8 @@ class NpeSourceMatcher : public BaseMatcher {
  * 3. p = foo() && 在 input.json 中指定 foo 可能返回 NULL
  *    同样，判断在 main() 里做
  * 4. p == NULL / p != NULL
- * 5. 对 foo() 解引用，包括 *foo()、foo()[i]、foo()->x
+ * 5. 对 foo() 解引用，包括 *foo()、foo()[i]、foo()->x。
+ *    此时 variable 中为函数名。函数名从 calleeDecl 中获取。
  */
 class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
                              public NpeSourceMatcher {
@@ -53,6 +54,26 @@ class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
     void saveNpeSuspectedSourcesWithCallee(
         const SourceRange &range, const std::optional<SourceRange> &varRange,
         const FunctionDecl *calleeDecl);
+    /**
+     * 类似上一个，但把 callee 作为 variable。
+     *
+     * 之前在 5 的三个函数中，使用 getProperSourceRange(E) 获得函数名。
+     * 但由于宏的影响（如 issue 239）会出问题：
+     *   #define FOO foo
+     *   FOO();
+     * 这里 E 的 source range 的 begin 是 FOO，而 end 是括号，
+     * 导致 content 可能横跨两个文件。
+     *
+     * 所以改用 getProperSourceRange(E).getBegin()，
+     * 不过这样导致只会加入函数名的第一部分，例如：
+     * - foo() -> foo
+     * - issue 239 中的 GetCharAddr<TestClass> -> GetCharAddr
+     *
+     * 现在改为从 calleeDecl 中获取。
+     * 虽然还是只有第一部分，不过起码能去掉宏的影响。
+     */
+    void saveNpeSuspectedSourcesWithCallee(const Stmt *S,
+                                           const FunctionDecl *calleeDecl);
 
     void checkFormPEqNullOrFoo(const SourceRange &range, const Expr *rhs,
                                const std::optional<SourceRange> &varRange);

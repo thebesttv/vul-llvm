@@ -41,6 +41,13 @@ void NpeGoodSourceVisitor::saveNpeSuspectedSourcesWithCallee(
     }
 }
 
+void NpeGoodSourceVisitor::saveNpeSuspectedSourcesWithCallee(
+    const Stmt *S, const FunctionDecl *calleeDecl) {
+    saveNpeSuspectedSourcesWithCallee(
+        S->getSourceRange(), calleeDecl->getNameInfo().getSourceRange(),
+        calleeDecl);
+}
+
 /**
  * 对于形如 p = NULL 或 p = foo() 的情况，加入 NPE 可疑的 source 中。
  * 来源的语句可以是 VarDecl，或 BinaryOperator 中的赋值语句。
@@ -133,8 +140,7 @@ bool NpeGoodSourceVisitor::VisitUnaryOperator(UnaryOperator *S) {
             // *E
             if (const FunctionDecl *calleeDecl = getDirectCallee(E)) {
                 // *foo()
-                saveNpeSuspectedSourcesWithCallee(
-                    S->getSourceRange(), getProperSourceRange(E), calleeDecl);
+                saveNpeSuspectedSourcesWithCallee(S, calleeDecl);
             }
         }
     }
@@ -148,8 +154,7 @@ bool NpeGoodSourceVisitor::VisitArraySubscriptExpr(ArraySubscriptExpr *S) {
         // E[i]
         if (const FunctionDecl *calleeDecl = getDirectCallee(E)) {
             // foo()[i]
-            saveNpeSuspectedSourcesWithCallee(
-                S->getSourceRange(), getProperSourceRange(E), calleeDecl);
+            saveNpeSuspectedSourcesWithCallee(S, calleeDecl);
         }
     }
 
@@ -162,8 +167,7 @@ bool NpeGoodSourceVisitor::VisitMemberExpr(MemberExpr *S) {
         // E->x
         if (const FunctionDecl *calleeDecl = getDirectCallee(E)) {
             // foo()->x
-            saveNpeSuspectedSourcesWithCallee(
-                S->getSourceRange(), getProperSourceRange(E), calleeDecl);
+            saveNpeSuspectedSourcesWithCallee(S, calleeDecl);
         }
     }
 

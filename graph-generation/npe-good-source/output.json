@@ -488,11 +488,11 @@
                     "content": "*nullInt()",
                     "variable": {
                         "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
-                        "beginLine": 16,
-                        "beginColumn": 15,
-                        "endLine": 16,
-                        "endColumn": 24,
-                        "content": "nullInt()"
+                        "beginLine": 6,
+                        "beginColumn": 6,
+                        "endLine": 6,
+                        "endColumn": 13,
+                        "content": "nullInt"
                     }
                 }
             ]
@@ -509,11 +509,11 @@
                     "content": "nullInt()[x1]",
                     "variable": {
                         "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
-                        "beginLine": 17,
-                        "beginColumn": 14,
-                        "endLine": 17,
-                        "endColumn": 23,
-                        "content": "nullInt()"
+                        "beginLine": 6,
+                        "beginColumn": 6,
+                        "endLine": 6,
+                        "endColumn": 13,
+                        "content": "nullInt"
                     }
                 }
             ]
@@ -530,11 +530,11 @@
                     "content": "nullA()->x",
                     "variable": {
                         "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
-                        "beginLine": 18,
-                        "beginColumn": 14,
-                        "endLine": 18,
-                        "endColumn": 21,
-                        "content": "nullA()"
+                        "beginLine": 10,
+                        "beginColumn": 4,
+                        "endLine": 10,
+                        "endColumn": 9,
+                        "content": "nullA"
                     }
                 }
             ]
@@ -551,11 +551,11 @@
                     "content": "nullA()->g",
                     "variable": {
                         "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
-                        "beginLine": 20,
-                        "beginColumn": 14,
-                        "endLine": 20,
-                        "endColumn": 21,
-                        "content": "nullA()"
+                        "beginLine": 10,
+                        "beginColumn": 4,
+                        "endLine": 10,
+                        "endColumn": 9,
+                        "content": "nullA"
                     }
                 }
             ]
@@ -572,11 +572,11 @@
                     "content": "((A *)nullInt())->x",
                     "variable": {
                         "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
-                        "beginLine": 22,
-                        "beginColumn": 20,
-                        "endLine": 22,
-                        "endColumn": 29,
-                        "content": "nullInt()"
+                        "beginLine": 6,
+                        "beginColumn": 6,
+                        "endLine": 6,
+                        "endColumn": 13,
+                        "content": "nullInt"
                     }
                 }
             ]
@@ -593,11 +593,11 @@
                     "content": "((A *)nullInt())->g",
                     "variable": {
                         "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
-                        "beginLine": 24,
-                        "beginColumn": 20,
-                        "endLine": 24,
-                        "endColumn": 29,
-                        "content": "nullInt()"
+                        "beginLine": 6,
+                        "beginColumn": 6,
+                        "endLine": 6,
+                        "endColumn": 13,
+                        "content": "nullInt"
                     }
                 }
             ]
