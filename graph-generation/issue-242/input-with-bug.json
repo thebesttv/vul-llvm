@@ -1,0 +1,47 @@
+{
+    "project": "demo",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242/compile_commands.json",
+    "results": [
+        {
+            "type": "npe",
+            "CodeXIssueID": "0",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242/main.cpp",
+                    "line": 35,
+                    "column": 12,
+                    "var": "TypeTest_2::GetPtr()"
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242/main.cpp",
+                    "line": 35,
+                    "column": 12,
+                    "var": "TypeTest_2::GetPtr()"
+                }
+            ]
+        },
+        {
+            "type": "npe",
+            "CodeXIssueID": "1",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242/main.cpp",
+                    "line": 41,
+                    "column": 17,
+                    "var": "ptr"
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242/main.cpp",
+                    "line": 42,
+                    "column": 12,
+                    "var": "ptr"
+                }
+            ]
+        }
+    ]
+}
