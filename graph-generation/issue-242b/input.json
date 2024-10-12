@@ -1,7 +1,7 @@
 {
     "project": "demo",
-    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242",
-    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242/compile_commands.json",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/compile_commands.json",
     "results": [
         {
             "type": "npe",
@@ -9,14 +9,14 @@
             "locations": [
                 {
                     "type": "source",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
                     "line": 35,
                     "column": 12,
                     "var": "TypeTest_2::GetPtr()"
                 },
                 {
                     "type": "sink",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
                     "line": 35,
                     "column": 12,
                     "var": "TypeTest_2::GetPtr()"
@@ -29,14 +29,14 @@
             "locations": [
                 {
                     "type": "source",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
                     "line": 41,
                     "column": 17,
                     "var": "ptr"
                 },
                 {
                     "type": "sink",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
                     "line": 42,
                     "column": 12,
                     "var": "ptr"
