@@ -30,7 +30,9 @@ bool BaseMatcher::isPointerType(const Expr *E) {
     if (!E)
         return false;
     auto type = E->getType().getTypePtrOrNull();
-    return type && type->isAnyPointerType();
+    // 对于 issue 242 main.cpp 第 9 行 nullptr 的对应类型
+    // isAnyPointerType() 返回 false，isNullPtrType() 返回 true
+    return type && (type->isAnyPointerType() || type->isNullPtrType());
 }
 
 std::optional<ordered_json>
