@@ -102,6 +102,7 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
 
     enum {
         // return null, p = xxx, p == null, p != null
+        // 根据 10 月 12 日讨论，加入 foo() 的情况
         RETURN_NULL_OR_NPE_GOOD_SOURCE,
         // nullptr, NULL, 0
         NULL_CONSTANT
@@ -255,12 +256,12 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
         return true;
     }
 
-    // bool VisitCallExpr(CallExpr *expr) {
-    //     if (currentStage != RETURN_NULL_OR_NPE_GOOD_SOURCE)
-    //         return true;
-    //     setMatchAndMaybeDumpJson(expr->getSourceRange(), std::nullopt);
-    //     return false;
-    // }
+    bool VisitCallExpr(CallExpr *expr) {
+        if (currentStage != RETURN_NULL_OR_NPE_GOOD_SOURCE)
+            return true;
+        setMatchAndMaybeDumpJson(expr->getSourceRange(), std::nullopt);
+        return false;
+    }
 
     bool VisitExpr(Expr *E) {
         if (currentStage != NULL_CONSTANT)
