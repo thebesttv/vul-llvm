@@ -1,0 +1,96 @@
+{
+    "project": "demo",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/input.json",
+    "results": [
+        {
+            "type": "npe-bug",
+            "sourceIndex": 0,
+            "nodes": [
+                14,
+                13
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
+                    "beginLine": 35,
+                    "beginColumn": 9,
+                    "endLine": 35,
+                    "endColumn": 29,
+                    "content": "TypeTest_2::GetPtr()",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
+                    "beginLine": 35,
+                    "beginColumn": 2,
+                    "endLine": 35,
+                    "endColumn": 39,
+                    "content": "return TypeTest_2::GetPtr()->mocData_",
+                    "stmtKind": "ReturnStmt"
+                }
+            ]
+        },
+        {
+            "type": "npe-bug",
+            "sourceIndex": 1,
+            "nodes": [
+                17
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
+                    "beginLine": 41,
+                    "beginColumn": 2,
+                    "endLine": 41,
+                    "endColumn": 41,
+                    "content": "TypeTest_2 *ptr = TypeTest_2::GetPtr();",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
+                        "beginLine": 41,
+                        "beginColumn": 14,
+                        "endLine": 41,
+                        "endColumn": 17,
+                        "content": "ptr"
+                    },
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
+                    "beginLine": 42,
+                    "beginColumn": 2,
+                    "endLine": 42,
+                    "endColumn": 22,
+                    "content": "return ptr->mocData_",
+                    "stmtKind": "ReturnStmt"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
+                    "beginLine": 8,
+                    "beginColumn": 7,
+                    "endLine": 8,
+                    "endColumn": 25,
+                    "content": "buffer_ == nullptr",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
+                        "beginLine": 8,
+                        "beginColumn": 7,
+                        "endLine": 8,
+                        "endColumn": 14,
+                        "content": "buffer_"
+                    }
+                }
+            ]
+        }
+    ]
+}
