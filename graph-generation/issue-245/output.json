@@ -71,6 +71,27 @@
             "locations": [
                 {
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/main.cpp",
+                    "beginLine": 83,
+                    "beginColumn": 12,
+                    "endLine": 83,
+                    "endColumn": 21,
+                    "content": "GetPtr(0)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/main.cpp",
+                        "beginLine": 63,
+                        "beginColumn": 13,
+                        "endLine": 63,
+                        "endColumn": 19,
+                        "content": "GetPtr"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/main.cpp",
                     "beginLine": 88,
                     "beginColumn": 13,
                     "endLine": 88,
