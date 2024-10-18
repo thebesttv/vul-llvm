@@ -1,0 +1,107 @@
+{
+    "project": "demo",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/compile_commands.json",
+    "results": [
+        {
+            "type": "npe",
+            "CodeXIssueID": "0",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
+                    "line": 86,
+                    "column": 35,
+                    "var": "GetCharAddr"
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
+                    "line": 66,
+                    "column": 9,
+                    "var": "ptr"
+                }
+            ]
+        },
+        {
+            "type": "npe",
+            "CodeXIssueID": "1",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
+                    "line": 97,
+                    "column": 12,
+                    "var": "GetCharAddr"
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
+                    "line": 71,
+                    "column": 9,
+                    "var": "ptr"
+                }
+            ]
+        },
+        {
+            "type": "npe",
+            "CodeXIssueID": "2",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
+                    "line": 108,
+                    "column": 10,
+                    "var": "GetCharAddr"
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
+                    "line": 71,
+                    "column": 9,
+                    "var": "ptr"
+                }
+            ]
+        },
+        {
+            "type": "npe",
+            "CodeXIssueID": "3",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
+                    "line": 145,
+                    "column": 22,
+                    "var": "GetPtr"
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
+                    "line": 132,
+                    "column": 5,
+                    "var": "ptr"
+                }
+            ]
+        },
+        {
+            "type": "npe",
+            "CodeXIssueID": "0",
+            "locations": [
+                {
+                    "type": "source",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
+                    "line": 157,
+                    "column": 9,
+                    "var": "GetPtr"
+                },
+                {
+                    "type": "sink",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
+                    "line": 156,
+                    "column": 5,
+                    "var": "GetPtr"
+                }
+            ]
+        }
+    ]
+}
