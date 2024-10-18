@@ -39,6 +39,7 @@ class NpeSourceMatcher : public BaseMatcher {
  *    同样，判断在 main() 里做
  * 4. p == NULL / p != NULL
  * 5. 对 foo() 解引用，包括 *foo()、foo()[i]、foo()->x。
+ *    额外包括 foo() 作为函数入参的情况，如 g(foo())。
  *    此时 variable 中为函数名。函数名从 calleeDecl 中获取。
  */
 class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
@@ -92,6 +93,8 @@ class NpeGoodSourceVisitor : public RecursiveASTVisitor<NpeGoodSourceVisitor>,
     bool VisitArraySubscriptExpr(ArraySubscriptExpr *S);
     // 5 中形如 foo()->x 的情况
     bool VisitMemberExpr(MemberExpr *S);
+    // 5 中 foo() 作为函数入参的情况
+    bool VisitCallExpr(CallExpr *expr);
 };
 
 class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,

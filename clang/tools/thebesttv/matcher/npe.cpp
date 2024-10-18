@@ -173,3 +173,15 @@ bool NpeGoodSourceVisitor::VisitMemberExpr(MemberExpr *S) {
 
     return true;
 }
+
+bool NpeGoodSourceVisitor::VisitCallExpr(CallExpr *expr) {
+    for (int i = 0; i < expr->getNumArgs(); i++) {
+        auto arg = expr->getArg(i);
+        if (const FunctionDecl *calleeDecl = getDirectCallee(arg)) {
+            // foo() 作为函数入参
+            saveNpeSuspectedSourcesWithCallee(arg, calleeDecl);
+        }
+    }
+
+    return true;
+}
