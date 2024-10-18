@@ -20,6 +20,14 @@
                     "endLine": 35,
                     "endColumn": 29,
                     "content": "TypeTest_2::GetPtr()",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-242b/main.cpp",
+                        "beginLine": 6,
+                        "beginColumn": 12,
+                        "endLine": 6,
+                        "endColumn": 18,
+                        "content": "GetPtr"
+                    },
                     "stmtKind": "CallExpr"
                 },
                 {
