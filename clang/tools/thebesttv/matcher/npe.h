@@ -259,7 +259,9 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
     bool VisitCallExpr(CallExpr *expr) {
         if (currentStage != RETURN_NULL_OR_NPE_GOOD_SOURCE)
             return true;
-        setMatchAndMaybeDumpJson(expr->getSourceRange(), std::nullopt);
+        auto calleeDecl = getDirectCallee(expr);
+        setMatchAndMaybeDumpJson(expr->getSourceRange(),
+                                 calleeDecl->getNameInfo().getSourceRange());
         return false;
     }
 
@@ -305,6 +307,8 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
         } else if (const BinaryOperator *binOp =
                        dyn_cast<BinaryOperator>(stmt)) {
             VisitBinaryOperator(const_cast<BinaryOperator *>(binOp));
+        } else if (const CallExpr *callExpr = dyn_cast<CallExpr>(stmt)) {
+            VisitCallExpr(const_cast<CallExpr *>(callExpr));
         }
 
         if (isMatch && dumpedJson.contains("variable")) {
