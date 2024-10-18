@@ -142,6 +142,10 @@ void dumpStmt(const ASTContext &Context, const Stmt *S) {
     //     requireTrue(false, "e is macro but b is not");
 }
 
+std::string getStmtKind(const Stmt *S) {
+    return std::string(S->getStmtClassName());
+}
+
 std::unique_ptr<Location>
 Location::fromSourceLocation(const ASTContext &Context, SourceLocation loc) {
     /**

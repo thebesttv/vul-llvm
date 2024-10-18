@@ -444,7 +444,7 @@ void dumpICFGNode(int u, ordered_json &jPath, int beginSid = 0,
                 saveLocationInfo(Context, S->getSourceRange(), j);
                 if (dumpFirstVar && first)
                     visitor.dump(S, j);
-                j["stmtKind"] = std::string(S->getStmtClassName());
+                j["stmtKind"] = getStmtKind(S);
                 jPath.push_back(j);
                 first = false;
             }

@@ -126,6 +126,8 @@ void dumpSourceLocation(const std::string &msg, const ASTContext &Context,
 
 void dumpStmt(const ASTContext &Context, const Stmt *S);
 
+std::string getStmtKind(const Stmt *S);
+
 struct Location {
     std::string file; // absolute path
     int line;
