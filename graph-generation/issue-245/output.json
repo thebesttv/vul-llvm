@@ -1,0 +1,91 @@
+{
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/input.json",
+    "results": [
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/main.cpp",
+                    "beginLine": 43,
+                    "beginColumn": 20,
+                    "endLine": 43,
+                    "endColumn": 48,
+                    "content": "GET_ADDR_INTERFACE()->GetPtr",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/main.cpp",
+                        "beginLine": 15,
+                        "beginColumn": 10,
+                        "endLine": 15,
+                        "endColumn": 21,
+                        "content": "GetCharAddr"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/main.cpp",
+                    "beginLine": 49,
+                    "beginColumn": 5,
+                    "endLine": 49,
+                    "endColumn": 37,
+                    "content": "GET_ADDR_INTERFACE()->ProcessPtr",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/main.cpp",
+                        "beginLine": 15,
+                        "beginColumn": 10,
+                        "endLine": 15,
+                        "endColumn": 21,
+                        "content": "GetCharAddr"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/main.cpp",
+                    "beginLine": 54,
+                    "beginColumn": 5,
+                    "endLine": 54,
+                    "endColumn": 41,
+                    "content": "GetCharAddr<TestClass>()->ProcessPtr",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/main.cpp",
+                        "beginLine": 15,
+                        "beginColumn": 10,
+                        "endLine": 15,
+                        "endColumn": 21,
+                        "content": "GetCharAddr"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/main.cpp",
+                    "beginLine": 88,
+                    "beginColumn": 13,
+                    "endLine": 88,
+                    "endColumn": 25,
+                    "content": "GetPtr(0)->a",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-245/main.cpp",
+                        "beginLine": 63,
+                        "beginColumn": 13,
+                        "endLine": 63,
+                        "endColumn": 19,
+                        "content": "GetPtr"
+                    }
+                }
+            ]
+        }
+    ]
+}
