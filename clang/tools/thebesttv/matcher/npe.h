@@ -2,6 +2,7 @@
 
 #include "DumpPath.h"
 #include "base.h"
+#include <fmt/color.h>
 
 class NpeSourceMatcher : public BaseMatcher {
   private:
@@ -155,6 +156,26 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
         }
     };
 
+    // 用于 debug
+    void processSourceLocation(SourceLocation loc, std::string msg) {
+        FullSourceLoc fullLoc = Context->getFullLoc(loc);
+        if (fullLoc.isInvalid()) {
+            logger.error("Invalid location: {}", msg);
+            return;
+        }
+        if (fullLoc.isFileID()) {
+            logger.info("> {} F: {}:{}", msg, fullLoc.getLineNumber(),
+                        fullLoc.getColumnNumber());
+            return;
+        }
+        logger.info("> {} M", msg);
+        // 这个对于 issue 247 比较有用
+        processSourceLocation(fullLoc.getImmediateMacroCallerLoc(),
+                              "  " + msg + " I");
+        processSourceLocation(fullLoc.getSpellingLoc(), "  " + msg + " S");
+        processSourceLocation(fullLoc.getExpansionLoc(), "  " + msg + " E");
+    }
+
     /**
      * 根据 source 点的行号、列号进行匹配
      *
@@ -174,17 +195,70 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
             if (!isMatch)
                 continue;
 
-            ordered_json j;
-            if (saveLocationInfo(*Context, stmt->getSourceRange(), j)) {
-                auto x = Item(varLoc, j, line, column);
-                matches.push_back(x);
-                // stmt->dumpColor();
-                // logger.info(
-                //     "Begin: {}:{}, end: {}:{}, size: {}, within range: {}",
-                //     x.beginLine, x.beginColumn, x.endLine, x.endColumn,
-                //     x.size, x.withinRange);
-                // logger.info("{}", j["content"].get<std::string>());
+            auto addToMatches = [&](const SourceRange range) {
+                ordered_json j;
+                if (saveLocationInfo(*Context, range, j)) {
+                    auto x = Item(varLoc, j, line, column);
+                    if (x.endLine - x.beginLine > 1)
+                        return;
+
+                    matches.push_back(x);
+
+                    logger.info("Added to matches: begin: {}:{}, end: {}:{}, "
+                                "size: {}, within range: {}",
+                                x.beginLine, x.beginColumn, x.endLine,
+                                x.endColumn, x.size, x.withinRange);
+                    auto content = j["content"].get<std::string>();
+                    logger.info(
+                        fmt::format(fg(fmt::color::red), "{}", content));
+                }
+            };
+
+            /*
+            auto getSpellingRange = [&](const SourceRange range) {
+                auto b = range.getBegin();
+                auto e = range.getEnd();
+                auto &SM = Context->getSourceManager();
+                return SourceRange(SM.getSpellingLoc(b), SM.getSpellingLoc(e));
+            };
+
+            auto getExpansionRange = [&](const SourceRange range) {
+                auto b = range.getBegin();
+                auto e = range.getEnd();
+                auto &SM = Context->getSourceManager();
+                return SourceRange(SM.getExpansionLoc(b),
+                                   SM.getExpansionLoc(e));
+            };
+            */
+
+            auto getImmediateMacroCallerRange = [&](const SourceRange range) {
+                auto b = range.getBegin();
+                auto e = range.getEnd();
+                auto &SM = Context->getSourceManager();
+                return SourceRange(SM.getImmediateMacroCallerLoc(b),
+                                   SM.getImmediateMacroCallerLoc(e));
+            };
+
+            auto handleSingleSourceLocation = [&](const SourceLocation loc) {
+                if (!loc.isMacroID())
+                    return;
+                addToMatches(getImmediateMacroCallerRange(loc));
+            };
+
+            stmt->dumpColor();
+            processSourceLocation(stmt->getBeginLoc(), "Begin");
+            processSourceLocation(stmt->getEndLoc(), "End");
+
+            auto range = stmt->getSourceRange();
+            addToMatches(range);
+            if (auto memberCallExpr = dyn_cast<CXXMemberCallExpr>(stmt)) {
+                handleSingleSourceLocation(memberCallExpr->getBeginLoc());
+                handleSingleSourceLocation(memberCallExpr->getExprLoc());
+            } else if (auto callExpr = dyn_cast<CallExpr>(stmt)) {
+                handleSingleSourceLocation(callExpr->getExprLoc());
             }
+            // addToMatches(getSpellingRange(range));
+            // addToMatches(getExpansionRange(range));
         }
 
         if (matches.empty())
