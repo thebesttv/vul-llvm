@@ -1161,7 +1161,8 @@ int main(int argc, const char **argv) {
         fmt::print("{} stmts:\n", dump.size());
         for (const auto &j : dump) {
             std::string kind = j["stmtKind"].get<std::string>();
-            fmt::print(" {}:\n", fmt::format(fg(fmt::color::green), kind));
+            fmt::print(" {}:\n",
+                       fmt::format(fg(fmt::color::green), "{}", kind));
             fmt::print("  {}\n", j["content"].get<std::string>());
         }
 
