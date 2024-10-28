@@ -263,6 +263,8 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
         if (currentStage != RETURN_NULL_OR_NPE_GOOD_SOURCE)
             return true;
         auto calleeDecl = getDirectCallee(expr);
+        if (!calleeDecl)
+            return true;
         setMatchAndMaybeDumpJson(expr->getSourceRange(),
                                  calleeDecl->getNameInfo().getSourceRange());
         return false;
