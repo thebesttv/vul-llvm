@@ -357,6 +357,9 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
     std::vector<VarLocResult>
     transform(const std::vector<VarLocResult> original,
               const decltype(FunctionInfo::G) &G, int line, int column) {
+        if (original.empty())
+            return original;
+
         dumpJson = false;
 
         logger.info("In NpeBugSourceVisitor::transform");
