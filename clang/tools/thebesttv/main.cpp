@@ -122,10 +122,12 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
                 return std::nullopt;
             if (isStmt) {
                 // search for stmt
+                auto range =
+                    getProperSourceRange(*Context, stmt->getSourceRange());
                 auto bLoc =
-                    Location::fromSourceLocation(*Context, stmt->getBeginLoc());
+                    Location::fromSourceLocation(*Context, range.getBegin());
                 auto eLoc =
-                    Location::fromSourceLocation(*Context, stmt->getEndLoc());
+                    Location::fromSourceLocation(*Context, range.getEnd());
 
                 if (!bLoc || bLoc->file != file)
                     return std::nullopt;
