@@ -1,24 +1,12 @@
 #include "DumpPath.h"
 
-bool saveLocationInfo(ASTContext &Context, const SourceRange &range,
-                      ordered_json &j, bool getExpansionLocation) {
-    bool allGood = true;
+SourceRange getProperSourceRange(ASTContext &Context, const SourceRange &range,
+                                 bool getExpansionLocation) {
     SourceManager &SM = Context.getSourceManager();
 
     SourceLocation b = range.getBegin();
     if (b.isMacroID()) {
         b = getExpansionLocation ? SM.getExpansionLoc(b) : SM.getSpellingLoc(b);
-    }
-    auto bLoc = Location::fromSourceLocation(Context, b);
-    if (bLoc) {
-        j["file"] = bLoc->file;
-        j["beginLine"] = bLoc->line;
-        j["beginColumn"] = bLoc->column;
-    } else {
-        j["file"] = "!!! begin loc invalid !!!";
-        j["beginLine"] = -1;
-        j["beginColumn"] = -1;
-        allGood = false;
     }
 
     /**
@@ -38,7 +26,32 @@ bool saveLocationInfo(ASTContext &Context, const SourceRange &range,
         Lexer::getLocForEndOfToken(_e, 0, SM, Context.getLangOpts());
     if (e.isInvalid())
         e = _e;
+
+    return {b, e};
+}
+
+bool saveLocationInfo(ASTContext &Context, const SourceRange &range,
+                      ordered_json &j, bool getExpansionLocation) {
+    bool allGood = true;
+
+    auto properRange =
+        getProperSourceRange(Context, range, getExpansionLocation);
+    auto b = properRange.getBegin();
+    auto e = properRange.getEnd();
+
+    auto bLoc = Location::fromSourceLocation(Context, b);
     auto eLoc = Location::fromSourceLocation(Context, e);
+
+    if (bLoc) {
+        j["file"] = bLoc->file;
+        j["beginLine"] = bLoc->line;
+        j["beginColumn"] = bLoc->column;
+    } else {
+        j["file"] = "!!! begin loc invalid !!!";
+        j["beginLine"] = -1;
+        j["beginColumn"] = -1;
+        allGood = false;
+    }
 
     if (eLoc) {
         j["endLine"] = eLoc->line;
@@ -66,6 +79,7 @@ bool saveLocationInfo(ASTContext &Context, const SourceRange &range,
 
     std::string content;
     if (b.isValid() && e.isValid()) {
+        SourceManager &SM = Context.getSourceManager();
         const char *cb = SM.getCharacterData(b);
         const char *ce = SM.getCharacterData(e);
         auto length = ce - cb;
