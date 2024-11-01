@@ -204,6 +204,7 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
 
                     matches.push_back(x);
 
+                    /*
                     logger.info("Added to matches: begin: {}:{}, end: {}:{}, "
                                 "size: {}, within range: {}",
                                 x.beginLine, x.beginColumn, x.endLine,
@@ -211,6 +212,7 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
                     auto content = j["content"].get<std::string>();
                     logger.info(
                         fmt::format(fg(fmt::color::red), "{}", content));
+                    */
                 }
             };
 
@@ -245,9 +247,9 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
                 addToMatches(getImmediateMacroCallerRange(loc));
             };
 
-            stmt->dumpColor();
-            processSourceLocation(stmt->getBeginLoc(), "Begin");
-            processSourceLocation(stmt->getEndLoc(), "End");
+            // stmt->dumpColor();
+            // processSourceLocation(stmt->getBeginLoc(), "Begin");
+            // processSourceLocation(stmt->getEndLoc(), "End");
 
             auto range = stmt->getSourceRange();
             addToMatches(range);
