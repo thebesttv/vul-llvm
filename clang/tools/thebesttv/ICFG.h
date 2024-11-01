@@ -1,5 +1,7 @@
 #pragma once
 
+#include <queue>
+
 #include "clang/Analysis/CFG.h"
 
 using namespace clang;
@@ -60,4 +62,37 @@ struct ICFG {
     }
 
     void addFunction(int fid, const CFG &cfg);
+
+    std::vector<int> nodeVisited;
+
+    void calculateReachability() {
+        nodeVisited.resize(n);
+        std::fill(nodeVisited.begin(), nodeVisited.end(), 0);
+
+        std::queue<int> q;
+        for (const auto &p : entryExitOfFunction) {
+            int fid = p.first;
+            int entry = p.second.first;
+            int u = getNodeId(fid, entry);
+            q.push(u);
+        }
+
+        while (!q.empty()) {
+            int u = q.front();
+            q.pop();
+            if (nodeVisited[u])
+                continue;
+            nodeVisited[u] = true;
+            for (const auto &e : G[u]) {
+                if (e.type == Edge::Type::INTRA_PROC) {
+                    q.push(e.target);
+                }
+            }
+        }
+    }
+
+    bool reachable(int fid, int bid) {
+        int u = getNodeId(fid, bid);
+        return nodeVisited[u];
+    }
 };

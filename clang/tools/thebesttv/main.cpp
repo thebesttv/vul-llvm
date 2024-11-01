@@ -178,6 +178,9 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
         std::vector<VarLocResult> locResults;
         for (int bid = 0; bid < fi->n; bid++) {
             for (int sid = 0; sid < fi->G[bid].size(); sid++) {
+                // 跳过 unreachable 的 BB
+                if (!Global.icfg.reachable(fid, bid))
+                    continue;
                 auto result = locate(bid, sid);
                 if (result) {
                     locResults.push_back(result.value());
@@ -1117,6 +1120,18 @@ int main(int argc, const char **argv) {
             m += edges.size();
         }
         logger.info("ICFG: {} nodes, {} edges", Global.icfg.n, m);
+    }
+
+    {
+        logger.info("Calculating reachability ...");
+
+        Global.icfg.calculateReachability();
+
+        int unreachable = 0;
+        for (int r : Global.icfg.nodeVisited) {
+            unreachable += !r;
+        }
+        logger.info("Unreachable nodes: {}", unreachable);
     }
 
     fs::path outputDir = jsonPath.parent_path();
