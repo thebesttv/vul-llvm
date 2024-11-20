@@ -209,9 +209,23 @@ std::unique_ptr<ASTUnit> createASTOfFile(std::string file) {
     return loadFromASTDump(AstDumpPath);
 }
 
-ASTFromFile::ASTFromFile(const std::string &file)
-    : ASTDumpFile(getASTDumpFile(file)),
-      AST(std::shared_ptr(createASTOfFile(file))) {}
+ASTFromFile::ASTFromFile(const std::string &file, bool fromASTDump) {
+    if (fromASTDump) {
+        // 先用 -emit-ast 生成 AST dump，然后从 dump 中读取 AST
+        this->ASTDumpFile = getASTDumpFile(file);
+        this->AST = std::shared_ptr(createASTOfFile(file));
+    } else {
+        this->ASTDumpFile = ""; // 为空，代表没有对应的 AST dump 文件
+
+        ClangTool Tool(*Global.cb, {file});
+        DiagnosticConsumer DC = IgnoringDiagConsumer();
+        Tool.setDiagnosticConsumer(&DC);
+
+        std::vector<std::unique_ptr<ASTUnit>> ASTs;
+        Tool.buildASTs(ASTs);
+        this->AST = ASTs.empty() ? nullptr : std::move(ASTs[0]);
+    }
+}
 
 class ASTPool {
   private:
@@ -223,7 +237,7 @@ class ASTPool {
     std::shared_ptr<ASTFromFile> getASTOfFile(std::string file) {
         if (cache.exist(file))
             return cache.get(file);
-        auto AST = std::make_shared<ASTFromFile>(file);
+        auto AST = std::make_shared<ASTFromFile>(file, Global.fromASTDump);
         cache.put(file, AST);
         return AST;
     }

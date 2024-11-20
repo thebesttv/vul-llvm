@@ -13,10 +13,19 @@ class ASTFromFile {
     std::shared_ptr<ASTUnit> AST;
 
   public:
-    ASTFromFile(const std::string &file);
+    /**
+     * 有两种方式读取 AST：
+     * 1. 使用 ClangTool::buildASTs 直接读取。
+     *    这种方法可以获得模板函数的实例化 body，
+     *    但在一些项目中读取时，程序可能直接崩溃。
+     * 2. 先用 clang -emit-ast 生成 AST dump 文件，
+     *    然后用 ASTUnit::LoadFromASTFile 从 dump 中读取 AST。
+     *    这种方法不会导致程序崩溃，但无法获得模板函数的实例化 body。
+     */
+    ASTFromFile(const std::string &file, bool fromASTDump);
 
     ~ASTFromFile() {
-        if (!Global.keepAST) {
+        if (!Global.keepAST && !ASTDumpFile.empty()) {
             // 删除对应的 AST dump 文件
             llvm::sys::fs::remove(ASTDumpFile);
         }

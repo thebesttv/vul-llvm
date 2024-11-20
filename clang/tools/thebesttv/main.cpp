@@ -990,6 +990,11 @@ int main(int argc, const char **argv) {
         "DFS tick (timeout checking frequency), default 1'000'000", {"tick"});
     args::ValueFlag<int> argDfsTimeout(
         argParser, "N", "DFS timeout in seconds, default 30", {'t'});
+    args::Flag argFromASTDump(
+        argParser, "from-ast-dump",
+        "Load from AST dump generated with 'clang -emit-ast' "
+        "insted of ClangTool",
+        {"from-ast-dump"});
     args::Flag argKeepAST(argParser, "keep-ast", "Keep AST dumps on disk",
                           {"keep-ast"});
     args::Flag argNoGoodSource(argParser, "no-good-source",
@@ -1036,11 +1041,17 @@ int main(int argc, const char **argv) {
     Global.callDepth = getArgValue(argCallDepth, 6, "Max call depth");
     Global.dfsTick = getArgValue(argDfsTick, 1'000'000, "DFS tick");
     Global.dfsTimeout = getArgValue(argDfsTimeout, 30, "DFS timeout");
+    Global.fromASTDump = getArgValue(argFromASTDump, "From AST dump");
     Global.keepAST = getArgValue(argKeepAST, "Keep AST");
     Global.noGoodSource = getArgValue(argNoGoodSource, "No good-source");
     Global.noNodes = getArgValue(argNoNodes, "No nodes");
     Global.npeFix = getArgValue(argNpeFix, "NPE fix");
     Global.debug = getArgValue(argDebug, "Debug");
+
+    if (!Global.fromASTDump && Global.keepAST) {
+        logger.error("Not reading from AST dump, cannot keep AST");
+        exit(1);
+    }
 
     setClangPath(argv[0]);
 
