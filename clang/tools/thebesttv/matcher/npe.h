@@ -254,7 +254,8 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
             auto range = stmt->getSourceRange();
             addToMatches(range);
             if (auto memberCallExpr = dyn_cast<CXXMemberCallExpr>(stmt)) {
-                handleSingleSourceLocation(memberCallExpr->getBeginLoc());
+                // p->foo()，其中 beginLoc 是 p，endLoc 是 foo，只需要 endLoc
+                // handleSingleSourceLocation(memberCallExpr->getBeginLoc());
                 handleSingleSourceLocation(memberCallExpr->getExprLoc());
             } else if (auto callExpr = dyn_cast<CallExpr>(stmt)) {
                 handleSingleSourceLocation(callExpr->getExprLoc());
