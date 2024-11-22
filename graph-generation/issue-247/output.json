@@ -8,6 +8,7 @@
             "type": "npe-bug",
             "sourceIndex": 0,
             "nodes": [
+                26,
                 25,
                 11,
                 10
@@ -23,13 +24,13 @@
                     "content": "EXEC(UseAddr(GET_ADDR_INTERFACE()->GetPtr()))",
                     "variable": {
                         "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
-                        "beginLine": 64,
-                        "beginColumn": 11,
-                        "endLine": 64,
-                        "endColumn": 17,
-                        "content": "GetPtr"
+                        "beginLine": 57,
+                        "beginColumn": 10,
+                        "endLine": 57,
+                        "endColumn": 21,
+                        "content": "GetCharAddr"
                     },
-                    "stmtKind": "CXXMemberCallExpr"
+                    "stmtKind": "CallExpr"
                 },
                 {
                     "type": "entry",
@@ -56,6 +57,7 @@
             "type": "npe-bug",
             "sourceIndex": 1,
             "nodes": [
+                36,
                 35,
                 16,
                 15,
@@ -72,13 +74,13 @@
                     "content": "EXEC(GET_ADDR_INTERFACE()->ProcessPtr())",
                     "variable": {
                         "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
-                        "beginLine": 69,
-                        "beginColumn": 9,
-                        "endLine": 69,
-                        "endColumn": 19,
-                        "content": "ProcessPtr"
+                        "beginLine": 57,
+                        "beginColumn": 10,
+                        "endLine": 57,
+                        "endColumn": 21,
+                        "content": "GetCharAddr"
                     },
-                    "stmtKind": "CXXMemberCallExpr"
+                    "stmtKind": "CallExpr"
                 },
                 {
                     "type": "entry",
@@ -115,6 +117,7 @@
             "type": "npe-bug",
             "sourceIndex": 2,
             "nodes": [
+                46,
                 45,
                 16,
                 15,
@@ -131,13 +134,13 @@
                     "content": "EXEC(GetCharAddr<TestClass>()->ProcessPtr())",
                     "variable": {
                         "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-247/main.cpp",
-                        "beginLine": 69,
-                        "beginColumn": 9,
-                        "endLine": 69,
-                        "endColumn": 19,
-                        "content": "ProcessPtr"
+                        "beginLine": 57,
+                        "beginColumn": 10,
+                        "endLine": 57,
+                        "endColumn": 21,
+                        "content": "GetCharAddr"
                     },
-                    "stmtKind": "CXXMemberCallExpr"
+                    "stmtKind": "CallExpr"
                 },
                 {
                     "type": "entry",
