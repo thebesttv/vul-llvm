@@ -16,6 +16,16 @@
                     "type": "stmt",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
                     "beginLine": 7,
+                    "beginColumn": 17,
+                    "endLine": 7,
+                    "endColumn": 24,
+                    "content": "nullptr",
+                    "stmtKind": "CXXNullPtrLiteralExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 7,
                     "beginColumn": 13,
                     "endLine": 7,
                     "endColumn": 24,
@@ -98,6 +108,16 @@
                     "type": "stmt",
                     "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
                     "beginLine": 7,
+                    "beginColumn": 17,
+                    "endLine": 7,
+                    "endColumn": 24,
+                    "content": "nullptr",
+                    "stmtKind": "CXXNullPtrLiteralExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 7,
                     "beginColumn": 13,
                     "endLine": 7,
                     "endColumn": 24,
@@ -175,6 +195,16 @@
                     "endColumn": 18,
                     "content": "x + y",
                     "stmtKind": "ImplicitCastExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 17,
+                    "endLine": 12,
+                    "endColumn": 24,
+                    "content": "nullptr",
+                    "stmtKind": "CXXNullPtrLiteralExpr"
                 },
                 {
                     "type": "stmt",

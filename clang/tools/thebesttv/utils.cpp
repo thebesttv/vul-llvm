@@ -82,6 +82,9 @@ std::unique_ptr<CFG> buildCFG(const Decl *D) {
     // option.MarkElidedCXXConstructors = true;
     // option.AddVirtualBaseBranches = true;
 
+    // option.setAllAlwaysAdd();
+    option.setAlwaysAdd(Stmt::CXXNullPtrLiteralExprClass);
+
     return CFG::buildCFG(D, D->getBody(), &D->getASTContext(), option);
 }
 
