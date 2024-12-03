@@ -180,6 +180,9 @@ bool NpeGoodSourceVisitor::VisitCallExpr(CallExpr *expr) {
         if (const FunctionDecl *calleeDecl = getDirectCallee(arg)) {
             // foo() 作为函数入参
             saveNpeSuspectedSourcesWithCallee(arg, calleeDecl);
+        } else if (isNullPointerConstant(arg)) {
+            // nullptr 作为函数入参
+            saveNpeSuspectedSources(arg->getSourceRange(), std::nullopt);
         }
     }
 
