@@ -187,11 +187,33 @@ class NpeBugSourceVisitor : public RecursiveASTVisitor<NpeBugSourceVisitor>,
     traverseAndMatch(const std::vector<VarLocResult> original,
                      const decltype(FunctionInfo::G) &G, int line, int column) {
         std::vector<Item> matches;
+
+        // 对所有函数调用，如果参数中有 nullptr，就加入到 nullArgsToInclude 中
+        std::set<const Stmt *> nullArgsToInclude;
+        for (const auto &varLoc : original) {
+            if (auto callExpr = dyn_cast<CallExpr>(G[varLoc.bid][varLoc.sid])) {
+                for (auto *_arg : callExpr->arguments()) {
+                    auto arg = uncast(_arg);
+                    if (isNullPointerConstant(arg)) {
+                        nullArgsToInclude.insert(arg);
+                    }
+                }
+            }
+        }
+
         for (const auto &varLoc : original) {
             Stmt *stmt = const_cast<Stmt *>(G[varLoc.bid][varLoc.sid]);
 
             isMatch = false;
-            this->TraverseStmt(stmt);
+            if (nullArgsToInclude.find(stmt) != nullArgsToInclude.end()) {
+                // 某个函数调用的 nullptr 参数，作为 NPE bug source
+                auto oldCurrentStage = currentStage;
+                currentStage = NULL_CONSTANT;
+                this->TraverseStmt(stmt);
+                currentStage = oldCurrentStage;
+            } else {
+                this->TraverseStmt(stmt);
+            }
             if (!isMatch)
                 continue;
 
