@@ -1,7 +1,7 @@
 {
     "project": "demo",
-    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265",
-    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265/compile_commands.json",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/compile_commands.json",
     "results": [
         {
             "type": "npe",
@@ -9,14 +9,14 @@
             "locations": [
                 {
                     "type": "source",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
                     "line": 8,
                     "column": 23,
                     "var": "nullptr"
                 },
                 {
                     "type": "sink",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
                     "line": 3,
                     "column": 14,
                     "var": "ptr2"
@@ -29,14 +29,14 @@
             "locations": [
                 {
                     "type": "source",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
                     "line": 8,
                     "column": 5,
                     "var": "nullptr"
                 },
                 {
                     "type": "sink",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
                     "line": 3,
                     "column": 14,
                     "var": "ptr2"
@@ -49,14 +49,14 @@
             "locations": [
                 {
                     "type": "source",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
                     "line": 22,
                     "column": 28,
                     "var": "nullptr"
                 },
                 {
                     "type": "sink",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
                     "line": 16,
                     "column": 14,
                     "var": "ptr2"
@@ -69,14 +69,14 @@
             "locations": [
                 {
                     "type": "source",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
                     "line": 22,
                     "column": 5,
                     "var": "nullptr"
                 },
                 {
                     "type": "sink",
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265/main.cpp",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
                     "line": 23,
                     "column": 13,
                     "var": "ptr2"
