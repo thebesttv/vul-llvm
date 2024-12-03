@@ -1,0 +1,76 @@
+{
+    "project": "demo",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265b",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265b/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265b/input.json",
+    "results": [
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265b/main.cpp",
+                    "beginLine": 8,
+                    "beginColumn": 18,
+                    "endLine": 8,
+                    "endColumn": 25,
+                    "content": "nullptr"
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265b/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 6,
+                    "endLine": 13,
+                    "endColumn": 21,
+                    "content": "ptr1 == nullptr",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265b/main.cpp",
+                        "beginLine": 13,
+                        "beginColumn": 6,
+                        "endLine": 13,
+                        "endColumn": 10,
+                        "content": "ptr1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265b/main.cpp",
+                    "beginLine": 22,
+                    "beginColumn": 5,
+                    "endLine": 22,
+                    "endColumn": 36,
+                    "content": "int *p = usePtr1(ptr1, nullptr)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265b/main.cpp",
+                        "beginLine": 22,
+                        "beginColumn": 10,
+                        "endLine": 22,
+                        "endColumn": 11,
+                        "content": "p"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "npe-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265b/main.cpp",
+                    "beginLine": 22,
+                    "beginColumn": 28,
+                    "endLine": 22,
+                    "endColumn": 35,
+                    "content": "nullptr"
+                }
+            ]
+        }
+    ]
+}
