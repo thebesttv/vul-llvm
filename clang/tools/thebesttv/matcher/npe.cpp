@@ -176,7 +176,7 @@ bool NpeGoodSourceVisitor::VisitMemberExpr(MemberExpr *S) {
 
 bool NpeGoodSourceVisitor::VisitCallExpr(CallExpr *expr) {
     for (int i = 0; i < expr->getNumArgs(); i++) {
-        auto arg = expr->getArg(i);
+        auto arg = uncast(expr->getArg(i));
         if (const FunctionDecl *calleeDecl = getDirectCallee(arg)) {
             // foo() 作为函数入参
             saveNpeSuspectedSourcesWithCallee(arg, calleeDecl);
