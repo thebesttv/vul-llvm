@@ -1,0 +1,214 @@
+{
+    "project": "demo",
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/input.json",
+    "results": [
+        {
+            "type": "npe-bug",
+            "sourceIndex": 0,
+            "nodes": [
+                4,
+                2,
+                1
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 8,
+                    "beginColumn": 18,
+                    "endLine": 8,
+                    "endColumn": 25,
+                    "content": "nullptr",
+                    "stmtKind": "CXXNullPtrLiteralExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 8,
+                    "beginColumn": 5,
+                    "endLine": 8,
+                    "endColumn": 26,
+                    "content": "usePtr(ptr1, nullptr)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 1,
+                    "beginColumn": 1,
+                    "endLine": 4,
+                    "endColumn": 2,
+                    "content": "void usePtr(int *ptr1, int *ptr2)\n{\n    *ptr1 = *ptr2;\n}"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 3,
+                    "beginColumn": 5,
+                    "endLine": 3,
+                    "endColumn": 18,
+                    "content": "*ptr1 = *ptr2",
+                    "stmtKind": "BinaryOperator"
+                }
+            ]
+        },
+        {
+            "type": "npe-bug",
+            "sourceIndex": 1,
+            "nodes": [
+                4,
+                2,
+                1
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 8,
+                    "beginColumn": 5,
+                    "endLine": 8,
+                    "endColumn": 26,
+                    "content": "usePtr(ptr1, nullptr)",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                        "beginLine": 1,
+                        "beginColumn": 6,
+                        "endLine": 1,
+                        "endColumn": 12,
+                        "content": "usePtr"
+                    },
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 1,
+                    "beginColumn": 1,
+                    "endLine": 4,
+                    "endColumn": 2,
+                    "content": "void usePtr(int *ptr1, int *ptr2)\n{\n    *ptr1 = *ptr2;\n}"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 3,
+                    "beginColumn": 5,
+                    "endLine": 3,
+                    "endColumn": 18,
+                    "content": "*ptr1 = *ptr2",
+                    "stmtKind": "BinaryOperator"
+                }
+            ]
+        },
+        {
+            "type": "npe-bug",
+            "sourceIndex": 2,
+            "nodes": [
+                13,
+                10,
+                9,
+                7
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 22,
+                    "beginColumn": 28,
+                    "endLine": 22,
+                    "endColumn": 35,
+                    "content": "nullptr",
+                    "stmtKind": "CXXNullPtrLiteralExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 22,
+                    "beginColumn": 14,
+                    "endLine": 22,
+                    "endColumn": 36,
+                    "content": "usePtr1(ptr1, nullptr)",
+                    "stmtKind": "CallExpr"
+                },
+                {
+                    "type": "entry",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 1,
+                    "endLine": 18,
+                    "endColumn": 2,
+                    "content": "int *usePtr1(int *ptr1, int *ptr2)\n{\n\tif (ptr1 == nullptr) {\n\t\treturn nullptr;\n\t ..."
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 14,
+                    "endLine": 13,
+                    "endColumn": 21,
+                    "content": "nullptr",
+                    "stmtKind": "CXXNullPtrLiteralExpr"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 6,
+                    "endLine": 13,
+                    "endColumn": 21,
+                    "content": "ptr1 == nullptr",
+                    "stmtKind": "BinaryOperator"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 16,
+                    "beginColumn": 5,
+                    "endLine": 16,
+                    "endColumn": 18,
+                    "content": "*ptr1 = *ptr2",
+                    "stmtKind": "BinaryOperator"
+                }
+            ]
+        },
+        {
+            "type": "npe-bug",
+            "sourceIndex": 3,
+            "nodes": [
+                12
+            ],
+            "locations": [
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 22,
+                    "beginColumn": 5,
+                    "endLine": 22,
+                    "endColumn": 37,
+                    "content": "int *p = usePtr1(ptr1, nullptr);",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                        "beginLine": 22,
+                        "beginColumn": 10,
+                        "endLine": 22,
+                        "endColumn": 11,
+                        "content": "p"
+                    },
+                    "stmtKind": "DeclStmt"
+                },
+                {
+                    "type": "stmt",
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-265a/main.cpp",
+                    "beginLine": 23,
+                    "beginColumn": 2,
+                    "endLine": 23,
+                    "endColumn": 11,
+                    "content": "return *p",
+                    "stmtKind": "ReturnStmt"
+                }
+            ]
+        }
+    ]
+}
