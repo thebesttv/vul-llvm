@@ -22,11 +22,13 @@
 
 ** 代码实现
 
+路径生成方法见[[https://github.com/thebesttv/vul-auto-private/blob/main/docs/readme.md][文档]]。
+
 *** CFG 生成
 
 为了确保函数调用成为 CFGBlock 的最后一条语句，
-修改了 [[clang/lib/Analysis/CFG.cpp]]，
-见 22308f8d25fc9bd183461b362c1971c806134394。
+修改了 [[clang/lib/Analysis/CFG.cpp]]
+([[https://github.com/thebesttv/vul-llvm/commits/tbt-17/clang/lib/Analysis/CFG.cpp][修改历史]])。
 
 *** ICFG 生成
 
