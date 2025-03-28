@@ -24,7 +24,7 @@
 
 *** CFG 生成
 
-为了确保函数调用成为 CFGBlock 的最后一跳语句，
+为了确保函数调用成为 CFGBlock 的最后一条语句，
 修改了 [[clang/lib/Analysis/CFG.cpp]]，
 见 22308f8d25fc9bd183461b362c1971c806134394。
 
