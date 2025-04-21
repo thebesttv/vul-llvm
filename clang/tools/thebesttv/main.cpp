@@ -7,6 +7,7 @@
 #include "PathFinder.h"
 #include "VarFinder.h"
 #include "VarLocResult.h"
+#include "matcher/bufferOverflow.h"
 #include "matcher/npe.h"
 #include "utils.h"
 #include <fstream>
@@ -192,6 +193,9 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
         if (isSource) {
             if (bugType == "npe") {
                 locResults = NpeBugSourceVisitor(Context, fid)
+                                 .transform(locResults, fi->G, line, column);
+            } else if (bugType == "bufferOverflow") {
+                locResults = BufferOverflowBugSourceVisitor(Context, fid)
                                  .transform(locResults, fi->G, line, column);
             }
         }
@@ -739,6 +743,26 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
 
         auto &fromFile = Global.functionLocations[from.fid].file;
         removeDoubleFreeBadSource(fromFile, fromLine);
+    }
+    /**
+     * 以上三种缺陷 (npe、resourceLeak、doubleFree) 包含完整路径。
+     * 以下缺陷仅包含 source 位置。
+     */
+    else if (type == "bufferOverflow") {
+        logger.info("Handle source-only type: {}", type);
+        requireFromValid();
+        requireTrue(Global.icfg.entryExitOfFunction[from.fid].first != from.bid,
+                    "Source should not be entry of function");
+
+        int size = findPathBetween(from, fromLine, from, fromLine, {}, {},
+                                   "bufferOverflow-bug", sourceIndex, results);
+        if (size == 0) {
+            logger.warn("Unable to find any path for buffer overflow!");
+        } else {
+            // 路径经过的所有 stmt 都认为 bad source
+            removeBadSourceFromResults(results,
+                                       Global.bufferOverflowSuspectedSources);
+        }
     } else {
         logger.info("Handle unknown type: {}", type);
         requireFromValid();

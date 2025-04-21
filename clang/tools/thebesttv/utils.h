@@ -353,6 +353,8 @@ struct GlobalStat {
     SrcSet doubleFreeSuspectedSources;      // 每个元素是可疑的 source
     std::set<std::string> mayFreeFunctions; // 类似 free 的函数
 
+    SrcSet bufferOverflowSuspectedSources; // 每个元素是可疑的 source
+
     int ASTPoolSize;
     int callDepth;
     int dfsTick;
