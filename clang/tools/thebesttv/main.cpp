@@ -103,7 +103,8 @@ void fixCompilationDatabase(fs::path path) {
 VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
                             int line, int column, bool isStmt,
                             bool requireExact, bool succFirst, int previousFid,
-                            int nextFid, bool isNpeSource) {
+                            int nextFid, bool isSource,
+                            const std::string &bugType) {
     FindVarVisitor visitor;
 
     for (const auto &fi : functionsInFile.at(file)) {
@@ -188,9 +189,11 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
             }
         }
 
-        if (isNpeSource) {
-            locResults = NpeBugSourceVisitor(Context, fid)
-                             .transform(locResults, fi->G, line, column);
+        if (isSource) {
+            if (bugType == "npe") {
+                locResults = NpeBugSourceVisitor(Context, fid)
+                                 .transform(locResults, fi->G, line, column);
+            }
         }
 
         if (locResults.empty())
@@ -332,7 +335,7 @@ struct FunctionLocator {
 
 VarLocResult locateVariable(const FunctionLocator &locator, const Location &loc,
                             bool succFirst, int previousFid, int nextFid,
-                            bool isNpeSource) {
+                            bool isSource, const std::string &bugType) {
     int fid = locator.getFid(loc);
     if (fid == -1) {
         return VarLocResult();
@@ -361,9 +364,9 @@ VarLocResult locateVariable(const FunctionLocator &locator, const Location &loc,
     logger.warn("Unable to find exact match! Trying inexact matching...");
     logger.warn("  {}:{}:{}", loc.file, loc.line, loc.column);
     */
-    auto result =
-        locateVariable(functionsInFile, loc.file, loc.line, loc.column, true,
-                       false, succFirst, previousFid, nextFid, isNpeSource);
+    auto result = locateVariable(functionsInFile, loc.file, loc.line,
+                                 loc.column, true, false, succFirst,
+                                 previousFid, nextFid, isSource, bugType);
     return result;
 }
 
@@ -796,7 +799,7 @@ void generatePathFromOneEntry(int sourceIndex, const ordered_json &sourceEntry,
 
         VarLocResult varLoc =
             locateVariable(locator, jsonLoc, succFirst, previousFid, nextFid,
-                           bugType == "npe" && type == "source");
+                           type == "source", bugType);
         if (!varLoc.isValid()) {
             logger.error("Error: cannot locate {} at {}", type, loc);
             // 跳过无法定位的中间路径
