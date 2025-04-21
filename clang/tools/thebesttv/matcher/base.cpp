@@ -1,6 +1,17 @@
 #include "base.h"
 #include "../DumpPath.h"
 
+const Expr *BaseMatcher::getProperVar(const Expr *E) {
+    E = uncast(E);
+    if (const auto *expr = dyn_cast<MemberExpr>(E)) {
+        ordered_json j;
+        if (!saveLocationInfo(*Context, expr->getSourceRange(), j, false)) {
+            return expr->getBase();
+        }
+    }
+    return E;
+}
+
 const Expr *BaseMatcher::uncast(const Expr *E) {
     if (!E)
         return nullptr;

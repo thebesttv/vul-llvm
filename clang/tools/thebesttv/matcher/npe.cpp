@@ -11,17 +11,6 @@ bool NpeSourceMatcher::isNullPointerConstant(const Expr *expr) {
     return result != Expr::NullPointerConstantKind::NPCK_NotNull;
 }
 
-const Expr *NpeSourceMatcher::getProperVar(const Expr *E) {
-    E = uncast(E);
-    if (const auto *expr = dyn_cast<MemberExpr>(E)) {
-        ordered_json j;
-        if (!saveLocationInfo(*Context, expr->getSourceRange(), j, false)) {
-            return expr->getBase();
-        }
-    }
-    return E;
-}
-
 std::optional<SrcWeakPtr> //
 NpeGoodSourceVisitor::saveNpeSuspectedSources(
     const SourceRange &range, const std::optional<SourceRange> &varRange) {

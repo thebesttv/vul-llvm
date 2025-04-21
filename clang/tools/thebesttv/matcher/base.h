@@ -3,6 +3,19 @@
 #include "VarLocResult.h"
 
 class BaseMatcher {
+  private:
+    /**
+     * 首先，将表达式 uncast，因为：
+     * - 可能存在 cast
+     * - 宏可能引入括号，如
+     *   #define IS_NULL(x) ((x) == NULL)
+     *
+     * 其次，处理以下情况：
+     * - 对于 MemberExpr (o.x, o->x)，若由于宏导致 o 和 x 不在同一个文件中，
+     *   则只返回 o
+     */
+    const Expr *getProperVar(const Expr *E);
+
   protected:
     ASTContext *Context;
     int fid; // 当前访问函数的 fid
@@ -37,6 +50,10 @@ class BaseMatcher {
             return p; // 插入成功，则返回对应的 weak_ptr
         }
         return std::nullopt;
+    }
+
+    SourceRange getProperSourceRange(const Expr *E) {
+        return getProperVar(E)->getSourceRange();
     }
 
   public:

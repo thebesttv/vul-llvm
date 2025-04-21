@@ -5,25 +5,8 @@
 #include <fmt/color.h>
 
 class NpeSourceMatcher : public BaseMatcher {
-  private:
-    /**
-     * 首先，将表达式 uncast，因为：
-     * - 可能存在 cast
-     * - 宏可能引入括号，如
-     *   #define IS_NULL(x) ((x) == NULL)
-     *
-     * 其次，处理以下情况：
-     * - 对于 MemberExpr (o.x, o->x)，若由于宏导致 o 和 x 不在同一个文件中，
-     *   则只返回 o
-     */
-    const Expr *getProperVar(const Expr *E);
-
   protected:
     bool isNullPointerConstant(const Expr *expr);
-
-    SourceRange getProperSourceRange(const Expr *E) {
-        return getProperVar(E)->getSourceRange();
-    }
 
   public:
     explicit NpeSourceMatcher(ASTContext *Context, int fid)
