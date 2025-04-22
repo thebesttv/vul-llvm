@@ -1,0 +1,301 @@
+{
+    "root": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source",
+    "compile_commands": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/compile_commands.json",
+    "source": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/input.json",
+    "results": [
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 18,
+                    "beginColumn": 5,
+                    "endLine": 18,
+                    "endColumn": 26,
+                    "content": "int *p1 = new int[10]",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 18,
+                        "beginColumn": 10,
+                        "endLine": 18,
+                        "endColumn": 12,
+                        "content": "p1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 19,
+                    "beginColumn": 5,
+                    "endLine": 19,
+                    "endColumn": 35,
+                    "content": "int *p2 = new int[10]{1, 2, 3}",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 19,
+                        "beginColumn": 10,
+                        "endLine": 19,
+                        "endColumn": 12,
+                        "content": "p2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "resourceLeak-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 20,
+                    "beginColumn": 5,
+                    "endLine": 20,
+                    "endColumn": 46,
+                    "content": "int *p3 = (int *)malloc(10 * sizeof(int))",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 20,
+                        "beginColumn": 10,
+                        "endLine": 20,
+                        "endColumn": 12,
+                        "content": "p3"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 8,
+                    "beginColumn": 5,
+                    "endLine": 8,
+                    "endColumn": 15,
+                    "content": "int a1[10]",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 8,
+                        "beginColumn": 9,
+                        "endLine": 8,
+                        "endColumn": 11,
+                        "content": "a1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 9,
+                    "beginColumn": 5,
+                    "endLine": 9,
+                    "endColumn": 27,
+                    "content": "int a2[10] = {1, 2, 3}",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 9,
+                        "beginColumn": 9,
+                        "endLine": 9,
+                        "endColumn": 11,
+                        "content": "a2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 10,
+                    "beginColumn": 5,
+                    "endLine": 10,
+                    "endColumn": 27,
+                    "content": "std::array<int, 10> a3",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 10,
+                        "beginColumn": 25,
+                        "endLine": 10,
+                        "endColumn": 27,
+                        "content": "a3"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 5,
+                    "endLine": 11,
+                    "endColumn": 34,
+                    "content": "array<int, 10> a4 = {1, 2, 3}",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 11,
+                        "beginColumn": 20,
+                        "endLine": 11,
+                        "endColumn": 22,
+                        "content": "a4"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 13,
+                    "beginColumn": 5,
+                    "endLine": 13,
+                    "endColumn": 24,
+                    "content": "std::vector<int> v1",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 13,
+                        "beginColumn": 22,
+                        "endLine": 13,
+                        "endColumn": 24,
+                        "content": "v1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 14,
+                    "beginColumn": 5,
+                    "endLine": 14,
+                    "endColumn": 31,
+                    "content": "vector<int> v2 = {1, 2, 3}",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 14,
+                        "beginColumn": 17,
+                        "endLine": 14,
+                        "endColumn": 19,
+                        "content": "v2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 15,
+                    "beginColumn": 5,
+                    "endLine": 15,
+                    "endColumn": 19,
+                    "content": "std::string s1",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 15,
+                        "beginColumn": 17,
+                        "endLine": 15,
+                        "endColumn": 19,
+                        "content": "s1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 16,
+                    "beginColumn": 5,
+                    "endLine": 16,
+                    "endColumn": 21,
+                    "content": "string s2(\"123\")",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 16,
+                        "beginColumn": 12,
+                        "endLine": 16,
+                        "endColumn": 14,
+                        "content": "s2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 18,
+                    "beginColumn": 5,
+                    "endLine": 18,
+                    "endColumn": 26,
+                    "content": "int *p1 = new int[10]",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 18,
+                        "beginColumn": 10,
+                        "endLine": 18,
+                        "endColumn": 12,
+                        "content": "p1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 19,
+                    "beginColumn": 5,
+                    "endLine": 19,
+                    "endColumn": 35,
+                    "content": "int *p2 = new int[10]{1, 2, 3}",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 19,
+                        "beginColumn": 10,
+                        "endLine": 19,
+                        "endColumn": 12,
+                        "content": "p2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                    "beginLine": 20,
+                    "beginColumn": 5,
+                    "endLine": 20,
+                    "endColumn": 46,
+                    "content": "int *p3 = (int *)malloc(10 * sizeof(int))",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
+                        "beginLine": 20,
+                        "beginColumn": 10,
+                        "endLine": 20,
+                        "endColumn": 12,
+                        "content": "p3"
+                    }
+                }
+            ]
+        }
+    ]
+}
