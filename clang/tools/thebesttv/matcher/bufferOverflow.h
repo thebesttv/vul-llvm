@@ -5,7 +5,7 @@
 /**
  * 加入以下情况
  * - 变量定义 & 赋值
- * - 指针
+ * - 指针 (暂时不加)
  * - 数组
  * - vector, array, string
  */
@@ -40,7 +40,7 @@ class BufferOverflowGoodSourceVisitor
             return true;
 
         const auto &type = D->getType();
-        if (isArrayType(type) || isPointerType(type)) {
+        if (isArrayType(type) /* || isPointerType(type) */) {
             saveSuspectedSource(D->getSourceRange(), D->getLocation());
         } else if (type->isClassType() || type->isStructuralType()) {
             const auto &ctype = type.getCanonicalType();

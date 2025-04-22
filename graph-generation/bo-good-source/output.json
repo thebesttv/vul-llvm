@@ -233,69 +233,6 @@
                     }
                 }
             ]
-        },
-        {
-            "type": "bufferOverflow-good-source",
-            "locations": [
-                {
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
-                    "beginLine": 18,
-                    "beginColumn": 5,
-                    "endLine": 18,
-                    "endColumn": 26,
-                    "content": "int *p1 = new int[10]",
-                    "variable": {
-                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
-                        "beginLine": 18,
-                        "beginColumn": 10,
-                        "endLine": 18,
-                        "endColumn": 12,
-                        "content": "p1"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "bufferOverflow-good-source",
-            "locations": [
-                {
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
-                    "beginLine": 19,
-                    "beginColumn": 5,
-                    "endLine": 19,
-                    "endColumn": 35,
-                    "content": "int *p2 = new int[10]{1, 2, 3}",
-                    "variable": {
-                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
-                        "beginLine": 19,
-                        "beginColumn": 10,
-                        "endLine": 19,
-                        "endColumn": 12,
-                        "content": "p2"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "bufferOverflow-good-source",
-            "locations": [
-                {
-                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
-                    "beginLine": 20,
-                    "beginColumn": 5,
-                    "endLine": 20,
-                    "endColumn": 46,
-                    "content": "int *p3 = (int *)malloc(10 * sizeof(int))",
-                    "variable": {
-                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/bo-good-source/main.cpp",
-                        "beginLine": 20,
-                        "beginColumn": 10,
-                        "endLine": 20,
-                        "endColumn": 12,
-                        "content": "p3"
-                    }
-                }
-            ]
         }
     ]
 }

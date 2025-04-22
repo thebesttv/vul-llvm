@@ -381,6 +381,27 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                    "beginLine": 76,
+                    "beginColumn": 5,
+                    "endLine": 76,
+                    "endColumn": 31,
+                    "content": "char buffer[MAX_DATA_SIZE]",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/double-free/gemini_pro-5076.c",
+                        "beginLine": 76,
+                        "beginColumn": 10,
+                        "endLine": 76,
+                        "endColumn": 16,
+                        "content": "buffer"
+                    }
+                }
+            ]
         }
     ]
 }

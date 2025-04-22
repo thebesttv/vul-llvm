@@ -375,6 +375,27 @@
                     "stmtKind": "BinaryOperator"
                 }
             ]
+        },
+        {
+            "type": "bufferOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                    "beginLine": 47,
+                    "beginColumn": 9,
+                    "endLine": 47,
+                    "endColumn": 29,
+                    "content": "std::vector<int *> v",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/template/main.cpp",
+                        "beginLine": 47,
+                        "beginColumn": 28,
+                        "endLine": 47,
+                        "endColumn": 29,
+                        "content": "v"
+                    }
+                }
+            ]
         }
     ]
 }
