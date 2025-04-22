@@ -913,6 +913,8 @@ ordered_json generateFromInput(const ordered_json &input, int beginIndex,
                            "resourceLeak-good-source", output["results"]);
         dumpSourceToOutput(Global.doubleFreeSuspectedSources,
                            "doubleFree-good-source", output["results"]);
+        dumpSourceToOutput(Global.bufferOverflowSuspectedSources,
+                           "bufferOverflow-good-source", output["results"]);
     }
 
     return output;

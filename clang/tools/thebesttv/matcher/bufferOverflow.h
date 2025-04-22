@@ -2,6 +2,60 @@
 #include "DumpPath.h"
 #include "base.h"
 
+/**
+ * 加入以下情况
+ * - 变量定义 & 赋值
+ * - 指针
+ * - 数组
+ * - vector, array, string
+ */
+class BufferOverflowGoodSourceVisitor
+    : public RecursiveASTVisitor<BufferOverflowGoodSourceVisitor>,
+      public BaseMatcher {
+  private:
+    std::optional<SrcWeakPtr>
+    saveSuspectedSource(const SourceRange &range,
+                        const std::optional<SourceRange> &varRange) {
+        static int index = 0;
+        return BaseMatcher::saveSuspectedSource(
+            range, varRange, Global.bufferOverflowSuspectedSources, index);
+    }
+
+    bool isArrayType(const QualType &type) {
+        return type->isArrayType() || type->isConstantArrayType() ||
+               type->isIncompleteArrayType() || type->isVariableArrayType() ||
+               type->isDependentSizedArrayType();
+    }
+    bool isPointerType(const QualType &type) {
+        return type->isAnyPointerType();
+    }
+
+  public:
+    explicit BufferOverflowGoodSourceVisitor(ASTContext *Context, int fid)
+        : BaseMatcher(Context, fid) {}
+
+    bool VisitVarDecl(VarDecl *D) {
+        // must be declared within a function
+        if (!D->getParentFunctionOrMethod())
+            return true;
+
+        const auto &type = D->getType();
+        if (isArrayType(type) || isPointerType(type)) {
+            saveSuspectedSource(D->getSourceRange(), D->getLocation());
+        } else if (type->isClassType() || type->isStructuralType()) {
+            const auto &ctype = type.getCanonicalType();
+            if (const auto &decl = ctype->getAsCXXRecordDecl()) {
+                const auto &name = decl->getNameAsString();
+                if (name == "vector" || name == "array" ||
+                    name == "basic_string") {
+                    saveSuspectedSource(D->getSourceRange(), D->getLocation());
+                }
+            }
+        }
+        return true;
+    }
+};
+
 class BufferOverflowBugSourceVisitor
     : public BaseMatcher,
       public RecursiveASTVisitor<BufferOverflowBugSourceVisitor> {
