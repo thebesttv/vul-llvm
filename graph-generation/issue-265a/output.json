@@ -6,6 +6,7 @@
     "results": [
         {
             "type": "npe-bug",
+            "CodeXIssueID": "0",
             "sourceIndex": 0,
             "nodes": [
                 4,
@@ -56,6 +57,7 @@
         },
         {
             "type": "npe-bug",
+            "CodeXIssueID": "1",
             "sourceIndex": 1,
             "nodes": [
                 4,
@@ -104,6 +106,7 @@
         },
         {
             "type": "npe-bug",
+            "CodeXIssueID": "3",
             "sourceIndex": 2,
             "nodes": [
                 13,
@@ -175,6 +178,7 @@
         },
         {
             "type": "npe-bug",
+            "CodeXIssueID": "4",
             "sourceIndex": 3,
             "nodes": [
                 12

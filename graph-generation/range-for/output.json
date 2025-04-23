@@ -177,6 +177,69 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 7,
+                    "beginColumn": 10,
+                    "endLine": 7,
+                    "endColumn": 19,
+                    "content": "int i = 1",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                        "beginLine": 7,
+                        "beginColumn": 14,
+                        "endLine": 7,
+                        "endColumn": 15,
+                        "content": "i"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 11,
+                    "beginColumn": 5,
+                    "endLine": 11,
+                    "endColumn": 16,
+                    "content": "int sum = 0",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                        "beginLine": 11,
+                        "beginColumn": 9,
+                        "endLine": 11,
+                        "endColumn": 12,
+                        "content": "sum"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                    "beginLine": 12,
+                    "beginColumn": 10,
+                    "endLine": 12,
+                    "endColumn": 19,
+                    "content": "int num :",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/range-for/main.cpp",
+                        "beginLine": 12,
+                        "beginColumn": 14,
+                        "endLine": 12,
+                        "endColumn": 17,
+                        "content": "num"
+                    }
+                }
+            ]
         }
     ]
 }

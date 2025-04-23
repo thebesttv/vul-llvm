@@ -473,6 +473,48 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 32,
+                    "beginColumn": 5,
+                    "endLine": 32,
+                    "endColumn": 14,
+                    "content": "int x = 0",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                        "beginLine": 32,
+                        "beginColumn": 9,
+                        "endLine": 32,
+                        "endColumn": 10,
+                        "content": "x"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                    "beginLine": 34,
+                    "beginColumn": 5,
+                    "endLine": 34,
+                    "endColumn": 28,
+                    "content": "int y = d.x + d.y + d.z",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/constructor/multi.cpp",
+                        "beginLine": 34,
+                        "beginColumn": 9,
+                        "endLine": 34,
+                        "endColumn": 10,
+                        "content": "y"
+                    }
+                }
+            ]
         }
     ]
 }

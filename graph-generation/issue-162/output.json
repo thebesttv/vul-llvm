@@ -6,6 +6,7 @@
     "results": [
         {
             "type": "npe-bug",
+            "CodeXIssueID": "2",
             "sourceIndex": 0,
             "nodes": [
                 14
@@ -43,6 +44,7 @@
         },
         {
             "type": "npe-bug",
+            "CodeXIssueID": "3",
             "sourceIndex": 1,
             "nodes": [
                 18
@@ -80,6 +82,7 @@
         },
         {
             "type": "npe-bug",
+            "CodeXIssueID": "4",
             "sourceIndex": 2,
             "nodes": [
                 27,
@@ -150,6 +153,7 @@
         },
         {
             "type": "npe-bug",
+            "CodeXIssueID": "5",
             "sourceIndex": 3,
             "nodes": [
                 35,
@@ -220,6 +224,7 @@
         },
         {
             "type": "npe-bug",
+            "CodeXIssueID": "6",
             "sourceIndex": 4,
             "nodes": [
                 54
@@ -293,6 +298,90 @@
                         "endLine": 67,
                         "endColumn": 20,
                         "content": "ptr"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 39,
+                    "beginColumn": 5,
+                    "endLine": 39,
+                    "endColumn": 37,
+                    "content": "int flag = (ptr != NULL) ? 0 : 1",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                        "beginLine": 39,
+                        "beginColumn": 9,
+                        "endLine": 39,
+                        "endColumn": 13,
+                        "content": "flag"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 49,
+                    "beginColumn": 5,
+                    "endLine": 49,
+                    "endColumn": 37,
+                    "content": "int flag = (ptr == NULL) ? 0 : 1",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                        "beginLine": 49,
+                        "beginColumn": 9,
+                        "endLine": 49,
+                        "endColumn": 13,
+                        "content": "flag"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 58,
+                    "beginColumn": 5,
+                    "endLine": 58,
+                    "endColumn": 37,
+                    "content": "int flag = (ptr != NULL) ? 0 : 1",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                        "beginLine": 58,
+                        "beginColumn": 9,
+                        "endLine": 58,
+                        "endColumn": 13,
+                        "content": "flag"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                    "beginLine": 67,
+                    "beginColumn": 5,
+                    "endLine": 67,
+                    "endColumn": 37,
+                    "content": "int flag = (ptr == NULL) ? 0 : 1",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-162/main.cpp",
+                        "beginLine": 67,
+                        "beginColumn": 9,
+                        "endLine": 67,
+                        "endColumn": 13,
+                        "content": "flag"
                     }
                 }
             ]

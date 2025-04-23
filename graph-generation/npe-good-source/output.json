@@ -853,6 +853,258 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 16,
+                    "beginColumn": 5,
+                    "endLine": 16,
+                    "endColumn": 24,
+                    "content": "int x1 = *nullInt()",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 16,
+                        "beginColumn": 9,
+                        "endLine": 16,
+                        "endColumn": 11,
+                        "content": "x1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 17,
+                    "beginColumn": 5,
+                    "endLine": 17,
+                    "endColumn": 27,
+                    "content": "int x2 = nullInt()[x1]",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 17,
+                        "beginColumn": 9,
+                        "endLine": 17,
+                        "endColumn": 11,
+                        "content": "x2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 18,
+                    "beginColumn": 5,
+                    "endLine": 18,
+                    "endColumn": 24,
+                    "content": "int x3 = nullA()->x",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 18,
+                        "beginColumn": 9,
+                        "endLine": 18,
+                        "endColumn": 11,
+                        "content": "x3"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 20,
+                    "beginColumn": 5,
+                    "endLine": 20,
+                    "endColumn": 26,
+                    "content": "int x4 = nullA()->g()",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 20,
+                        "beginColumn": 9,
+                        "endLine": 20,
+                        "endColumn": 11,
+                        "content": "x4"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 22,
+                    "beginColumn": 5,
+                    "endLine": 22,
+                    "endColumn": 33,
+                    "content": "int y1 = ((A *)nullInt())->x",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 22,
+                        "beginColumn": 9,
+                        "endLine": 22,
+                        "endColumn": 11,
+                        "content": "y1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 24,
+                    "beginColumn": 5,
+                    "endLine": 24,
+                    "endColumn": 35,
+                    "content": "int y2 = ((A *)nullInt())->g()",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 24,
+                        "beginColumn": 9,
+                        "endLine": 24,
+                        "endColumn": 11,
+                        "content": "y2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 27,
+                    "beginColumn": 5,
+                    "endLine": 27,
+                    "endColumn": 28,
+                    "content": "int nx1 = *nonNullInt()",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 27,
+                        "beginColumn": 9,
+                        "endLine": 27,
+                        "endColumn": 12,
+                        "content": "nx1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 28,
+                    "beginColumn": 5,
+                    "endLine": 28,
+                    "endColumn": 31,
+                    "content": "int nx2 = nonNullInt()[x1]",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 28,
+                        "beginColumn": 9,
+                        "endLine": 28,
+                        "endColumn": 12,
+                        "content": "nx2"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 29,
+                    "beginColumn": 5,
+                    "endLine": 29,
+                    "endColumn": 28,
+                    "content": "int nx3 = nonNullA()->x",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 29,
+                        "beginColumn": 9,
+                        "endLine": 29,
+                        "endColumn": 12,
+                        "content": "nx3"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 30,
+                    "beginColumn": 5,
+                    "endLine": 30,
+                    "endColumn": 30,
+                    "content": "int nx4 = nonNullA()->g()",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 30,
+                        "beginColumn": 9,
+                        "endLine": 30,
+                        "endColumn": 12,
+                        "content": "nx4"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 32,
+                    "beginColumn": 5,
+                    "endLine": 32,
+                    "endColumn": 37,
+                    "content": "int ny1 = ((A *)nonNullInt())->x",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 32,
+                        "beginColumn": 9,
+                        "endLine": 32,
+                        "endColumn": 12,
+                        "content": "ny1"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                    "beginLine": 33,
+                    "beginColumn": 5,
+                    "endLine": 33,
+                    "endColumn": 39,
+                    "content": "int ny2 = ((A *)nonNullInt())->g()",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/npe-good-source/refFoo.cpp",
+                        "beginLine": 33,
+                        "beginColumn": 9,
+                        "endLine": 33,
+                        "endColumn": 12,
+                        "content": "ny2"
+                    }
+                }
+            ]
         }
     ]
 }

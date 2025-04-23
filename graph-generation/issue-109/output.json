@@ -5,6 +5,7 @@
     "results": [
         {
             "type": "npe-bug",
+            "CodeXIssueID": "1",
             "sourceIndex": 0,
             "nodes": [
                 7,

@@ -281,6 +281,27 @@
                     "content": "int main(int argc, char *argv[]) {\n    Node *node = createNode(1);\n    if (argc  ..."
                 }
             ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                    "beginLine": 27,
+                    "beginColumn": 9,
+                    "endLine": 27,
+                    "endColumn": 32,
+                    "content": "int x = node->data + 10",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/resource-leak/main.cpp",
+                        "beginLine": 27,
+                        "beginColumn": 13,
+                        "endLine": 27,
+                        "endColumn": 14,
+                        "content": "x"
+                    }
+                }
+            ]
         }
     ]
 }

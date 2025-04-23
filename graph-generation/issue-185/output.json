@@ -6,6 +6,7 @@
     "results": [
         {
             "type": "npe-bug",
+            "CodeXIssueID": "0",
             "sourceIndex": 0,
             "nodes": [
                 2,
@@ -78,6 +79,7 @@
         },
         {
             "type": "npe-bug",
+            "CodeXIssueID": "1",
             "sourceIndex": 1,
             "nodes": [
                 2,
@@ -150,6 +152,7 @@
         },
         {
             "type": "npe-bug",
+            "CodeXIssueID": "0",
             "sourceIndex": 2,
             "nodes": [
                 2,
@@ -217,6 +220,27 @@
                     "endColumn": 13,
                     "content": "return *ptr",
                     "stmtKind": "ReturnStmt"
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-185/main.cpp",
+                    "beginLine": 23,
+                    "beginColumn": 2,
+                    "endLine": 23,
+                    "endColumn": 32,
+                    "content": "int tmp = DefPtr(a, GetPtr(a))",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/issue-185/main.cpp",
+                        "beginLine": 23,
+                        "beginColumn": 6,
+                        "endLine": 23,
+                        "endColumn": 9,
+                        "content": "tmp"
+                    }
                 }
             ]
         }

@@ -102,6 +102,132 @@
                     "stmtKind": "ReturnStmt"
                 }
             ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_1.cpp",
+                    "beginLine": 2,
+                    "beginColumn": 5,
+                    "endLine": 2,
+                    "endColumn": 14,
+                    "content": "int x = 1",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_1.cpp",
+                        "beginLine": 2,
+                        "beginColumn": 9,
+                        "endLine": 2,
+                        "endColumn": 10,
+                        "content": "x"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_1.cpp",
+                    "beginLine": 3,
+                    "beginColumn": 5,
+                    "endLine": 3,
+                    "endColumn": 14,
+                    "content": "int y = 2",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_1.cpp",
+                        "beginLine": 3,
+                        "beginColumn": 9,
+                        "endLine": 3,
+                        "endColumn": 10,
+                        "content": "y"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_2.cpp",
+                    "beginLine": 2,
+                    "beginColumn": 5,
+                    "endLine": 2,
+                    "endColumn": 14,
+                    "content": "int x = 1",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_2.cpp",
+                        "beginLine": 2,
+                        "beginColumn": 9,
+                        "endLine": 2,
+                        "endColumn": 10,
+                        "content": "x"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_2.cpp",
+                    "beginLine": 3,
+                    "beginColumn": 5,
+                    "endLine": 3,
+                    "endColumn": 14,
+                    "content": "int y = 2",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_2.cpp",
+                        "beginLine": 3,
+                        "beginColumn": 9,
+                        "endLine": 3,
+                        "endColumn": 10,
+                        "content": "y"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_2.cpp",
+                    "beginLine": 5,
+                    "beginColumn": 9,
+                    "endLine": 5,
+                    "endColumn": 21,
+                    "content": "int z = 1024",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_2.cpp",
+                        "beginLine": 5,
+                        "beginColumn": 13,
+                        "endLine": 5,
+                        "endColumn": 14,
+                        "content": "z"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "integerOverflow-good-source",
+            "locations": [
+                {
+                    "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_2.cpp",
+                    "beginLine": 7,
+                    "beginColumn": 9,
+                    "endLine": 7,
+                    "endColumn": 21,
+                    "content": "int z = 2048",
+                    "variable": {
+                        "file": "/home/thebesttv/vul/llvm-project/graph-generation/same-name/main_2.cpp",
+                        "beginLine": 7,
+                        "beginColumn": 13,
+                        "endLine": 7,
+                        "endColumn": 14,
+                        "content": "z"
+                    }
+                }
+            ]
         }
     ]
 }
