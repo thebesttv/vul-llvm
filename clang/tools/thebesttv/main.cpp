@@ -514,7 +514,8 @@ void deduplicateAndFixLocations(ordered_json &locations, int fromLine,
 void saveAsJson(int fromLine, int toLine,
                 const std::set<std::vector<int>> &results,
                 const std::string &type, int sourceIndex,
-                ordered_json &jResults, int fromSid) {
+                const ordered_json &sourceEntry, ordered_json &jResults,
+                int fromSid) {
     std::vector<std::vector<int>> sortedResults(results.begin(), results.end());
     // sort based on length
     std::sort(sortedResults.begin(), sortedResults.end(),
@@ -525,7 +526,8 @@ void saveAsJson(int fromLine, int toLine,
     for (const auto &path : sortedResults) {
         if (cnt++ > 10)
             break;
-        ordered_json jPath, locations;
+        ordered_json jPath(sourceEntry), locations;
+        jPath.erase("locations");
         jPath["type"] = type;
         jPath["sourceIndex"] = sourceIndex; // input.json 中 results 对应的下标
         if (!Global.noNodes)
@@ -548,7 +550,7 @@ int findPathBetween(const VarLocResult &from, int fromLine, VarLocResult to,
                     int toLine, const std::vector<VarLocResult> &_pointsToPass,
                     const std::vector<VarLocResult> &_pointsToAvoid,
                     const std::string &type, int sourceIndex,
-                    ordered_json &jResults) {
+                    const ordered_json &sourceEntry, ordered_json &jResults) {
     requireTrue(from.isValid(), "FROM location is invalid");
     requireTrue(to.isValid(), "TO location is invalid");
 
@@ -570,8 +572,8 @@ int findPathBetween(const VarLocResult &from, int fromLine, VarLocResult to,
     auto pFinder = DfsPathFinder(icfg);
     pFinder.search(u, v, pointsToPass, pointsToAvoid, Global.callDepth);
 
-    saveAsJson(fromLine, toLine, pFinder.results, type, sourceIndex, jResults,
-               from.sid);
+    saveAsJson(fromLine, toLine, pFinder.results, type, sourceIndex,
+               sourceEntry, jResults, from.sid);
     return pFinder.results.size();
 }
 
@@ -624,6 +626,7 @@ void removeDoubleFreeBadSource(const std::string &sourceFile, int sourceLine) {
 void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
                       int toLine, const std::vector<VarLocResult> &path,
                       const std::string &type, int sourceIndex,
+                      const ordered_json &sourceEntry,
                       ordered_json &jFinalResults) {
 
     // 获取 loc 所在函数的出口
@@ -649,8 +652,9 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
         requireToValid();
 
         logger.info("Generating NPE bug version ...");
-        int size = findPathBetween(from, fromLine, to, toLine, path, {},
-                                   "npe-bug", sourceIndex, results);
+        int size =
+            findPathBetween(from, fromLine, to, toLine, path, {}, "npe-bug",
+                            sourceIndex, sourceEntry, results);
         if (size == 0) {
             logger.warn("Unable to find any path for NPE bug version!");
         } else {
@@ -666,9 +670,9 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
             std::vector<VarLocResult> p = path;
             bool found = false;
             while (true) {
-                int result =
-                    findPathBetween(from, fromLine, sinkExit, INT_MAX, p, {to},
-                                    "npe-fix", sourceIndex, results);
+                int result = findPathBetween(from, fromLine, sinkExit, INT_MAX,
+                                             p, {to}, "npe-fix", sourceIndex,
+                                             sourceEntry, results);
                 if (result) {
                     found = true;
                     break;
@@ -712,9 +716,9 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
         auto new_path = std::vector<VarLocResult>(path);
         new_path.push_back(to);
 
-        int size =
-            findPathBetween(from, fromLine, getExit(to), INT_MAX, new_path, {},
-                            "resourceLeak-bug", sourceIndex, results);
+        int size = findPathBetween(from, fromLine, getExit(to), INT_MAX,
+                                   new_path, {}, "resourceLeak-bug",
+                                   sourceIndex, sourceEntry, results);
         if (size == 0) {
             logger.warn("Unable to find any path for resource leak!");
         } else {
@@ -734,7 +738,8 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
         requireToValid();
 
         int size = findPathBetween(from, fromLine, to, toLine, path, {},
-                                   "doubleFree-bug", sourceIndex, results);
+                                   "doubleFree-bug", sourceIndex, sourceEntry,
+                                   results);
         if (size == 0) {
             logger.warn("Unable to find any path for double free!");
         } else {
@@ -760,7 +765,8 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
                     "Source should not be entry of function");
 
         int size = findPathBetween(from, fromLine, from, fromLine, {}, {},
-                                   "bufferOverflow-bug", sourceIndex, results);
+                                   "bufferOverflow-bug", sourceIndex,
+                                   sourceEntry, results);
         if (size == 0) {
             logger.warn("Unable to find any path for buffer overflow!");
         } else {
@@ -775,7 +781,8 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
                     "Source should not be entry of function");
 
         int size = findPathBetween(from, fromLine, from, fromLine, {}, {},
-                                   "integerOverflow-bug", sourceIndex, results);
+                                   "integerOverflow-bug", sourceIndex,
+                                   sourceEntry, results);
         if (size == 0) {
             logger.warn("Unable to find any path for integer overflow!");
         } else {
@@ -792,7 +799,7 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
             toLine = INT_MAX;
         }
         findPathBetween(from, fromLine, to, toLine, path, {}, type, sourceIndex,
-                        results);
+                        sourceEntry, results);
     }
 
     // 将生成的路径结果加入到最终结果中
@@ -871,7 +878,7 @@ void generatePathFromOneEntry(int sourceIndex, const ordered_json &sourceEntry,
     }
 
     handleInputEntry(from, fromLine, to, toLine, path, bugType, sourceIndex,
-                     jResults);
+                     sourceEntry, jResults);
 }
 
 void dumpSourceToOutput(const SrcSet &sources, //
