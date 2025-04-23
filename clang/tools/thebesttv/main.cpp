@@ -532,7 +532,8 @@ void saveAsJson(int fromLine, int toLine,
         }
         deduplicateAndFixLocations(locations, fromLine, toLine);
         jPath["locations"] = locations;
-        jResults.push_back(jPath);
+        if (locations.size() > 0)
+            jResults.push_back(jPath);
     }
 }
 
