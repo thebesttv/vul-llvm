@@ -4,6 +4,7 @@
 #include "ICFG.h"
 #include "matcher/bufferOverflow.h"
 #include "matcher/doubleFree.h"
+#include "matcher/integerOverflow.h"
 #include "matcher/npe.h"
 #include "matcher/resourceLeak.h"
 #include "utils.h"
@@ -131,6 +132,7 @@ bool GenICFGVisitor::VisitFunctionDecl(FunctionDecl *D) {
     ResourceLeakGoodSourceVisitor(Context, fid).TraverseDecl(D);
     DoubleFreeGoodSourceVisitor(Context, fid).TraverseDecl(D);
     BufferOverflowGoodSourceVisitor(Context, fid).TraverseDecl(D);
+    IntegerOverflowGoodSourceVisitor(Context, fid).TraverseDecl(D);
 
     /*
     // traverse CFGBlocks

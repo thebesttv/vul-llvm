@@ -8,6 +8,7 @@
 #include "VarFinder.h"
 #include "VarLocResult.h"
 #include "matcher/bufferOverflow.h"
+#include "matcher/integerOverflow.h"
 #include "matcher/npe.h"
 #include "utils.h"
 #include <fstream>
@@ -196,6 +197,9 @@ VarLocResult locateVariable(const fif &functionsInFile, const std::string &file,
                                  .transform(locResults, fi->G, line, column);
             } else if (bugType == "bufferOverflow") {
                 locResults = BufferOverflowBugSourceVisitor(Context, fid)
+                                 .transform(locResults, fi->G, line, column);
+            } else if (bugType == "integerOverflow") {
+                locResults = IntegerOverflowBugSourceVisitor(Context, fid)
                                  .transform(locResults, fi->G, line, column);
             }
         }
@@ -764,6 +768,21 @@ void handleInputEntry(const VarLocResult &from, int fromLine, VarLocResult to,
             removeBadSourceFromResults(results,
                                        Global.bufferOverflowSuspectedSources);
         }
+    } else if (type == "integerOverflow") {
+        logger.info("Handle source-only type: {}", type);
+        requireFromValid();
+        requireTrue(Global.icfg.entryExitOfFunction[from.fid].first != from.bid,
+                    "Source should not be entry of function");
+
+        int size = findPathBetween(from, fromLine, from, fromLine, {}, {},
+                                   "integerOverflow-bug", sourceIndex, results);
+        if (size == 0) {
+            logger.warn("Unable to find any path for integer overflow!");
+        } else {
+            // 路径经过的所有 stmt 都认为 bad source
+            removeBadSourceFromResults(results,
+                                       Global.integerOverflowSuspectedSources);
+        }
     } else {
         logger.info("Handle unknown type: {}", type);
         requireFromValid();
@@ -916,6 +935,8 @@ ordered_json generateFromInput(const ordered_json &input, int beginIndex,
                            "doubleFree-good-source", output["results"]);
         dumpSourceToOutput(Global.bufferOverflowSuspectedSources,
                            "bufferOverflow-good-source", output["results"]);
+        dumpSourceToOutput(Global.integerOverflowSuspectedSources,
+                           "integerOverflow-good-source", output["results"]);
     }
 
     return output;

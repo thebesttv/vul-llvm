@@ -355,6 +355,8 @@ struct GlobalStat {
 
     SrcSet bufferOverflowSuspectedSources; // 每个元素是可疑的 source
 
+    SrcSet integerOverflowSuspectedSources; // 每个元素是可疑的 source
+
     int ASTPoolSize;
     int callDepth;
     int dfsTick;
