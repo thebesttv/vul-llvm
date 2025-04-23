@@ -3,7 +3,8 @@
 #include "base.h"
 
 inline bool __isIntType(const QualType &type) {
-    return type->isBuiltinType() && type->isIntegerType();
+    return type->isBuiltinType() && type->isIntegerType() &&
+           !type->isBooleanType() && !type->isEnumeralType();
 }
 
 /**
@@ -32,7 +33,7 @@ class IntegerOverflowGoodSourceVisitor
             return true;
 
         const auto &type = D->getType();
-        if (__isIntType(type)) {
+        if (D->hasInit() && __isIntType(type)) {
             saveSuspectedSource(D->getSourceRange(), D->getLocation());
         }
         return true;
