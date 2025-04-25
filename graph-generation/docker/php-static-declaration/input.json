@@ -43,9 +43,6 @@
                     "line": 1199,
                     "column": 2
                 }
-            ],
-            "analyzer": [
-                "infer"
             ]
         },
         {
@@ -101,9 +98,6 @@
                     "column": 33,
                     "var": "zv"
                 }
-            ],
-            "analyzer": [
-                "infer"
             ]
         }
     ]
