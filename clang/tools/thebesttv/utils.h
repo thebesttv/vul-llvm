@@ -359,6 +359,7 @@ struct GlobalStat {
     int callDepth;
     int dfsTick;
     int dfsTimeout;
+    bool fromASTDump;
     bool keepAST;
     bool noGoodSource;
     bool noNodes;
